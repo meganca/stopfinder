@@ -1,0 +1,69 @@
+<h2><%= @busstop.StopName %></h2>
+
+<%= form_for :busstop, url: busstops_path do |f| %>
+  <% if @validate.include?(:bearing_code) %>
+    <p>
+      <%= f.label :direction %>:
+      <%= f.select :BearingCode, BusStop.directionValues, :selected => "unknown" %>
+    </p>
+  <% end %>
+  <% if @validate.include?(:intersection_pos) %>
+    <p>
+      <%= f.label :position %> (relative to intersection):
+      <%= f.select :Intersection, BusStop.intersectionPositionValues, :selected => "unknown" %>
+    </p>
+  <% end %>
+  <% if @validate.include?(:sign_type) %>
+    <p>
+      <%= f.label :"Sign Type"%>:
+      <%= f.select :RteSignType, BusStop.signTypeValues, :selected => "unknown" %>
+    </p>
+  <% end %>
+  <% if @validate.include?(:sched_holder) %>
+    <p>
+      <%= f.label :"Schedule holder"%> present:
+      <%= f.select :SchedHolder, BusStop.scheduleTypeValues, :selected => "unknown" %>
+    </p>
+  <% end %>
+  <% if @validate.include?(:shelter_count) %>
+    <p>
+      <%= f.label :"Number of shelters"%>:
+      <%= f.number_field :Shelters, :class => 'text_field', :value => "" %>
+    </p>
+  <% end %>
+  <% if @validate.include?(:bench_count) %>
+    <p>
+      <%= f.label :"Number of benches"%>:
+      <%= f.number_field :BenchCount, :class => 'text_field', :value => "" %>
+    </p>
+  <% end %>
+  <% if @validate.include?(:can_count) %>
+    <p>
+      <%= f.label :"Number of trashcans"%>:
+      <%= f.number_field :CanCount, :class => 'text_field', :value => "" %>
+    </p>
+  <% end %>
+  <% if @validate.include?(:box_count) %>
+    <p>
+      <%= f.label :"Number of boxes (newsboxes, postboxes, etc)"%>:
+      <%= f.number_field :BoxCount, :class => 'text_field', :value => "" %>
+    </p>
+  <% end %>
+  <% if @validate.include?(:pole_count) %>
+    <p>
+      <%= f.label :"Number of poles (other than bus sign)"%>:
+      <%= f.number_field :PoleCount, :class => 'text_field', :value => "" %>
+    </p>
+  <% end %>
+  
+  <%= f.hidden_field :UserIP, :value => request.remote_ip %>
+  <%= f.hidden_field :StopId, :value => @busstop.StopId %>
+  <%= f.hidden_field :AgencyId, :value => @busstop.AgencyId %>
+  <%= f.hidden_field :DateCreated, :value => Time.now %>
+
+  <%= f.check_box :UserAtStop, {:checked=>false} %>
+  <%= f.label :"I am currently at this stop." %>
+  <p>
+    <%= f.submit "Verify" %>
+  </p>
+<% end %>

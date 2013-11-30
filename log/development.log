@@ -1,0 +1,2148 @@
+Connecting to database specified by database.yml
+
+
+Started GET "/welcome" for 128.208.7.233 at 2013-11-21 13:26:25 -0800
+
+ActionController::RoutingError (No route matches [GET] "/welcome"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/share/ruby/webrick/httpserver.rb:138:in `service'
+  /usr/share/ruby/webrick/httpserver.rb:94:in `run'
+  /usr/share/ruby/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (2.4ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started GET "/assets/rails.png" for 128.208.7.233 at 2013-11-21 13:35:56 -0800
+Served asset /rails.png - 304 Not Modified (27ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/welcome" for 128.208.7.233 at 2013-11-21 14:07:11 -0800
+
+ActionController::RoutingError (No route matches [GET] "/welcome"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/share/ruby/webrick/httpserver.rb:138:in `service'
+  /usr/share/ruby/webrick/httpserver.rb:94:in `run'
+  /usr/share/ruby/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.7ms)
+
+
+Started GET "/welcome/index" for 128.208.7.233 at 2013-11-21 14:07:19 -0800
+
+ActionController::RoutingError (uninitialized constant WelcomeController):
+  activesupport (3.2.13) lib/active_support/inflector/methods.rb:230:in `block in constantize'
+  activesupport (3.2.13) lib/active_support/inflector/methods.rb:229:in `each'
+  activesupport (3.2.13) lib/active_support/inflector/methods.rb:229:in `constantize'
+  actionpack (3.2.13) lib/action_dispatch/routing/route_set.rb:69:in `controller_reference'
+  actionpack (3.2.13) lib/action_dispatch/routing/route_set.rb:54:in `controller'
+  actionpack (3.2.13) lib/action_dispatch/routing/route_set.rb:32:in `call'
+  journey (1.0.4) lib/journey/router.rb:68:in `block in call'
+  journey (1.0.4) lib/journey/router.rb:56:in `each'
+  journey (1.0.4) lib/journey/router.rb:56:in `call'
+  actionpack (3.2.13) lib/action_dispatch/routing/route_set.rb:612:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.5) lib/rack/etag.rb:23:in `call'
+  rack (1.4.5) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.13) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.13) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.13) lib/active_support/callbacks.rb:405:in `_run__2929347183918427972__call__3916430220253414317__callbacks'
+  activesupport (3.2.13) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.13) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.13) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.13) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/reloader.rb:65:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/share/ruby/webrick/httpserver.rb:138:in `service'
+  /usr/share/ruby/webrick/httpserver.rb:94:in `run'
+  /usr/share/ruby/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.8ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/welcome/index" for 128.208.7.233 at 2013-11-21 14:09:11 -0800
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (1.3ms)
+Compiled application.css  (1ms)  (pid 26161)
+Compiled jquery.js  (48ms)  (pid 26161)
+Compiled jquery_ujs.js  (1ms)  (pid 26161)
+Compiled application.js  (263ms)  (pid 26161)
+Completed 200 OK in 391ms (Views: 390.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 128.208.7.233 at 2013-11-21 14:09:12 -0800
+Served asset /application.css - 200 OK (41ms)
+
+
+Started GET "/assets/application.js?body=1" for 128.208.7.233 at 2013-11-21 14:09:12 -0800
+Served asset /application.js - 200 OK (19ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 128.208.7.233 at 2013-11-21 14:09:12 -0800
+Served asset /jquery.js - 200 OK (5ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 128.208.7.233 at 2013-11-21 14:09:12 -0800
+Served asset /jquery_ujs.js - 200 OK (5ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started GET "/welcome/index" for 128.208.7.233 at 2013-11-21 14:17:26 -0800
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 78ms (Views: 77.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 128.208.7.233 at 2013-11-21 14:17:26 -0800
+Served asset /jquery.js - 304 Not Modified (8ms)
+
+
+Started GET "/assets/application.js?body=1" for 128.208.7.233 at 2013-11-21 14:17:26 -0800
+Served asset /application.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 128.208.7.233 at 2013-11-21 14:17:26 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/application.css?body=1" for 128.208.7.233 at 2013-11-21 14:17:26 -0800
+Served asset /application.css - 304 Not Modified (3ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started GET "/welcome/index" for 128.208.7.233 at 2013-11-21 14:58:10 -0800
+
+ActionController::RoutingError (No route matches [GET] "/welcome/index"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/share/ruby/webrick/httpserver.rb:138:in `service'
+  /usr/share/ruby/webrick/httpserver.rb:94:in `run'
+  /usr/share/ruby/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.8ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started GET "/assets/rails.png" for 128.208.7.233 at 2013-11-21 14:59:21 -0800
+Served asset /rails.png - 304 Not Modified (4ms)
+
+
+Started GET "/busstops/1_29277" for 128.208.7.233 at 2013-11-21 14:59:29 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_29277"}
+Completed 500 Internal Server Error in 102ms
+
+ActiveModel::MassAssignmentSecurity::Error (Can't mass-assign protected attributes: StopId):
+  app/controllers/busstops_controller.rb:7:in `new'
+  app/controllers/busstops_controller.rb:7:in `show'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.2ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.3ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (13.2ms)
+
+
+Started GET "/busstops/1_29277" for 67.183.84.202 at 2013-11-21 16:25:57 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_29277"}
+Completed 500 Internal Server Error in 1ms
+
+ActiveModel::MassAssignmentSecurity::Error (Can't mass-assign protected attributes: StopId):
+  app/controllers/busstops_controller.rb:7:in `new'
+  app/controllers/busstops_controller.rb:7:in `show'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.3ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.6ms)
+
+
+Started GET "/busstops/1_29277" for 67.183.84.202 at 2013-11-21 16:32:12 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_29277"}
+Completed 500 Internal Server Error in 1ms
+
+ActiveModel::MassAssignmentSecurity::Error (Can't mass-assign protected attributes: StopId):
+  app/controllers/busstops_controller.rb:7:in `new'
+  app/controllers/busstops_controller.rb:7:in `show'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (45.0ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.4ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (54.5ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/busstops/1_29277" for 67.183.84.202 at 2013-11-21 16:35:53 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_29277"}
+Completed 500 Internal Server Error in 79ms
+
+ActiveModel::MassAssignmentSecurity::Error (Can't mass-assign protected attributes: StopId):
+  app/controllers/busstops_controller.rb:7:in `new'
+  app/controllers/busstops_controller.rb:7:in `show'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.4ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.1ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/busstops/1_29277" for 67.183.84.202 at 2013-11-21 16:38:07 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_29277"}
+  [1m[36mBusStop Load (0.7ms)[0m  [1mSELECT * FROM sisdata WHERE stopid = 29277[0m
+Mysql2::Error: Table 'stopfinder.sisdata' doesn't exist: SELECT * FROM sisdata WHERE stopid = 29277
+Completed 500 Internal Server Error in 272ms
+
+ActiveRecord::StatementInvalid (Mysql2::Error: Table 'stopfinder.sisdata' doesn't exist: SELECT * FROM sisdata WHERE stopid = 29277):
+  app/controllers/busstops_controller.rb:10:in `show'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.4ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (12.4ms)
+
+
+Started GET "/busstops/1_29277" for 67.183.84.202 at 2013-11-21 16:39:37 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_29277"}
+  [1m[35mBusStop Load (75.2ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 29277
+  [1m[36mBusStop Load (75.2ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 29277 AND userid = 0[0m
+  Rendered busstops/show.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 414ms (Views: 39.2ms | ActiveRecord: 153.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 16:39:38 -0800
+Served asset /application.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 16:39:38 -0800
+Served asset /jquery.js - 304 Not Modified (44ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 16:39:38 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 16:39:38 -0800
+Served asset /application.js - 304 Not Modified (5ms)
+
+
+Started GET "/update/29277" for 67.183.84.202 at 2013-11-21 16:39:42 -0800
+
+ActionController::RoutingError (No route matches [GET] "/update/29277"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/share/ruby/webrick/httpserver.rb:138:in `service'
+  /usr/share/ruby/webrick/httpserver.rb:94:in `run'
+  /usr/share/ruby/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.8ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/busstops/1_29277" for 67.183.84.202 at 2013-11-21 16:41:31 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_29277"}
+  [1m[36mBusStop Load (75.5ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 29277[0m
+  [1m[35mBusStop Load (75.4ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 29277 AND userid = 0
+  Rendered busstops/show.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 441ms (Views: 41.0ms | ActiveRecord: 153.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 16:41:31 -0800
+Served asset /application.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 16:41:31 -0800
+Served asset /jquery.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 16:41:31 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (45ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 16:41:31 -0800
+Served asset /application.js - 304 Not Modified (5ms)
+
+
+Started GET "/update/29277" for 67.183.84.202 at 2013-11-21 16:41:33 -0800
+
+ActionController::RoutingError (No route matches [GET] "/update/29277"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/share/ruby/webrick/httpserver.rb:138:in `service'
+  /usr/share/ruby/webrick/httpserver.rb:94:in `run'
+  /usr/share/ruby/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/busstops/1_29277" for 67.183.84.202 at 2013-11-21 16:42:17 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_29277"}
+  [1m[36mBusStop Load (84.7ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 29277[0m
+  [1m[35mBusStop Load (85.6ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 29277 AND userid = 0
+  Rendered busstops/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 370ms (Views: 7.9ms | ActiveRecord: 173.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 16:42:18 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 16:42:18 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 16:42:18 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 16:42:18 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/update/29277" for 67.183.84.202 at 2013-11-21 16:42:19 -0800
+Processing by BusstopsController#update as HTML
+  Parameters: {"id"=>"29277"}
+Completed 500 Internal Server Error in 1ms
+
+NoMethodError (undefined method `find_by' for #<Class:0x007f555c3ed858>):
+  app/controllers/busstops_controller.rb:107:in `update'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.3ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.4ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.6ms)
+
+
+Started GET "/add/29277" for 67.183.84.202 at 2013-11-21 16:42:36 -0800
+Processing by BusstopsController#addnew as HTML
+  Parameters: {"id"=>"29277"}
+Completed 500 Internal Server Error in 1ms
+
+NoMethodError (undefined method `find_by' for #<Class:0x007f555c3ed858>):
+  app/controllers/busstops_controller.rb:117:in `addnew'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.2ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.8ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.4ms)
+
+
+Started GET "/busstops/1_29277" for 67.183.84.202 at 2013-11-21 16:44:01 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_29277"}
+  [1m[36mBusStop Load (74.9ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 29277[0m
+  [1m[35mBusStop Load (74.9ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 29277 AND userid = 0
+  Rendered busstops/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 355ms (Views: 11.5ms | ActiveRecord: 152.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 16:44:01 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 16:44:01 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 16:44:01 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 16:44:01 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/update/29277" for 67.183.84.202 at 2013-11-21 16:44:03 -0800
+Processing by BusstopsController#update as HTML
+  Parameters: {"id"=>"29277"}
+Completed 500 Internal Server Error in 1ms
+
+NoMethodError (undefined method `find_by' for #<Class:0x007f555c92a6e0>):
+  app/controllers/busstops_controller.rb:110:in `update'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.4ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.9ms)
+
+
+Started GET "/busstops/1_29277" for 67.183.84.202 at 2013-11-21 16:45:06 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_29277"}
+  [1m[36mBusStop Load (75.2ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 29277[0m
+  [1m[35mBusStop Load (75.3ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 29277 AND userid = 0
+  Rendered busstops/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 344ms (Views: 9.4ms | ActiveRecord: 153.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 16:45:07 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 16:45:07 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 16:45:07 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 16:45:07 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/update/29277" for 67.183.84.202 at 2013-11-21 16:45:08 -0800
+Processing by BusstopsController#update as HTML
+  Parameters: {"id"=>"29277"}
+Completed 500 Internal Server Error in 1ms
+
+TypeError (no implicit conversion of nil into String):
+  app/controllers/busstops_controller.rb:110:in `+'
+  app/controllers/busstops_controller.rb:110:in `update'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.2ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.8ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.2ms)
+
+
+Started GET "/busstops/1_29277" for 67.183.84.202 at 2013-11-21 16:47:11 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_29277"}
+  [1m[36mBusStop Load (75.0ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 29277[0m
+  [1m[35mBusStop Load (75.3ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 29277 AND userid = 0
+  Rendered busstops/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 384ms (Views: 9.4ms | ActiveRecord: 153.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 16:47:11 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 16:47:11 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 16:47:11 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 16:47:11 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/update/29277" for 67.183.84.202 at 2013-11-21 16:47:13 -0800
+Processing by BusstopsController#update as HTML
+  Parameters: {"id"=>"29277"}
+  [1m[36mBusStop Load (74.9ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 29277[0m
+  Rendered busstops/update.html.erb within layouts/application (5.8ms)
+Completed 500 Internal Server Error in 90ms
+
+ActionView::Template::Error (undefined method `StopName' for #<Array:0x007f555c462c98>):
+    1: <h2><%= @busstop.StopName %></h2>
+    2: 
+    3: <%= form_for :busstop, url: busstops_path do |f| %>
+    4:   <p>
+  app/views/busstops/update.html.erb:1:in `_app_views_busstops_update_html_erb__2715399936995354275_70002298519800'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.2ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.3ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (11.3ms)
+
+
+Started GET "/welcome/index" for 67.183.84.202 at 2013-11-21 16:48:09 -0800
+
+ActionController::RoutingError (No route matches [GET] "/welcome/index"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/share/ruby/webrick/httpserver.rb:138:in `service'
+  /usr/share/ruby/webrick/httpserver.rb:94:in `run'
+  /usr/share/ruby/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/busstops/1_75403" for 67.183.84.202 at 2013-11-21 18:18:48 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (75.5ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403[0m
+  [1m[35mBusStop Load (75.3ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0
+  Rendered busstops/show.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 431ms (Views: 39.6ms | ActiveRecord: 153.7ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 18:18:49 -0800
+Served asset /application.css - 200 OK (3ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 18:18:49 -0800
+Served asset /jquery.js - 200 OK (6ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 18:18:49 -0800
+Served asset /jquery_ujs.js - 200 OK (4ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 18:18:49 -0800
+Served asset /application.js - 200 OK (6ms)
+
+
+Started GET "/busstops/1_75403" for 67.183.84.202 at 2013-11-21 18:22:56 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (75.6ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403[0m
+  [1m[35mBusStop Load (75.5ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0
+  Rendered busstops/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 166ms (Views: 12.3ms | ActiveRecord: 151.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 18:22:56 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 18:22:56 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 18:22:56 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 18:22:56 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/busstops/1_75403" for 67.183.84.202 at 2013-11-21 18:23:15 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (75.4ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403[0m
+  [1m[35mBusStop Load (75.4ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0
+  Rendered busstops/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 163ms (Views: 9.4ms | ActiveRecord: 150.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 18:23:16 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 18:23:16 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 18:23:16 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 18:23:16 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/busstops/1_75403" for 67.183.84.202 at 2013-11-21 18:24:09 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (75.7ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403[0m
+  [1m[35mBusStop Load (75.0ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0
+  Rendered busstops/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 379ms (Views: 9.3ms | ActiveRecord: 154.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 18:24:10 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 18:24:10 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 18:24:10 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 18:24:10 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/update/1_75403" for 67.183.84.202 at 2013-11-21 18:24:11 -0800
+Processing by BusstopsController#update as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (75.4ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403[0m
+  Rendered busstops/update.html.erb within layouts/application (6.1ms)
+Completed 500 Internal Server Error in 87ms
+
+ActionView::Template::Error (undefined method `StopName' for #<Array:0x007f349493a830>):
+    1: <h2><%= @busstop.StopName %></h2>
+    2: 
+    3: <%= form_for :busstop, url: busstops_path do |f| %>
+    4:   <p>
+  app/views/busstops/update.html.erb:1:in `_app_views_busstops_update_html_erb__4531094221670719217_69931903890320'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.9ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.4ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (10.6ms)
+
+
+Started GET "/busstops/1_75403" for 67.183.84.202 at 2013-11-21 18:24:59 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[35mBusStop Load (75.1ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403
+  [1m[36mBusStop Load (75.0ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0[0m
+  Rendered busstops/show.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 385ms (Views: 53.1ms | ActiveRecord: 152.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 18:25:00 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 18:25:00 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 18:25:00 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 18:25:00 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/update/1_75403" for 67.183.84.202 at 2013-11-21 18:25:01 -0800
+Processing by BusstopsController#update as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[35mBusStop Load (75.5ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403
+  Rendered busstops/update.html.erb within layouts/application (30.1ms)
+Completed 200 OK in 114ms (Views: 36.5ms | ActiveRecord: 75.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 18:25:01 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 18:25:01 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 18:25:01 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 18:25:01 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/busstops/1_75403" for 67.183.84.202 at 2013-11-21 18:25:58 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (86.1ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403[0m
+  [1m[35mBusStop Load (85.2ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0
+  Rendered busstops/show.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 398ms (Views: 8.7ms | ActiveRecord: 174.2ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 18:25:59 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 18:25:59 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 18:25:59 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 18:25:59 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/add/1_75403" for 67.183.84.202 at 2013-11-21 18:26:00 -0800
+Processing by BusstopsController#addnew as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (74.8ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403[0m
+  Rendered busstops/addnew.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 96ms (Views: 18.9ms | ActiveRecord: 74.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 18:26:00 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 18:26:00 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 18:26:00 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 18:26:00 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/update/1_75403" for 67.183.84.202 at 2013-11-21 18:26:54 -0800
+Processing by BusstopsController#update as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[35mBusStop Load (75.3ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403
+  Rendered busstops/update.html.erb within layouts/application (35.6ms)
+Completed 200 OK in 120ms (Views: 42.8ms | ActiveRecord: 75.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 18:26:54 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 18:26:54 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 18:26:54 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 18:26:54 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/add/1_75403" for 67.183.84.202 at 2013-11-21 18:30:27 -0800
+Processing by BusstopsController#addnew as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (75.4ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403[0m
+  Rendered busstops/addnew.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 94ms (Views: 17.3ms | ActiveRecord: 75.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 18:30:28 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 18:30:28 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 18:30:28 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 18:30:28 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/update/1_75403" for 67.183.84.202 at 2013-11-21 18:30:30 -0800
+Processing by BusstopsController#update as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[35mBusStop Load (75.7ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403
+  Rendered busstops/update.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 128ms (Views: 51.1ms | ActiveRecord: 75.7ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 18:30:30 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 18:30:30 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 18:30:30 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 18:30:30 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/busstops/1_75403" for 67.183.84.202 at 2013-11-21 19:22:48 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (75.9ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (75.3ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 384ms (Views: 11.7ms | ActiveRecord: 153.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 19:22:48 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 19:22:48 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 19:22:48 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 19:22:48 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/busstops/1_75403" for 67.183.84.202 at 2013-11-21 19:22:52 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (75.0ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (75.0ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 158ms (Views: 5.7ms | ActiveRecord: 150.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 19:22:52 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 19:22:52 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 19:22:52 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 19:22:52 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/busstops/1_29778" for 67.183.84.202 at 2013-11-21 19:23:01 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_29778"}
+  [1m[36mBusStop Load (75.9ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 29778 AND agencyid = 1[0m
+  [1m[35mBusStop Load (75.2ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 29778 AND userid = 0 AND agencyid = 1
+Completed 500 Internal Server Error in 153ms
+
+NoMethodError (undefined method `StopName' for nil:NilClass):
+  app/controllers/busstops_controller.rb:90:in `show'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.7ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.3ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.4ms)
+
+
+Started GET "/busstops/1_29277" for 67.183.84.202 at 2013-11-21 19:24:15 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_29277"}
+  [1m[36mBusStop Load (75.1ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 29277 AND agencyid = 1[0m
+  [1m[35mBusStop Load (75.2ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 29277 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 164ms (Views: 11.4ms | ActiveRecord: 150.3ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 19:24:15 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 19:24:15 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 19:24:15 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 19:24:15 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/busstops/1_29277" for 67.183.84.202 at 2013-11-21 19:30:41 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_29277"}
+  [1m[36mBusStop Load (75.4ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 29277 AND agencyid = 1[0m
+  [1m[35mBusStop Load (75.1ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 29277 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 352ms (Views: 10.5ms | ActiveRecord: 153.3ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 19:30:41 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 19:30:41 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 19:30:41 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 19:30:41 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/busstops/1_29277" for 67.183.84.202 at 2013-11-21 19:32:41 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_29277"}
+  [1m[36mBusStop Load (75.5ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 29277 AND agencyid = 1[0m
+  [1m[35mBusStop Load (75.0ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 29277 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (1.4ms)
+Completed 500 Internal Server Error in 347ms
+
+ActionView::Template::Error (no implicit conversion of Fixnum into String):
+    22:     <td><%= @busstop.Shelters %></td>
+    23:   </tr>
+    24:   <% if @busstop.BenchCount != -1%>
+    25:     <%= "<tr><td>Benches:</td><td>"+@busstop.BenchCount+"</td></tr>" %>
+    26:   <% end %>
+    27: </table>
+    28: <br>
+  app/views/busstops/show.html.erb:25:in `+'
+  app/views/busstops/show.html.erb:25:in `_app_views_busstops_show_html_erb__21964488127317811_69931900842740'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.3ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (10.1ms)
+
+
+Started GET "/busstops/1_29277" for 67.183.84.202 at 2013-11-21 19:33:14 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_29277"}
+  [1m[36mBusStop Load (86.0ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 29277 AND agencyid = 1[0m
+  [1m[35mBusStop Load (85.5ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 29277 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 360ms (Views: 7.9ms | ActiveRecord: 174.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-21 19:33:15 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-21 19:33:15 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-21 19:33:15 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-21 19:33:15 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/busstops/1_75403" for 174.239.193.30 at 2013-11-21 19:43:45 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (74.9ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (75.0ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 167ms (Views: 12.6ms | ActiveRecord: 149.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 174.239.193.30 at 2013-11-21 19:43:45 -0800
+Served asset /application.css - 200 OK (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 174.239.193.30 at 2013-11-21 19:43:46 -0800
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 174.239.193.30 at 2013-11-21 19:43:46 -0800
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 174.239.193.30 at 2013-11-21 19:43:46 -0800
+Served asset /application.js - 200 OK (0ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/busstops/1_29277" for 172.28.7.62 at 2013-11-22 15:30:25 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_29277"}
+  [1m[36mBusStop Load (75.7ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 29277 AND agencyid = 1[0m
+  [1m[35mBusStop Load (75.5ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 29277 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 474ms (Views: 67.8ms | ActiveRecord: 154.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 172.28.7.62 at 2013-11-22 15:30:26 -0800
+Served asset /application.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.js?body=1" for 172.28.7.62 at 2013-11-22 15:30:26 -0800
+Served asset /application.js - 304 Not Modified (48ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 172.28.7.62 at 2013-11-22 15:30:26 -0800
+Served asset /jquery.js - 304 Not Modified (6ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 172.28.7.62 at 2013-11-22 15:30:26 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (4ms)
+
+
+Started GET "/update/1_29277" for 172.28.7.62 at 2013-11-22 15:30:28 -0800
+Processing by BusstopsController#update as HTML
+  Parameters: {"id"=>"1_29277"}
+  [1m[36mBusStop Load (75.4ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 29277[0m
+  Rendered busstops/update.html.erb within layouts/application (15.6ms)
+Completed 200 OK in 104ms (Views: 26.7ms | ActiveRecord: 75.4ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 172.28.7.62 at 2013-11-22 15:30:28 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 172.28.7.62 at 2013-11-22 15:30:28 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 172.28.7.62 at 2013-11-22 15:30:28 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 172.28.7.62 at 2013-11-22 15:30:28 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/busstops/1_29277" for 172.28.7.62 at 2013-11-22 15:35:24 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_29277"}
+  [1m[36mBusStop Load (75.9ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 29277 AND agencyid = 1[0m
+  [1m[35mBusStop Load (75.4ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 29277 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 433ms (Views: 38.7ms | ActiveRecord: 154.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 172.28.7.62 at 2013-11-22 15:35:25 -0800
+Served asset /application.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 172.28.7.62 at 2013-11-22 15:35:25 -0800
+Served asset /application.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 172.28.7.62 at 2013-11-22 15:35:25 -0800
+Served asset /jquery.js - 304 Not Modified (40ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 172.28.7.62 at 2013-11-22 15:35:25 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (4ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/busstops/1_75403" for 67.183.84.202 at 2013-11-25 17:06:02 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (75.9ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (75.4ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 558ms (Views: 107.6ms | ActiveRecord: 154.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-25 17:06:03 -0800
+Served asset /application.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-25 17:06:03 -0800
+Served asset /jquery.js - 304 Not Modified (47ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-25 17:06:03 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (9ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-25 17:06:03 -0800
+Served asset /application.js - 304 Not Modified (6ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/busstops/1_75403" for 67.183.84.202 at 2013-11-25 17:07:31 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (85.4ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (85.1ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 417ms (Views: 34.4ms | ActiveRecord: 173.5ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-25 17:07:31 -0800
+Served asset /jquery.js - 304 Not Modified (8ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-25 17:07:31 -0800
+Served asset /application.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-25 17:07:31 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (45ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-25 17:07:31 -0800
+Served asset /application.js - 304 Not Modified (5ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/busstops/1_75403" for 67.183.84.202 at 2013-11-25 17:09:46 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (76.0ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (75.0ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 413ms (Views: 45.7ms | ActiveRecord: 153.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-25 17:09:46 -0800
+Served asset /application.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-25 17:09:46 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-25 17:09:46 -0800
+Served asset /application.js - 304 Not Modified (50ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-25 17:09:46 -0800
+Served asset /jquery.js - 304 Not Modified (5ms)
+
+
+Started GET "/busstops/1_75403" for 67.183.84.202 at 2013-11-25 17:09:50 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (75.3ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (75.0ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 160ms (Views: 6.7ms | ActiveRecord: 150.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-25 17:09:50 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-25 17:09:50 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-25 17:09:50 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-25 17:09:50 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/busstops/1_75403" for 67.183.84.202 at 2013-11-25 17:09:52 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (75.8ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (75.7ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 160ms (Views: 5.6ms | ActiveRecord: 151.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-25 17:09:52 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-25 17:09:52 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-25 17:09:52 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-25 17:09:52 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/busstops/1_75403" for 67.183.84.202 at 2013-11-25 17:09:53 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (75.8ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (75.5ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 160ms (Views: 6.3ms | ActiveRecord: 151.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-25 17:09:53 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-25 17:09:53 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-25 17:09:53 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-25 17:09:53 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/busstops/1_75403" for 67.183.84.202 at 2013-11-25 17:18:05 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (75.5ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (75.4ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 401ms (Views: 41.0ms | ActiveRecord: 153.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-25 17:18:06 -0800
+Served asset /application.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-25 17:18:06 -0800
+Served asset /jquery.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-25 17:18:06 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-25 17:18:06 -0800
+Served asset /application.js - 304 Not Modified (5ms)
+
+
+Started GET "/busstops/1_75403" for 67.183.84.202 at 2013-11-25 17:18:07 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (76.0ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (75.5ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 161ms (Views: 6.0ms | ActiveRecord: 151.5ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-25 17:18:07 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-25 17:18:07 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-25 17:18:07 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-25 17:18:07 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/busstops/1_29277" for 67.183.84.202 at 2013-11-25 17:18:17 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_29277"}
+  [1m[36mBusStop Load (75.5ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 29277 AND agencyid = 1[0m
+  [1m[35mBusStop Load (75.8ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 29277 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 159ms (Views: 5.6ms | ActiveRecord: 151.3ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-25 17:18:17 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-25 17:18:17 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-25 17:18:17 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-25 17:18:17 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/busstop/id/27729" for 140.142.25.143 at 2013-11-25 18:19:26 -0800
+
+ActionController::RoutingError (No route matches [GET] "/busstop/id/27729"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/share/ruby/webrick/httpserver.rb:138:in `service'
+  /usr/share/ruby/webrick/httpserver.rb:94:in `run'
+  /usr/share/ruby/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/busstops/1_75403" for 140.142.25.143 at 2013-11-25 18:19:44 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (75.6ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (75.4ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 165ms (Views: 11.2ms | ActiveRecord: 151.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 140.142.25.143 at 2013-11-25 18:19:45 -0800
+Served asset /application.css - 200 OK (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 140.142.25.143 at 2013-11-25 18:19:45 -0800
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 140.142.25.143 at 2013-11-25 18:19:45 -0800
+Served asset /application.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 140.142.25.143 at 2013-11-25 18:19:45 -0800
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/busstops/1_75403" for 140.142.25.143 at 2013-11-25 18:24:56 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (76.5ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (74.9ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 424ms (Views: 11.9ms | ActiveRecord: 154.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 140.142.25.143 at 2013-11-25 18:24:57 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 140.142.25.143 at 2013-11-25 18:24:57 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 140.142.25.143 at 2013-11-25 18:24:57 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 140.142.25.143 at 2013-11-25 18:24:57 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/busstops/1_75403" for 67.183.84.202 at 2013-11-26 01:09:28 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (75.6ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (75.5ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (5.3ms)
+Completed 500 Internal Server Error in 434ms
+
+ActionView::Template::Error (no implicit conversion of Fixnum into String):
+    22:     <td><%= @busstop.Shelters %></td>
+    23:   </tr>
+    24:   <% if @busstop.BenchCount != -1%>
+    25:     <%= "<tr><td>Benches:</td><td>"+@busstop.BenchCount+"</td></tr>" %>
+    26:   <% end %>
+    27: </table>
+    28: <br>
+  app/views/busstops/show.html.erb:25:in `+'
+  app/views/busstops/show.html.erb:25:in `_app_views_busstops_show_html_erb__1181817032053119535_11854540'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.9ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.5ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (10.4ms)
+
+
+Started GET "/busstops/1_75403" for 67.183.84.202 at 2013-11-26 01:10:25 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (75.4ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (76.0ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 208ms (Views: 52.2ms | ActiveRecord: 151.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-26 01:10:25 -0800
+Served asset /application.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-26 01:10:25 -0800
+Served asset /jquery.js - 304 Not Modified (8ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-26 01:10:25 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-26 01:10:25 -0800
+Served asset /application.js - 304 Not Modified (5ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/busstops/1_29277" for 67.183.84.202 at 2013-11-26 22:22:51 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_29277"}
+  [1m[36mBusStop Load (77.6ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 29277 AND agencyid = 1[0m
+  [1m[35mBusStop Load (77.4ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 29277 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 473ms (Views: 69.1ms | ActiveRecord: 157.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-26 22:22:52 -0800
+Served asset /application.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-26 22:22:52 -0800
+Served asset /jquery.js - 304 Not Modified (40ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-26 22:22:52 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-26 22:22:52 -0800
+Served asset /application.js - 304 Not Modified (6ms)
+
+
+Started GET "/update/1_29277" for 67.183.84.202 at 2013-11-26 22:22:54 -0800
+Processing by BusstopsController#update as HTML
+  Parameters: {"id"=>"1_29277"}
+  [1m[36mBusStop Load (77.4ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 29277 AND agencyid = 1[0m
+  Rendered busstops/update.html.erb within layouts/application (16.0ms)
+Completed 200 OK in 107ms (Views: 27.2ms | ActiveRecord: 77.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-26 22:22:54 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-26 22:22:55 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-26 22:22:55 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-26 22:22:55 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/add/1_29277" for 67.183.84.202 at 2013-11-26 22:23:01 -0800
+Processing by BusstopsController#addnew as HTML
+  Parameters: {"id"=>"1_29277"}
+  [1m[35mBusStop Load (77.3ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 29277 AND agencyid = 1
+  Rendered busstops/addnew.html.erb within layouts/application (8.2ms)
+Completed 200 OK in 97ms (Views: 17.8ms | ActiveRecord: 77.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 67.183.84.202 at 2013-11-26 22:23:01 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 67.183.84.202 at 2013-11-26 22:23:01 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 67.183.84.202 at 2013-11-26 22:23:01 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 67.183.84.202 at 2013-11-26 22:23:01 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/busstops/1_75403" for 69.91.137.202 at 2013-11-27 10:44:43 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (77.7ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (77.6ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 437ms (Views: 57.8ms | ActiveRecord: 158.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.91.137.202 at 2013-11-27 10:44:43 -0800
+Served asset /application.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.91.137.202 at 2013-11-27 10:44:43 -0800
+Served asset /jquery.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.91.137.202 at 2013-11-27 10:44:43 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.91.137.202 at 2013-11-27 10:44:43 -0800
+Served asset /application.js - 304 Not Modified (5ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started GET "/busstops/1_75403" for 69.91.137.202 at 2013-11-27 11:26:35 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (77.8ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (77.3ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 426ms (Views: 26.4ms | ActiveRecord: 157.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.91.137.202 at 2013-11-27 11:26:36 -0800
+Served asset /application.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.91.137.202 at 2013-11-27 11:26:36 -0800
+Served asset /jquery.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.91.137.202 at 2013-11-27 11:26:36 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.91.137.202 at 2013-11-27 11:26:36 -0800
+Served asset /application.js - 304 Not Modified (4ms)
+
+
+Started GET "/update/1_75403" for 69.91.137.202 at 2013-11-27 11:26:38 -0800
+Processing by BusstopsController#update as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (78.0ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  Rendered busstops/update.html.erb within layouts/application (54.2ms)
+Completed 200 OK in 144ms (Views: 64.5ms | ActiveRecord: 78.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.91.137.202 at 2013-11-27 11:26:38 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.91.137.202 at 2013-11-27 11:26:38 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.91.137.202 at 2013-11-27 11:26:38 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.91.137.202 at 2013-11-27 11:26:38 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/add/1_75403" for 69.91.137.202 at 2013-11-27 11:27:53 -0800
+Processing by BusstopsController#addnew as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[35mBusStop Load (77.6ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1
+  Rendered busstops/addnew.html.erb within layouts/application (10.2ms)
+Completed 200 OK in 109ms (Views: 29.4ms | ActiveRecord: 77.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.91.137.202 at 2013-11-27 11:27:54 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.91.137.202 at 2013-11-27 11:27:54 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.91.137.202 at 2013-11-27 11:27:54 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.91.137.202 at 2013-11-27 11:27:54 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started GET "/assets/rails.png" for 69.91.131.245 at 2013-11-27 11:59:57 -0800
+Served asset /rails.png - 200 OK (7ms)
+
+
+Started GET "/welcome/index" for 69.91.131.245 at 2013-11-27 12:00:27 -0800
+
+ActionController::RoutingError (No route matches [GET] "/welcome/index"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/share/ruby/webrick/httpserver.rb:138:in `service'
+  /usr/share/ruby/webrick/httpserver.rb:94:in `run'
+  /usr/share/ruby/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (2.2ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/welcome/index" for 69.91.131.245 at 2013-11-27 12:04:43 -0800
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 23ms (Views: 22.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.91.131.245 at 2013-11-27 12:04:44 -0800
+Served asset /application.css - 304 Not Modified (5ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.91.131.245 at 2013-11-27 12:04:44 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.91.131.245 at 2013-11-27 12:04:44 -0800
+Served asset /jquery.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.91.131.245 at 2013-11-27 12:04:44 -0800
+Served asset /application.js - 304 Not Modified (4ms)
+
+
+Started GET "/welcome/index" for 69.91.131.245 at 2013-11-27 12:05:00 -0800
+
+TypeError (no implicit conversion of String into Hash):
+  config/routes.rb:5:in `block in <top (required)>'
+  config/routes.rb:1:in `<top (required)>'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.8ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.8ms)
+
+
+Started GET "/welcome/index" for 69.91.131.245 at 2013-11-27 12:05:34 -0800
+
+ActionController::RoutingError (No route matches [GET] "/welcome/index"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/share/ruby/webrick/httpserver.rb:138:in `service'
+  /usr/share/ruby/webrick/httpserver.rb:94:in `run'
+  /usr/share/ruby/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started GET "/welcome/index" for 69.91.131.245 at 2013-11-27 12:05:58 -0800
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 66ms (Views: 65.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.91.131.245 at 2013-11-27 12:05:59 -0800
+Served asset /application.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.91.131.245 at 2013-11-27 12:05:59 -0800
+Served asset /jquery.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.91.131.245 at 2013-11-27 12:05:59 -0800
+Served asset /application.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.91.131.245 at 2013-11-27 12:05:59 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (2ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/busstops/1_75403" for 69.91.131.245 at 2013-11-27 12:06:56 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (77.5ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (77.4ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 402ms (Views: 25.7ms | ActiveRecord: 157.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.91.131.245 at 2013-11-27 12:06:56 -0800
+Served asset /application.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.91.131.245 at 2013-11-27 12:06:56 -0800
+Served asset /jquery.js - 304 Not Modified (58ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.91.131.245 at 2013-11-27 12:06:56 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.91.131.245 at 2013-11-27 12:06:56 -0800
+Served asset /application.js - 304 Not Modified (4ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started GET "/assets/rails.png" for 69.91.131.245 at 2013-11-27 12:08:36 -0800
+Served asset /rails.png - 304 Not Modified (1ms)
+
+
+Started GET "/welcome/index" for 69.91.131.245 at 2013-11-27 12:08:56 -0800
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 66ms (Views: 65.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.91.131.245 at 2013-11-27 12:08:56 -0800
+Served asset /application.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.91.131.245 at 2013-11-27 12:08:56 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.91.131.245 at 2013-11-27 12:08:56 -0800
+Served asset /jquery.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.91.131.245 at 2013-11-27 12:08:56 -0800
+Served asset /application.js - 304 Not Modified (4ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started GET "/welcome/index" for 69.91.131.245 at 2013-11-27 12:12:03 -0800
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 25ms (Views: 24.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.91.131.245 at 2013-11-27 12:12:03 -0800
+Served asset /application.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.91.131.245 at 2013-11-27 12:12:03 -0800
+Served asset /jquery.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.91.131.245 at 2013-11-27 12:12:03 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.91.131.245 at 2013-11-27 12:12:03 -0800
+Served asset /application.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/rails.png" for 69.91.131.245 at 2013-11-27 12:12:06 -0800
+Served asset /rails.png - 304 Not Modified (1ms)
+
+
+Started GET "/assets/rails.png" for 69.91.131.245 at 2013-11-27 12:12:27 -0800
+
+ArgumentError (controller name should not start with a slash):
+  config/routes.rb:5:in `block in <top (required)>'
+  config/routes.rb:1:in `<top (required)>'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.3ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.9ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.6ms)
+
+
+Started GET "/assets/rails.png" for 69.91.131.245 at 2013-11-27 12:12:29 -0800
+Served asset /rails.png - 200 OK (0ms)
+
+
+Started GET "/assets/rails.png" for 69.91.131.245 at 2013-11-27 12:12:43 -0800
+Served asset /rails.png - 304 Not Modified (0ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started GET "/assets/rails.png" for 69.91.131.245 at 2013-11-27 12:13:59 -0800
+Served asset /rails.png - 304 Not Modified (2ms)
+
+
+Started GET "/assets/rails.png" for 69.91.131.245 at 2013-11-27 12:14:03 -0800
+Served asset /rails.png - 304 Not Modified (0ms)
+
+
+Started GET "/welcome/index" for 69.91.131.245 at 2013-11-27 12:14:07 -0800
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 24ms (Views: 23.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.91.131.245 at 2013-11-27 12:14:07 -0800
+Served asset /application.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.91.131.245 at 2013-11-27 12:14:07 -0800
+Served asset /jquery.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.91.131.245 at 2013-11-27 12:14:07 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.91.131.245 at 2013-11-27 12:14:07 -0800
+Served asset /application.js - 304 Not Modified (44ms)
+
+
+Started GET "/assets/rails.png" for 69.91.131.245 at 2013-11-27 12:15:48 -0800
+Served asset /rails.png - 304 Not Modified (0ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started GET "/assets/rails.png" for 69.91.131.245 at 2013-11-27 12:19:55 -0800
+Served asset /rails.png - 304 Not Modified (2ms)
+
+
+Started GET "/welcome/index" for 69.91.131.245 at 2013-11-27 12:20:00 -0800
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 24ms (Views: 23.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.91.131.245 at 2013-11-27 12:20:00 -0800
+Served asset /application.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.91.131.245 at 2013-11-27 12:20:00 -0800
+Served asset /jquery.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.91.131.245 at 2013-11-27 12:20:00 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.91.131.245 at 2013-11-27 12:20:00 -0800
+Served asset /application.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/rails.png" for 69.91.131.245 at 2013-11-27 12:21:32 -0800
+Served asset /rails.png - 304 Not Modified (0ms)
+
+
+Started GET "/" for 69.91.131.245 at 2013-11-27 12:26:37 -0800
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 8ms (Views: 8.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.91.131.245 at 2013-11-27 12:26:38 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.91.131.245 at 2013-11-27 12:26:38 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.91.131.245 at 2013-11-27 12:26:38 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.91.131.245 at 2013-11-27 12:26:38 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/busstops/1_75403" for 69.91.131.245 at 2013-11-27 12:27:15 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (77.4ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (77.3ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 428ms (Views: 7.8ms | ActiveRecord: 157.5ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.91.131.245 at 2013-11-27 12:27:16 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.91.131.245 at 2013-11-27 12:27:16 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.91.131.245 at 2013-11-27 12:27:16 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.91.131.245 at 2013-11-27 12:27:16 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/add/1_75403" for 174.229.1.231 at 2013-11-27 12:36:38 -0800
+Processing by BusstopsController#addnew as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (77.7ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+Completed 500 Internal Server Error in 80ms
+
+NoMethodError (undefined method `split' for nil:NilClass):
+  app/controllers/busstops_controller.rb:154:in `addnew'
+
+
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.4ms)
+  Rendered /usr/share/gems/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.8ms)
+
+
+Started GET "/" for 69.91.131.245 at 2013-11-27 12:53:32 -0800
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 9ms (Views: 8.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.91.131.245 at 2013-11-27 12:53:32 -0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.91.131.245 at 2013-11-27 12:53:32 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.91.131.245 at 2013-11-27 12:53:32 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.91.131.245 at 2013-11-27 12:53:32 -0800
+Served asset /application.js - 304 Not Modified (0ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/busstops/1_75403" for 128.208.7.20 at 2013-11-27 13:56:16 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (77.8ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (77.2ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 406ms (Views: 26.3ms | ActiveRecord: 157.9ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 128.208.7.20 at 2013-11-27 13:56:17 -0800
+Served asset /jquery.js - 304 Not Modified (57ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 128.208.7.20 at 2013-11-27 13:56:17 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application.css?body=1" for 128.208.7.20 at 2013-11-27 13:56:17 -0800
+Served asset /application.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 128.208.7.20 at 2013-11-27 13:56:17 -0800
+Served asset /application.js - 304 Not Modified (4ms)
+
+
+Started GET "/" for 128.208.7.85 at 2013-11-27 13:58:51 -0800
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 8ms (Views: 7.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 128.208.7.85 at 2013-11-27 13:58:51 -0800
+Served asset /application.css - 200 OK (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 128.208.7.85 at 2013-11-27 13:58:51 -0800
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 128.208.7.85 at 2013-11-27 13:58:51 -0800
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 128.208.7.85 at 2013-11-27 13:58:51 -0800
+Served asset /application.js - 200 OK (0ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started GET "/busstops/1_75403" for 128.208.7.20 at 2013-11-27 15:02:38 -0800
+Processing by BusstopsController#show as HTML
+  Parameters: {"id"=>"1_75403"}
+  [1m[36mBusStop Load (77.1ms)[0m  [1mSELECT * FROM stopinfo_dev WHERE stopid = 75403 AND agencyid = 1[0m
+  [1m[35mBusStop Load (77.1ms)[0m  SELECT * FROM stopinfo_dev WHERE stopid = 75403 AND userid = 0 AND agencyid = 1
+  Rendered busstops/show.html.erb within layouts/application (3.7ms)
+Compiled application.css  (1ms)  (pid 11024)
+Compiled jquery.js  (54ms)  (pid 11024)
+Compiled jquery_ujs.js  (0ms)  (pid 11024)
+Compiled application.js  (70ms)  (pid 11024)
+Completed 200 OK in 476ms (Views: 101.4ms | ActiveRecord: 157.2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 128.208.7.20 at 2013-11-27 15:02:38 -0800
+Served asset /jquery.js - 304 Not Modified (7ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 128.208.7.20 at 2013-11-27 15:02:38 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (2ms)

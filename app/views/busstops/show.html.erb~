@@ -1,0 +1,36 @@
+<h2><%= @busstop.StopName %></h2>
+
+<table>
+  <tr>
+    <td>Direction:</td>
+    <td><%= BusStop.directionName(@busstop.BearingCode) %></td>
+  </tr>
+  <tr>
+    <td>Position:</td>
+    <td><%= @busstop.Intersection %>, <%= @busstop.FromCrossCurb %> feet from curb</td>
+  </tr>
+  <tr>
+    <td>Sign type:</td>
+    <td><%= @busstop.RteSignType %></td>
+  </tr>
+  <tr>
+    <td>Schedule holder:</td>
+    <td><%= @busstop.SchedHolder %></td>
+  </tr>
+  <tr>
+    <td>Number of shelters:</td>
+    <td><%= @busstop.Shelters %></td>
+  </tr>
+  <% if @busstop.BenchCount != -1%>
+    <%= "<tr><td>Benches:</td><td>"+@busstop.BenchCount+"</td></tr>" %>
+  <% end %>
+</table>
+<br>
+<table>
+  <tr>
+    <td><%= link_to 'Improve current stop information', "/update/"+@busstop.StopId %></td>
+  </tr>
+  <tr>
+    <td><%= link_to 'Add new stop information', "/add/"+@busstop.StopId %></td>
+  </tr>
+</table>

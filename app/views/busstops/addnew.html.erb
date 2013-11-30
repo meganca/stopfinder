@@ -1,0 +1,51 @@
+<h2><%= @busstop.StopName %></h2>
+
+<%= form_for :busstop, url: busstops_path do |f| %>
+  <% if @add.include?(:curb_inset) %>
+    <p>
+      <%= f.label :"Sign position"%>:
+      <%= f.select :InsetFromCurb, BusStop.curbInsetValues, :selected => "unknown" %>
+    </p>
+  <% end %>
+  <% if @add.include?(:bench_count) %>
+    <p>
+      <%= f.label :"Number of benches"%>:
+      <%= f.number_field :BenchCount, :class => 'text_field', :value => "" %>
+    </p>
+  <% end %>
+  <% if @add.include?(:can_count) %>
+    <p>
+      <%= f.label :"Number of trashcans"%>:
+      <%= f.number_field :CanCount, :class => 'text_field', :value => "" %>
+    </p>
+  <% end %>
+  <% if @add.include?(:box_count) %>
+    <p>
+      <%= f.label :"Number of boxes (newsboxes, postboxes, etc)"%>:
+      <%= f.number_field :BoxCount, :class => 'text_field', :value => "" %>
+    </p>
+  <% end %>
+  <% if @add.include?(:pole_count) %>
+    <p>
+      <%= f.label :"Number of poles (other than bus sign)"%>:
+      <%= f.number_field :PoleCount, :class => 'text_field', :value => "" %>
+    </p>
+  <% end %>
+
+  <p>
+    <%= f.label :"Additional information" %>:
+    <%= f.text_area :StopComment, :value =>"" %>
+  </p>
+  
+  <%= f.hidden_field :UserIP, :value => request.remote_ip %>
+  <%= f.hidden_field :StopId, :value => @busstop.StopId %>
+  <%= f.hidden_field :AgencyId, :value => @busstop.AgencyId %>
+  <%= f.hidden_field :DateCreated, :value => Time.now %>
+
+  <%= f.check_box :UserAtStop, {:checked=>false} %>
+  <%= f.label :"I am currently at this stop." %>
+
+  <p>
+    <%= f.submit "Submit new information" %>
+  </p>
+<% end %>

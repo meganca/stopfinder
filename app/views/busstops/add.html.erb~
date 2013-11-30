@@ -1,0 +1,35 @@
+<h2>Add info for <%= @busstop.StopName %></h2>
+
+<%= form_for :busstop, url: busstops_path do |f| %>
+  <p>
+    <%= f.label :"Number of benches"%>:
+    <%= f.number_field :BenchCount, :class => 'text_field' %>
+  </p>
+
+  <p>
+    <%= f.label :"Number of trash cans"%>:
+    <%= f.number_field :CanCount, :class => 'text_field' %>
+  </p>
+
+  <p>
+    <%= f.label :"Number of newsboxes"%>:
+    <%= f.number_field :BoxCount, :class => 'text_field' %>
+  </p>
+
+  <p>
+    <%= f.label :"Number of poles"%> (not including stop pole):
+    <%= f.number_field :PoleCount, :class => 'text_field' %>
+  </p>
+
+  <p>
+    <%= f.label :"Additional information" %>:
+    <%= f.text_area :text %>
+  </p>
+  
+  <%= f.hidden_field :UserId, :value => request.remote_ip %>
+  <%= f.hidden_field :StopId, :value => @busstop.StopId %>
+
+  <p>
+    <%= f.submit "Submit new information" %>
+  </p>
+<% end %>

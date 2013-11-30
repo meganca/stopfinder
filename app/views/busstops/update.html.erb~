@@ -1,0 +1,34 @@
+<h2><%= @busstop.StopName %></h2>
+
+<%= form_for :busstop, url: busstops_path do |f| %>
+  <p>
+    <%= f.label :direction %>:
+    <%= f.select :BearingCode, [["don't know", 'None'],['northbound','N'],['eastbound','E'],['southbound','S'],['westbound','W']] %>
+  </p>
+  <p>
+    <%= f.label :position %> (relative to intersection):
+    <%= f.select :Intersection, [["don't know", 'None'],['Far side','Far side'],['Near side','Near side'],['At cross st','At cross st'],['Far middle','Far middle'],['Near middle','Near middle'],['Opposite to','Opposite to']] %>
+  </p>
+ 
+  <p>
+    <%= f.label :"Sign Type"%>:
+    <%= f.select :RteSignType, [["don't know", "user unknown"],['small sign on one pole','small sign on one pole'],['large sign on one wide base','large sign on one wide base'],['large sign on two poles','large sign on two poles'],['triangular kiosk','triangular kiosk'],['tunnel route sign','tunnel route: small sign on square pole'],['no sign','no sign']] %>
+  </p>
+
+  <p>
+    <%= f.label :"Schedule holder"%> present:
+    <%= f.select :SchedHolder, [["don't know", "user unknown"],['yes','yes'],['no','no']] %>
+  </p>
+
+  <p>
+    <%= f.label :"Number of shelters"%>:
+    <%= f.number_field :Shelters, :class => 'text_field' %>
+  </p>
+  
+  <%= f.hidden_field :UserId, :value => request.remote_ip %>
+  <%= f.hidden_field :StopId, :value => @busstop.StopId %>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>

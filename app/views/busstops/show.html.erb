@@ -1,0 +1,106 @@
+<h2><%= @busstopAttributes[:stop_name].value %></h2>
+
+<table>
+  <% if @busstopAttributes[:bearing_code].value != "unknown" %>
+    <tr>
+      <td>Direction:</td>
+      <td>
+        <%= @busstopAttributes[:bearing_code].value %>
+        <% if @busstopAttributes[:bearing_code].needsValidation == "true" %> * <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <tr>
+    <td>Position from intersection:</td>
+    <td>
+        <% if @busstopAttributes[:intersection_pos].value != "unknown" %>
+          <%= @busstopAttributes[:intersection_pos].value %>,
+          <% if @busstopAttributes[:intersection_pos].needsValidation == "true" %> * <% end %> 
+        <% end %>
+        <%= @busstopAttributes[:intersection_distance].value %> feet from curb
+    </td>
+  </tr>
+  <% if @busstopAttributes[:sign_type].value != "unknown" %>
+    <tr>
+      <td>Sign type:</td>
+      <td>
+        <%= @busstopAttributes[:sign_type].value %>
+        <% if @busstopAttributes[:sign_type].needsValidation == "true" %> * <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if @busstopAttributes[:curb_inset].value != "unknown" %>
+    <tr>
+      <td>Sign position:</td>
+      <td>
+        <%= @busstopAttributes[:curb_inset].value %>
+        <% if @busstopAttributes[:curb_inset].needsValidation == "true" %> * <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if @busstopAttributes[:sched_holder].value != "unknown" %>
+    <tr>
+      <td>Schedule holder:</td>
+      <td>
+        <%= @busstopAttributes[:sched_holder].value %>
+        <% if @busstopAttributes[:sched_holder].needsValidation == "true" %> * <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if @busstopAttributes[:shelter_count].value != "unknown" %>
+    <tr>
+      <td>Number of shelters:</td>
+      <td>
+        <%= @busstopAttributes[:shelter_count].value %>
+        <% if @busstopAttributes[:shelter_count].needsValidation == "true" %> * <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if @busstopAttributes[:bench_count].value != "unknown" %>
+    <tr>
+      <td>Number of benches:</td>
+      <td>
+        <%= @busstopAttributes[:bench_count].value %>
+        <% if @busstopAttributes[:bench_count].needsValidation == "true" %> * <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if @busstopAttributes[:can_count].value != "unknown" %>
+    <tr>
+      <td>Number of cans:</td>
+      <td>
+        <%= @busstopAttributes[:can_count].value %>
+        <% if @busstopAttributes[:can_count].needsValidation == "true" %> * <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if @busstopAttributes[:pole_count].value != "unknown" %>
+    <tr>
+      <td>Number of poles:</td>
+      <td>
+        <%= @busstopAttributes[:pole_count].value %>
+        <% if @busstopAttributes[:pole_count].needsValidation == "true" %> * <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if @busstopAttributes[:box_count].value != "unknown" %>
+    <tr>
+      <td>Number of boxes: (newsboxes, mailboxes)</td>
+      <td>
+        <%= @busstopAttributes[:box_count].value %>
+        <% if @busstopAttributes[:box_count].needsValidation == "true" %> * <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<br>
+<table>
+  <tr>
+    <td><%= link_to 'Verify stop information', "/update/"+ params[:id] %></td>
+    <td><%= link_to 'Add new stop information', "/add/"+ params[:id] %></td>
+  </tr>
+  <tr>
+	<!--<td><%= link_to 'Report stop closure', "/update/"+ params[:id] %></td>-->
+  </tr>
+</table>
+* indicates information that needs verification
