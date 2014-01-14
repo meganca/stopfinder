@@ -1,0 +1,74 @@
+<div id="main" class="container">
+<table cellpadding=5>
+<tr>
+<td><%= image_tag 'oba_logo.png', :width => "100" %></td>
+<td><h1>StopFinder</h1></td>
+</tr>
+<tr><td colspan=2 height=20px></td></tr>
+<tr>
+  <td style="font-weight:bold;">
+    Field
+  </td>
+  <td>
+    Description
+  </td>
+</tr>
+<tr><td colspan=2 height=20px></td></tr>
+<tr>
+  <td style="font-weight:bold;">
+    Direction
+  </td>
+  <td>
+    This indicates the bearing of the bus, one of the four cardinal directions.
+  </td>
+</tr>
+<tr><td colspan=2 height=20px></td></tr>
+<tr>
+  <td style="font-weight:bold;">
+    Position from intersection
+  </td>
+  <td>
+    This describes the placement of the stop relative to the given intersection. The street named first is the street the bus travels along, while the street named second is the street it intersects. For example, if the intersection is "Blanchard St & 1st Ave," a stop on the "far side" of the intersection will be along Blanchard, after crossing 1st. <br />
+    
+    The possible values for this field are: far side, near side, at cross street, far middle, near middle, and opposite to.
+  </td>
+</tr>
+<tr><td colspan=2 height=20px></td></tr>
+<tr>
+  <td style="font-weight:bold;">
+    Sign position
+  </td>
+  <td>
+    This describes the placement of the bus stop pole relative to the curb. A pole within about one foot of the curb is close, while a pole on the far side of the sidewalk and inset from the curb is far.
+  </td>
+</tr>
+<tr><td colspan=2 height=20px></td></tr>
+<tr>
+  <td style="font-weight:bold;">
+    Sign type
+  </td>
+  <td>
+    This describes the shape of the bus stop pole itself. A sign on a "non-Metro pole" means that the bus stop sign is mounted on some pre-existing pole, such as a telephone or light pole, rather than on its own distinct pole.
+  </td>
+</tr>
+<tr><td colspan=2 height=20px></td></tr>
+<tr>
+  <td style="font-weight:bold;">
+    Schedule holder
+  </td>
+  <td>
+    A printed copy of the bus schedule is sometimes affixed to the bus stop pole in a schedule holder.
+  </td>
+</tr>
+
+</table>
+
+
+
+
+
+<% if @browser == :safari %>
+  <td><%= link_to 'Return to app', "onebusaway://" %></td>
+<% end %>
+
+</div>

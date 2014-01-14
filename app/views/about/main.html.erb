@@ -1,0 +1,27 @@
+<div id="main" class="container">
+<table>
+<tr>
+<td><%= image_tag 'oba_logo.png', :width => "100" %></td>
+<td><h1>StopFinder</h1></td>
+</tr>
+</table>
+
+<p>This application is an ongoing research project at the University of Washington, designed to provide detailed information about bus stops to public transportation users. The information is a combination of data received King County Metro and information provided directly by users of the application. In particular, this application collects information identified by blind and low vision bus riders as landmarks they may use to locate their stop and navigate the bus system more easily.</p>
+
+
+<table>
+  <tr>
+    <td> <%= link_to 'Detailed study information', "/InformationStatementV6.pdf" %>
+    </td>
+    <td width=40></td>
+    <td><%= link_to 'What information is collected?', "/about/fields" %></td>
+  </tr>
+<tr>
+<% if @browser == :safari %>
+  <td><%= link_to 'Return to app', "onebusaway://" %></td>
+<% end %>
+<td></td>
+</tr>
+</table>
+
+</div>

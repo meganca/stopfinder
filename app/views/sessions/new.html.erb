@@ -1,0 +1,22 @@
+<table>
+<tr>
+<td><%= image_tag 'oba_logo.png', :width => "100" %></td>
+<td><h1>StopFinder</h1></td>
+</tr>
+<tr>
+<tr><td colspan=2 height=20></td></tr>
+<% if session[:user_email] %>
+ <td colspan=2>Already logged in as <%= session[:user_email] %></td>
+<% else %>
+  <td align=right><%= image_tag 'fb_icon_325x325.png', :width => "20" %></td>
+  <td><%= link_to 'Log in with facebook', "/auth/facebook" %></td></tr>
+	<tr>
+  <td align=right><%= image_tag 'Google-G-Logo.png', :width => "20" %></td>
+  <td><%= link_to 'Log in with google', "/auth/google_oauth2" %></td>
+<% end %>
+</tr>
+</table>
+
+<% if @browser == :safari %>
+  <%= link_to 'Return to app', "onebusaway://" %>
+<% end %>
