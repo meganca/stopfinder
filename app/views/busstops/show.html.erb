@@ -1,6 +1,33 @@
+<div id="main" class="container">
+<table>
+<tr>
+<td><%= image_tag 'oba_logo.png', :width => "100" %></td>
+<td><h1>StopFinder</h1></td>
+</tr>
+<tr>
+<% if session[:user_email] %>
+<td width=> </td>
+<td align="right"> <%= session[:user_email]%><br/> <%= link_to "Log out", "/logout/" %> </td>
+<% else %>
+ <td></td>
+ <td align="right"><%= link_to 'Log in with existing account', "/login/" %></td>
+<% end %>
+</tr>
+<tr><td colspan=2>
+
+<br><br>
 <h2><%= @busstopAttributes[:stop_name].value %></h2>
 
-<table>
+</td></tr>
+
+  <% if @busstopAttributes[:stop_closed].value == "true" %>
+    <tr>
+      <td colspan=2>
+        <h4 style="color:red">THIS STOP MAY CURRENTLY BE CLOSED.</h4>
+      </td>
+    </tr>
+  <% end %>
+  
   <% if @busstopAttributes[:bearing_code].value != "unknown" %>
     <tr>
       <td>Direction:</td>
@@ -24,7 +51,7 @@
     <tr>
       <td>Sign type:</td>
       <td>
-        <%= @busstopAttributes[:sign_type].value %>
+        <%= BusStop.signTypeNames[BusStop.signTypeValues.index(@busstopAttributes[:sign_type].value)] %> 
         <% if @busstopAttributes[:sign_type].needsValidation == "true" %> * <% end %>
       </td>
     </tr>
@@ -33,7 +60,7 @@
     <tr>
       <td>Sign position:</td>
       <td>
-        <%= @busstopAttributes[:curb_inset].value %>
+        <%= BusStop.curbInsetNames[BusStop.curbInsetValues.index(@busstopAttributes[:curb_inset].value)] %> 
         <% if @busstopAttributes[:curb_inset].needsValidation == "true" %> * <% end %>
       </td>
     </tr>
@@ -74,33 +101,19 @@
       </td>
     </tr>
   <% end %>
-  <% if @busstopAttributes[:pole_count].value != "unknown" %>
-    <tr>
-      <td>Number of poles:</td>
-      <td>
-        <%= @busstopAttributes[:pole_count].value %>
-        <% if @busstopAttributes[:pole_count].needsValidation == "true" %> * <% end %>
-      </td>
-    </tr>
-  <% end %>
-  <% if @busstopAttributes[:box_count].value != "unknown" %>
-    <tr>
-      <td>Number of boxes: (newsboxes, mailboxes)</td>
-      <td>
-        <%= @busstopAttributes[:box_count].value %>
-        <% if @busstopAttributes[:box_count].needsValidation == "true" %> * <% end %>
-      </td>
-    </tr>
-  <% end %>
-</table>
-<br>
-<table>
+  <tr><td colspan=2 height=20></td></tr>
   <tr>
     <td><%= link_to 'Verify stop information', "/update/"+ params[:id] %></td>
     <td><%= link_to 'Add new stop information', "/add/"+ params[:id] %></td>
   </tr>
   <tr>
-	<!--<td><%= link_to 'Report stop closure', "/update/"+ params[:id] %></td>-->
+    <% if @browser == :safari %>
+      <td><%= link_to 'Return to app', "onebusaway://" %></td>
+    <% end %>
+	<td><%= link_to 'Report stop closure', "/closed/"+ params[:id] %></td>
   </tr>
 </table>
+<br />
 * indicates information that needs verification
+<br />
+</div>

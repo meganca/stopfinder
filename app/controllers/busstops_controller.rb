@@ -1,12 +1,18 @@
 class BusstopsController < ApplicationController
   StopData = Struct.new(:value, :needsValidation)
   @@votingMajority = 0.75
+  @@closureMinimum = 1
   
   def show
+    cookies[:stopid] = params[:id]
+    
     ids = (params[:id]).split("_")
     agencyid = ids[0]
     stopid = ids[1]
     @busstop = BusStop.new(StopId: stopid)
+    
+    # Get the device for display purposes
+    checkDevice()
 	
     # Track votes and what we have/don't have
     @busstopAttributes = Hash.new
@@ -32,11 +38,18 @@ class BusstopsController < ApplicationController
     insets = Hash.new
     BusStop.curbInsetValues.each {|x| insets[x] = 0 }
 
-    shelters = Hash.new
     benches = Hash.new
+    BusStop.benchCountValues.each {|x| benches[x] = 0 }
+	
+    shelters = Hash.new
+    BusStop.shelterCountValues.each {|x| shelters[x] = 0 }
+	
     cans = Hash.new
-    boxes = Hash.new
-    poles = Hash.new
+    BusStop.trashCanValues.each {|x| cans[x] = 0 }
+    
+    closedvotes = Hash.new
+    closedvotes["true"] = 0
+    closedvotes["false"] = 0
 
     stopdata.each do |stop|
       dir = BusStop.directionName(stop.BearingCode)
@@ -53,14 +66,19 @@ class BusstopsController < ApplicationController
 
       itype = BusStop.curbInset(stop.InsetFromCurb)
       insets[itype] = insets[itype] + 1
+	  
+      benchcount = BusStop.benchCount(stop.BenchCount)
+      benches[benchcount] = benches[benchcount] + 1
+	  
+      sheltercount = BusStop.shelterCount(stop.Shelters)
+      shelters[sheltercount] = shelters[sheltercount] + 1
+	  
+      cancount = BusStop.trashCan(stop.HasCan)
+      cans[cancount] = cans[cancount] + 1
       
-      # Add up the fields where we don't know possible values ahead of time
-      tallyNumericalValues(shelters, stop.Shelters)
-      tallyNumericalValues(benches, stop.BenchCount)
-      tallyNumericalValues(cans, stop.CanCount)
-      tallyNumericalValues(boxes, stop.BoxCount)
-      tallyNumericalValues(poles, stop.PoleCount)
-
+      closed = BusStop.isClosed(stop.ClosureType, stop.ClosurePermanent, stop.ClosureStartdate, stop.ClosureEnddate)
+      closedvotes[closed] = closedvotes[closed] + 1
+	  
     end
 
     # Clear out any counts of "no opinion"
@@ -69,11 +87,18 @@ class BusstopsController < ApplicationController
     signs.delete("unknown")
     schedules.delete("unknown")
     insets.delete("unknown")
-    benches.delete(-1)
-    shelters.delete(-1)
-    cans.delete(-1)
-    boxes.delete(-1)
-    poles.delete(-1)
+    benches.delete("unknown")
+    shelters.delete("unknown")
+    cans.delete("unknown")
+    
+    # If the stop isn't closed, ignore; we don't need to do anything
+    # This is something where we don't want majority vote, just count
+    closedvotes.delete("false")
+    if (closedvotes["true"] >= @@closureMinimum)
+      @busstopAttributes[:stop_closed] = StopData.new("true", "false")
+    else
+      @busstopAttributes[:stop_closed] = StopData.new("false", "false")
+    end
 
     # Information we ONLY get from Metro
     @busstopAttributes[:stop_name] = StopData.new(officialstop[0].StopName, "false")
@@ -89,8 +114,6 @@ class BusstopsController < ApplicationController
     calculateInfo(shelters, :shelter_count)
     calculateInfo(benches, :bench_count)
     calculateInfo(cans, :can_count)
-    calculateInfo(boxes, :box_count)
-    calculateInfo(poles, :pole_count)
 	
 	cookies[:validate] = @validate
 	cookies[:add] = @add
@@ -101,7 +124,7 @@ class BusstopsController < ApplicationController
       majorityValue = votingHash.max_by{|k,v| v}[0]
       count = votingHash.values.inject(0) {|sum,x| sum + x}
       
-      if count == 0
+      if (count == 0)
         @busstopAttributes[infoSymbol] = StopData.new("unknown", "true")
         @add.push(infoSymbol)
       else
@@ -129,6 +152,14 @@ class BusstopsController < ApplicationController
     end
   end
   
+  def checkDevice() 
+    if browser.safari?
+      @browser = :safari
+    else
+      @browser = :other
+    end
+  end
+  
   def update
     ids = (params[:id]).split("_")
     agencyid = ids[0]
@@ -142,7 +173,7 @@ class BusstopsController < ApplicationController
   def create
     @busstop = BusStop.new(params[:busstop])
     @busstop.save
-    redirect_to :action => "show", :id => params[:busstop][:AgencyId] + "_" + params[:busstop][:StopId]
+    redirect_to dataentry_url(:id => params[:busstop][:AgencyId] + "_" + params[:busstop][:StopId])
   end
 
   def addnew
@@ -154,4 +185,12 @@ class BusstopsController < ApplicationController
     addlist = cookies[:add].split("&")
     @add = addlist.map { |x| x.to_sym } 
   end
+  
+  def closure
+    ids = (params[:id]).split("_")
+    agencyid = ids[0]
+    stopid = ids[1]
+    @busstop = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = " + stopid + " AND agencyid = " + agencyid)[0]
+  end
+  
 end

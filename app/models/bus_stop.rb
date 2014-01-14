@@ -1,12 +1,13 @@
 class BusStop < ActiveRecord::Base
   self.table_name = "stopinfo_dev"
   attr_accessible :UserId, :AgencyId, :StopId, :BearingCode, :Intersection, 
-    :RteSignType, :SchedHolder, :Shelters, :BenchCount, :CanCount, :BoxCount, 
-    :PoleCount, :StopComment, :UserIP, :DateCreated, :UserAtStop, :InsetFromCurb
+    :RteSignType, :SchedHolder, :Shelters, :BenchCount, :HasCan, :AddedFrom,
+    :StopComment, :UserIP, :DateCreated, :UserAtStop, :InsetFromCurb,
+    :ClosureType, :ClosurePermanent, :ClosureStartdate, :ClosureEnddate, :MovedTo
 
   # Constants to keep track of what fields we're collecting
   @@infoFields = ["direction", "position", "sign type", "schedule holder", "is tunnel", 
-    "curb inset", "shelters", "benches", "boxes", "poles", "comment"]
+    "curb inset", "shelters", "benches", "comment"]
 
   def self.infoFields
     @@infoFields
@@ -19,13 +20,20 @@ class BusStop < ActiveRecord::Base
     @@directionValues
   end
 
-  @@signTypeValues = ["small sign on stand alone pole", "sign on non bus stop pole", "large sign on two poles", "triangular kiosk", 
+  @@signTypeValues = ["single pole sign", "non bus pole", "two pole sign", "triangle", 
+    "wide base", "no sign", "unknown"]
+    
+  @@signTypeNames = ["small sign on stand alone pole", "sign on non bus stop pole", "large sign on two poles", "triangular kiosk", 
     "large sign on one wide base", "no sign", "unknown"]
 	
   def self.signTypeValues
     @@signTypeValues
   end
 
+  def self.signTypeNames
+    @@signTypeNames
+  end
+  
   @@intersectionPositionValues = ["far side", "near side", "at cross street", 
       "far middle", "near middle", "opposite to", "unknown"] 
       
@@ -40,12 +48,42 @@ class BusStop < ActiveRecord::Base
     @@scheduleTypeValues
   end
   
-  @@curbInsetValues = ["close to curb (within 1 foot)", "far from curb (more than 1 foot away)", "unknown"] 
-      
+  @@curbInsetValues = ["<1", ">1", "unknown"] 
+  
   def self.curbInsetValues
     @@curbInsetValues
   end
+  
+  @@curbInsetNames = ["close to curb (within 1 foot)", "far from curb (more than 1 foot away)", "unknown"] 
+      
+  def self.curbInsetNames
+    @@curbInsetNames
+  end
+  
+  @@closeMoveValues = ["closed (permanently)", "closed (temporarily)", "moved to a different location (temporarily)"] 
+      
+  def self.closeMoveValues
+    @@closeMoveValues
+  end
 
+  @@benchCountValues = ["0", "1", "2", "3 or more", "unknown"] 
+      
+  def self.benchCountValues
+    @@benchCountValues
+  end
+  
+  @@shelterCountValues = ["0", "1", "2", "3 or more", "unknown"] 
+      
+  def self.shelterCountValues
+    @@shelterCountValues
+  end
+  
+  @@trashCanValues = ["yes", "no", "unknown"] 
+      
+  def self.trashCanValues
+    @@trashCanValues
+  end
+  
   def self.directionName(direction)
     if (directionValues.include?(direction))
       return direction
@@ -89,46 +127,46 @@ class BusStop < ActiveRecord::Base
       return "false"
     end
   end
-  
+    
   def self.signType(signCode)
     if (signTypeValues.include?(signCode))
       return signCode
     else
       case signCode
       when "A1 <=2 rts"
-        return "small sign on stand alone pole"
+        return "single pole sign"
       when "C1H <=48 rts"
-        return "large sign on two poles"
+        return "two pole sign"
       when "B1H <=14 rts"
-        return "large sign on two poles"
+        return "two pole sign"
       when "Single"
-        return "small sign on stand alone pole"
+        return "single pole sign"
       when "A2 <=6 rts"
-        return "small sign on stand alone pole"
+        return "single pole sign"
       when "Ksk Hyb Rts"
-        return "triangular kiosk"
+        return "triangule"
       when "C2 <=32 rts"
-        return "large sign on one wide base"
+        return "wide base"
       when "B1 <=12 rts"
-        return "small sign on stand alone pole"
+        return "single pole sign"
       when "C2H <=32 rts"
-        return "large sign on one wide base"
+        return "wide base"
       when "C1H <=48 rts"
-        return "large sign on two poles"
+        return "two pole sign"
       when "Tunnel Rts"
-        return "small sign on stand alone pole"
+        return "single pole sign"
       when "None"
         return "no sign"
       when "C1 <=18 rts"
-        return "large sign on one wide base"
+        return "wide base"
       when "A2H <=10 rts"
-        return "small sign on stand alone pole"
+        return "single pole sign"
       when "Large Routes"
-        return "large sign on one wide base"
+        return "wide base"
       when "New double"
-        return "small sign on stand alone pole"
+        return "single pole sign"
       when "Small Routes"
-        return "small sign on stand alone pole"
+        return "single pole sign"
       when "Unknown"
         return "unknown"
       else
@@ -158,6 +196,46 @@ class BusStop < ActiveRecord::Base
       return pos
     else
       return "unknown"
+    end
+  end
+  
+  def self.benchCount(val)
+    if (benchCountValues.include?(val))
+      return val
+    else
+      return "unknown"
+    end
+  end
+  
+  def self.shelterCount(val)
+    if (shelterCountValues.include?(val.to_s))
+      return val.to_s
+    elsif (val == nil)
+      return "unknown"
+    elsif (val >= 3)
+      return "3 or more"
+    else
+      return "unknown"
+    end
+  end
+  
+  def self.trashCan(val)
+    if (trashCanValues.include?(val))
+      return val
+    else
+      return "unknown"
+    end
+  end
+  
+  def self.isClosed(type, permanent, startdate, enddate)
+    if ((type == nil) || (type == ""))
+      return "false"
+    elsif (type == "current" && enddate > Time.now)
+      return "true"
+    elsif (type == "future" && startdate < Time.now && enddate > Time.now)
+      return "true"
+    else
+      return "false"
     end
   end
   

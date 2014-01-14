@@ -1,69 +1,79 @@
+<div id="main" class="container">
+<table>
+<tr>
+<td><%= image_tag 'oba_logo.png', :width => "100" %></td>
+<td><h1>StopFinder</h1></td>
+</tr>
+<tr><td colspan=2>
+
+<br><br>
 <h2><%= @busstop.StopName %></h2>
 
+</td></tr>
 <%= form_for :busstop, url: busstops_path do |f| %>
   <% if @validate.include?(:bearing_code) %>
-    <p>
-      <%= f.label :direction %>:
-      <%= f.select :BearingCode, BusStop.directionValues, :selected => "unknown" %>
-    </p>
+    <tr>
+      <td>Direction: </td>
+      <td><%= f.select :BearingCode, BusStop.directionValues, :selected => "unknown" %></td>
+    </tr>
   <% end %>
   <% if @validate.include?(:intersection_pos) %>
-    <p>
-      <%= f.label :position %> (relative to intersection):
-      <%= f.select :Intersection, BusStop.intersectionPositionValues, :selected => "unknown" %>
-    </p>
+    <tr>
+      <td>Position (relative to intersection):</td>
+      <td><%= f.select :Intersection, BusStop.intersectionPositionValues, :selected => "unknown" %></td>
+    </tr>
+  <% end %>
+  <% if @validate.include?(:curb_inset) %>
+    <tr>
+      <td>Sign position:</td>
+      <td><%= f.select :InsetFromCurb, BusStop.curbInsetNames.map.with_index{ |x, i| [x, BusStop.curbInsetValues[i]]}, :selected => "unknown" %></td>
+    </tr>
   <% end %>
   <% if @validate.include?(:sign_type) %>
-    <p>
-      <%= f.label :"Sign Type"%>:
-      <%= f.select :RteSignType, BusStop.signTypeValues, :selected => "unknown" %>
-    </p>
+    <tr>
+      <td>Sign Type:</td>
+      <td><%= f.select :RteSignType, BusStop.signTypeNames.map.with_index{ |x, i| [x, BusStop.signTypeValues[i]]}, :selected => "unknown" %></td>
+    </tr>
   <% end %>
   <% if @validate.include?(:sched_holder) %>
-    <p>
-      <%= f.label :"Schedule holder"%> present:
-      <%= f.select :SchedHolder, BusStop.scheduleTypeValues, :selected => "unknown" %>
-    </p>
+    <tr>
+      <td>Schedule holder:</td>
+      <td><%= f.select :SchedHolder, BusStop.scheduleTypeValues, :selected => "unknown" %></td>
+    </tr>
   <% end %>
   <% if @validate.include?(:shelter_count) %>
-    <p>
-      <%= f.label :"Number of shelters"%>:
-      <%= f.number_field :Shelters, :class => 'text_field', :value => "" %>
-    </p>
+    <tr>
+      <td>Number of shelters:</td>
+      <td><%= f.select :Shelters, BusStop.shelterCountValues, :selected => "unknown" %></td>
+    </tr>
   <% end %>
   <% if @validate.include?(:bench_count) %>
-    <p>
-      <%= f.label :"Number of benches"%>:
-      <%= f.number_field :BenchCount, :class => 'text_field', :value => "" %>
-    </p>
+    <tr>
+      <td>Number of benches:</td>
+      <td><%= f.select :BenchCount, BusStop.benchCountValues, :selected => "unknown" %></td>
+    </tr>
   <% end %>
   <% if @validate.include?(:can_count) %>
-    <p>
-      <%= f.label :"Number of trashcans"%>:
-      <%= f.number_field :CanCount, :class => 'text_field', :value => "" %>
-    </p>
+    <tr>
+      <td>Is there a trash can?:</td>
+      <td><%= f.select :HasCan,  BusStop.trashCanValues, :selected => "unknown" %></td>
+    </tr>
   <% end %>
-  <% if @validate.include?(:box_count) %>
-    <p>
-      <%= f.label :"Number of boxes (newsboxes, postboxes, etc)"%>:
-      <%= f.number_field :BoxCount, :class => 'text_field', :value => "" %>
-    </p>
-  <% end %>
-  <% if @validate.include?(:pole_count) %>
-    <p>
-      <%= f.label :"Number of poles (other than bus sign)"%>:
-      <%= f.number_field :PoleCount, :class => 'text_field', :value => "" %>
-    </p>
-  <% end %>
+  </table>
   
   <%= f.hidden_field :UserIP, :value => request.remote_ip %>
+  <%= f.hidden_field :UserId, :value => session[:user_email] %>
   <%= f.hidden_field :StopId, :value => @busstop.StopId %>
   <%= f.hidden_field :AgencyId, :value => @busstop.AgencyId %>
   <%= f.hidden_field :DateCreated, :value => Time.now %>
+  <%= f.hidden_field :AddedFrom, :value => "update" %>
 
-  <%= f.check_box :UserAtStop, {:checked=>false} %>
-  <%= f.label :"I am currently at this stop." %>
+  <%= f.label :at_stop do %>
+  <%= f.check_box :UserAtStop %>I am currently at this stop.
+  <% end %>
   <p>
     <%= f.submit "Verify" %>
   </p>
 <% end %>
+<%= link_to 'Information collection details', "/InformationStatementV6.pdf" %>
+</div>

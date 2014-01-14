@@ -38,3 +38,11 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'mysql2'
+
+# Browser detection gem
+gem 'browser'
+
+# Gem to enable signin
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
