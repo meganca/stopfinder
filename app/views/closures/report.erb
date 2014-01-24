@@ -1,0 +1,73 @@
+<div id="main" class="container">
+<table>
+<tr>
+<td><%= image_tag 'oba_logo.png', :width => "100" %></td>
+<td><h1>StopFinder</h1></td>
+</tr>
+<tr><td colspan=2>
+
+<br><br>
+<h2><%= @busstop.StopName %></h2>
+
+</td></tr>
+<%= form_for :closure, url: closures_path do |f| %>
+<tr><td colspan=2>Is the stop closed right now?</td></tr>
+<tr>
+  <td colspan=2>
+    <%= f.radio_button :ClosureType, "current", id: 'permanent_closed', :checked => true %>yes
+  </td>
+</tr>
+<tr>
+  <td colspan=2>
+    <%= f.radio_button :ClosureType, "future", id: 'permanent_closed' %>no, closed starting at: <br/>
+    <%= f.date_select :StartDate %>
+  </td>
+</tr>
+
+<tr><td colspan=2 height=20></td></tr>
+<tr><td colspan=2>How long is it closed for?</td></tr>
+
+<tr>
+  <td colspan=2>
+    <%= f.radio_button :ClosurePermanent, "unknown", id: 'permanent_closed' %>Unknown.
+  </td>
+</tr>
+<tr>
+  <td colspan=2>
+    <%= f.radio_button :ClosurePermanent, "yes", id: 'permanent_closed', :checked => true %>Stop is closed permanently.
+  </td>
+</tr>
+<tr>
+  <td colspan=2>
+    <%= f.radio_button :ClosurePermanent, "no", id: 'permanent_closed' %>Stop is closed until: <br />
+    <%= f.date_select :EndDate %>
+  </td>
+</tr>
+
+<tr><td colspan=2 height=20></td></tr>
+<tr><td colspan=2>Is there a suggested alternate stop?</td></tr>
+
+<tr>
+  <td colspan=2>
+    <%= f.text_area :MovedTo, :value =>"", :rows =>3, :cols =>100 %>
+  </td>
+</tr>
+</table>
+
+
+<%= f.hidden_field :UserIP, :value => request.remote_ip %>
+<%= f.hidden_field :UserId, :value => session[:user_email] %>
+<%= f.hidden_field :StopId, :value => @busstop.StopId %>
+<%= f.hidden_field :AgencyId, :value => @busstop.AgencyId %>
+<%= f.hidden_field :DateCreated, :value => Time.now %>
+
+<%= f.label :at_stop do %>
+  <%= f.check_box :UserAtStop %>I am currently at this stop.
+<% end %>
+  
+<p>
+  <%= f.submit "Report closure" %>
+</p>
+<% end %>
+
+</div>
