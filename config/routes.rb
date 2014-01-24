@@ -1,11 +1,11 @@
 StopfinderDev::Application.routes.draw do
-  devise_for :users
+ # devise_for :users
 
   root :to => 'about#main'
   
   resources :busstops
   resources :closures
-  resources :authorizations
+  #resources :authorizations
   # The priority is based upon order of creation:
   # first created -> highest priority
   get '/update/:id' => 'busstops#update'
