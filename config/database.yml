@@ -6,7 +6,7 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: stopfinder
+  database: stopinfo_dev
   pool: 5
   username: stopfinder
   password: 5+rapHang3rz
@@ -25,7 +25,7 @@ test:
 production:
   adapter: mysql2
   encoding: utf8
-  database: stopfinder
+  database: stopinfo
   pool: 5
   username: stopfinder
   password: 5+rapHang3rz

@@ -2,7 +2,7 @@ class CreateDatabase < ActiveRecord::Migration
   def self.up
     ActiveRecord::Schema.define(:version => 0) do
 
-      create_table "stopinfo_dev", :id => false, :force => true do |t|
+      create_table "busstops", :id => false, :force => true do |t|
         t.string   "UserId",                   :limit => 64
         t.string   "AgencyId",                 :limit => 64,                 :null => false
         t.string   "StopId",                   :limit => 64,                 :null => false
@@ -84,19 +84,13 @@ class CreateDatabase < ActiveRecord::Migration
         t.float    "Ycoord"
         t.float    "XcoordOffset"
         t.float    "YcoordOffset"
-        t.integer  "BenchCount",                             :default => -1
-        t.integer  "CanCount",                               :default => -1
-        t.integer  "BoxCount",                               :default => -1
-        t.integer  "PoleCount",                              :default => -1
+        t.string  "BenchCount",                :limit => 64
+        t.string  "HasCan",                    :limit => 64
         t.string   "InsetFromCurb",            :limit => 64
         t.string   "HasButtonForLight",        :limit => 64
-        t.string   "IsClosedOrMoved",          :limit => 64
-        t.string   "PermanentlyGone",          :limit => 64
-        t.string   "MovedToStop",              :limit => 64
-        t.string   "MovedTo",                  :limit => 64
-        t.datetime "DurationOfClosure"
         t.string   "UserIP",                   :limit => 64
-        t.integer  "UserAtStop"
+        t.integer  "UserAtStop"               
+        t.string   "AddedFrom",                :limit => 64
       end
     end
   end
@@ -104,7 +98,6 @@ class CreateDatabase < ActiveRecord::Migration
   def self.down
     # drop all the tables if you really need
     # to support migration back to version 0
-    drop_table "stopinfo_dev"
   end
 end
 

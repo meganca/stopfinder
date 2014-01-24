@@ -2,15 +2,16 @@
 <table>
 <tr>
 <td><%= image_tag 'oba_logo.png', :width => "100" %></td>
-<td><h1>StopFinder</h1></td>
+<td><h1>StopInfo</h1></td>
 </tr>
 <tr>
-<% if session[:user_email] %>
-<td width=> </td>
-<td align="right"> <%= session[:user_email]%><br/> <%= link_to "Log out", "/logout/" %> </td>
+<% if user_signed_in? %>
+  <td>Logged in as <strong><%= current_user.email %></strong>.</td></tr>
+  <tr><td><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></td>
+  <td><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></td></tr>
 <% else %>
- <td></td>
- <td align="right"><%= link_to 'Log in with existing account', "/login/" %></td>
+  <td><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></td>
+  <td><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></td></tr>
 <% end %>
 </tr>
 <tr><td colspan=2>
@@ -20,13 +21,13 @@
 
 </td></tr>
 
-  <% if @busstopAttributes[:stop_closed].value == "true" %>
+  <% if @busstopAttributes[:stop_closed].value == "true" %> 
     <tr>
       <td colspan=2>
         <h4 style="color:red">THIS STOP MAY CURRENTLY BE CLOSED.</h4>
       </td>
     </tr>
-  <% end %>
+  <% end %> 
   
   <% if @busstopAttributes[:bearing_code].value != "unknown" %>
     <tr>

@@ -43,6 +43,7 @@ gem 'mysql2'
 gem 'browser'
 
 # Gem to enable signin
+gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'

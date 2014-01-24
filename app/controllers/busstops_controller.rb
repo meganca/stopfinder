@@ -22,6 +22,9 @@ class BusstopsController < ApplicationController
     # Get the array w/ all results
     stopdata = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = " + stopid + " AND agencyid = " + agencyid)
     officialstop = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = "+stopid+" AND userid = 0 AND agencyid = " + agencyid)
+    
+    # Get array for closures
+    closuredata = Closure.find_by_sql("SELECT * FROM " + Closure.table_name + " WHERE stopid = " + stopid + " AND agencyid = " + agencyid)
 	
     directions = Hash.new
     BusStop.directionValues.each {|x| directions[x] = 0 }
@@ -76,9 +79,11 @@ class BusstopsController < ApplicationController
       cancount = BusStop.trashCan(stop.HasCan)
       cans[cancount] = cans[cancount] + 1
       
-      closed = BusStop.isClosed(stop.ClosureType, stop.ClosurePermanent, stop.ClosureStartdate, stop.ClosureEnddate)
+    end
+    
+    closuredata.each do |report|
+      closed = Closure.isCurrent(report.ClosureType, report.ClosurePermanent, report.StartDate, report.EndDate)
       closedvotes[closed] = closedvotes[closed] + 1
-	  
     end
 
     # Clear out any counts of "no opinion"
@@ -184,13 +189,6 @@ class BusstopsController < ApplicationController
 	
     addlist = cookies[:add].split("&")
     @add = addlist.map { |x| x.to_sym } 
-  end
-  
-  def closure
-    ids = (params[:id]).split("_")
-    agencyid = ids[0]
-    stopid = ids[1]
-    @busstop = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = " + stopid + " AND agencyid = " + agencyid)[0]
   end
   
 end

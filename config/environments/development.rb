@@ -34,4 +34,7 @@ StopfinderDev::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  
+  # Devise requested this
+  config.action_mailer.default_url_options = { :host => 'helsinki.cs.washington.edu:3000' }
 end

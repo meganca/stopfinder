@@ -1,12 +1,16 @@
 StopfinderDev::Application.routes.draw do
+  devise_for :users
+
   root :to => 'about#main'
   
   resources :busstops
+  resources :closures
+  resources :authorizations
   # The priority is based upon order of creation:
   # first created -> highest priority
   get '/update/:id' => 'busstops#update'
   get '/add/:id' => 'busstops#addnew'
-  get '/closed/:id' => 'busstops#closure'
+  get '/closed/:id' => 'closures#report'
   match 'about/entry/:id' => 'about#entry', :as => :dataentry
   match '/busstops/:id' => 'busstops#show', :as => :dataview
   
@@ -20,6 +24,7 @@ StopfinderDev::Application.routes.draw do
   #get	'/manage/account', :to => 'sessions#edit', as => :manage
   match '/auth/:provider/callback', :to => 'sessions#create'
   match '/auth/failure', :to => 'sessions#failure'
+  #devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

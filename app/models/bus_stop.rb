@@ -1,9 +1,8 @@
 class BusStop < ActiveRecord::Base
-  self.table_name = "stopinfo_dev"
+  self.table_name = "busstops"
   attr_accessible :UserId, :AgencyId, :StopId, :BearingCode, :Intersection, 
     :RteSignType, :SchedHolder, :Shelters, :BenchCount, :HasCan, :AddedFrom,
-    :StopComment, :UserIP, :DateCreated, :UserAtStop, :InsetFromCurb,
-    :ClosureType, :ClosurePermanent, :ClosureStartdate, :ClosureEnddate, :MovedTo
+    :StopComment, :UserIP, :DateCreated, :UserAtStop, :InsetFromCurb
 
   # Constants to keep track of what fields we're collecting
   @@infoFields = ["direction", "position", "sign type", "schedule holder", "is tunnel", 
@@ -224,18 +223,6 @@ class BusStop < ActiveRecord::Base
       return val
     else
       return "unknown"
-    end
-  end
-  
-  def self.isClosed(type, permanent, startdate, enddate)
-    if ((type == nil) || (type == ""))
-      return "false"
-    elsif (type == "current" && enddate > Time.now)
-      return "true"
-    elsif (type == "future" && startdate < Time.now && enddate > Time.now)
-      return "true"
-    else
-      return "false"
     end
   end
   
