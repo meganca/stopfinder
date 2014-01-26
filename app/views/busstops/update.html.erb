@@ -11,54 +11,86 @@
 
 </td></tr>
 <%= form_for :busstop, url: busstops_path do |f| %>
-  <% if @validate.include?(:bearing_code) %>
-    <tr>
-      <td>Direction: </td>
-      <td><%= f.select :BearingCode, BusStop.directionValues, :selected => "unknown" %></td>
+  <tr>
+    <td>Direction: </td>
+    <td>
+    <% if session[:bearing_code][:needs_verification] == "true" %>
+      <%= f.select :BearingCode, (BusStop.directionNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.directionValues[i]]}, :selected => "unknown" %>
+    <% else %>
+      <%= f.select :BearingCode, (BusStop.directionNames + ["unknown"]).map.with_index{ |x, i| [x, BusStop.directionValues[i]]}, :selected => session[:bearing_code][:value] %>
+    <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>Position (relative to intersection):</td>
+    <td>
+    <% if session[:intersection_pos][:needs_verification] == "true" %>
+      <%= f.select :Intersection, (BusStop.intersectionPosNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.intersectionPositionValues[i]]}, :selected => "unknown" %>
+    <% else %>
+      <%= f.select :Intersection, (BusStop.intersectionPosNames + + ["unknown"]).map.with_index{ |x, i| [x, BusStop.intersectionPositionValues[i]]}, :selected => session[:intersection_pos][:value] %>
+    <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>Sign Type:</td>
+    <td>
+      <% if session[:sign_type][:needs_verification] == "true" %>
+        <%= f.select :RteSignType, (BusStop.signTypeNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.signTypeValues[i]]}, :selected => "unknown" %>
+      <% else %>
+        <%= f.select :RteSignType, (BusStop.signTypeNames + ["unknown"]).map.with_index{ |x, i| [x, BusStop.signTypeValues[i]]}, :selected =>session[:sign_type][:value] %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>Sign position:</td>
+    <td>
+      <% if session[:curb_inset][:needs_verification] == "true" %>
+        <%= f.select :InsetFromCurb, (BusStop.curbInsetNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.curbInsetValues[i]]}, :selected => "unknown" %>
+      <% else %>
+        <%= f.select :InsetFromCurb, (BusStop.curbInsetNames + ["unknown"]).map.with_index{ |x, i| [x, BusStop.curbInsetValues[i]]}, :selected => session[:curb_inset][:value] %>
+      <% end %>
+      </td>
     </tr>
-  <% end %>
-  <% if @validate.include?(:intersection_pos) %>
-    <tr>
-      <td>Position (relative to intersection):</td>
-      <td><%= f.select :Intersection, BusStop.intersectionPositionValues, :selected => "unknown" %></td>
-    </tr>
-  <% end %>
-  <% if @validate.include?(:curb_inset) %>
-    <tr>
-      <td>Sign position:</td>
-      <td><%= f.select :InsetFromCurb, BusStop.curbInsetNames.map.with_index{ |x, i| [x, BusStop.curbInsetValues[i]]}, :selected => "unknown" %></td>
-    </tr>
-  <% end %>
-  <% if @validate.include?(:sign_type) %>
-    <tr>
-      <td>Sign Type:</td>
-      <td><%= f.select :RteSignType, BusStop.signTypeNames.map.with_index{ |x, i| [x, BusStop.signTypeValues[i]]}, :selected => "unknown" %></td>
-    </tr>
-  <% end %>
-  <% if @validate.include?(:sched_holder) %>
     <tr>
       <td>Schedule holder:</td>
-      <td><%= f.select :SchedHolder, BusStop.scheduleTypeValues, :selected => "unknown" %></td>
+      <td>
+        <% if session[:sched_holder][:needs_verification] == "true" %>
+          <%= f.select :SchedHolder, (BusStop.scheduleTypeNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.scheduleTypeValues[i]]}, :selected => "unknown" %>
+        <% else %>
+          <%= f.select :SchedHolder, (BusStop.scheduleTypeNames + ["unknown"]).map.with_index{ |x, i| [x, BusStop.scheduleTypeValues[i]]}, :selected => session[:sched_holder][:value] %>
+      <% end %>
+      </td>
     </tr>
-  <% end %>
-  <% if @validate.include?(:shelter_count) %>
     <tr>
       <td>Number of shelters:</td>
-      <td><%= f.select :Shelters, BusStop.shelterCountValues, :selected => "unknown" %></td>
+      <td>
+        <% if session[:shelter_count][:needs_verification] == "true" %>
+          <%= f.select :Shelters, (BusStop.shelterCountNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.shelterCountValues[i]]}, :selected => "unknown" %>
+        <% else %>
+          <%= f.select :Shelters, (BusStop.shelterCountNames + ["unknown"]).map.with_index{ |x, i| [x, BusStop.shelterCountValues[i]]}, :selected => session[:shelter_count][:value] %>
+      <% end %>
+      </td>
     </tr>
-  <% end %>
-  <% if @validate.include?(:bench_count) %>
     <tr>
       <td>Number of benches:</td>
-      <td><%= f.select :BenchCount, BusStop.benchCountValues, :selected => "unknown" %></td>
+      <td>
+        <% if session[:bench_count][:needs_verification] == "true" %>
+          <%= f.select :BenchCount, (BusStop.benchCountNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.benchCountValues[i]]}, :selected => "unknown" %>
+        <% else %>
+          <%= f.select :BenchCount, (BusStop.benchCountNames + ["unknown"]).map.with_index{ |x, i| [x, BusStop.benchCountValues[i]]}, :selected => session[:bench_count][:value] %>
+        <% end %>
+      </td>
     </tr>
-  <% end %>
-  <% if @validate.include?(:can_count) %>
     <tr>
       <td>Is there a trash can?:</td>
-      <td><%= f.select :HasCan,  BusStop.trashCanValues, :selected => "unknown" %></td>
+      <td>
+        <% if session[:can_count][:needs_verification] == "true" %>
+          <%= f.select :HasCan, (BusStop.trashCanNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.trashCanValues[i]]}, :selected => "unknown" %>
+        <% else %>
+          <%= f.select :HasCan, (BusStop.trashCanNames + ["unknown"]).map.with_index{ |x, i| [x, BusStop.trashCanValues[i]]}, :selected => session[:can_count][:value] %>
+        <% end %>
+      </td>
     </tr>
-  <% end %>
   </table>
   
   <%= f.hidden_field :UserIP, :value => request.remote_ip %>
@@ -66,7 +98,6 @@
   <%= f.hidden_field :StopId, :value => @busstop.StopId %>
   <%= f.hidden_field :AgencyId, :value => @busstop.AgencyId %>
   <%= f.hidden_field :DateCreated, :value => Time.now %>
-  <%= f.hidden_field :AddedFrom, :value => "update" %>
 
   <%= f.label :at_stop do %>
   <%= f.check_box :UserAtStop %>I am currently at this stop.

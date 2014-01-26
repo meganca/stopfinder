@@ -1,6 +1,7 @@
 class BusstopsController < ApplicationController
   StopData = Struct.new(:value, :needsValidation)
   @@votingMajority = 0.75
+  @@validationMinimum = 3
   @@closureMinimum = 1
   
   def show
@@ -28,7 +29,7 @@ class BusstopsController < ApplicationController
 	
     directions = Hash.new
     BusStop.directionValues.each {|x| directions[x] = 0 }
-	
+    
     intersections = Hash.new
     BusStop.intersectionPositionValues.each {|x| intersections[x] = 0 }
     
@@ -106,10 +107,13 @@ class BusstopsController < ApplicationController
     end
 
     # Information we ONLY get from Metro
-    @busstopAttributes[:stop_name] = StopData.new(officialstop[0].StopName, "false")
-    @busstopAttributes[:intersection_distance] = StopData.new(officialstop[0].FromCrossCurb, "false")
-    @busstopAttributes[:is_tunnel_stop] = StopData.new(BusStop.isTunnelStop(officialstop[0].RteSignType), "false")
-    
+    #@busstopAttributes[:stop_name] = StopData.new(officialstop[0].StopName, "false")
+    session[:stop_name] = officialstop[0].StopName
+    #@busstopAttributes[:intersection_distance] = StopData.new(officialstop[0].FromCrossCurb, "false")
+    session[:intersection_distance] = officialstop[0].FromCrossCurb
+    #@busstopAttributes[:is_tunnel_stop] = StopData.new(BusStop.isTunnelStop(officialstop[0].RteSignType), "false")
+    session[:is_tunnel_stop] = BusStop.isTunnelStop(officialstop[0].RteSignType)
+	
     # Calculate things that we collect dynamically
     calculateInfo(directions, :bearing_code)
     calculateInfo(signs, :sign_type)
@@ -120,30 +124,39 @@ class BusstopsController < ApplicationController
     calculateInfo(benches, :bench_count)
     calculateInfo(cans, :can_count)
 	
-	cookies[:validate] = @validate
-	cookies[:add] = @add
+    #cookies[:validate] = @validate
+    #cookies[:add] = @add
   end
 
   def calculateInfo(votingHash, infoSymbol)
     if votingHash.empty? == false     
       majorityValue = votingHash.max_by{|k,v| v}[0]
       count = votingHash.values.inject(0) {|sum,x| sum + x}
-      
+      session[infoSymbol] = {}
+	  
       if (count == 0)
-        @busstopAttributes[infoSymbol] = StopData.new("unknown", "true")
-        @add.push(infoSymbol)
+        #@busstopAttributes[infoSymbol] = StopData.new("unknown", "true")
+        session[infoSymbol][:value] = "unknown"
+        #@add.push(infoSymbol)
       else
-        @validate.push(infoSymbol)
+        #@validate.push(infoSymbol)
         
-        if ((votingHash[majorityValue] * 1.0 / count) >= @@votingMajority)
-          @busstopAttributes[infoSymbol] = StopData.new(majorityValue, "false")
+        if (((votingHash[majorityValue] * 1.0 / count) >= @@votingMajority) && votingHash[majorityValue] >= @@validationMinimum)
+          #@busstopAttributes[infoSymbol] = StopData.new(majorityValue, "false")
+          session[infoSymbol][:value] = majorityValue
+          session[infoSymbol][:needs_verification] = "false"
+          session[infoSymbol][:votes] = votingHash.to_s
         else
-          @busstopAttributes[infoSymbol] = StopData.new(majorityValue, "true")
+          #@busstopAttributes[infoSymbol] = StopData.new(majorityValue, "true")
+          session[infoSymbol][:value] = majorityValue
+          session[infoSymbol][:needs_verification] = "true"
+          session[infoSymbol][:votes] = votingHash.to_s
         end
       end
     else
-      @busstopAttributes[infoSymbol] = StopData.new("unknown", "true")
-      @add.push(infoSymbol)
+      #@busstopAttributes[infoSymbol] = StopData.new("unknown", "true")
+      session[infoSymbol][value] = "unknown"
+      #@add.push(infoSymbol)
     end
   end
   
@@ -171,8 +184,8 @@ class BusstopsController < ApplicationController
     stopid = ids[1]
     @busstop = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = " + stopid + " AND agencyid = " + agencyid)[0]
 	
-    valid = cookies[:validate].split("&")
-    @validate = valid.map { |x| x.to_sym } 
+    #valid = cookies[:validate].split("&")
+    #@validate = valid.map { |x| x.to_sym } 
   end
 
   def create

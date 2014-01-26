@@ -15,6 +15,12 @@ class BusStop < ActiveRecord::Base
   # Acceptable values for each data type
   @@directionValues = ["northbound", "eastbound", "westbound", "southbound", "unknown"]
   
+  @@directionNames = ["northbound", "eastbound", "westbound", "southbound"] 
+      
+  def self.directionNames
+    @@directionNames
+  end
+  
   def self.directionValues
     @@directionValues
   end
@@ -23,7 +29,7 @@ class BusStop < ActiveRecord::Base
     "wide base", "no sign", "unknown"]
     
   @@signTypeNames = ["small sign on stand alone pole", "sign on non bus stop pole", "large sign on two poles", "triangular kiosk", 
-    "large sign on one wide base", "no sign", "unknown"]
+    "large sign on one wide base", "no sign"]
 	
   def self.signTypeValues
     @@signTypeValues
@@ -36,8 +42,15 @@ class BusStop < ActiveRecord::Base
   @@intersectionPositionValues = ["far side", "near side", "at cross street", 
       "far middle", "near middle", "opposite to", "unknown"] 
       
+  @@intersectionPosNames = ["far side", "near side", "at cross street", 
+      "far middle", "near middle", "opposite to"] 
+      
   def self.intersectionPositionValues
     @@intersectionPositionValues
+  end
+  
+  def self.intersectionPosNames
+    @@intersectionPosNames
   end
   
   @@scheduleTypeValues = ["single", "midsize", "double", 
@@ -47,40 +60,59 @@ class BusStop < ActiveRecord::Base
     @@scheduleTypeValues
   end
   
+  @@scheduleTypeNames = ["single", "midsize", "double", 
+      "none"] 
+      
+  def self.scheduleTypeNames
+    @@scheduleTypeNames
+  end
+  
   @@curbInsetValues = ["<1", ">1", "unknown"] 
   
   def self.curbInsetValues
     @@curbInsetValues
   end
   
-  @@curbInsetNames = ["close to curb (within 1 foot)", "far from curb (more than 1 foot away)", "unknown"] 
+  @@curbInsetNames = ["close to curb (within 1 foot)", "far from curb (more than 1 foot away)"] 
       
   def self.curbInsetNames
     @@curbInsetNames
   end
-  
-  @@closeMoveValues = ["closed (permanently)", "closed (temporarily)", "moved to a different location (temporarily)"] 
-      
-  def self.closeMoveValues
-    @@closeMoveValues
-  end
 
-  @@benchCountValues = ["0", "1", "2", "3 or more", "unknown"] 
+  @@benchCountValues = ["0", "1", "2", "3+", "unknown"] 
       
   def self.benchCountValues
     @@benchCountValues
   end
   
-  @@shelterCountValues = ["0", "1", "2", "3 or more", "unknown"] 
+  @@benchCountNames = ["0", "1", "2", "3 or more"] 
+      
+  def self.benchCountNames
+    @@benchCountNames
+  end
+  
+  @@shelterCountValues = ["0", "1", "2", "3+", "unknown"] 
       
   def self.shelterCountValues
     @@shelterCountValues
+  end
+  
+  @@shelterCountNames = ["0", "1", "2", "3 or more"] 
+      
+  def self.shelterCountNames
+    @@shelterCountNames
   end
   
   @@trashCanValues = ["yes", "no", "unknown"] 
       
   def self.trashCanValues
     @@trashCanValues
+  end
+  
+  @@trashCanNames = ["yes", "no"] 
+      
+  def self.trashCanNames
+    @@trashCanNames
   end
   
   def self.directionName(direction)
