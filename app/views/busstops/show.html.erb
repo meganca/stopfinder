@@ -17,8 +17,9 @@
  <div class = "content">
  <tr><td colspan=2>
 
+
 <br>
-<h2><%= @busstopAttributes[:stop_name].value %></h2>
+<h2><%= session[:stop_name] %></h2>
 
 </td></tr>
 
@@ -30,86 +31,83 @@
     </tr>
   <% end %> 
   
-  <% if @busstopAttributes[:bearing_code].value != "unknown" %>
+  <% if session[:bearing_code] != "unknown" %>
     <tr>
       <td>Direction:</td>
       <td>
-        <%= @busstopAttributes[:bearing_code].value %>
-        <% if @busstopAttributes[:bearing_code].needsValidation == "true" %> * <% end %>
+        <%= session[:bearing_code][:value] %>
+        <% if session[:bearing_code][:needs_verification] == "true" %> * <% end %>
       </td>
     </tr>
   <% end %>
   <tr>
     <td>Position from intersection:</td>
     <td>
-        <% if @busstopAttributes[:intersection_pos].value != "unknown" %>
-          <%= @busstopAttributes[:intersection_pos].value %>,
-          <% if @busstopAttributes[:intersection_pos].needsValidation == "true" %> * <% end %> 
+        <% if session[:intersection_pos][:value] != "unknown" %>
+          <%= session[:intersection_pos][:value] %>,
+          <% if session[:intersection_pos][:needs_verification] == "true" %> * <% end %> 
         <% end %>
-        <%= @busstopAttributes[:intersection_distance].value %> feet from curb
+        <%= session[:intersection_distance] %> feet from curb
     </td>
   </tr>
-  <% if @busstopAttributes[:sign_type].value != "unknown" %>
+  <% if session[:sign_type][:value] != "unknown" %>
     <tr>
       <td>Sign type:</td>
       <td>
-        <%= BusStop.signTypeNames[BusStop.signTypeValues.index(@busstopAttributes[:sign_type].value)] %> 
-        <% if @busstopAttributes[:sign_type].needsValidation == "true" %> * <% end %>
+        <%= BusStop.signTypeNames[BusStop.signTypeValues.index(session[:sign_type][:value])] %>
+        <% if session[:sign_type][:needs_verification] == "true" %> * <% end %>
       </td>
     </tr>
   <% end %>
-  <% if @busstopAttributes[:curb_inset].value != "unknown" %>
+  <% if session[:curb_inset][:value] != "unknown" %>
     <tr>
       <td>Sign position:</td>
       <td>
-        <%= BusStop.curbInsetNames[BusStop.curbInsetValues.index(@busstopAttributes[:curb_inset].value)] %> 
-        <% if @busstopAttributes[:curb_inset].needsValidation == "true" %> * <% end %>
+        <%= BusStop.curbInsetNames[BusStop.curbInsetValues.index(session[:curb_inset][:value])] %> 
+        <% if session[:curb_inset][:needs_verification] == "true" %> * <% end %>
       </td>
     </tr>
   <% end %>
-  <% if @busstopAttributes[:sched_holder].value != "unknown" %>
+  <% if session[:sched_holder][:value] != "unknown" %>
     <tr>
       <td>Schedule holder:</td>
       <td>
-        <%= @busstopAttributes[:sched_holder].value %>
-        <% if @busstopAttributes[:sched_holder].needsValidation == "true" %> * <% end %>
+        <%= session[:sched_holder][:value] %>
+        <% if session[:sched_holder][:needs_verification] == "true" %> * <% end %>
       </td>
     </tr>
   <% end %>
-  <% if @busstopAttributes[:shelter_count].value != "unknown" %>
+  <% if session[:shelter_count][:value] != "unknown" %>
     <tr>
       <td>Number of shelters:</td>
       <td>
-        <%= @busstopAttributes[:shelter_count].value %>
-        <% if @busstopAttributes[:shelter_count].needsValidation == "true" %> * <% end %>
+        <%= session[:shelter_count][:value] %>
+        <% if session[:shelter_count][:needs_verification] == "true" %> * <% end %>
       </td>
     </tr>
   <% end %>
-  <% if @busstopAttributes[:bench_count].value != "unknown" %>
+  <% if session[:bench_count][:value] != "unknown" %>
     <tr>
       <td>Number of benches:</td>
       <td>
-        <%= @busstopAttributes[:bench_count].value %>
-        <% if @busstopAttributes[:bench_count].needsValidation == "true" %> * <% end %>
+        <%= session[:bench_count][:value] %>
+        <% if session[:bench_count][:needs_verification] == "true" %> * <% end %>
       </td>
     </tr>
   <% end %>
-  <% if @busstopAttributes[:can_count].value != "unknown" %>
+  <% if session[:can_count][:value] != "unknown" %>
     <tr>
       <td>Number of cans:</td>
       <td>
-        <%= @busstopAttributes[:can_count].value %>
-        <% if @busstopAttributes[:can_count].needsValidation == "true" %> * <% end %>
+        <%= session[:can_count][:value] %>
+        <% if session[:can_count][:needs_verification] == "true" %> * <% end %>
       </td>
     </tr>
   <% end %>
   <tr><td colspan=2 height=20></td></tr>
   <tr>
     <td><%= link_to 'Verify stop information', "/update/"+ params[:id] %></td>
-    <!-- <td><%= link_to 'Add new stop information', "/add/"+ params[:id] %></td> -->
-  </tr>
-  <tr>
-	<td><%= link_to 'Report stop closure', "/closed/"+ params[:id] %></td>
+    <td><%= link_to 'Report stop closure', "/closed/"+ params[:id] %></td>
   </tr>
 </table>
 <br />
