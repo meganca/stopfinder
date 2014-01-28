@@ -3,6 +3,9 @@ class AboutController < ApplicationController
     checkDevice()
   end
   
+  def contact
+  end
+  
   def entry
   end
   

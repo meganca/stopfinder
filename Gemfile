@@ -47,3 +47,6 @@ gem 'browser'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
+
+# Gem for contact form
+gem 'mail_form'

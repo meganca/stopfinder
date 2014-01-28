@@ -1,0 +1,8 @@
+<p>Questions or feedback? Contact us.</p>
+
+<%= form_for @contact_form do |f| %>
+  Name: <%= f.text_field :name, :required => true %><br />
+  Email: <%= f.text_field :email, :required => true %> <br />
+  Message: <%= f.text_area :message, :as => :text, :required => true, :rows => 4 %> <br />
+<%= f.submit 'Send message' %>
+<% end %>
