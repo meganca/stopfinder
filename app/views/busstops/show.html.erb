@@ -1,26 +1,6 @@
-<div class="container">
-<div class="top">
-<table>
-<tr>
-<td><%= image_tag 'oba_logo.png', :width => "100" %> <h1>StopInfo</h1></td>
-</tr>
-<tr>
-<% if session[:user_email] %>
-<td width=> </td>
-<td align="right"> <%= session[:user_email]%><br/> <%= link_to "Log out", "/logout/" %> </td>
-<% else %>
- <td></td>
- <td><%= link_to 'Log in with existing account', "/login/" %></td>
- <% end %>
- </tr>
- </div>
- <div class = "content">
- <tr><td colspan=2>
-
-
-<br>
+<table cellpadding = "10">
+<tr><td colspan=2>
 <h2><%= session[:stop_name] %></h2>
-
 </td></tr>
 
   <% if @busstopAttributes[:stop_closed].value == "true" %> 
@@ -104,6 +84,17 @@
       </td>
     </tr>
   <% end %>
+<tr>
+  <% if session[:user_email] %>
+  <tr><td height=20></td></tr>
+  <td></td>
+  <td> <%= session[:user_email]%><br/> <%= link_to "Log out", "/logout/" %> </td>
+<% else %>
+ <tr>
+ <td></td>
+ <td align = "right"><%= link_to 'Log in with existing account', "/login/" %></td>
+ <% end %>
+ </tr>
   <tr><td colspan=2 height=20></td></tr>
   <tr>
     <td><%= link_to 'Verify stop information', "/update/"+ params[:id] %></td>
@@ -113,5 +104,3 @@
 <br />
 * indicates information that needs verification
 <br />
-</div>
-</div>
