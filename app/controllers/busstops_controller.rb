@@ -11,6 +11,8 @@ class BusstopsController < ApplicationController
     agencyid = ids[0]
     stopid = ids[1]
     @busstop = BusStop.new(StopId: stopid)
+    session[:agency_id] = agencyid
+    session[:stop_id] = stopid
     
     # Get the device for display purposes
     checkDevice()
@@ -179,29 +181,66 @@ class BusstopsController < ApplicationController
   end
   
   def update
-    ids = (params[:id]).split("_")
-    agencyid = ids[0]
-    stopid = ids[1]
-    @busstop = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = " + stopid + " AND agencyid = " + agencyid)[0]
-	
-    #valid = cookies[:validate].split("&")
-    #@validate = valid.map { |x| x.to_sym } 
   end
 
   def create
     @busstop = BusStop.new(params[:busstop])
     @busstop.save
+    
+    @log = Log.new
+    @log.input_id = @busstop.InputId
+    
+    if session[:bearing_code][:needs_verification] == "true"
+      @log.direction = "needs verification"
+    else
+      @log.direction = session[:bearing_code][:value]
+    end
+      
+    if session[:intersection_pos][:needs_verification] == "true"
+      @log.position = "needs verification"
+    else
+      @log.position = session[:intersection_pos][:value] 
+    end
+      
+    if session[:sign_type][:needs_verification] == "true" 
+      @log.sign_type = "needs verification"
+    else
+      @log.position = session[:sign_type][:value]
+    end
+      
+    if session[:curb_inset][:needs_verification] == "true" 
+      @log.sign_position = "needs verification"
+    else
+      @log.sign_position = session[:curb_inset][:value]
+    end
+      
+    if session[:sched_holder][:needs_verification] == "true" 
+      @log.schedule_holder = "needs verification"
+    else
+      @log.schedule_holder = session[:sched_holder][:value]
+    end
+    
+    if session[:shelter_count][:needs_verification] == "true" 
+      @log.shelters = "needs verification"
+    else
+      @log.shelters = session[:shelter_count][:value]
+    end
+      
+    if session[:bench_count][:needs_verification] == "true"
+      @log.benches = "needs verification"
+    else
+      @log.benches = session[:bench_count][:value]
+    end
+      
+    if session[:can_count][:needs_verification] == "true" 
+      @log.trash_can = "needs verification"
+    else
+      @log.trash_can = session[:can_count][:value]
+    end
+    
+    @log.save
+    
     redirect_to dataentry_url(:id => params[:busstop][:AgencyId] + "_" + params[:busstop][:StopId])
   end
 
-  def addnew
-    ids = (params[:id]).split("_")
-    agencyid = ids[0]
-    stopid = ids[1]
-    @busstop = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = " + stopid + " AND agencyid = " + agencyid)[0]
-	
-    addlist = cookies[:add].split("&")
-    @add = addlist.map { |x| x.to_sym } 
-  end
-  
 end

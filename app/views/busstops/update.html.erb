@@ -7,7 +7,7 @@
 <tr><td colspan=2>
 
 <br><br>
-<h2><%= @busstop.StopName %></h2>
+<h2><%= session[:stop_name] %></h2>
 
 </td></tr>
 <%= form_for :busstop, url: busstops_path do |f| %>
@@ -93,10 +93,15 @@
     </tr>
   </table>
   
+  <p>
+    Additional information:
+    <%= f.text_area :StopComment, :value =>"", :rows =>3 %>
+  </p>
+  
   <%= f.hidden_field :UserIP, :value => request.remote_ip %>
   <%= f.hidden_field :UserId, :value => session[:user_email] %>
-  <%= f.hidden_field :StopId, :value => @busstop.StopId %>
-  <%= f.hidden_field :AgencyId, :value => @busstop.AgencyId %>
+  <%= f.hidden_field :StopId, :value => session[:stop_id] %>
+  <%= f.hidden_field :AgencyId, :value => session[:agency_id] %>
   <%= f.hidden_field :DateCreated, :value => Time.now %>
 
   <%= f.label :at_stop do %>

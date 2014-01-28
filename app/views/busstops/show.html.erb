@@ -44,7 +44,7 @@
           <%= session[:intersection_pos][:value] %>,
           <% if session[:intersection_pos][:needs_verification] == "true" %> * <% end %> 
         <% end %>
-        <%= session[:intersection_distance] %> feet from curb
+        <%= session[:intersection_distance] %> feet from intersection
     </td>
   </tr>
   <% if session[:sign_type][:value] != "unknown" %>
@@ -94,7 +94,7 @@
   <% end %>
   <% if session[:can_count][:value] != "unknown" %>
     <tr>
-      <td>Number of cans:</td>
+      <td>Trash can?:</td>
       <td>
         <%= session[:can_count][:value] %>
         <% if session[:can_count][:needs_verification] == "true" %> * <% end %>
@@ -104,10 +104,10 @@
   <tr><td colspan=2 height=20></td></tr>
   <tr>
     <td><%= link_to 'Verify stop information', "/update/"+ params[:id] %></td>
-    <!-- <td><%= link_to 'Add new stop information', "/add/"+ params[:id] %></td> -->
+    <td><%= link_to 'Report stop closure', "/closed/"+ params[:id] %></td>
   </tr>
   <tr>
-	<td><%= link_to 'Report stop closure', "/closed/"+ params[:id] %></td>
+    <td><%= link_to 'Main information page', "/" %></td>
   </tr>
 </table>
 <br />

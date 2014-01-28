@@ -1,10 +1,15 @@
 StopfinderDev::Application.routes.draw do
+  #get "contact_form/new"
+
+  #get "contact_form/create"
+
  # devise_for :users
 
   root :to => 'about#main'
   
   resources :busstops
   resources :closures
+  resources :contact_forms
   #resources :authorizations
   # The priority is based upon order of creation:
   # first created -> highest priority
@@ -12,6 +17,7 @@ StopfinderDev::Application.routes.draw do
   get '/add/:id' => 'busstops#addnew'
   get '/closed/:id' => 'closures#report'
   match 'about/entry/:id' => 'about#entry', :as => :dataentry
+  match 'about/contact/:id' => 'about#contact', :as => :emailentry
   match '/busstops/:id' => 'busstops#show', :as => :dataview
   
   # Routing for info/tutorials
