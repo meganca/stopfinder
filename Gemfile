@@ -50,3 +50,5 @@ gem 'omniauth-google-oauth2'
 
 # Gem for contact form
 gem 'mail_form'
+
+gem 'composite_primary_keys'

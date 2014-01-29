@@ -14,9 +14,13 @@ class BusstopsController < ApplicationController
     session[:agency_id] = agencyid
     session[:stop_id] = stopid
     
-    # Get the device for display purposes
-    checkDevice()
-	
+    # Get the comment
+    if (Comment.find_by_agency_id_and_stop_id(agencyid, stopid) == nil)
+      session[:comment] = ""
+    else
+      session[:comment] = Comment.find_by_agency_id_and_stop_id(agencyid, stopid).info
+    end
+    
     # Track votes and what we have/don't have
     @busstopAttributes = Hash.new
     @validate = Array.new
@@ -189,56 +193,10 @@ class BusstopsController < ApplicationController
     
     @log = Log.new
     @log.input_id = @busstop.InputId
-    
-    if session[:bearing_code][:needs_verification] == "true"
-      @log.direction = "needs verification"
-    else
-      @log.direction = session[:bearing_code][:value]
-    end
-      
-    if session[:intersection_pos][:needs_verification] == "true"
-      @log.position = "needs verification"
-    else
-      @log.position = session[:intersection_pos][:value] 
-    end
-      
-    if session[:sign_type][:needs_verification] == "true" 
-      @log.sign_type = "needs verification"
-    else
-      @log.position = session[:sign_type][:value]
-    end
-      
-    if session[:curb_inset][:needs_verification] == "true" 
-      @log.sign_position = "needs verification"
-    else
-      @log.sign_position = session[:curb_inset][:value]
-    end
-      
-    if session[:sched_holder][:needs_verification] == "true" 
-      @log.schedule_holder = "needs verification"
-    else
-      @log.schedule_holder = session[:sched_holder][:value]
-    end
-    
-    if session[:shelter_count][:needs_verification] == "true" 
-      @log.shelters = "needs verification"
-    else
-      @log.shelters = session[:shelter_count][:value]
-    end
-      
-    if session[:bench_count][:needs_verification] == "true"
-      @log.benches = "needs verification"
-    else
-      @log.benches = session[:bench_count][:value]
-    end
-      
-    if session[:can_count][:needs_verification] == "true" 
-      @log.trash_can = "needs verification"
-    else
-      @log.trash_can = session[:can_count][:value]
-    end
-    
+    Log.updateAttributes(@log, session)
     @log.save
+    
+    Comment.add_or_edit(@busstop.AgencyId, @busstop.StopId, @busstop.StopComment)
     
     redirect_to dataentry_url(:id => params[:busstop][:AgencyId] + "_" + params[:busstop][:StopId])
   end

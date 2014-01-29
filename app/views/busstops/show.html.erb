@@ -84,6 +84,14 @@
       </td>
     </tr>
   <% end %>
+  <% if session[:comment] != "" %>
+    <tr>
+      <td>Additional information:</td>
+      <td>
+        <%= session[:comment] %>
+      </td>
+    </tr>
+  <% end %>
   <tr><td colspan=2 height=20></td></tr>
   <tr>
     <td><%= link_to 'Verify or add stop information', "/update/"+ params[:id] %></td>
