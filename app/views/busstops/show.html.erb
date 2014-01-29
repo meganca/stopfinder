@@ -84,24 +84,19 @@
       </td>
     </tr>
   <% end %>
-<tr>
-  <% if session[:user_email] %>
-  <tr><td height=20></td></tr>
-  <td></td>
-  <td> <%= session[:user_email]%><br/> <%= link_to "Log out", "/logout/" %> </td>
-<% else %>
- <tr>
- <td></td>
- <td align = "right"><%= link_to 'Log in with existing account', "/login/" %></td>
- <% end %>
- </tr>
   <tr><td colspan=2 height=20></td></tr>
   <tr>
-    <td><%= link_to 'Verify stop information', "/update/"+ params[:id] %></td>
+    <td><%= link_to 'Verify or add stop information', "/update/"+ params[:id] %></td>
     <td><%= link_to 'Report stop closure', "/closed/"+ params[:id] %></td>
   </tr>
+  <tr><td colspan=2 height=20></td></tr>
   <tr>
-    <td><%= link_to 'Main information page', "/" %></td>
+    <td><%= link_to 'What is StopInfo?', "/" %></td>
+  <% if session[:user_email] %>
+  <td> <%= session[:user_email]%><br/> <%= link_to "Log out", "/logout/" %> </td>
+<% else %>
+ <td><%= link_to 'Log in with existing account', "/login/" %></td>
+ <% end %>
   </tr>
 </table>
 <br />
