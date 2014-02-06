@@ -5,7 +5,7 @@
 </td></tr>
 <%= form_for :busstop, url: busstops_path do |f| %>
   <tr>
-    <td>Direction: </td>
+    <td><%= f.label :BearingCode, "Direction:" %></td>
     <td>
     <% if session[:bearing_code][:needs_verification] == "true" %>
       <%= f.select :BearingCode, (BusStop.directionNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.directionValues[i]]}, :selected => "unknown" %>
@@ -15,7 +15,7 @@
     </td>
   </tr>
   <tr>
-    <td>Position (relative to intersection):</td>
+    <td><%= f.label :Intersection, "Position (relative to intersection):" %></td>
     <td>
     <% if session[:intersection_pos][:needs_verification] == "true" %>
       <%= f.select :Intersection, (BusStop.intersectionPosNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.intersectionPositionValues[i]]}, :selected => "unknown" %>
@@ -25,7 +25,7 @@
     </td>
   </tr>
   <tr>
-    <td>Sign Type:</td>
+    <td><%= f.label :RteSignType, "Sign Type:" %></td>
     <td>
       <% if session[:sign_type][:needs_verification] == "true" %>
         <%= f.select :RteSignType, (BusStop.signTypeNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.signTypeValues[i]]}, :selected => "unknown" %>
@@ -35,7 +35,7 @@
     </td>
   </tr>
   <tr>
-    <td>Sign position:</td>
+    <td><%= f.label :InsetFromCurb, "Sign position:" %></td>
     <td>
       <% if session[:curb_inset][:needs_verification] == "true" %>
         <%= f.select :InsetFromCurb, (BusStop.curbInsetNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.curbInsetValues[i]]}, :selected => "unknown" %>
@@ -45,7 +45,7 @@
       </td>
     </tr>
     <tr>
-      <td>Schedule holder:</td>
+      <td><%= f.label :SchedHolder, "Schedule holder:" %></td>
       <td>
         <% if session[:sched_holder][:needs_verification] == "true" %>
           <%= f.select :SchedHolder, (BusStop.scheduleTypeNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.scheduleTypeValues[i]]}, :selected => "unknown" %>
@@ -55,7 +55,7 @@
       </td>
     </tr>
     <tr>
-      <td>Number of shelters:</td>
+      <td><%= f.label :Shelters, "Number of shelters:" %></td>
       <td>
         <% if session[:shelter_count][:needs_verification] == "true" %>
           <%= f.select :Shelters, (BusStop.shelterCountNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.shelterCountValues[i]]}, :selected => "unknown" %>
@@ -65,7 +65,7 @@
       </td>
     </tr>
     <tr>
-      <td>Number of benches:</td>
+      <td><%= f.label :BenchCount, "Number of benches:" %></td>
       <td>
         <% if session[:bench_count][:needs_verification] == "true" %>
           <%= f.select :BenchCount, (BusStop.benchCountNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.benchCountValues[i]]}, :selected => "unknown" %>
@@ -75,7 +75,7 @@
       </td>
     </tr>
     <tr>
-      <td>Is there a trash can?:</td>
+      <td><%= f.label :HasCan, "Is there a trash can?:" %></td>
       <td>
         <% if session[:can_count][:needs_verification] == "true" %>
           <%= f.select :HasCan, (BusStop.trashCanNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.trashCanValues[i]]}, :selected => "unknown" %>
@@ -87,7 +87,7 @@
   </table>
   <% if session[:user_email] %>
   <p>
-    Additional information:
+   <%= f.label :StopComment, "Additional information:" %>
       <%= f.text_area :StopComment, :value =>session[:comment], :rows =>3 %>
     
   </p>
@@ -99,9 +99,7 @@
   <%= f.hidden_field :AgencyId, :value => session[:agency_id] %>
   <%= f.hidden_field :DateCreated, :value => Time.now %>
 
-  <%= f.label :at_stop do %>
-  <%= f.check_box :UserAtStop %> I am currently at this stop.
-  <% end %>
+  <%= f.check_box :UserAtStop %><%= f.label :UserAtStop, "I am currently at this stop." %> 
   <p>
     <%= f.submit "Verify" %>
   </p>

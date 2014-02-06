@@ -15,6 +15,12 @@ class AboutController < ApplicationController
   def data
   end
   
+  def testing
+  end
+  
+  def missing
+  end
+  
   def checkDevice() 
     if browser.safari?
       @browser = :safari

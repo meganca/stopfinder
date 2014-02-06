@@ -10,15 +10,15 @@ class Closure < ActiveRecord::Base
     elsif (type == "current")
       if (permanent == "yes")
         return "true"
-      elsif (enddate > Time.now)
+      elsif (enddate > Date.today)
         return "true"
       else
         return "false"
       end
-    elsif (type == "future" && startdate < Time.now)
+    elsif (type == "future" && startdate < Date.today)
       if (permanent == "yes")
         return "true"
-      elsif (enddate > Time.now)
+      elsif (enddate > Date.today)
         return "true"
       else
         return "false"

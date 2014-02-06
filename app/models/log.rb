@@ -17,7 +17,7 @@ class Log < ActiveRecord::Base
     if sessionhash[:sign_type][:needs_verification] == "true" 
       update.sign_type = "needs verification"
     else
-      update.position = sessionhash[:sign_type][:value]
+      update.sign_type = sessionhash[:sign_type][:value]
     end
       
     if sessionhash[:curb_inset][:needs_verification] == "true" 

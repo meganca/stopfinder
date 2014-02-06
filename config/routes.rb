@@ -1,8 +1,4 @@
 StopfinderDev::Application.routes.draw do
-  #get "contact_form/new"
-
-  #get "contact_form/create"
-
  # devise_for :users
 
   root :to => 'about#main'
@@ -18,11 +14,12 @@ StopfinderDev::Application.routes.draw do
   get '/closed/:id' => 'closures#report'
   match 'about/entry/:id' => 'about#entry', :as => :dataentry
   match 'about/contact/:id' => 'about#contact', :as => :emailentry
+  match '/testing' => 'about#testing'
   match '/busstops/:id' => 'busstops#show', :as => :dataview
   
   # Routing for info/tutorials
   get '/about/fields' => 'about#data'
-  #get '/about/statement' => 'about#irb'
+  get '/about/missing' => 'about#missing'
   
   # Routing for login
   get   '/login', :to => 'sessions#new', :as => :login

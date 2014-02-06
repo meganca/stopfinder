@@ -1,12 +1,5 @@
-<div id="main" class="container">
 <table>
-<tr>
-<td><%= image_tag 'oba_logo.png', :width => "100" %></td>
-<td><h1>StopFinder</h1></td>
-</tr>
 <tr><td colspan=2>
-
-<br><br>
 <h2><%= @busstop.StopName %></h2>
 
 </td></tr>
@@ -44,7 +37,7 @@
   <%= f.hidden_field :AddedFrom, :value => "add" %>
 
   <%= f.label :at_stop do %>
-  <%= f.check_box :UserAtStop %>I am currently at this stop.
+  <%= f.check_box :UserAtStop %> I am currently at this stop.
   <% end %>
 
   <p>

@@ -14,6 +14,14 @@ class BusstopsController < ApplicationController
     session[:agency_id] = agencyid
     session[:stop_id] = stopid
     
+    # Get the array w/ all results
+    stopdata = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = " + stopid + " AND agencyid = " + agencyid)
+    officialstop = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = "+stopid+" AND userid = 0 AND agencyid = " + agencyid)
+    
+    if(stopdata.empty?)
+      redirect_to '/about/missing' and return
+    end
+    
     # Get the comment
     if (Comment.find_by_agency_id_and_stop_id(agencyid, stopid) == nil)
       session[:comment] = ""
@@ -25,10 +33,6 @@ class BusstopsController < ApplicationController
     @busstopAttributes = Hash.new
     @validate = Array.new
     @add = Array.new
-
-    # Get the array w/ all results
-    stopdata = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = " + stopid + " AND agencyid = " + agencyid)
-    officialstop = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = "+stopid+" AND userid = 0 AND agencyid = " + agencyid)
     
     # Get array for closures
     closuredata = Closure.find_by_sql("SELECT * FROM " + Closure.table_name + " WHERE stopid = " + stopid + " AND agencyid = " + agencyid)
@@ -113,11 +117,8 @@ class BusstopsController < ApplicationController
     end
 
     # Information we ONLY get from Metro
-    #@busstopAttributes[:stop_name] = StopData.new(officialstop[0].StopName, "false")
     session[:stop_name] = officialstop[0].StopName
-    #@busstopAttributes[:intersection_distance] = StopData.new(officialstop[0].FromCrossCurb, "false")
     session[:intersection_distance] = officialstop[0].FromCrossCurb
-    #@busstopAttributes[:is_tunnel_stop] = StopData.new(BusStop.isTunnelStop(officialstop[0].RteSignType), "false")
     session[:is_tunnel_stop] = BusStop.isTunnelStop(officialstop[0].RteSignType)
 	
     # Calculate things that we collect dynamically
@@ -129,9 +130,6 @@ class BusstopsController < ApplicationController
     calculateInfo(shelters, :shelter_count)
     calculateInfo(benches, :bench_count)
     calculateInfo(cans, :can_count)
-	
-    #cookies[:validate] = @validate
-    #cookies[:add] = @add
   end
 
   def calculateInfo(votingHash, infoSymbol)
@@ -141,28 +139,20 @@ class BusstopsController < ApplicationController
       session[infoSymbol] = {}
 	  
       if (count == 0)
-        #@busstopAttributes[infoSymbol] = StopData.new("unknown", "true")
         session[infoSymbol][:value] = "unknown"
-        #@add.push(infoSymbol)
       else
-        #@validate.push(infoSymbol)
-        
-        if (((votingHash[majorityValue] * 1.0 / count) >= @@votingMajority) && votingHash[majorityValue] >= @@validationMinimum)
-          #@busstopAttributes[infoSymbol] = StopData.new(majorityValue, "false")
+        if (((votingHash[majorityValue] * 1.0 / count) > @@votingMajority) && votingHash[majorityValue] >= @@validationMinimum)
           session[infoSymbol][:value] = majorityValue
           session[infoSymbol][:needs_verification] = "false"
           session[infoSymbol][:votes] = votingHash.to_s
         else
-          #@busstopAttributes[infoSymbol] = StopData.new(majorityValue, "true")
           session[infoSymbol][:value] = majorityValue
           session[infoSymbol][:needs_verification] = "true"
           session[infoSymbol][:votes] = votingHash.to_s
         end
       end
     else
-      #@busstopAttributes[infoSymbol] = StopData.new("unknown", "true")
       session[infoSymbol][value] = "unknown"
-      #@add.push(infoSymbol)
     end
   end
   
@@ -186,9 +176,44 @@ class BusstopsController < ApplicationController
   
   def update
   end
+  
+  def checkVerifiedForSave(stop)
+    if (session[:bearing_code][:needs_verification] == "false" && session[:bearing_code][:value] == stop.BearingCode)
+      stop.BearingCode = "unknown"
+    end
+      
+    if (session[:intersection_pos][:needs_verification] == "false" && session[:intersection_pos][:value] == stop.Intersection)
+      stop.Intersection = "unknown"
+    end
+      
+    if (session[:sign_type][:needs_verification] == "false" && session[:sign_type][:value] == stop.RteSignType)
+      stop.RteSignType = "unknown"
+    end
+      
+    if (session[:curb_inset][:needs_verification] == "false" && session[:curb_inset][:value] == stop.InsetFromCurb)
+      stop.InsetFromCurb = "unknown"
+    end
+      
+    if (session[:sched_holder][:needs_verification] == "false" && session[:sched_holder][:value] == stop.SchedHolder)
+      stop.SchedHolder = "unknown"
+    end
+    
+    if (session[:shelter_count][:needs_verification] == "false" && session[:shelter_count][:value] == stop.Shelters)
+      stop.Shelters = "unknown"
+    end
+      
+    if (session[:bench_count][:needs_verification] == "false" && session[:bench_count][:value] == stop.BenchCount)
+      stop.BenchCount = "unknown"
+    end
+      
+    if (session[:can_count][:needs_verification] == "false" && session[:can_count][:value] == stop.HasCan)
+      stop.HasCan = "unknown"
+    end
+  end
 
   def create
     @busstop = BusStop.new(params[:busstop])
+    checkVerifiedForSave(@busstop)
     @busstop.save
     
     @log = Log.new
@@ -196,7 +221,10 @@ class BusstopsController < ApplicationController
     Log.updateAttributes(@log, session)
     @log.save
     
-    Comment.add_or_edit(@busstop.AgencyId, @busstop.StopId, @busstop.StopComment)
+    # Don't overwrite our comment with null for not logged in users
+    if(session[:user_email])
+      Comment.add_or_edit(@busstop.AgencyId, @busstop.StopId, @busstop.StopComment)
+    end
     
     redirect_to dataentry_url(:id => params[:busstop][:AgencyId] + "_" + params[:busstop][:StopId])
   end

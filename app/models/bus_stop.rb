@@ -53,15 +53,13 @@ class BusStop < ActiveRecord::Base
     @@intersectionPosNames
   end
   
-  @@scheduleTypeValues = ["single", "midsize", "double", 
-      "none", "unknown"] 
+  @@scheduleTypeValues = ["yes", "no", "unknown"] 
       
   def self.scheduleTypeValues
     @@scheduleTypeValues
   end
   
-  @@scheduleTypeNames = ["single", "midsize", "double", 
-      "none"] 
+  @@scheduleTypeNames = ["yes", "no"] 
       
   def self.scheduleTypeNames
     @@scheduleTypeNames
@@ -73,7 +71,7 @@ class BusStop < ActiveRecord::Base
     @@curbInsetValues
   end
   
-  @@curbInsetNames = ["close to curb (within 1 foot)", "far from curb (more than 1 foot away)"] 
+  @@curbInsetNames = ["close to curb (< 1 foot)", "far from curb (> 1 foot)"] 
       
   def self.curbInsetNames
     @@curbInsetNames
@@ -175,7 +173,7 @@ class BusStop < ActiveRecord::Base
       when "A2 <=6 rts"
         return "single pole sign"
       when "Ksk Hyb Rts"
-        return "triangule"
+        return "triangle"
       when "C2 <=32 rts"
         return "wide base"
       when "B1 <=12 rts"
@@ -214,8 +212,16 @@ class BusStop < ActiveRecord::Base
       return holder.downcase
     else
       case holder
+      when "None"
+        return "no"
+      when "Single"
+        return "yes"
+      when "Midsize"
+        return "yes"
       when "H-Panel"
-        return "midsize"
+        return "yes"
+      when "Double"
+        return "yes"
       else
         return "unknown"
       end
@@ -239,12 +245,12 @@ class BusStop < ActiveRecord::Base
   end
   
   def self.shelterCount(val)
-    if (shelterCountValues.include?(val.to_s))
-      return val.to_s
+    if (shelterCountValues.include?(val))
+      return val
     elsif (val == nil)
       return "unknown"
-    elsif (val >= 3)
-      return "3 or more"
+    elsif (val == "3" or val == "4" or val == "5")
+      return "3+"
     else
       return "unknown"
     end
