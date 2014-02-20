@@ -7,8 +7,7 @@ StopfinderDev::Application.routes.draw do
   resources :closures
   resources :contact_forms
   #resources :authorizations
-  # The priority is based upon order of creation:
-  # first created -> highest priority
+  
   get '/update/:id' => 'busstops#update'
   get '/add/:id' => 'busstops#addnew'
   get '/closed/:id' => 'closures#report'
