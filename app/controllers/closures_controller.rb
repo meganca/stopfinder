@@ -1,7 +1,7 @@
 class ClosuresController < ApplicationController
  
   def report
-    ids = (params[:id]).split("_")
+    ids = (params[:id]).split(/[_?=&]/)
     agencyid = ids[0]
     stopid = ids[1]
     @busstop = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = " + stopid + " AND agencyid = " + agencyid)[0]

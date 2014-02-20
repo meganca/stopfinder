@@ -7,7 +7,7 @@ class BusstopsController < ApplicationController
   def show
     cookies[:stopid] = params[:id]
     
-    ids = (params[:id]).split("_")
+    ids = (params[:id]).split(/[_?=&]/)
     agencyid = ids[0]
     stopid = ids[1]
     @busstop = BusStop.new(StopId: stopid)
