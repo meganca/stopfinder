@@ -104,6 +104,15 @@
       </td>
     </tr>
   <% end %>
+  <% if session[:lighting][:value] != "unknown" %>
+    <tr>
+      <td>Well-lit at night?:</td>
+      <td>
+        <%= BusStop.lightingNames[BusStop.lightingValues.index(session[:lighting][:value])] %>
+        <% if session[:lighting][:needs_verification] == "true" %> * <% end %>
+      </td>
+    </tr>
+  <% end %>
   <% if session[:comment] != "" %>
     <tr>
       <td>Additional information:</td>

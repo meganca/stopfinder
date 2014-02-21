@@ -84,6 +84,9 @@ class BusstopsController < ApplicationController
 	
     cans = Hash.new
     BusStop.trashCanValues.each {|x| cans[x] = 0 }
+    
+    lighting = Hash.new
+    BusStop.lightingValues.each {|x| lighting[x] = 0 }
 
     stopdata.each do |stop|
       int = BusStop.intersectionPosition(stop.Intersection)
@@ -113,6 +116,9 @@ class BusstopsController < ApplicationController
       cancount = BusStop.trashCan(stop.HasCan)
       cans[cancount] = cans[cancount] + 1
       
+      lightingType = BusStop.lighting(stop.LightingConditions)
+      lighting[lightingType] = lighting[lightingType] + 1
+      
     end
     
     closedStatus = Closure.closureStatus(closuredata)
@@ -134,6 +140,7 @@ class BusstopsController < ApplicationController
     shelterPlacement.delete("unknown")
     shelterOrientation.delete("unknown")
     cans.delete("unknown")
+    lighting.delete("unknown")
     
     #@busstopAttributes[:stop_closed] = StopData.new("false", "false")
 
@@ -151,6 +158,7 @@ class BusstopsController < ApplicationController
     calculateInfo(shelterOrientation, :shelter_orientation)
     calculateInfo(benches, :bench_count)
     calculateInfo(cans, :can_count)
+    calculateInfo(lighting, :lighting)
   end
 
   def calculateInfo(votingHash, infoSymbol)

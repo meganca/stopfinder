@@ -121,6 +121,18 @@ class BusStop < ActiveRecord::Base
     @@trashCanNames
   end
   
+  @@lightingValues = ["0", "1", "2", "3", "unknown"] 
+      
+  def self.lightingValues
+    @@lightingValues
+  end
+  
+  @@lightingNames = ["no lighting", "poorly lit", "some lighting", "well-lit"] 
+      
+  def self.lightingNames
+    @@lightingNames
+  end
+  
   def self.directionName(direction)
     if (directionValues.include?(direction))
       return direction
@@ -292,4 +304,11 @@ class BusStop < ActiveRecord::Base
     end
   end
   
+  def self.lighting(val)
+    if (lightingValues.include?(val))
+      return val
+    else
+      return "unknown"
+    end
+  end
 end

@@ -1,13 +1,5 @@
 <table cellpadding = 5>
 <tr><td colspan=2 height=20px></td></tr>
-<tr>
-  <td style="font-weight:bold;">
-    Direction
-  </td>
-  <td>
-    This indicates the direction the bus is traveling along the first street named.
-  </td>
-</tr>
 <tr><td colspan=2 height=20px></td></tr>
 <tr>
   <td style="font-weight:bold; vertical-align:text-top;">
@@ -16,18 +8,37 @@
   <td>
     This describes the placement of the stop relative to the given intersection. The street named first is the street the bus travels along, while the street named second is the street it intersects. For example, if the intersection is "Blanchard St & 1st Ave," a stop on the "far side" of the intersection will be on Blanchard, after crossing 1st. <br /><br />
     
-    The possible values for this field are: far side, near side, at cross street, far middle, near middle, and opposite to.<br /><br />
+    The possible values for this field are: far side, near side, at cross street, and opposite to.<br /><br />
     
     "Far side" indicates a stop after the intersection. "Near side" indicates a stop before the intersection. "Opposite to" indicates a stop at a t-intersection across from the intersecting street (at the "top" of the T.)
     
     <table>
       <tr>
 	
-        <td><%= image_tag 'buspositions.png', :width => "65%"%></td></tr>
+        <td><%= image_tag 'buspositions_simplified.png', :width => "65%"%></td></tr>
         <tr>
         <td><%= image_tag 'buspositions2.png', :width => "65%"%></td>
       </tr>
     </table>
+  </td>
+</tr>
+<tr><td colspan=2 height=20px></td></tr>
+<tr>
+  <td style="font-weight:bold; vertical-align:text-top;">
+    Sign type
+  </td>
+  <td>
+    This describes the shape of the bus stop pole itself. 
+    
+    A <b>small sign on own pole</b> is a single pole with a bus sign. It may have a schedule holder attached. <br /> <%= image_tag 'singlepole.png'%> <br />
+    
+    A <b>sign on a non bus stop pole</b> means that the bus stop sign is mounted on some pre-existing pole, such as a telephone or light pole, rather than on its own distinct pole. More details about the pole can be given in the comments section.<br /> <%= image_tag 'nonmetro.png'%> <br />
+    
+    A <b>sign on two poles</b> is mounted on two separate poles. These signs are usually large and often include schedule information. <br /> <%= image_tag 'twopoles.png'%> <br />
+    
+    A <b>triangular kiosk</b> is a large, three-paneled structure that often has schedule and map information as well as the bus stop number. <br /> <%= image_tag 'triangularkiosk.png'%> <br />
+    
+    A <b>large sign on one pole</b> is mounted on a pole on only one side, unlike the two pole bus stop. The sign is large enough that the bottom is generally 1-2 feet off the ground.<br />  <%= image_tag 'widebase.png'%> <br />
   </td>
 </tr>
 <tr><td colspan=2 height=20px></td></tr>
@@ -41,33 +52,31 @@
 </tr>
 <tr><td colspan=2 height=20px></td></tr>
 <tr>
-  <td style="font-weight:bold; vertical-align:text-top;">
-    Sign type
+  <td style="font-weight:bold;">
+    Schedule holder
   </td>
   <td>
-    This describes the shape of the bus stop pole itself. 
-    
-    A <b>sign on a stand alone pole</b> is a single pole with a bus sign. It may have a schedule holder attached. <br /> <%= image_tag 'singlepole.png'%> <br />
-    
-    A <b>sign on a non bus stop pole</b> means that the bus stop sign is mounted on some pre-existing pole, such as a telephone or light pole, rather than on its own distinct pole. <br />
-    
-    A <b>sign on two poles</b> is mounted on two separate poles. <br /> <%= image_tag 'twopoles.png'%> <br />
-    
-    A <b>triangular kiosk</b> is a large, three-paneled structure that often has schedule and map information as well as the bus stop number. <br /> <%= image_tag 'triangularkiosk.png'%> <br />
-    
-    A <b>sign on a wide base</b> is mounted on a pole on only one side, unlike the two pole bus stop. The base of the pole has a supporting structure to hold the sign up. <br />  <%= image_tag 'widebase.png'%> <br />
+    A printed copy of the bus schedule is sometimes affixed to the bus stop pole in a separate schedule holder.
   </td>
 </tr>
 <tr><td colspan=2 height=20px></td></tr>
 <tr>
   <td style="font-weight:bold;">
-    Schedule holder
+    Number of shelters
   </td>
   <td>
-    A printed copy of the bus schedule is sometimes affixed to the bus stop pole in a schedule holder.
+    This field refers specifically to official bus stop shelters. 
   </td>
 </tr>
-
+<tr><td colspan=2 height=20px></td></tr>
+<tr>
+  <td style="font-weight:bold;">
+    Shelter position and opening
+  </td>
+  <td>
+    The placement of shelters near a bus stop varies. "Position of shelters" refers to how near the shelters are to the curb. The shelter facing direction indicates whether the open side of the shelter faces towards the street, away from the street, or perpendicular to the street.
+  </td>
+</tr>
 </table>
 
 
