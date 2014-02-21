@@ -2,12 +2,7 @@ class Log < ActiveRecord::Base
   self.table_name = "logs"
   
   def self.updateAttributes(update, sessionhash)
-    if sessionhash[:bearing_code][:needs_verification] == "true"
-      update.direction = "needs verification"
-    else
-      update.direction = sessionhash[:bearing_code][:value]
-    end
-      
+        
     if sessionhash[:intersection_pos][:needs_verification] == "true"
       update.position = "needs verification"
     else

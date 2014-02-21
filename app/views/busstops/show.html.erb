@@ -63,12 +63,12 @@
     <tr>
       <td>Number of shelters:</td>
       <td>
-        <%= session[:shelter_count][:value] %>
+        <%= BusStop.shelterCountNames[BusStop.shelterCountValues.index(session[:shelter_count][:value])] %>
         <% if session[:shelter_count][:needs_verification] == "true" %> * <% end %>
       </td>
     </tr>
   <% end %>
-  <% if (session[:shelter_count][:value] != 0) && (session[:shelter_count][:value] != "unknown") && (session[:shelter_count][:needs_verification] == "false") &&  session[:shelter_offset][:value] != "unknown" %>
+  <% if (session[:shelter_count][:value] != "0") && (session[:shelter_count][:value] != "unknown") && (session[:shelter_count][:needs_verification] == "false") &&  session[:shelter_offset][:value] != "unknown" %>
     <tr>
       <td>Shelter position:</td>
       <td>
@@ -77,7 +77,7 @@
       </td>
     </tr>
   <% end %>
-  <% if (session[:shelter_count][:value] != 0) && (session[:shelter_count][:value] != "unknown") && (session[:shelter_count][:needs_verification] == "false") && session[:shelter_orientation][:value] != "unknown" %>
+  <% if (session[:shelter_count][:value] != "0") && (session[:shelter_count][:value] != "unknown") && (session[:shelter_count][:needs_verification] == "false") && session[:shelter_orientation][:value] != "unknown" %>
     <tr>
       <td>The shelter faces:</td>
       <td>
@@ -101,6 +101,15 @@
       <td>
         <%= session[:can_count][:value] %>
         <% if session[:can_count][:needs_verification] == "true" %> * <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if session[:lighting][:value] != "unknown" %>
+    <tr>
+      <td>Well-lit at night?:</td>
+      <td>
+        <%= BusStop.lightingNames[BusStop.lightingValues.index(session[:lighting][:value])] %>
+        <% if session[:lighting][:needs_verification] == "true" %> * <% end %>
       </td>
     </tr>
   <% end %>

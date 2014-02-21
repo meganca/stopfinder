@@ -21,7 +21,7 @@ class BusstopsController < ApplicationController
     showLog.info("Viewing stop #{agencyid}_#{stopid} at #{Time.now}")
     
     if(session[:device_id])
-      showLog.info("Submitted by user #{session[:device_id]}")
+      showLog.info("Accessed by user #{session[:device_id]}")
     elsif(params[:userid])
       session[:device_id] = params[:userid]
       showLog.info("Accessed by user #{params[:userid]}")
@@ -84,6 +84,9 @@ class BusstopsController < ApplicationController
 	
     cans = Hash.new
     BusStop.trashCanValues.each {|x| cans[x] = 0 }
+    
+    lighting = Hash.new
+    BusStop.lightingValues.each {|x| lighting[x] = 0 }
 
     stopdata.each do |stop|
       int = BusStop.intersectionPosition(stop.Intersection)
@@ -113,6 +116,9 @@ class BusstopsController < ApplicationController
       cancount = BusStop.trashCan(stop.HasCan)
       cans[cancount] = cans[cancount] + 1
       
+      lightingType = BusStop.lighting(stop.LightingConditions)
+      lighting[lightingType] = lighting[lightingType] + 1
+      
     end
     
     closedStatus = Closure.closureStatus(closuredata)
@@ -120,9 +126,6 @@ class BusstopsController < ApplicationController
     session[:closure][:status] = closedStatus[0]
     session[:closure][:reported] = closedStatus[1]
     session[:closure][:enddate] = closedStatus[2]
-    #render :text => closedStatus.to_s
-    #return
-    
 
     # Clear out any counts of "no opinion"
     intersections.delete("unknown")
@@ -134,12 +137,14 @@ class BusstopsController < ApplicationController
     shelterPlacement.delete("unknown")
     shelterOrientation.delete("unknown")
     cans.delete("unknown")
+    lighting.delete("unknown")
     
     #@busstopAttributes[:stop_closed] = StopData.new("false", "false")
 
     # Information we ONLY get from Metro
     session[:stop_name] = officialstop[0].StopName
     session[:intersection_distance] = officialstop[0].FromCrossCurb
+    #session[:temp_shelters] = officialstop[0].Shelters
 	
     # Calculate things that we collect dynamically
     calculateInfo(signs, :sign_type)
@@ -151,6 +156,7 @@ class BusstopsController < ApplicationController
     calculateInfo(shelterOrientation, :shelter_orientation)
     calculateInfo(benches, :bench_count)
     calculateInfo(cans, :can_count)
+    calculateInfo(lighting, :lighting)
   end
 
   def calculateInfo(votingHash, infoSymbol)
@@ -214,11 +220,7 @@ class BusstopsController < ApplicationController
     showLog.info("")
   end
   
-  def checkVerifiedForSave(stop)
-    if (session[:bearing_code][:needs_verification] == "false" && session[:bearing_code][:value] == stop.BearingCode)
-      stop.BearingCode = "unknown"
-    end
-      
+  def checkVerifiedForSave(stop)    
     if (session[:intersection_pos][:needs_verification] == "false" && session[:intersection_pos][:value] == stop.Intersection)
       stop.Intersection = "unknown"
     end
@@ -245,6 +247,18 @@ class BusstopsController < ApplicationController
       
     if (session[:can_count][:needs_verification] == "false" && session[:can_count][:value] == stop.HasCan)
       stop.HasCan = "unknown"
+    end
+    
+    if (session[:shelter_offset][:needs_verification] == "false" && session[:shelter_offset][:value] == stop.ShelterOffset)
+      stop.ShelterOffset = "unknown"
+    end
+    
+    if (session[:shelter_orientation][:needs_verification] == "false" && session[:shelter_orientation][:value] == stop.ShelterOrientation)
+      stop.ShelterOrientation = "unknown"
+    end
+    
+    if (session[:lighting][:needs_verification] == "false" && session[:lighting][:value] == stop.LightingConditions)
+      stop.LightingConditions = "unknown"
     end
   end
 

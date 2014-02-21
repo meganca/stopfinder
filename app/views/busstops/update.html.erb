@@ -98,6 +98,16 @@
         <% end %>
       </td>
     </tr>
+    <tr>
+      <td><%= f.label :LightingConditions, "Is the stop well-lit at night?:" %></td>
+      <td>
+        <% if session[:lighting][:needs_verification] == "true" %>
+          <%= f.select :LightingConditions, (BusStop.lightingNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.lightingValues[i]]}, :selected => "unknown" %>
+        <% else %>
+          <%= f.select :LightingConditions, (BusStop.lightingNames + ["unknown"]).map.with_index{ |x, i| [x, BusStop.lightingValues[i]]}, :selected => session[:lighting][:value] %>
+        <% end %>
+      </td>
+    </tr>
   </table>
   <% if session[:user_email] %>
   <p>
