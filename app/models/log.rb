@@ -45,6 +45,24 @@ class Log < ActiveRecord::Base
       update.trash_can = sessionhash[:can_count][:value]
     end
     
+    if sessionhash[:shelter_offset][:needs_verification] == "true" 
+      update.shelter_position = "needs verification"
+    else
+      update.shelter_position = sessionhash[:shelter_offset][:value]
+    end
+    
+    if sessionhash[:shelter_orientation][:needs_verification] == "true" 
+      update.shelter_orientation = "needs verification"
+    else
+      update.shelter_orientation = sessionhash[:shelter_orientation][:value]
+    end
+    
+    if sessionhash[:lighting][:needs_verification] == "true" 
+      update.lighting = "needs verification"
+    else
+      update.lighting = sessionhash[:lighting][:value]
+    end
+    
     if sessionhash[:user_email]
       update.comment = sessionhash[:comment]
     else
