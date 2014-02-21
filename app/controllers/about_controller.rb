@@ -1,6 +1,17 @@
 class AboutController < ApplicationController
   def main
-    checkDevice()
+    showLog = BusStop.usageLogger
+    showLog.info("Viewed main info page at #{Time.now}")
+    
+    if(session[:device_id])
+      showLog.info("Opened by user #{session[:device_id]}")
+    end
+
+    if(session[:user_email])
+      showLog.info("User logged in as #{session[:user_email]}")
+    end
+    
+    showLog.info("")
   end
   
   def contact
@@ -13,9 +24,33 @@ class AboutController < ApplicationController
   end
   
   def data
+    showLog = BusStop.usageLogger
+    showLog.info("Viewed field info page at #{Time.now}")
+    
+    if(session[:device_id])
+      showLog.info("Opened by user #{session[:device_id]}")
+    end
+
+    if(session[:user_email])
+      showLog.info("User logged in as #{session[:user_email]}")
+    end
+    
+    showLog.info("")
   end
   
   def testing
+    showLog = BusStop.usageLogger
+    showLog.info("Access from out-of-region request at #{Time.now}")
+    
+    if(session[:device_id])
+      showLog.info("Opened by user #{session[:device_id]}")
+    end
+
+    if(session[:user_email])
+      showLog.info("User logged in as #{session[:user_email]}")
+    end
+    
+    showLog.info("")
   end
   
   def missing

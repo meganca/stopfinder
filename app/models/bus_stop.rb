@@ -2,34 +2,20 @@ class BusStop < ActiveRecord::Base
   self.table_name = "busstops"
   attr_accessible :UserId, :AgencyId, :StopId, :BearingCode, :Intersection, 
     :RteSignType, :SchedHolder, :Shelters, :BenchCount, :HasCan, :AddedFrom,
-    :StopComment, :UserIP, :DateCreated, :UserAtStop, :InsetFromCurb
+    :StopComment, :UserIP, :DateCreated, :UserAtStop, :InsetFromCurb, :OBAId,
+    :ShelterOffset, :ShelterOrientation, :LightingConditions
 
+  # Log some custom information
+  def self.usageLogger
+    @@usageLogger ||= Logger.new("#{Rails.root}/log/siteusage.log")
+  end  
+  
   # Constants to keep track of what fields we're collecting
-  @@infoFields = ["direction", "position", "sign type", "schedule holder", "is tunnel", 
-    "curb inset", "shelters", "benches", "comment"]
-
-  def self.infoFields
-    @@infoFields
-  end
-  
-  # Acceptable values for each data type
-  @@directionValues = ["northbound", "eastbound", "westbound", "southbound", "unknown"]
-  
-  @@directionNames = ["northbound", "eastbound", "westbound", "southbound"] 
-      
-  def self.directionNames
-    @@directionNames
-  end
-  
-  def self.directionValues
-    @@directionValues
-  end
-
   @@signTypeValues = ["single pole sign", "non bus pole", "two pole sign", "triangle", 
     "wide base", "no sign", "unknown"]
     
-  @@signTypeNames = ["small sign on stand alone pole", "sign on non bus stop pole", "large sign on two poles", "triangular kiosk", 
-    "large sign on one wide base", "no sign"]
+  @@signTypeNames = ["small sign on own pole", "sign on non bus stop pole", "large sign on two poles", "triangular kiosk", 
+    "large sign on one pole", "no sign"]
 	
   def self.signTypeValues
     @@signTypeValues
@@ -39,11 +25,9 @@ class BusStop < ActiveRecord::Base
     @@signTypeNames
   end
   
-  @@intersectionPositionValues = ["far side", "near side", "at cross street", 
-      "far middle", "near middle", "opposite to", "unknown"] 
+  @@intersectionPositionValues = ["far side", "near side", "at cross street", "opposite to", "unknown"] 
       
-  @@intersectionPosNames = ["far side", "near side", "at cross street", 
-      "far middle", "near middle", "opposite to"] 
+  @@intersectionPosNames = ["far side", "near side", "at cross street", "opposite to"] 
       
   def self.intersectionPositionValues
     @@intersectionPositionValues
@@ -101,6 +85,30 @@ class BusStop < ActiveRecord::Base
     @@shelterCountNames
   end
   
+  @@shelterInsetValues = ["<1", ">1", "unknown"] 
+  
+  def self.shelterInsetValues
+    @@shelterInsetValues
+  end
+  
+  @@shelterInsetNames = ["against curb", "across sidewalk from curb"] 
+      
+  def self.shelterInsetNames
+    @@shelterInsetNames
+  end
+  
+  @@shelterOrientationValues = ["streetfacing", "away from street", "sideways", "unknown"] 
+  
+  def self.shelterOrientationValues
+    @@shelterOrientationValues
+  end
+  
+  @@shelterOrientationNames = ["towards the street", "away from the street", "perpendicular to street"] 
+      
+  def self.shelterOrientationNames
+    @@shelterOrientationNames
+  end
+  
   @@trashCanValues = ["yes", "no", "unknown"] 
       
   def self.trashCanValues
@@ -140,9 +148,13 @@ class BusStop < ActiveRecord::Base
     if (intersectionPositionValues.include?(pos.downcase))
       return pos.downcase
     else
-      case pos
-        when "At cross st"
+      case pos.downcase
+        when "at cross st"
           return "at cross street"
+        when "far middle"
+          return "far side"
+        when "near middle"
+          return "near side"
         else
           return "unknown"
       end
@@ -251,6 +263,22 @@ class BusStop < ActiveRecord::Base
       return "unknown"
     elsif (val == "3" or val == "4" or val == "5")
       return "3+"
+    else
+      return "unknown"
+    end
+  end
+  
+  def self.shelterOrientation(val)
+    if (shelterOrientationValues.include?(val))
+      return val
+    else
+      return "unknown"
+    end
+  end
+  
+  def self.shelterPosition(val)
+    if (shelterInsetValues.include?(val))
+      return val
     else
       return "unknown"
     end

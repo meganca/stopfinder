@@ -2,11 +2,10 @@ class BusstopsController < ApplicationController
   StopData = Struct.new(:value, :needsValidation)
   @@votingMajority = 0.75
   @@validationMinimum = 3
-  @@closureMinimum = 1
   
   def show
     cookies[:stopid] = params[:id]
-    
+
     ids = (params[:id]).split(/[_?=&]/)
     agencyid = ids[0]
     stopid = ids[1]
@@ -14,11 +13,33 @@ class BusstopsController < ApplicationController
     session[:agency_id] = agencyid
     session[:stop_id] = stopid
     
+    if(params[:direction])
+      session[:bearing] = params[:direction]
+    end
+    
+    showLog = BusStop.usageLogger
+    showLog.info("Viewing stop #{agencyid}_#{stopid} at #{Time.now}")
+    
+    if(session[:device_id])
+      showLog.info("Submitted by user #{session[:device_id]}")
+    elsif(params[:userid])
+      session[:device_id] = params[:userid]
+      showLog.info("Accessed by user #{params[:userid]}")
+    end
+
+    if(session[:user_email])
+      showLog.info("User logged in as #{session[:user_email]}")
+    end
+    
+    showLog.info("")
+    
     # Get the array w/ all results
     stopdata = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = " + stopid + " AND agencyid = " + agencyid)
     officialstop = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = "+stopid+" AND userid = 0 AND agencyid = " + agencyid)
     
     if(stopdata.empty?)
+      showLog.info("Stop #{agencyid}_#{stopid} at #{Time.now} not found in database")
+      showLog.info("")
       redirect_to '/about/missing' and return
     end
     
@@ -35,10 +56,7 @@ class BusstopsController < ApplicationController
     @add = Array.new
     
     # Get array for closures
-    closuredata = Closure.find_by_sql("SELECT * FROM " + Closure.table_name + " WHERE stopid = " + stopid + " AND agencyid = " + agencyid)
-	
-    directions = Hash.new
-    BusStop.directionValues.each {|x| directions[x] = 0 }
+    closuredata = Closure.find_by_sql("SELECT * FROM " + Closure.table_name + " WHERE stopid = " + stopid + " AND agencyid = " + agencyid + " AND StartDate < UTC_TIMESTAMP() AND EndDate > UTC_TIMESTAMP() ORDER BY DateCreated DESC")
     
     intersections = Hash.new
     BusStop.intersectionPositionValues.each {|x| intersections[x] = 0 }
@@ -57,18 +75,17 @@ class BusstopsController < ApplicationController
 	
     shelters = Hash.new
     BusStop.shelterCountValues.each {|x| shelters[x] = 0 }
+    
+    shelterPlacement = Hash.new
+    BusStop.shelterInsetValues.each {|x| shelterPlacement[x] = 0 }
+    
+    shelterOrientation = Hash.new
+    BusStop.shelterOrientationValues.each {|x| shelterOrientation[x] = 0 }
 	
     cans = Hash.new
     BusStop.trashCanValues.each {|x| cans[x] = 0 }
-    
-    closedvotes = Hash.new
-    closedvotes["true"] = 0
-    closedvotes["false"] = 0
 
     stopdata.each do |stop|
-      dir = BusStop.directionName(stop.BearingCode)
-      directions[dir] = directions[dir] + 1
-
       int = BusStop.intersectionPosition(stop.Intersection)
       intersections[int] = intersections[int] + 1
 
@@ -86,48 +103,52 @@ class BusstopsController < ApplicationController
 	  
       sheltercount = BusStop.shelterCount(stop.Shelters)
       shelters[sheltercount] = shelters[sheltercount] + 1
+      
+      shelterPlacementCount = BusStop.shelterPosition(stop.ShelterOffset)
+      shelterPlacement[shelterPlacementCount] = shelterPlacement[shelterPlacementCount] + 1
+      
+      shelterOrientationCount = BusStop.shelterOrientation(stop.ShelterOrientation)
+      shelterOrientation[shelterOrientationCount] = shelterOrientation[shelterOrientationCount] + 1
 	  
       cancount = BusStop.trashCan(stop.HasCan)
       cans[cancount] = cans[cancount] + 1
       
     end
     
-    closuredata.each do |report|
-      closed = Closure.isCurrent(report.ClosureType, report.ClosurePermanent, report.StartDate, report.EndDate)
-      closedvotes[closed] = closedvotes[closed] + 1
-    end
+    closedStatus = Closure.closureStatus(closuredata)
+    session[:closure] = {}
+    session[:closure][:status] = closedStatus[0]
+    session[:closure][:reported] = closedStatus[1]
+    session[:closure][:enddate] = closedStatus[2]
+    #render :text => closedStatus.to_s
+    #return
+    
 
     # Clear out any counts of "no opinion"
-    directions.delete("unknown")
     intersections.delete("unknown")
     signs.delete("unknown")
     schedules.delete("unknown")
     insets.delete("unknown")
     benches.delete("unknown")
     shelters.delete("unknown")
+    shelterPlacement.delete("unknown")
+    shelterOrientation.delete("unknown")
     cans.delete("unknown")
     
-    # If the stop isn't closed, ignore; we don't need to do anything
-    # This is something where we don't want majority vote, just count
-    closedvotes.delete("false")
-    if (closedvotes["true"] >= @@closureMinimum)
-      @busstopAttributes[:stop_closed] = StopData.new("true", "false")
-    else
-      @busstopAttributes[:stop_closed] = StopData.new("false", "false")
-    end
+    #@busstopAttributes[:stop_closed] = StopData.new("false", "false")
 
     # Information we ONLY get from Metro
     session[:stop_name] = officialstop[0].StopName
     session[:intersection_distance] = officialstop[0].FromCrossCurb
-    session[:is_tunnel_stop] = BusStop.isTunnelStop(officialstop[0].RteSignType)
 	
     # Calculate things that we collect dynamically
-    calculateInfo(directions, :bearing_code)
     calculateInfo(signs, :sign_type)
     calculateInfo(intersections, :intersection_pos)
     calculateInfo(schedules, :sched_holder)
     calculateInfo(insets, :curb_inset)
     calculateInfo(shelters, :shelter_count)
+    calculateInfo(shelterPlacement, :shelter_offset)
+    calculateInfo(shelterOrientation, :shelter_orientation)
     calculateInfo(benches, :bench_count)
     calculateInfo(cans, :can_count)
   end
@@ -175,6 +196,22 @@ class BusstopsController < ApplicationController
   end
   
   def update
+    ids = (params[:id]).split(/[_&=]/)
+    agencyid = ids[0]
+    stopid = ids[1]
+    
+    showLog = BusStop.usageLogger
+    showLog.info("Viewing update/verify form for #{agencyid}_#{stopid} at #{Time.now}")
+    
+    if(session[:device_id])
+      showLog.info("Accessed by user #{session[:device_id]}")
+    end
+
+    if(session[:user_email])
+      showLog.info("User logged in as #{session[:user_email]}")
+    end
+    
+    showLog.info("")
   end
   
   def checkVerifiedForSave(stop)
@@ -220,6 +257,19 @@ class BusstopsController < ApplicationController
     @log.input_id = @busstop.InputId
     Log.updateAttributes(@log, session)
     @log.save
+    
+    showLog = BusStop.usageLogger
+    showLog.info("Submitted stop info for #{params[:busstop][:AgencyId]}_#{params[:busstop][:StopId]} at #{Time.now}")
+    
+    if(session[:device_id])
+      showLog.info("Submitted by user #{session[:device_id]}")
+    end
+
+    if(session[:user_email])
+      showLog.info("User logged in as #{session[:user_email]}")
+    end
+    
+    showLog.info("")
     
     # Don't overwrite our comment with null for not logged in users
     if(session[:user_email])

@@ -4,28 +4,29 @@ class Closure < ActiveRecord::Base
     :ClosureType, :ClosurePermanent, :StartDate, :EndDate, :MovedTo
     
     
-  def self.isCurrent(type, permanent, startdate, enddate)
-    if ((type == nil) || (type == ""))
-      return "false"
-    elsif (type == "current")
-      if (permanent == "yes")
-        return "true"
-      elsif (enddate > Date.today)
-        return "true"
-      else
-        return "false"
-      end
-    elsif (type == "future" && startdate < Date.today)
-      if (permanent == "yes")
-        return "true"
-      elsif (enddate > Date.today)
-        return "true"
-      else
-        return "false"
-      end
-    else
-      return "false"
+  def self.closureStatus(allReports)
+    dateReported = Time.new(2000)
+      
+    if (allReports.any? == false)
+      return ["open"]
     end
+    
+    status = allReports[0].ClosureType
+    if (status == "open")
+      return ["open"]
+    else
+      # Current or future closure report
+      dateReported = allReports[0].StartDate
+      
+      allReports.each do |report|
+        if (report.ClosurePermanent == "no" && report.ClosureType != "open")
+          return ["closed", dateReported.strftime("%B %d, %Y"), report.EndDate.strftime("%B %d, %Y at %I:%M %p")]
+        end
+      end
+    end
+    
+    # If we haven't otherwise returned, no end date
+    return ["closed", dateReported.strftime("%B %d, %Y"), "none"]
   end
   
   

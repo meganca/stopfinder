@@ -1,40 +1,45 @@
 <table>
 <tr><td colspan=2>
 
-<h2><%= @busstop.StopName %></h2>
+<h2><%= session[:stop_name] %></h2>
 
 </td></tr>
 <%= form_for :closure, url: closures_path do |f| %>
-<tr><td colspan=2>Is the stop closed right now?</td></tr>
+<tr><td colspan=2>Is the stop closed or open?</td></tr>
 <tr>
   <td colspan=2>
-    <%= f.radio_button :ClosureType, "current", id: 'permanent_closed', :checked => true %> Yes
+    <%= f.radio_button :ClosureType, "open", :checked => true %> Open.
   </td>
 </tr>
 <tr>
   <td colspan=2>
-    <%= f.radio_button :ClosureType, "future", id: 'permanent_closed' %> No, closed starting at: <br/>
-    <%= f.date_select :StartDate %>
+    <%= f.radio_button :ClosureType, "current" %> Currently closed.
+  </td>
+</tr>
+<tr>
+  <td colspan=2>
+    <%= f.radio_button :ClosureType, "future" %> Closed starting at: <br/>
+    <%= f.datetime_select :StartDate, :default => Time.now  %>
   </td>
 </tr>
 
 <tr><td colspan=2 height=20></td></tr>
-<tr><td colspan=2>How long is it closed for?</td></tr>
+<tr><td colspan=2>If closed, how long is it closed for?</td></tr>
 
 <tr>
   <td colspan=2>
-    <%= f.radio_button :ClosurePermanent, "unknown", id: 'permanent_closed' %> Unknown.
+    <%= f.radio_button :ClosurePermanent, "unknown", id: 'permanent_closed', :checked => true %> Unknown.
   </td>
 </tr>
 <tr>
   <td colspan=2>
-    <%= f.radio_button :ClosurePermanent, "yes", id: 'permanent_closed', :checked => true %> Stop is closed permanently.
+    <%= f.radio_button :ClosurePermanent, "yes", id: 'permanent_closed' %> Stop is closed permanently.
   </td>
 </tr>
 <tr>
   <td colspan=2>
     <%= f.radio_button :ClosurePermanent, "no", id: 'permanent_closed' %> Stop is closed until: <br />
-    <%= f.date_select :EndDate %>
+    <%= f.datetime_select :EndDate, :default => (Time.now).advance(:hours => 1) %>
   </td>
 </tr>
 
