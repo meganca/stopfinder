@@ -4,8 +4,6 @@ class BusstopsController < ApplicationController
   @@validationMinimum = 3
   
   def show
-    cookies[:stopid] = params[:id]
-
     ids = (params[:id]).split(/[_?=&]/)
     agencyid = ids[0]
     stopid = ids[1]
@@ -27,15 +25,15 @@ class BusstopsController < ApplicationController
       showLog.info("Accessed by user #{params[:userid]}")
     end
 
-    if(session[:user_email])
-      showLog.info("User logged in as #{session[:user_email]}")
+    if(cookies[:user_email])
+      showLog.info("User logged in as #{cookies[:user_email]}")
     end
     
     showLog.info("")
     
     # Get the array w/ all results
-    stopdata = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = " + stopid + " AND agencyid = " + agencyid)
-    officialstop = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = "+stopid+" AND userid = 0 AND agencyid = " + agencyid)
+    stopdata = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = \"" + stopid + "\" AND agencyid = \"" + agencyid + "\"")
+    officialstop = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = \""+stopid+"\" AND userid = 0 AND agencyid = \"" + agencyid + "\"")
     
     if(stopdata.empty?)
       showLog.info("Stop #{agencyid}_#{stopid} at #{Time.now} not found in database")
@@ -213,8 +211,8 @@ class BusstopsController < ApplicationController
       showLog.info("Accessed by user #{session[:device_id]}")
     end
 
-    if(session[:user_email])
-      showLog.info("User logged in as #{session[:user_email]}")
+    if(cookies[:user_email])
+      showLog.info("User logged in as #{cookies[:user_email]}")
     end
     
     showLog.info("")
@@ -279,14 +277,14 @@ class BusstopsController < ApplicationController
       showLog.info("Submitted by user #{session[:device_id]}")
     end
 
-    if(session[:user_email])
-      showLog.info("User logged in as #{session[:user_email]}")
+    if(cookies[:user_email])
+      showLog.info("User logged in as #{cookies[:user_email]}")
     end
     
     showLog.info("")
     
     # Don't overwrite our comment with null for not logged in users
-    if(session[:user_email])
+    if(cookies[:user_email])
       Comment.add_or_edit(@busstop.AgencyId, @busstop.StopId, @busstop.StopComment)
     end
     

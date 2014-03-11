@@ -13,8 +13,8 @@ class ClosuresController < ApplicationController
       showLog.info("Accessed by user #{session[:device_id]}")
     end
 
-    if(session[:user_email])
-      showLog.info("User logged in as #{session[:user_email]}")
+    if(cookies[:user_email])
+      showLog.info("User logged in as #{cookies[:user_email]}")
     end
     
     showLog.info("")
@@ -48,8 +48,8 @@ class ClosuresController < ApplicationController
       showLog.info("Submitted by user #{session[:device_id]}")
     end
 
-    if(session[:user_email])
-      showLog.info("User logged in as #{session[:user_email]}")
+    if(cookies[:user_email])
+      showLog.info("User logged in as #{cookies[:user_email]}")
     end
     
     showLog.info("")

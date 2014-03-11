@@ -3,24 +3,24 @@ class SessionsController < ApplicationController
   end
   
   def create
-    if session[:user_email]
+    if cookies[:user_email]
       render :text => "You are already logged in."
-      redirect_to dataview_url(:id => cookies[:stopid])
+      redirect_to dataview_url(:id => session[:agency_id]+"_"+session[:stop_id], :direction => session[:bearing])
     else
       # Go get the authorization
       auth_hash = request.env['omniauth.auth']
    
       # Create the session
-      session[:user_email] = auth_hash["info"]["email"]
+      cookies[:user_email] = {:value => auth_hash["info"]["email"], :expires => 1.month.from_now}
    
-      #render :text => "Welcome #{session[:user_email]}!"
-      redirect_to dataview_url(:id => cookies[:stopid])
+      #render :text => "Welcome #{cookies[:user_email]}!"
+      redirect_to dataview_url(:id => session[:agency_id]+"_"+session[:stop_id], :direction => session[:bearing])
     end
   end
   
   def destroy
-    session[:user_email] = nil
-    redirect_to dataview_url(:id => cookies[:stopid])
+    cookies.delete(:user_email)
+    redirect_to dataview_url(:id => session[:agency_id]+"_"+session[:stop_id], :direction => session[:bearing])
   end
   
   def failure

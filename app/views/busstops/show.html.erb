@@ -134,8 +134,8 @@
     <td><%= link_to 'What do these fields mean?', "/about/fields" %></td>
   </tr>
   <tr> <td></td>
-    <% if session[:user_email] %>
-      <td> <%= session[:user_email]%><br/> <%= link_to "Log out", "/logout/" %> </td>
+    <% if cookies[:user_email] %>
+      <td> <%= cookies[:user_email]%><br/> <%= link_to "Log out", "/logout/" %> </td>
     <% else %>
       <td><%= link_to 'Log in with existing account', "/login/" %></td>
     <% end %>

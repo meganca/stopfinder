@@ -7,8 +7,8 @@ class AboutController < ApplicationController
       showLog.info("Opened by user #{session[:device_id]}")
     end
 
-    if(session[:user_email])
-      showLog.info("User logged in as #{session[:user_email]}")
+    if(cookies[:user_email])
+      showLog.info("User logged in as #{cookies[:user_email]}")
     end
     
     showLog.info("")
@@ -31,8 +31,8 @@ class AboutController < ApplicationController
       showLog.info("Opened by user #{session[:device_id]}")
     end
 
-    if(session[:user_email])
-      showLog.info("User logged in as #{session[:user_email]}")
+    if(cookies[:user_email])
+      showLog.info("User logged in as #{cookies[:user_email]}")
     end
     
     showLog.info("")
@@ -46,8 +46,8 @@ class AboutController < ApplicationController
       showLog.info("Opened by user #{session[:device_id]}")
     end
 
-    if(session[:user_email])
-      showLog.info("User logged in as #{session[:user_email]}")
+    if(cookies[:user_email])
+      showLog.info("User logged in as #{cookies[:user_email]}")
     end
     
     showLog.info("")

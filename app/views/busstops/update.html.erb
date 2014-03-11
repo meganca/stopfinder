@@ -109,7 +109,7 @@
       </td>
     </tr>
   </table>
-  <% if session[:user_email] %>
+  <% if cookies[:user_email] %>
   <p>
    <%= f.label :StopComment, "Additional information:" %>
       <%= f.text_area :StopComment, :value =>session[:comment], :rows =>3 %>
@@ -118,7 +118,7 @@
   <% end %>
   
   <%= f.hidden_field :UserIP, :value => request.remote_ip %>
-  <%= f.hidden_field :UserId, :value => session[:user_email] %>
+  <%= f.hidden_field :UserId, :value => cookies[:user_email] %>
   <%= f.hidden_field :StopId, :value => session[:stop_id] %>
   <%= f.hidden_field :AgencyId, :value => session[:agency_id] %>
   <%= f.hidden_field :DateCreated, :value => Time.now %>

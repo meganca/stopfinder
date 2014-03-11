@@ -55,7 +55,7 @@
 
 
 <%= f.hidden_field :UserIP, :value => request.remote_ip %>
-<%= f.hidden_field :UserId, :value => session[:user_email] %>
+<%= f.hidden_field :UserId, :value => cookies[:user_email] %>
 <%= f.hidden_field :StopId, :value => @busstop.StopId %>
 <%= f.hidden_field :AgencyId, :value => @busstop.AgencyId %>
 <%= f.hidden_field :DateCreated, :value => Time.now %>

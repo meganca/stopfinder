@@ -1,7 +1,7 @@
 <table>
 <tr><td colspan=2 height=20></td></tr>
-<% if session[:user_email] %>
- <td colspan=2>Already logged in as <%= session[:user_email] %></td>
+<% if cookies[:user_email] %>
+ <td colspan=2>Already logged in as <%= cookies[:user_email] %></td>
 <% else %>
   <td align=right><%= image_tag 'fb_icon_325x325.png', :width => "20" %></td>
   <td><%= link_to 'Log in with Facebook', "/auth/facebook" %></td></tr>
