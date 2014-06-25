@@ -36,17 +36,17 @@
     <tr>
       <td>Sign type:</td>
       <td>
-        <%= BusStop.signTypeNames[BusStop.signTypeValues.index(session[:sign_type][:value])] %>
+        <%= BusStop.SIGNTYPENAMES_CONST[BusStop.SIGNTYPEVALUES_CONST.index(session[:sign_type][:value])] %>
         <% if session[:sign_type][:needs_verification] == "true" %> * <% end %>
       </td>
     </tr>
   <% end %>
-  <% if session[:curb_inset][:value] != "unknown" %>
+  <% if session[:sign_inset][:value] != "unknown" %>
     <tr>
       <td>Sign position:</td>
       <td>
-        <%= BusStop.curbInsetNames[BusStop.curbInsetValues.index(session[:curb_inset][:value])] %> 
-        <% if session[:curb_inset][:needs_verification] == "true" %> * <% end %>
+        <%= BusStop.SIGNINSETNAMES_CONST[BusStop.SIGNINSETVALUES_CONST.index(session[:sign_inset][:value])] %> 
+        <% if session[:sign_inset][:needs_verification] == "true" %> * <% end %>
       </td>
     </tr>
   <% end %>
@@ -63,7 +63,7 @@
     <tr>
       <td>Number of shelters:</td>
       <td>
-        <%= BusStop.shelterCountNames[BusStop.shelterCountValues.index(session[:shelter_count][:value])] %>
+        <%= BusStop.SHELTERCOUNTNAMES_CONST[BusStop.SHELTERCOUNTVALUES_CONST.index(session[:shelter_count][:value])] %>
         <% if session[:shelter_count][:needs_verification] == "true" %> * <% end %>
       </td>
     </tr>
@@ -72,7 +72,7 @@
     <tr>
       <td>Shelter position:</td>
       <td>
-        <%= BusStop.shelterInsetNames[BusStop.shelterInsetValues.index(session[:shelter_offset][:value])] %>
+        <%= BusStop.SHELTERINSETNAMES_CONST[BusStop.SHELTERINSETVALUES_CONST.index(session[:shelter_offset][:value])] %>
         <% if session[:shelter_offset][:needs_verification] == "true" %> * <% end %>
       </td>
     </tr>
@@ -81,7 +81,7 @@
     <tr>
       <td>The shelter faces:</td>
       <td>
-        <%= BusStop.shelterOrientationNames[BusStop.shelterOrientationValues.index(session[:shelter_orientation][:value])] %>
+        <%= BusStop.SHELTERORIENTATIONNAMES_CONST[BusStop.SHELTERORIENTATIONVALUES_CONST.index(session[:shelter_orientation][:value])] %>
         <% if session[:shelter_orientation][:needs_verification] == "true" %> * <% end %>
       </td>
     </tr>
@@ -90,7 +90,7 @@
     <tr>
       <td>Number of benches:</td>
       <td>
-        <%= session[:bench_count][:value] %>
+        <%= BusStop.BENCHCOUNTNAMES_CONST[BusStop.BENCHCOUNTVALUES_CONST.index(session[:bench_count][:value])] %>
         <% if session[:bench_count][:needs_verification] == "true" %> * <% end %>
       </td>
     </tr>
@@ -108,7 +108,7 @@
     <tr>
       <td>Well-lit at night?:</td>
       <td>
-        <%= BusStop.lightingNames[BusStop.lightingValues.index(session[:lighting][:value])] %>
+        <%= BusStop.LIGHTINGNAMES_CONST[BusStop.LIGHTINGVALUES_CONST.index(session[:lighting][:value])] %>
         <% if session[:lighting][:needs_verification] == "true" %> * <% end %>
       </td>
     </tr>

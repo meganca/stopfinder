@@ -8,9 +8,9 @@
     <td><%= f.label :Intersection, "Position (relative to intersection):" %></td>
     <td>
     <% if session[:intersection_pos][:needs_verification] == "true" %>
-      <%= f.select :Intersection, (BusStop.intersectionPosNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.intersectionPositionValues[i]]}, :selected => "unknown" %>
+      <%= f.select :Intersection, (BusStop.STOPPOSITIONNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.STOPPOSITIONVALUES_CONST[i]]}, :selected => "unknown" %>
     <% else %>
-      <%= f.select :Intersection, (BusStop.intersectionPosNames + ["unknown"]).map.with_index{ |x, i| [x, BusStop.intersectionPositionValues[i]]}, :selected => session[:intersection_pos][:value] %>
+      <%= f.select :Intersection, (BusStop.STOPPOSITIONNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.STOPPOSITIONVALUES_CONST[i]]}, :selected => session[:intersection_pos][:value] %>
     <% end %>
     </td>
   </tr>
@@ -18,19 +18,19 @@
     <td><%= f.label :RteSignType, "Sign Type:" %></td>
     <td>
       <% if session[:sign_type][:needs_verification] == "true" %>
-        <%= f.select :RteSignType, (BusStop.signTypeNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.signTypeValues[i]]}, :selected => "unknown" %>
+        <%= f.select :RteSignType, (BusStop.SIGNTYPENAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SIGNTYPEVALUES_CONST[i]]}, :selected => "unknown" %>
       <% else %>
-        <%= f.select :RteSignType, (BusStop.signTypeNames + ["unknown"]).map.with_index{ |x, i| [x, BusStop.signTypeValues[i]]}, :selected =>session[:sign_type][:value] %>
+        <%= f.select :RteSignType, (BusStop.SIGNTYPENAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SIGNTYPEVALUES_CONST[i]]}, :selected =>session[:sign_type][:value] %>
       <% end %>
     </td>
   </tr>
   <tr>
     <td><%= f.label :InsetFromCurb, "Sign position:" %></td>
     <td>
-      <% if session[:curb_inset][:needs_verification] == "true" %>
-        <%= f.select :InsetFromCurb, (BusStop.curbInsetNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.curbInsetValues[i]]}, :selected => "unknown" %>
+      <% if session[:sign_inset][:needs_verification] == "true" %>
+        <%= f.select :InsetFromCurb, (BusStop.SIGNINSETNAMES_CONST+ ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SIGNINSETVALUES_CONST[i]]}, :selected => "unknown" %>
       <% else %>
-        <%= f.select :InsetFromCurb, (BusStop.curbInsetNames + ["unknown"]).map.with_index{ |x, i| [x, BusStop.curbInsetValues[i]]}, :selected => session[:curb_inset][:value] %>
+        <%= f.select :InsetFromCurb, (BusStop.SIGNINSETNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SIGNINSETVALUES_CONST[i]]}, :selected => session[:sign_inset][:value] %>
       <% end %>
       </td>
     </tr>
@@ -38,9 +38,9 @@
       <td><%= f.label :SchedHolder, "Schedule holder:" %></td>
       <td>
         <% if session[:sched_holder][:needs_verification] == "true" %>
-          <%= f.select :SchedHolder, (BusStop.scheduleTypeNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.scheduleTypeValues[i]]}, :selected => "unknown" %>
+          <%= f.select :SchedHolder, (BusStop.SCHEDULENAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SCHEDULEVALUES_CONST[i]]}, :selected => "unknown" %>
         <% else %>
-          <%= f.select :SchedHolder, (BusStop.scheduleTypeNames + ["unknown"]).map.with_index{ |x, i| [x, BusStop.scheduleTypeValues[i]]}, :selected => session[:sched_holder][:value] %>
+          <%= f.select :SchedHolder, (BusStop.SCHEDULENAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SCHEDULEVALUES_CONST[i]]}, :selected => session[:sched_holder][:value] %>
       <% end %>
       </td>
     </tr>
@@ -48,9 +48,9 @@
       <td><%= f.label :Shelters, "Number of shelters:" %></td>
       <td>
         <% if session[:shelter_count][:needs_verification] == "true" %>
-          <%= f.select :Shelters, (BusStop.shelterCountNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.shelterCountValues[i]]}, :selected => "unknown" %>
+          <%= f.select :Shelters, (BusStop.SHELTERCOUNTNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SHELTERCOUNTVALUES_CONST[i]]}, :selected => "unknown" %>
         <% else %>
-          <%= f.select :Shelters, (BusStop.shelterCountNames + ["unknown"]).map.with_index{ |x, i| [x, BusStop.shelterCountValues[i]]}, :selected => session[:shelter_count][:value] %>
+          <%= f.select :Shelters, (BusStop.SHELTERCOUNTNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SHELTERCOUNTVALUES_CONST[i]]}, :selected => session[:shelter_count][:value] %>
       <% end %>
       </td>
     </tr>
@@ -59,9 +59,9 @@
         <td><%= f.label :ShelterOffset, "Position of shelter(s):" %></td>
         <td>
           <% if session[:shelter_offset][:needs_verification] == "true" %>
-            <%= f.select :ShelterOffset, (BusStop.shelterInsetNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.shelterInsetValues[i]]}, :selected => "unknown" %>
+            <%= f.select :ShelterOffset, (BusStop.SHELTERINSETNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SHELTERINSETVALUES_CONST[i]]}, :selected => "unknown" %>
           <% else %>
-            <%= f.select :ShelterOffset, (BusStop.shelterInsetNames + ["unknown"]).map.with_index{ |x, i| [x, BusStop.shelterInsetValues[i]]}, :selected => session[:shelter_offset][:value] %>
+            <%= f.select :ShelterOffset, (BusStop.SHELTERINSETNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SHELTERINSETVALUES_CONST[i]]}, :selected => session[:shelter_offset][:value] %>
         <% end %>
         </td>
       </tr>
@@ -71,9 +71,9 @@
         <td><%= f.label :ShelterOrientation, "Which way does the shelter open?:" %></td>
         <td>
           <% if session[:shelter_orientation][:needs_verification] == "true" %>
-            <%= f.select :ShelterOrientation, (BusStop.shelterOrientationNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.shelterOrientationValues[i]]}, :selected => "unknown" %>
+            <%= f.select :ShelterOrientation, (BusStop.SHELTERORIENTATIONNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SHELTERORIENTATIONVALUES_CONST[i]]}, :selected => "unknown" %>
           <% else %>
-            <%= f.select :ShelterOrientation, (BusStop.shelterOrientationNames + ["unknown"]).map.with_index{ |x, i| [x, BusStop.shelterOrientationValues[i]]}, :selected => session[:shelter_offset][:value] %>
+            <%= f.select :ShelterOrientation, (BusStop.SHELTERORIENTATIONNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SHELTERORIENTATIONVALUES_CONST[i]]}, :selected => session[:shelter_offset][:value] %>
         <% end %>
         </td>
       </tr>
@@ -82,9 +82,9 @@
       <td><%= f.label :BenchCount, "Number of benches:" %></td>
       <td>
         <% if session[:bench_count][:needs_verification] == "true" %>
-          <%= f.select :BenchCount, (BusStop.benchCountNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.benchCountValues[i]]}, :selected => "unknown" %>
+          <%= f.select :BenchCount, (BusStop.BENCHCOUNTNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.BENCHCOUNTVALUES_CONST[i]]}, :selected => "unknown" %>
         <% else %>
-          <%= f.select :BenchCount, (BusStop.benchCountNames + ["unknown"]).map.with_index{ |x, i| [x, BusStop.benchCountValues[i]]}, :selected => session[:bench_count][:value] %>
+          <%= f.select :BenchCount, (BusStop.BENCHCOUNTNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.BENCHCOUNTVALUES_CONST[i]]}, :selected => session[:bench_count][:value] %>
         <% end %>
       </td>
     </tr>
@@ -92,9 +92,9 @@
       <td><%= f.label :HasCan, "Is there a trash can?:" %></td>
       <td>
         <% if session[:can_count][:needs_verification] == "true" %>
-          <%= f.select :HasCan, (BusStop.trashCanNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.trashCanValues[i]]}, :selected => "unknown" %>
+          <%= f.select :HasCan, (BusStop.TRASHCANNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.TRASHCANVALUES_CONST[i]]}, :selected => "unknown" %>
         <% else %>
-          <%= f.select :HasCan, (BusStop.trashCanNames + ["unknown"]).map.with_index{ |x, i| [x, BusStop.trashCanValues[i]]}, :selected => session[:can_count][:value] %>
+          <%= f.select :HasCan, (BusStop.TRASHCANNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.TRASHCANVALUES_CONST[i]]}, :selected => session[:can_count][:value] %>
         <% end %>
       </td>
     </tr>
@@ -102,9 +102,9 @@
       <td><%= f.label :LightingConditions, "Is the stop well-lit at night?:" %></td>
       <td>
         <% if session[:lighting][:needs_verification] == "true" %>
-          <%= f.select :LightingConditions, (BusStop.lightingNames + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.lightingValues[i]]}, :selected => "unknown" %>
+          <%= f.select :LightingConditions, (BusStop.LIGHTINGNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.LIGHTINGVALUES_CONST[i]]}, :selected => "unknown" %>
         <% else %>
-          <%= f.select :LightingConditions, (BusStop.lightingNames + ["unknown"]).map.with_index{ |x, i| [x, BusStop.lightingValues[i]]}, :selected => session[:lighting][:value] %>
+          <%= f.select :LightingConditions, (BusStop.LIGHTINGNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.LIGHTINGVALUES_CONST[i]]}, :selected => session[:lighting][:value] %>
         <% end %>
       </td>
     </tr>
