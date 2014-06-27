@@ -135,7 +135,7 @@
   </tr>
   <tr> <td></td>
     <% if cookies[:user_email] %>
-      <td> <%= cookies[:user_email]%><br/> <%= link_to "Log out", "/logout/" %> </td>
+      <td> <%= link_to cookies[:user_email].to_s, "/reputation/profile" %><br/> <%= link_to "Log out", "/logout/" %> </td>
     <% else %>
       <td><%= link_to 'Log in with existing account', "/login/" %></td>
     <% end %>

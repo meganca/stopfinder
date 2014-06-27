@@ -12,6 +12,7 @@ StopfinderDev::Application.routes.draw do
   get '/edit/:id' => 'busstops#edit', :as => :duplicateentry
   get '/add/:id' => 'busstops#addnew'
   get '/closed/:id' => 'closures#report'
+  get '/reputation/profile' => 'reputation#profile'
   match 'about/entry/:id' => 'about#entry', :as => :dataentry
   match 'about/contact/:id' => 'about#contact', :as => :emailentry
   match '/testing' => 'about#testing'
