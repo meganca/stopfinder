@@ -9,6 +9,7 @@ StopfinderDev::Application.routes.draw do
   #resources :authorizations
   
   get '/update/:id' => 'busstops#update'
+  get '/edit/:id' => 'busstops#edit', :as => :duplicateentry
   get '/add/:id' => 'busstops#addnew'
   get '/closed/:id' => 'closures#report'
   match 'about/entry/:id' => 'about#entry', :as => :dataentry

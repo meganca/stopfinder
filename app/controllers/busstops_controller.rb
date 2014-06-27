@@ -1,4 +1,5 @@
 class BusstopsController < ApplicationController
+  respond_to :json
   StopData = Struct.new(:value, :needsValidation)
   @@votingMajority = 0.75
   @@validationMinimum = 3
@@ -12,9 +13,8 @@ class BusstopsController < ApplicationController
     session[:agency_id] = agencyid
     session[:stop_id] = stopid
     
-    if(params[:direction])
-      session[:bearing] = params[:direction]
-    end
+    #OBA API call; store any desired variables into session from this
+    queryOBA()
     
     showLog = BusStop.usageLogger
     showLog.info("Viewing stop #{agencyid}_#{stopid} at #{Time.now}")
@@ -114,6 +114,7 @@ class BusstopsController < ApplicationController
     submissionTotal = BusStop.count_by_sql("SELECT COUNT(*) FROM " + BusStop.table_name + " WHERE stopid = \"" + session[:stop_id] + "\" AND agencyid = \"" + session[:agency_id] + "\" AND " + fieldName + " != \"unknown\" AND userid != \"0\"")
     if (submissionTotal == 0)
       session[infoSymbol][:value] = "unknown"
+      session[infoSymbol][:needs_verification] = "false"
       return
     end
     
@@ -152,13 +153,18 @@ class BusstopsController < ApplicationController
     end
   end
   
-  def tallyNumericalValues(tallyHash, vote)
-    if (vote).blank? == false
-      if tallyHash.has_key?(vote)
-        tallyHash[vote] = tallyHash[vote] + 1
-      else
-        tallyHash[vote] = 1
-      end
+  def queryOBA
+    apiURI = "http://api.pugetsound.onebusaway.org/api/where/stop/" + params[:id] + ".json?key=TEST"
+    response = Net::HTTP.get_response(URI.parse(apiURI))
+    data = response.body
+    
+    begin
+      response = Net::HTTP.get_response(URI.parse(apiURI))
+      data = response.body
+      hash = JSON.parse(data)
+      session[:direction] = hash["data"]["entry"]["direction"]
+    rescue
+      retry
     end
   end
   
@@ -166,6 +172,23 @@ class BusstopsController < ApplicationController
     ids = (params[:id]).split(/[_&=]/)
     agencyid = ids[0]
     stopid = ids[1]
+    session[:update_type] = "new"
+    
+    if(cookies[:user_id])
+      @stopcheck = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = \"" + session[:stop_id] + "\" AND agencyid = \"" + session[:agency_id] + "\" AND userid = \"" + cookies[:user_id] + "\" ORDER BY DateCreated DESC")
+      
+      # Were there any submissions?
+      if(@stopcheck.any?)
+        date = DateTime.parse(@stopcheck[0].DateCreated.to_s)
+        limit = DateTime.now - 24.hours
+        
+        if(limit < date)
+          session[:update_type] = "edit"
+          loadPriorSubmission(@stopcheck[0])
+          redirect_to duplicateentry_url(:id => session[:agency_id] + "_" + session[:stop_id]) and return
+        end
+      end
+    end 
     
     showLog = BusStop.usageLogger
     showLog.info("Viewing update/verify form for #{agencyid}_#{stopid} at #{Time.now}")
@@ -179,6 +202,22 @@ class BusstopsController < ApplicationController
     end
     
     showLog.info("")
+  end
+  
+  def edit
+  end
+  
+  def loadPriorSubmission(submission)
+    session[:intersection_pos_edit] = submission.Intersection
+    session[:sign_type_edit] = submission.RteSignType
+    session[:sign_inset_edit] = submission.InsetFromCurb
+    session[:sched_holder_edit] = submission.SchedHolder
+    session[:shelter_count_edit] = submission.Shelters
+    session[:shelter_offset_edit] = submission.ShelterOffset
+    session[:shelter_orientation_edit] = submission.ShelterOrientation
+    session[:bench_count_edit] = submission.BenchCount
+    session[:can_count_edit] = submission.HasCan
+    session[:lighting_edit] = submission.LightingConditions
   end
   
   def checkVerifiedForSave(stop)    
@@ -224,6 +263,18 @@ class BusstopsController < ApplicationController
   end
 
   def create
+    # Do this check on ID too, not just logged in users!!
+    if(session[:update_type] == "edit" )
+      @stopcheck = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = \"" + session[:stop_id] + "\" AND agencyid = \"" + session[:agency_id] + "\" AND userid = \"" + cookies[:user_id] + "\" ORDER BY DateCreated DESC")
+      
+      # Not a bad place to add it to their tally, either
+      priorSubmission = BusStop.find_by_inputid(@stopcheck[0].InputId)
+      priorSubmission(params[:busstop])
+      checkVerifiedForSave(priorSubmission)
+      priorSubmission.save
+      redirect_to duplicateentry_url(:id => params[:busstop][:AgencyId] + "_" + params[:busstop][:StopId]) and return
+    end 
+    
     @busstop = BusStop.new(params[:busstop])
     checkVerifiedForSave(@busstop)
     @busstop.save

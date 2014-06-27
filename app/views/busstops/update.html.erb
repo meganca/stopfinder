@@ -1,7 +1,9 @@
 <table>
 <tr><td colspan=2>
-<h2><%= session[:stop_name] %></h2>
-
+<h2><%= session[:stop_name] %>,</h2><h3><%= session[:direction] %> bound</h3>
+<% if session[:update_type] == "edit" %>
+  <p> You've submitted information for this stop within the last 24 hours. You may edit your prior submission: </p>
+<% end %>
 </td></tr>
 <%= form_for :busstop, url: busstops_path do |f| %>
   <tr>
@@ -51,7 +53,7 @@
           <%= f.select :Shelters, (BusStop.SHELTERCOUNTNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SHELTERCOUNTVALUES_CONST[i]]}, :selected => "unknown" %>
         <% else %>
           <%= f.select :Shelters, (BusStop.SHELTERCOUNTNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SHELTERCOUNTVALUES_CONST[i]]}, :selected => session[:shelter_count][:value] %>
-      <% end %>
+        <% end %>
       </td>
     </tr>
     <% if (session[:shelter_count][:value] != 0) && (session[:shelter_count][:value] != "unknown") && (session[:shelter_count][:needs_verification] == "false") %>
@@ -73,7 +75,7 @@
           <% if session[:shelter_orientation][:needs_verification] == "true" %>
             <%= f.select :ShelterOrientation, (BusStop.SHELTERORIENTATIONNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SHELTERORIENTATIONVALUES_CONST[i]]}, :selected => "unknown" %>
           <% else %>
-            <%= f.select :ShelterOrientation, (BusStop.SHELTERORIENTATIONNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SHELTERORIENTATIONVALUES_CONST[i]]}, :selected => session[:shelter_offset][:value] %>
+            <%= f.select :ShelterOrientation, (BusStop.SHELTERORIENTATIONNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SHELTERORIENTATIONVALUES_CONST[i]]}, :selected => session[:shelter_orientation][:value] %>
         <% end %>
         </td>
       </tr>
@@ -118,7 +120,7 @@
   <% end %>
   
   <%= f.hidden_field :UserIP, :value => request.remote_ip %>
-  <%= f.hidden_field :UserId, :value => cookies[:user_email] %>
+  <%= f.hidden_field :UserId, :value => cookies[:user_id] %>
   <%= f.hidden_field :StopId, :value => session[:stop_id] %>
   <%= f.hidden_field :AgencyId, :value => session[:agency_id] %>
   <%= f.hidden_field :DateCreated, :value => Time.now %>

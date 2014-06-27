@@ -56,11 +56,6 @@ class AboutController < ApplicationController
   def missing
   end
   
-  def checkDevice() 
-    if browser.safari?
-      @browser = :safari
-    else
-      @browser = :other
-    end
+  def repeat
   end
 end

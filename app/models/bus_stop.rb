@@ -3,7 +3,7 @@ class BusStop < ActiveRecord::Base
   attr_accessible :UserId, :AgencyId, :StopId, :BearingCode, :Intersection, 
     :RteSignType, :SchedHolder, :Shelters, :BenchCount, :HasCan, :AddedFrom,
     :StopComment, :UserIP, :DateCreated, :UserAtStop, :InsetFromCurb, :OBAId,
-    :ShelterOffset, :ShelterOrientation, :LightingConditions
+    :ShelterOffset, :ShelterOrientation, :LightingConditions, :InputId
 
   # Log some custom information
   def self.usageLogger
