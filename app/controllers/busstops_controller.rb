@@ -111,6 +111,8 @@ class BusstopsController < ApplicationController
   end
 
   def queryCalculate(fieldName, infoSymbol)
+    session[infoSymbol] = {}
+    
     submissionTotal = BusStop.count_by_sql("SELECT COUNT(*) FROM " + BusStop.table_name + " WHERE stopid = \"" + session[:stop_id] + "\" AND agencyid = \"" + session[:agency_id] + "\" AND " + fieldName + " != \"unknown\" AND userid != \"0\"")
     if (submissionTotal == 0)
       session[infoSymbol][:value] = "unknown"
