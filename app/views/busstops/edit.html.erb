@@ -37,7 +37,6 @@
     <tr>
       <td><%= f.label :SchedHolder, "Schedule holder:" %></td>
       <td>
-        <%= session[:sched_holder_edit] %>
         <% if session[:sched_holder][:needs_verification] == "true" %>
           <%= f.select :SchedHolder, (BusStop.SCHEDULENAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SCHEDULEVALUES_CONST[i]]}, :selected => session[:sched_holder_edit] %>
         <% else %>
