@@ -170,6 +170,21 @@ class BusstopsController < ApplicationController
     end
   end
   
+  def rateLimitRedirect(checkArray)
+    # Were there any submissions?
+    if(checkArray.any?)
+      date = DateTime.parse(checkArray[0].DateCreated.to_s)
+      limit = DateTime.now - 24.hours
+      
+      if(limit < date)
+        session[:update_type] = "edit"
+        session[:submission_id] = checkArray[0].InputId
+        loadPriorSubmission(checkArray[0])
+        redirect_to duplicateentry_url(:id => session[:agency_id] + "_" + session[:stop_id]) and return
+      end
+    end
+  end
+  
   def update
     ids = (params[:id]).split(/[_&=]/)
     agencyid = ids[0]
@@ -177,19 +192,15 @@ class BusstopsController < ApplicationController
     session[:update_type] = "new"
     
     if(cookies[:user_id])
-      @stopcheck = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = \"" + session[:stop_id] + "\" AND agencyid = \"" + session[:agency_id] + "\" AND userid = \"" + cookies[:user_id] + "\" ORDER BY DateCreated DESC")
-      
-      # Were there any submissions?
-      if(@stopcheck.any?)
-        date = DateTime.parse(@stopcheck[0].DateCreated.to_s)
-        limit = DateTime.now - 24.hours
-        
-        if(limit < date)
-          #session[:update_type] = "edit"
-          #loadPriorSubmission(@stopcheck[0])
-          #redirect_to duplicateentry_url(:id => session[:agency_id] + "_" + session[:stop_id]) and return
-        end
-      end
+      stopcheck = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = \"" + session[:stop_id] + "\" AND agencyid = \"" + session[:agency_id] + "\" AND userid = \"" + cookies[:user_id] + "\" ORDER BY DateCreated DESC")
+      rateLimitRedirect(stopcheck)
+    end  
+    
+    # Have to check for device id; might be side effects for multiple users on one device, but
+    # atm that is an outlier and should not be counted.
+    if(session[:device_id])
+      stopcheck = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = \"" + session[:stop_id] + "\" AND agencyid = \"" + session[:agency_id] + "\" AND OBAId = \"" + session[:device_id] + "\" ORDER BY DateCreated DESC")
+      rateLimitRedirect(stopcheck)
     end 
     
     showLog = BusStop.usageLogger
@@ -264,17 +275,28 @@ class BusstopsController < ApplicationController
     end
   end
 
+  def updatePrior(record)
+    record.LastEdited = DateTime.now
+    record.Intersection = params[:busstop][:Intersection]
+    record.RteSignType = params[:busstop][:RteSignType]
+    record.InsetFromCurb = params[:busstop][:InsetFromCurb]
+    record.SchedHolder = params[:busstop][:SchedHolder]
+    record.Shelters = params[:busstop][:Shelters]
+    record.ShelterOffset = params[:busstop][:ShelterOffset]
+    record.ShelterOrientation = params[:busstop][:ShelterOrientation]
+    record.BenchCount = params[:busstop][:BenchCount]
+    record.HasCan = params[:busstop][:HasCan]
+    record.LightingConditions = params[:busstop][:LightingConditions]
+  end
+  
   def create
-    # TODO: Do this check on ID too, not just logged in users!!
     if(session[:update_type] == "edit" )
-      @stopcheck = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = \"" + session[:stop_id] + "\" AND agencyid = \"" + session[:agency_id] + "\" AND userid = \"" + cookies[:user_id] + "\" ORDER BY DateCreated DESC")
-      
       # Not a bad place to add it to their tally, either
-      priorSubmission = BusStop.find_by_inputid(@stopcheck[0].InputId)
-      priorSubmission(params[:busstop])
+      priorSubmission = BusStop.find(session[:submission_id])
+      updatePrior(priorSubmission)
       checkVerifiedForSave(priorSubmission)
       priorSubmission.save
-      redirect_to duplicateentry_url(:id => params[:busstop][:AgencyId] + "_" + params[:busstop][:StopId]) and return
+      redirect_to dataentry_url(:id => params[:busstop][:AgencyId] + "_" + params[:busstop][:StopId]) and return
     end 
     
     @busstop = BusStop.new(params[:busstop])

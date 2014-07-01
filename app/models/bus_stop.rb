@@ -1,9 +1,9 @@
 class BusStop < ActiveRecord::Base
   self.table_name = "busstops"
-  attr_accessible :UserId, :AgencyId, :StopId, :BearingCode, :Intersection, 
+  attr_accessible :UserId, :AgencyId, :StopId, :BearingCode, :Intersection,
     :RteSignType, :SchedHolder, :Shelters, :BenchCount, :HasCan, :AddedFrom,
     :StopComment, :UserIP, :DateCreated, :UserAtStop, :InsetFromCurb, :OBAId,
-    :ShelterOffset, :ShelterOrientation, :LightingConditions, :InputId
+    :ShelterOffset, :ShelterOrientation, :LightingConditions, :InputId, :LastEdited
 
   # Log some custom information
   def self.usageLogger
@@ -67,7 +67,7 @@ class BusStop < ActiveRecord::Base
   end
   
   def self.SCHEDULENAMES_CONST
-    @@SCHEDULENAMES_CONST = ["yes", "no"] 
+    @@SCHEDULENAMES_CONST = ["no", "yes"] 
   end
   
   # Position of the pole relative to the curb
