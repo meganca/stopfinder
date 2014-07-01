@@ -1,7 +1,13 @@
+<tr>
+<td><h4 style = "padding-left:1em;"><%= image_tag 'oba_logo.png', :width => "50" %></td>
+</tr>
+
 <% if cookies[:user_id] %>
-  Logged in as <%= cookies[:user_email]%> <br />
+  Welcome, <%= cookies[:user_email]%>!<br />
+
 <% else %>
-  Not logged in.
+  Not logged in. <%= link_to 'Log in here', "/login/" %><br />
 <% end %>
 
-<%= link_to 'Return to information view.', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>
+<br />
+<%= link_to 'Return to information view.', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %> </h4>
