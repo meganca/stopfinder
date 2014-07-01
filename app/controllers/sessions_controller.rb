@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
         end
       end
    
-      cookies[:user_id] = currentUser.id
+      cookies[:user_id] = {value => currentUser.id, :expires => 1.month.from_now}
       #render :text => "Welcome #{cookies[:user_email]}!"
       redirect_to dataview_url(:id => session[:agency_id]+"_"+session[:stop_id])
     end

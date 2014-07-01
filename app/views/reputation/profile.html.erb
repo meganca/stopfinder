@@ -1,3 +1,7 @@
-Logged in as <%= cookies[:user_email]%> <br />
+<% if cookies[:user_id] %>
+  Logged in as <%= cookies[:user_email]%> <br />
+<% else %>
+  Not logged in.
+<% end %>
 
 <%= link_to 'Return to information view.', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>

@@ -185,9 +185,9 @@ class BusstopsController < ApplicationController
         limit = DateTime.now - 24.hours
         
         if(limit < date)
-          session[:update_type] = "edit"
-          loadPriorSubmission(@stopcheck[0])
-          redirect_to duplicateentry_url(:id => session[:agency_id] + "_" + session[:stop_id]) and return
+          #session[:update_type] = "edit"
+          #loadPriorSubmission(@stopcheck[0])
+          #redirect_to duplicateentry_url(:id => session[:agency_id] + "_" + session[:stop_id]) and return
         end
       end
     end 
@@ -265,7 +265,7 @@ class BusstopsController < ApplicationController
   end
 
   def create
-    # Do this check on ID too, not just logged in users!!
+    # TODO: Do this check on ID too, not just logged in users!!
     if(session[:update_type] == "edit" )
       @stopcheck = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = \"" + session[:stop_id] + "\" AND agencyid = \"" + session[:agency_id] + "\" AND userid = \"" + cookies[:user_id] + "\" ORDER BY DateCreated DESC")
       
@@ -285,6 +285,22 @@ class BusstopsController < ApplicationController
     @log.input_id = @busstop.InputId
     Log.updateAttributes(@log, session)
     @log.save
+    
+    # If we haven't returned by now this is a new info submit, not an edit
+    if(cookies[:user_id])
+      uniqueStops = BusStop.count("StopId", :distinct => true, :conditions => "userid = \"" + cookies[:user_id].to_s + "\"" )
+      user = User.find_by_id(cookies[:user_id])
+      
+      if(user.stops == nil) # First recorded submission!
+        user.points = 10
+        user.stops = uniqueStops
+        user.save
+      elsif (user.stops < uniqueStops) # This is a new stop
+        user.points = user.points + 10
+        user.stops = uniqueStops
+        user.save
+      end
+    end
     
     showLog = BusStop.usageLogger
     showLog.info("Submitted stop info for #{params[:busstop][:AgencyId]}_#{params[:busstop][:StopId]} at #{Time.now}")
