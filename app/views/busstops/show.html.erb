@@ -37,7 +37,7 @@
       <td>Sign type:</td>
       <td>
         <%= BusStop.SIGNTYPENAMES_CONST[BusStop.SIGNTYPEVALUES_CONST.index(session[:sign_type][:value])] %>
-        <% if session[:sign_type][:needs_verification] == "true" %> * <% end %>
+        <% if session[:sign_type][:needs_verification] == "true" %> * <% end %> 
       </td>
     </tr>
   <% end %>
