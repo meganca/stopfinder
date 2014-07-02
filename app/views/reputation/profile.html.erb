@@ -1,7 +1,40 @@
-<% if cookies[:user_id] %>
-  Logged in as <%= cookies[:user_email]%> <br />
-<% else %>
-  Not logged in.
-<% end %>
+<head>
+<style>
+.container {
+	font-size: 1.3em;
+	margin: 0 auto;
+}
 
-<%= link_to 'Return to information view.', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>
+.badges {
+	margin: 0 auto;
+	width: 90%;
+}
+</style>
+</head>
+
+
+<div class="container">
+<%= image_tag 'oba_logo.png', :width => "50" %>
+
+<% if cookies[:user_id] %>
+  Welcome,
+  <script> 
+  var email_string = '<%= cookies[:user_email]%>';
+  console.log(email_string);
+  email_string = email_string.substring(0, email_string.indexOf("@"));
+  document.write(email_string);
+  </script>!
+  <br/><br/>
+  Points: 
+  <br/><br/>
+  Badges:
+  <br/>
+<div class="badges">
+<%= image_tag 'oba_logo.png', :width => "50" %> <%= image_tag 'oba_logo.png', :width => "50" %> <%= image_tag 'oba_logo.png', :width => "50" %>
+</div>
+<% else %>
+  Not logged in. <%= link_to 'Log in here', "/login/" %><br />
+<% end %>
+<br />
+<%= link_to 'Return to information view', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>
+</div>

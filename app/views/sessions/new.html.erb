@@ -1,13 +1,13 @@
 <table>
 <tr><td colspan=2 height=20></td></tr>
 <% if cookies[:user_email] %>
- <td colspan=2>Already logged in as <%= cookies[:user_email] %></td>
+ <td colspan=2><h3> Already logged in as <%= cookies[:user_email] %></h3></td>
 <% else %>
-  <td align=right><%= image_tag 'fb_icon_325x325.png', :width => "20" %></td>
-  <td><%= link_to 'Log in with Facebook', "/auth/facebook" %></td></tr>
+  <td align=right><%= image_tag 'fb_icon_325x325.png', :alt => "facebook", :width => "40" %></td>
+  <td><h3><%= link_to 'Log in with Facebook', "/auth/facebook" %></h3></td></tr>
 	<tr>
-  <td align=right><%= image_tag 'Google-G-Logo.png', :width => "20" %></td>
-  <td><%= link_to 'Log in with Google', "/auth/google_oauth2" %></td>
+  <td align=right><%= image_tag 'Google-G-Logo.png', :alt => "google", :width => "40" %></td>
+  <td><h3><%= link_to 'Log in with Google', "/auth/google_oauth2" %></h3></td>
 <% end %>
 </tr>
 </table>
