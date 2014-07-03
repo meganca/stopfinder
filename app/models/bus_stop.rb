@@ -136,9 +136,9 @@ class BusStop < ActiveRecord::Base
   end
   
   module ShelterOrientation
-    NEAR = 0
-    FAR = 1
-    UNKNOWN = 2
+    STREET = 0
+    AWAY = 1
+    PERPENDICULAR = 2
     COUNT = 3
   end
   

@@ -166,7 +166,8 @@ class BusstopsController < ApplicationController
       hash = JSON.parse(data)
       session[:direction] = hash["data"]["entry"]["direction"]
     rescue
-      retry
+      #retry
+      session[:direction] = "E"
     end
   end
   

@@ -1,4 +1,4 @@
-<table cellpadding = "10">
+<table cellpadding = "10" style="max-width: 500px;">
 <tr> <td></td>
     <% if cookies[:user_email] %>
       <td> <%= link_to cookies[:user_email].to_s, "/reputation/profile" %><br/> <%= link_to "Log out", "/logout/" %> </td>
@@ -8,6 +8,7 @@
 <tr><td colspan=2>
 <h2><%= session[:stop_name] %>,</h2><h3><%= session[:direction] %> bound</h3>
 </td></tr>
+
   <% if session[:closure][:status] == "closed" %> 
     <% if session[:closure][:enddate] == "none" %>
       <tr>
@@ -36,15 +37,42 @@
           <%= session[:intersection_pos][:value] %>,
           <% if session[:intersection_pos][:needs_verification] == "true" %> * <% end %> 
         <% end %>
-        <%= session[:intersection_distance] %> feet from intersection
+        <%= session[:intersection_distance] %> feet from intersection <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about position", :data => { :helptype => "intersection" } %> 
+    
     </td>
   </tr>
+  <tr id="intersection" style="background-color: #eee; display:none;">
+    <td colspan=2 id="intersection help text">
+      <%= Help.INTERSECTIONHELP_CONST[BusStop.STOPPOSITIONVALUES_CONST.index(session[:intersection_pos][:value])] %><br />
+      <a href="#" data-help-image="intersection image" id="intersection image link">(display example image)</a>
+    </td>
+  </tr>
+  <tr id="intersection image" style="background-color: #eee; display:none;">
+    <td colspan=2 id="sign type image content">
+        <%= image_tag Help.INTERSECTIONIMG_CONST[BusStop.STOPPOSITIONVALUES_CONST.index(session[:intersection_pos][:value])], :width => "100%", :alt=> Help.INTERSECTIONIMGALT_CONST[BusStop.STOPPOSITIONVALUES_CONST.index(session[:intersection_pos][:value])]%> 
+    </td>
+  </tr>  
   <% if session[:sign_type][:value] != "unknown" %>
     <tr>
       <td>Sign type:</td>
       <td>
         <%= BusStop.SIGNTYPENAMES_CONST[BusStop.SIGNTYPEVALUES_CONST.index(session[:sign_type][:value])] %>
-        <% if session[:sign_type][:needs_verification] == "true" %> * <% end %> 
+        <% if session[:sign_type][:needs_verification] == "true" %> * <% end %>
+        
+        <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about sign type", :data => { :helptype => "sign type" } %> 
+      </td>
+    </tr>
+    <tr id="sign type" style="background-color: #eee; display:none;">
+      <td colspan=2 id="sign type help text">
+        <%= Help.SIGNTYPEHELP_CONST[BusStop.SIGNTYPEVALUES_CONST.index(session[:sign_type][:value])] %><br />
+        <a href="#" data-help-image="sign type image" id="sign type image link">(display example image)</a>
+      </td>
+    </tr>
+    <tr id="sign type image" style="background-color: #eee; display:none;">
+      <td colspan=2 id="sign type image content">
+        <% if BusStop.SIGNTYPEVALUES_CONST.index(session[:sign_type][:value]) <= Help.SIGNTYPEIMG_CONST.length %>
+          <%= image_tag Help.SIGNTYPEIMG_CONST[BusStop.SIGNTYPEVALUES_CONST.index(session[:sign_type][:value])], :width => "100%", :alt=> Help.SIGNTYPEIMGALT_CONST[BusStop.SIGNTYPEVALUES_CONST.index(session[:sign_type][:value])]%> 
+        <% end %>
       </td>
     </tr>
   <% end %>
@@ -54,6 +82,12 @@
       <td>
         <%= BusStop.SIGNINSETNAMES_CONST[BusStop.SIGNINSETVALUES_CONST.index(session[:sign_inset][:value])] %> 
         <% if session[:sign_inset][:needs_verification] == "true" %> * <% end %>
+        <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about sign position", :data => { :helptype => "sign position" } %> 
+      </td>
+    </tr>
+    <tr id="sign position" style="background-color: #eee; display:none;">
+      <td colspan=2 id="sign position help text">
+        <%= Help.SIGNPOSITIONHELP_CONST[BusStop.SIGNINSETVALUES_CONST.index(session[:sign_inset][:value])] %><br />
       </td>
     </tr>
   <% end %>
@@ -63,6 +97,12 @@
       <td>
         <%= session[:sched_holder][:value] %>
         <% if session[:sched_holder][:needs_verification] == "true" %> * <% end %>
+        <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about schedule holders", :data => { :helptype => "schedule" } %> 
+      </td>
+    </tr>
+    <tr id="schedule" style="background-color: #eee; display:none;">
+      <td colspan=2 id="schedule help text">
+        <%= Help.SCHEDULEHELP_CONST[BusStop.SCHEDULEVALUES_CONST.index(session[:sched_holder][:value])] %><br />
       </td>
     </tr>
   <% end %>
@@ -81,6 +121,12 @@
       <td>
         <%= BusStop.SHELTERINSETNAMES_CONST[BusStop.SHELTERINSETVALUES_CONST.index(session[:shelter_offset][:value])] %>
         <% if session[:shelter_offset][:needs_verification] == "true" %> * <% end %>
+        <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about shelter position", :data => { :helptype => "shelter position" } %> 
+      </td>
+    </tr>
+    <tr id="shelter position" style="background-color: #eee; display:none;">
+      <td colspan=2 id="shelter position help text">
+        <%= Help.SHELTERPOSITIONHELP_CONST[BusStop.SHELTERINSETVALUES_CONST.index(session[:shelter_offset][:value])] %><br />
       </td>
     </tr>
   <% end %>
@@ -90,6 +136,12 @@
       <td>
         <%= BusStop.SHELTERORIENTATIONNAMES_CONST[BusStop.SHELTERORIENTATIONVALUES_CONST.index(session[:shelter_orientation][:value])] %>
         <% if session[:shelter_orientation][:needs_verification] == "true" %> * <% end %>
+        <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about shelter orientation", :data => { :helptype => "shelter orientation" } %> 
+      </td>
+    </tr>
+    <tr id="shelter orientation" style="background-color: #eee; display:none;">
+      <td colspan=2 id="shelter orientation help text">
+        <%= Help.SHELTERORIENTATIONHELP_CONST[BusStop.SHELTERORIENTATIONVALUES_CONST.index(session[:shelter_orientation][:value])] %><br />
       </td>
     </tr>
   <% end %>
@@ -141,4 +193,3 @@
     <td><%= link_to 'What do these fields mean?', "/about/fields" %></td>
   </tr>
 </table>
-
