@@ -10,12 +10,22 @@
     <td><%= f.label :Intersection, "Position (relative to intersection):" %></td>
     <td>
     <% if session[:intersection_pos][:needs_verification] == "true" %>
-      <%= f.select :Intersection, (BusStop.STOPPOSITIONNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.STOPPOSITIONVALUES_CONST[i]]}, :selected => "unknown" %>
+      <%= f.select :Intersection, (BusStop.STOPPOSITIONNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.STOPPOSITIONVALUES_CONST[i]]}, :selected => "unknown", :data => { :selecthelptype => "intersection" } %>
     <% else %>
-      <%= f.select :Intersection, (BusStop.STOPPOSITIONNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.STOPPOSITIONVALUES_CONST[i]]}, :selected => session[:intersection_pos][:value] %>
+      <%= f.select :Intersection, (BusStop.STOPPOSITIONNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.STOPPOSITIONVALUES_CONST[i]]}, :selected => session[:intersection_pos][:value], 'data-selecthelptype' => 'shelter orientation'  %>
     <% end %>
     </td>
   </tr>
+  <tr id="Intersection help" style="background-color: #eee;">
+    <td colspan=2 id="Intersection help text">
+      <a href="#" data-help-image="Intersection image" id="intersection image link">(display example image)</a>
+    </td>
+  </tr>
+  <tr id="Intersection image" style="background-color: #eee; display:none;">
+    <td colspan=2 id="Intersection image content">
+        <%= image_tag Help.INTERSECTIONIMG_CONST[BusStop.STOPPOSITIONVALUES_CONST.index(session[:intersection_pos][:value])], :width => "100%", :alt=> Help.INTERSECTIONIMGALT_CONST[BusStop.STOPPOSITIONVALUES_CONST.index(session[:intersection_pos][:value])]%> 
+    </td>
+  </tr>  
   <tr>
     <td><%= f.label :RteSignType, "Sign Type:" %></td>
     <td>
