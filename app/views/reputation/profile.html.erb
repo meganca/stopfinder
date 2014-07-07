@@ -14,18 +14,21 @@
 
 
 <div class="container">
-<%= image_tag 'oba_logo.png', :width => "50" %>
+<%= image_tag 'oba_logo.png', :alt => "profile picture", :width => "50" %>
 
 <% if cookies[:user_id] %>
   Welcome,
   <script> 
   var email_string = '<%= cookies[:user_email]%>';
-  console.log(email_string);
   email_string = email_string.substring(0, email_string.indexOf("@"));
   document.write(email_string);
   </script>!
   <br/><br/>
-  Points: 
+
+  Points: <% if User.find_by_id(cookies[:user_id]).points == nil %>0
+  		  <% else %>
+  			<%= User.find_by_id(cookies[:user_id]).points %>
+  		 <% end %>
   <br/><br/>
   Badges:
   <br/>
