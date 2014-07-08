@@ -313,14 +313,21 @@ class BusstopsController < ApplicationController
     if(cookies[:user_id])
       uniqueStops = BusStop.count("StopId", :distinct => true, :conditions => "userid = \"" + cookies[:user_id].to_s + "\"" )
       user = User.find_by_id(cookies[:user_id])
-      
       if(user.stops == nil) # First recorded submission!
         user.points = 10
         user.stops = uniqueStops
+        user.title = "01"
         user.save
       elsif (user.stops < uniqueStops) # This is a new stop
         user.points = user.points + 10
         user.stops = uniqueStops
+        if (uniqueStops > 4)
+        	user.title = "02"
+        elsif (uniqueStops > 14)
+        	user.title = "03"
+        elsif (uniqueStops > 29)
+        	user.title = "04"
+		end
         user.save
       end
     end
