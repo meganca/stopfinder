@@ -1,7 +1,7 @@
 showHelp = (fieldToShow) ->
   helpRow = document.getElementById(fieldToShow)
   helpImg = document.getElementById(fieldToShow + " image content")
-     
+  
   if helpRow.style.display == "none"
     helpRow.style.display = "table-row"
   else
@@ -9,7 +9,7 @@ showHelp = (fieldToShow) ->
     helpImg = document.getElementById(fieldToShow+" image")
     helpImg.style.display = "none"
     document.getElementById(fieldToShow + " image link").innerHTML ="(display example image)"
-    
+  
   if helpImg.src
     if !(/\/assets\/.+/.test(helpImg.src))
       document.getElementById(fieldToShow + " image link").innerHTML =""
