@@ -10,7 +10,7 @@
     <td><%= f.label :Intersection, "Position (relative to intersection):" %></td>
     <td>
     <% if session[:intersection_pos][:needs_verification] == "true" %>
-      <%= f.select :Intersection, options_for_select(BusStop.STOPPOSITIONNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.STOPPOSITIONVALUES_CONST[i], {'data-help_text'=> Help.INTERSECTIONHELP_CONST[i], 'data-help_img'=> Help.INTERSECTIONIMG_CONST[i], 'data-help_img_alt'=> Help.INTERSECTIONIMGALT_CONST[i]}]}, :selected => "unknown" %>
+      <%= f.select :Intersection, (BusStop.STOPPOSITIONNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.STOPPOSITIONVALUES_CONST[i], {'data-help_text'=> Help.INTERSECTIONHELP_CONST[i], 'data-help_img'=> Help.INTERSECTIONIMG_CONST[i], 'data-help_img_alt'=> Help.INTERSECTIONIMGALT_CONST[i]}]}, :selected => "unknown" %>
     <% else %>
       <%= f.select :Intersection, (BusStop.STOPPOSITIONNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.STOPPOSITIONVALUES_CONST[i], {'data-help_text'=> Help.INTERSECTIONHELP_CONST[i], 'data-help_img'=> Help.INTERSECTIONIMG_CONST[i], 'data-help_img_alt'=> Help.INTERSECTIONIMGALT_CONST[i]}]}, :selected => session[:intersection_pos][:value] %>
     <% end %>
@@ -19,8 +19,12 @@
   </tr>
   <tr id="Intersection" style="background-color: #eee; display:none;">
     <td colspan=2 id="Intersection help text">
-      <span id="Intersection help content"><%= Help.INTERSECTIONHELP_CONST[BusStop.STOPPOSITIONVALUES_CONST.index(session[:intersection_pos][:value])] %></span><br />
-      <a href="#" data-help-image="Intersection image" id="Intersection image link">(display example image)</a>
+      <% if session[:intersection_pos][:needs_verification] == "true" %>
+         <span id="Intersection help content">This field needs more user votes to be confirmed.</span>
+      <% else %>
+        <span id="Intersection help content"><%= Help.INTERSECTIONHELP_CONST[BusStop.STOPPOSITIONVALUES_CONST.index(session[:intersection_pos][:value])] %></span><br />
+        <a href="#" data-help-image="Intersection image" id="Intersection image link">(display example image)</a>
+      <% end %>
     </td>
   </tr>
   <tr id="Intersection image" style="background-color: #eee; display:none;">
@@ -41,8 +45,12 @@
   </tr>
   <tr id="RteSignType" style="background-color: #eee; display:none;">
     <td colspan=2 id="RteSignType help text">
-      <span id="RteSignType help content"><%= Help.SIGNTYPEHELP_CONST[BusStop.SIGNTYPEVALUES_CONST.index(session[:sign_type][:value])] %></span><br />
-      <a href="#" data-help-image="RteSignType image" id="RteSignType image link">(display example image)</a>
+      <% if session[:sign_type][:needs_verification] == "true" %>
+         <span id="RteSignType help content">This field needs more user votes to be confirmed.</span>
+      <% else %>
+        <span id="RteSignType help content"><%= Help.SIGNTYPEHELP_CONST[BusStop.SIGNTYPEVALUES_CONST.index(session[:sign_type][:value])] %></span><br />
+        <a href="#" data-help-image="RteSignType image" id="RteSignType image link">(display example image)</a>
+      <% end %>
     </td>
   </tr>
   <tr id="RteSignType image" style="background-color: #eee; display:none;">
@@ -83,7 +91,7 @@
   </tr>
   <tr id="SchedHolder" style="background-color: #eee; display:none;">
     <td colspan=2 id="SchedHolder help text">
-      <% if session[:sign_inset][:needs_verification] == "true" %>
+      <% if session[:sched_holder][:needs_verification] == "true" %>
          <span id="SchedHolder help content">This field needs more user votes to be confirmed.</span>
       <% else %>
         <span id="SchedHolder help content"><%= Help.SCHEDULEHELP_CONST[BusStop.SCHEDULEVALUES_CONST.index(session[:sched_holder][:value])] %></span>

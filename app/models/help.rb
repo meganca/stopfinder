@@ -23,7 +23,7 @@ class Help
   end
   
   def self.INTERSECTIONIMG_CONST
-    @@INTERSECTIONIMG_CONST = ['buspositions_simplified.png', 'buspositions_simplified.png', 'buspositions2.png', 'buspositions2.png', 'none.png']
+    @@INTERSECTIONIMG_CONST = ['buspositions_simplified.png', 'buspositions_simplified.png', 'buspositions2.png', 'buspositions2.png']
   end
   
   def self.INTERSECTIONIMGALT_CONST
