@@ -306,7 +306,7 @@ class BusstopsController < ApplicationController
     
     @log = Log.new
     @log.input_id = @busstop.InputId
-    Log.updateAttributes(@log, session)
+    Log.updateAttributes(@log, session, cookies[:user_id])
     @log.save
     
     # If we haven't returned by now this is a new info submit, not an edit
