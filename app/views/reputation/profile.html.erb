@@ -3,6 +3,7 @@
 .container {
 	font-size: 1.3em;
 	margin: 0 auto;
+	padding-top:1em;
 }
 
 .badges {
@@ -14,7 +15,14 @@
 
 
 <div class="container">
-<%= image_tag 'oba_logo.png', :alt => "profile picture", :width => "50" %>
+<% if User.find_by_id(cookies[:user_id]).title == nil %><%= image_tag 'oba_logo.png', :alt => "profile picture", :width => "50" %>
+<% elsif User.find_by_id(cookies[:user_id]).title == "01" %>
+	<%= image_tag 'Contributor.png', :alt=> "Contributor icon", :width=>"50"%>
+<% elsif User.find_by_id(cookies[:user_id]).title == "02" %>
+	<%= image_tag 'SavvyTraveler.png', :alt=> "Savvy Traveler icon", :width=>"50"%>
+<% elsif User.find_by_id(cookies[:user_id]).title == "03" %>
+	<%= image_tag 'Contributor.png', :alt=> "Contributor icon", :width=>"50"%>
+<% end %>
 
 <% if cookies[:user_id] %>
   Welcome,

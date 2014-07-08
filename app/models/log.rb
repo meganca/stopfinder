@@ -1,7 +1,7 @@
 class Log < ActiveRecord::Base
   self.table_name = "logs"
   
-  def self.updateAttributes(update, sessionhash)
+  def self.updateAttributes(update, sessionhash, userid)
         
     if sessionhash[:intersection_pos][:needs_verification] == "true"
       update.position = "needs verification"
@@ -15,10 +15,10 @@ class Log < ActiveRecord::Base
       update.sign_type = sessionhash[:sign_type][:value]
     end
       
-    if sessionhash[:curb_inset][:needs_verification] == "true" 
+    if sessionhash[:sign_inset][:needs_verification] == "true" 
       update.sign_position = "needs verification"
     else
-      update.sign_position = sessionhash[:curb_inset][:value]
+      update.sign_position = sessionhash[:sign_inset][:value]
     end
       
     if sessionhash[:sched_holder][:needs_verification] == "true" 
@@ -63,7 +63,7 @@ class Log < ActiveRecord::Base
       update.lighting = sessionhash[:lighting][:value]
     end
     
-    if sessionhash[:user_email]
+    if userid
       update.comment = sessionhash[:comment]
     else
       update.comment = "not logged in"
