@@ -1,4 +1,4 @@
-<table>
+<table style="max-width: 500px;">
 <tr><td colspan=2>
 <h2><%= session[:stop_name] %>,</h2><h3><%= session[:direction] %> bound</h3>
 <% if session[:update_type] == "edit" %>
@@ -10,83 +10,137 @@
     <td><%= f.label :Intersection, "Position (relative to intersection):" %></td>
     <td>
     <% if session[:intersection_pos][:needs_verification] == "true" %>
-      <%= f.select :Intersection, (BusStop.STOPPOSITIONNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.STOPPOSITIONVALUES_CONST[i]]}, :selected => "unknown", :data => { :selecthelptype => "intersection" } %>
+      <%= f.select :Intersection, options_for_select(BusStop.STOPPOSITIONNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.STOPPOSITIONVALUES_CONST[i], {'data-help_text'=> Help.INTERSECTIONHELP_CONST[i], 'data-help_img'=> Help.INTERSECTIONIMG_CONST[i], 'data-help_img_alt'=> Help.INTERSECTIONIMGALT_CONST[i]}]}, :selected => "unknown" %>
     <% else %>
-      <%= f.select :Intersection, (BusStop.STOPPOSITIONNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.STOPPOSITIONVALUES_CONST[i]]}, :selected => session[:intersection_pos][:value], 'data-selecthelptype' => 'shelter orientation'  %>
+      <%= f.select :Intersection, (BusStop.STOPPOSITIONNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.STOPPOSITIONVALUES_CONST[i], {'data-help_text'=> Help.INTERSECTIONHELP_CONST[i], 'data-help_img'=> Help.INTERSECTIONIMG_CONST[i], 'data-help_img_alt'=> Help.INTERSECTIONIMGALT_CONST[i]}]}, :selected => session[:intersection_pos][:value] %>
     <% end %>
+    <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about position", :data => { :helptype => "Intersection" } %> 
     </td>
   </tr>
-  <tr id="Intersection help" style="background-color: #eee;">
+  <tr id="Intersection" style="background-color: #eee; display:none;">
     <td colspan=2 id="Intersection help text">
-      <a href="#" data-help-image="Intersection image" id="intersection image link">(display example image)</a>
+      <span id="Intersection help content"><%= Help.INTERSECTIONHELP_CONST[BusStop.STOPPOSITIONVALUES_CONST.index(session[:intersection_pos][:value])] %></span><br />
+      <a href="#" data-help-image="Intersection image" id="Intersection image link">(display example image)</a>
     </td>
   </tr>
   <tr id="Intersection image" style="background-color: #eee; display:none;">
-    <td colspan=2 id="Intersection image content">
-        <%= image_tag Help.INTERSECTIONIMG_CONST[BusStop.STOPPOSITIONVALUES_CONST.index(session[:intersection_pos][:value])], :width => "100%", :alt=> Help.INTERSECTIONIMGALT_CONST[BusStop.STOPPOSITIONVALUES_CONST.index(session[:intersection_pos][:value])]%> 
+    <td colspan=2>
+        <%= image_tag Help.INTERSECTIONIMG_CONST[BusStop.STOPPOSITIONVALUES_CONST.index(session[:intersection_pos][:value])], :id => "Intersection image content", :width => "100%", :alt=> Help.INTERSECTIONIMGALT_CONST[BusStop.STOPPOSITIONVALUES_CONST.index(session[:intersection_pos][:value])]%> 
     </td>
   </tr>  
   <tr>
     <td><%= f.label :RteSignType, "Sign Type:" %></td>
     <td>
       <% if session[:sign_type][:needs_verification] == "true" %>
-        <%= f.select :RteSignType, (BusStop.SIGNTYPENAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SIGNTYPEVALUES_CONST[i]]}, :selected => "unknown" %>
+        <%= f.select :RteSignType, (BusStop.SIGNTYPENAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SIGNTYPEVALUES_CONST[i], {'data-help_text'=> Help.SIGNTYPEHELP_CONST[i], 'data-help_img'=> Help.SIGNTYPEIMG_CONST[i], 'data-help_img_alt'=> Help.SIGNTYPEIMGALT_CONST[i]}]}, :selected => "unknown" %>
       <% else %>
-        <%= f.select :RteSignType, (BusStop.SIGNTYPENAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SIGNTYPEVALUES_CONST[i]]}, :selected =>session[:sign_type][:value] %>
+        <%= f.select :RteSignType, (BusStop.SIGNTYPENAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SIGNTYPEVALUES_CONST[i], {'data-help_text'=> Help.SIGNTYPEHELP_CONST[i], 'data-help_img'=> Help.SIGNTYPEIMG_CONST[i], 'data-help_img_alt'=> Help.SIGNTYPEIMGALT_CONST[i]}]}, :selected =>session[:sign_type][:value] %>
       <% end %>
+      <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about position", :data => { :helptype => "RteSignType" } %> 
+    </td>
+  </tr>
+  <tr id="RteSignType" style="background-color: #eee; display:none;">
+    <td colspan=2 id="RteSignType help text">
+      <span id="RteSignType help content"><%= Help.SIGNTYPEHELP_CONST[BusStop.SIGNTYPEVALUES_CONST.index(session[:sign_type][:value])] %></span><br />
+      <a href="#" data-help-image="RteSignType image" id="RteSignType image link">(display example image)</a>
+    </td>
+  </tr>
+  <tr id="RteSignType image" style="background-color: #eee; display:none;">
+    <td colspan=2>
+        <%= image_tag Help.SIGNTYPEIMG_CONST[BusStop.SIGNTYPEVALUES_CONST.index(session[:sign_type][:value])], :id => "RteSignType image content", :width => "100%", :alt=> Help.SIGNTYPEIMGALT_CONST[BusStop.SIGNTYPEVALUES_CONST.index(session[:sign_type][:value])]%> 
     </td>
   </tr>
   <tr>
     <td><%= f.label :InsetFromCurb, "Sign position:" %></td>
     <td>
       <% if session[:sign_inset][:needs_verification] == "true" %>
-        <%= f.select :InsetFromCurb, (BusStop.SIGNINSETNAMES_CONST+ ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SIGNINSETVALUES_CONST[i]]}, :selected => "unknown" %>
+        <%= f.select :InsetFromCurb, (BusStop.SIGNINSETNAMES_CONST+ ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SIGNINSETVALUES_CONST[i], {'data-help_text'=> Help.SIGNPOSITIONHELP_CONST[i]}]}, :selected => "unknown" %>
       <% else %>
-        <%= f.select :InsetFromCurb, (BusStop.SIGNINSETNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SIGNINSETVALUES_CONST[i]]}, :selected => session[:sign_inset][:value] %>
+        <%= f.select :InsetFromCurb, (BusStop.SIGNINSETNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SIGNINSETVALUES_CONST[i], {'data-help_text'=> Help.SIGNPOSITIONHELP_CONST[i]}]}, :selected => session[:sign_inset][:value] %>
       <% end %>
-      </td>
-    </tr>
-    <tr>
-      <td><%= f.label :SchedHolder, "Schedule holder:" %></td>
-      <td>
-        <% if session[:sched_holder][:needs_verification] == "true" %>
-          <%= f.select :SchedHolder, (BusStop.SCHEDULENAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SCHEDULEVALUES_CONST[i]]}, :selected => "unknown" %>
-        <% else %>
-          <%= f.select :SchedHolder, (BusStop.SCHEDULENAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SCHEDULEVALUES_CONST[i]]}, :selected => session[:sched_holder][:value] %>
+      <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about position", :data => { :helptype => "InsetFromCurb" } %> 
+    </td>
+  </tr>
+  <tr id="InsetFromCurb" style="background-color: #eee; display:none;">
+    <td colspan=2 id="InsetFromCurb help text">
+      <% if session[:sign_inset][:needs_verification] == "true" %>
+         <span id="InsetFromCurb help content">This field needs more user votes to be confirmed.</span>
+      <% else %>
+        <span id="InsetFromCurb help content"><%= Help.SIGNPOSITIONHELP_CONST[BusStop.SIGNINSETVALUES_CONST.index(session[:sign_inset][:value])] %></span>
       <% end %>
-      </td>
-    </tr>
-    <tr>
-      <td><%= f.label :Shelters, "Number of shelters:" %></td>
-      <td>
-        <% if session[:shelter_count][:needs_verification] == "true" %>
-          <%= f.select :Shelters, (BusStop.SHELTERCOUNTNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SHELTERCOUNTVALUES_CONST[i]]}, :selected => "unknown" %>
-        <% else %>
-          <%= f.select :Shelters, (BusStop.SHELTERCOUNTNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SHELTERCOUNTVALUES_CONST[i]]}, :selected => session[:shelter_count][:value] %>
-        <% end %>
-      </td>
-    </tr>
-    <% if (session[:shelter_count][:value] != 0) && (session[:shelter_count][:value] != "unknown") && (session[:shelter_count][:needs_verification] == "false") %>
+    </td>
+  </tr>
+  <tr>
+    <td><%= f.label :SchedHolder, "Schedule holder:" %></td>
+    <td>
+      <% if session[:sched_holder][:needs_verification] == "true" %>
+        <%= f.select :SchedHolder, (BusStop.SCHEDULENAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SCHEDULEVALUES_CONST[i], {'data-help_text'=> Help.SCHEDULEHELP_CONST[i]}]}, :selected => "unknown" %>
+      <% else %>
+        <%= f.select :SchedHolder, (BusStop.SCHEDULENAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SCHEDULEVALUES_CONST[i], {'data-help_text'=> Help.SCHEDULEHELP_CONST[i]}]}, :selected => session[:sched_holder][:value] %>
+      <% end %>
+      <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about position", :data => { :helptype => "SchedHolder" } %>
+    </td>
+  </tr>
+  <tr id="SchedHolder" style="background-color: #eee; display:none;">
+    <td colspan=2 id="SchedHolder help text">
+      <% if session[:sign_inset][:needs_verification] == "true" %>
+         <span id="SchedHolder help content">This field needs more user votes to be confirmed.</span>
+      <% else %>
+        <span id="SchedHolder help content"><%= Help.SCHEDULEHELP_CONST[BusStop.SCHEDULEVALUES_CONST.index(session[:sched_holder][:value])] %></span>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td><%= f.label :Shelters, "Number of shelters:" %></td>
+    <td>
+      <% if session[:shelter_count][:needs_verification] == "true" %>
+        <%= f.select :Shelters, (BusStop.SHELTERCOUNTNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SHELTERCOUNTVALUES_CONST[i]]}, :selected => "unknown" %>
+      <% else %>
+        <%= f.select :Shelters, (BusStop.SHELTERCOUNTNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SHELTERCOUNTVALUES_CONST[i]]}, :selected => session[:shelter_count][:value] %>
+      <% end %>
+    </td>
+  </tr>
+    <% if (session[:shelter_count][:value] != "0") && (session[:shelter_count][:value] != "unknown") && (session[:shelter_count][:needs_verification] == "false") %>
       <tr>
         <td><%= f.label :ShelterOffset, "Position of shelter(s):" %></td>
         <td>
           <% if session[:shelter_offset][:needs_verification] == "true" %>
-            <%= f.select :ShelterOffset, (BusStop.SHELTERINSETNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SHELTERINSETVALUES_CONST[i]]}, :selected => "unknown" %>
+            <%= f.select :ShelterOffset, (BusStop.SHELTERINSETNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SHELTERINSETVALUES_CONST[i], {'data-help_text'=> Help.SHELTERPOSITIONHELP_CONST[i]}]}, :selected => "unknown" %>
           <% else %>
-            <%= f.select :ShelterOffset, (BusStop.SHELTERINSETNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SHELTERINSETVALUES_CONST[i]]}, :selected => session[:shelter_offset][:value] %>
+            <%= f.select :ShelterOffset, (BusStop.SHELTERINSETNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SHELTERINSETVALUES_CONST[i], {'data-help_text'=> Help.SHELTERPOSITIONHELP_CONST[i]}]}, :selected => session[:shelter_offset][:value] %>
         <% end %>
+        <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about position", :data => { :helptype => "ShelterOffset" } %>
+        </td>
+      </tr>
+      <tr id="ShelterOffset" style="background-color: #eee; display:none;">
+        <td colspan=2 id="ShelterOffset help text">
+          <% if session[:shelter_offset][:needs_verification] == "true" %>
+             <span id="ShelterOffset help content">This field needs more user votes to be confirmed.</span>
+          <% else %>
+            <span id="ShelterOffset help content"><%= Help.SHELTERPOSITIONHELP_CONST[BusStop.SHELTERINSETVALUES_CONST.index(session[:shelter_offset][:value])] %></span>
+          <% end %>
         </td>
       </tr>
     <% end %>
-    <% if (session[:shelter_count][:value] != 0) && (session[:shelter_count][:value] != "unknown") && (session[:shelter_count][:needs_verification] == "false") %>
+    <% if (session[:shelter_count][:value] != "0") && (session[:shelter_count][:value] != "unknown") && (session[:shelter_count][:needs_verification] == "false") %>
       <tr>
         <td><%= f.label :ShelterOrientation, "Which way does the shelter open?:" %></td>
         <td>
           <% if session[:shelter_orientation][:needs_verification] == "true" %>
-            <%= f.select :ShelterOrientation, (BusStop.SHELTERORIENTATIONNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SHELTERORIENTATIONVALUES_CONST[i]]}, :selected => "unknown" %>
+            <%= f.select :ShelterOrientation, (BusStop.SHELTERORIENTATIONNAMES_CONST + ["needs verification"]).map.with_index{ |x, i| [x, BusStop.SHELTERORIENTATIONVALUES_CONST[i], {'data-help_text'=> Help.SHELTERORIENTATIONHELP_CONST[i]}]}, :selected => "unknown" %>
           <% else %>
-            <%= f.select :ShelterOrientation, (BusStop.SHELTERORIENTATIONNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SHELTERORIENTATIONVALUES_CONST[i]]}, :selected => session[:shelter_orientation][:value] %>
+            <%= f.select :ShelterOrientation, (BusStop.SHELTERORIENTATIONNAMES_CONST + ["unknown"]).map.with_index{ |x, i| [x, BusStop.SHELTERORIENTATIONVALUES_CONST[i], {'data-help_text'=> Help.SHELTERORIENTATIONHELP_CONST[i]}]}, :selected => session[:shelter_orientation][:value] %>
         <% end %>
+        <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about position", :data => { :helptype => "ShelterOrientation" } %>
+        </td>
+      </tr>
+      <tr id="ShelterOrientation" style="background-color: #eee; display:none;">
+        <td colspan=2 id="ShelterOrientation help text">
+          <% if session[:shelter_orientation][:needs_verification] == "true" %>
+             <span id="ShelterOrientation help content">This field needs more user votes to be confirmed.</span>
+          <% else %>
+            <span id="ShelterOrientation help content"><%= Help.SHELTERORIENTATIONHELP_CONST[BusStop.SHELTERORIENTATIONVALUES_CONST.index(session[:shelter_orientation][:value])] %></span>
+          <% end %>
         </td>
       </tr>
     <% end %>

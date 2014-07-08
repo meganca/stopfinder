@@ -1,11 +1,4 @@
-class Help  
-  signposition_text = {"near side": "The bus stop is located on the first street named, before the intersection of the second, in the direction the bus travels."}
-  samplevar = "WHY"
-  @CONSTANT = 42
-  hello: -> alert 'hello world'
-  test: alertval -> alert signposition_text[alertval]
-  
-show = (fieldToShow) ->
+showHelp = (fieldToShow) ->
   helpRow = document.getElementById(fieldToShow)
   if helpRow.style.display == "none"
     helpRow.style.display = "table-row"
@@ -24,18 +17,19 @@ showImage = (fieldToShow) ->
     imageRow.style.display = "none"
     document.getElementById(fieldToShow + " link").innerHTML ="(display example image)"
       
-updateShow = (fieldToShow, selection) ->
-  helpCell = document.getElementById(fieldToShow + " help text")
-  helper = new Help
-  helper.test("near side")
-  alert helper.signposition_text["near side"]
+updateHelpToShow = (fieldToShow, text, imgpath, imgalt) ->
+  helpText = document.getElementById(fieldToShow + " help content")
+  helpText.innerHTML = text
+  helpImg = document.getElementById(fieldToShow + " image content")
+  helpImg.src = "/assets/"+imgpath
+  helpImg.alt = imgalt
   
 $ ->
   $("img[data-helptype]").click (e) ->
     e.preventDefault()
  
     fieldId = $(this).data("helptype")
-    show(fieldId)
+    showHelp(fieldId)
     
 $ ->
   $("select[data-selecthelp]").change (e) ->
@@ -48,9 +42,12 @@ $ ->
   $("select[name^='busstop[']").change (e) ->
     e.preventDefault()
     
-    helpField = $(this).attr('name').split(/[\[\]]/)
-    selection = $(this).val()
-    updateShow(helpField[1], selection)
+    field = $(this).attr('name').split(/[\[\]]/)
+    text = $(this).find(':selected').data("help_text")
+    img = $(this).find(':selected').data("help_img")
+    imgalt = $(this).find(':selected').data("help_img_alt")
+    
+    updateHelpToShow(field[1], text, img, imgalt)
     
 $ ->
   $("a[data-help-image]").click (e) ->
