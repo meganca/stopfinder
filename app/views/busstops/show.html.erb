@@ -1,7 +1,9 @@
 <table cellpadding = "10" style="max-width: 500px;">
 <tr> <td></td>
     <% if cookies[:user_email] %>
-      <td> <%= link_to cookies[:user_email].to_s, "/reputation/profile" %><br/> <%= link_to "Log out", "/logout/" %> </td>
+      <td> Logged in as <%= cookies[:user_email].to_s %><br/> 
+      <%= link_to "View Profile", "/reputation/profile" %><br/>
+      <%= link_to "Log out", "/logout/" %> </td>
     <% else %>
       <td><a href = "/login/">Log in with <%= image_tag 'fb_icon_325x325.png', :alt=>"Facebook", :width=> '20'%> or <%= image_tag 'Google-G-Logo.png', :alt=>"Google", :width=> '20'%></a></td>
     <% end %>
