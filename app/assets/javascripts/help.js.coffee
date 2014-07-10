@@ -4,52 +4,44 @@ showHelp = (fieldToShow) ->
   
   if helpRow.style.display == "none"
     helpRow.style.display = "table-row"
+    
+    if (/\/assets\/.+/.test(helpImg.src))
+      document.getElementById(fieldToShow + " image link").innerHTML ="(display example image)"  
+      
   else
     helpRow.style.display = "none"
-    helpImg = document.getElementById(fieldToShow+" image")
-    helpImg.style.display = "none"
-    document.getElementById(fieldToShow + " image link").innerHTML ="(display example image)"
-  
-  if helpImg.src
-    if !(/\/assets\/.+/.test(helpImg.src))
-      document.getElementById(fieldToShow + " image link").innerHTML =""
-    else
-      document.getElementById(fieldToShow + " image link").innerHTML ="(display example image)"
+    document.getElementById(fieldToShow + " image").style.display = "none"
+    document.getElementById(fieldToShow + " image link").innerHTML = ""
   
 showImage = (fieldToShow) ->
-  imageRow = document.getElementById(fieldToShow)
+  imageRow = document.getElementById(fieldToShow + " image")
   helpImg = document.getElementById(fieldToShow + " image content")
-  link = document.getElementById(fieldToShow + " link")
+  link = document.getElementById(fieldToShow + " image link")
   
   if imageRow.style.display == "none"
     imageRow.style.display = "table-row"
-    document.getElementById(fieldToShow + " link").innerHTML ="hide image"
+    link.innerHTML = "hide image"
     helpImg.style.display = "block"
   else
     imageRow.style.display = "none"
-    document.getElementById(fieldToShow + " link").innerHTML ="(display example image)"
-    
-  if helpImg
-    if !(/\/assets\/.+/.test(helpImg.src))
-      helpImg.style.display = "none"
-      document.getElementById(fieldToShow + " image link").innerHTML =""
+    link.innerHTML = "(display example image)"
+    helpImg.style.display = "none"
       
 updateHelpToShow = (fieldToShow, text, imgpath, imgalt) ->
   helpText = document.getElementById(fieldToShow + " help content")
   helpText.innerHTML = text
+  
   helpImg = document.getElementById(fieldToShow + " image content")
-  if !!imgpath
-    helpImg.src = "/assets/"+imgpath
-    helpImg.alt = imgalt
-    helpImg.style.display = "block"
-
-    if document.getElementById(fieldToShow + " image link").innerHTML == "hide image"
-      document.getElementById(fieldToShow + " image link").innerHTML = "hide image"
-    else
-      document.getElementById(fieldToShow + " image link").innerHTML = "(display example image)"
+  link = document.getElementById(fieldToShow + " image link")
+  helpImg.src = "/assets/" + imgpath
+  helpImg.alt = imgalt
+  
+  if imgpath != ""
+    if link.innerHTML == ""
+      link.innerHTML = "(display example image)"
   else
-    helpImg.style.display = "none"
-    document.getElementById(fieldToShow + " image link").innerHTML =""
+    document.getElementById(fieldToShow + " image").style.display = "none"
+    link.innerHTML = ""
   
 $ ->
   $("img[data-helptype]").click (e) ->
@@ -57,13 +49,6 @@ $ ->
  
     fieldId = $(this).data("helptype")
     showHelp(fieldId)
-    
-$ ->
-  $("select[data-selecthelp]").change (e) ->
-    e.preventDefault()
-  
-    selected = $(this).val()
-    alert selected
     
  $ ->
   $("select[name^='busstop[']").change (e) ->

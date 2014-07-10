@@ -10,8 +10,77 @@ class BusStop < ActiveRecord::Base
     @@usageLogger ||= Logger.new("#{Rails.root}/log/siteusage.log")
   end  
   
+  class FieldInfo
+    def initialize(displayString, active)
+      @displayString = displayString
+      @active = active
+    end
+    
+    def displayString
+      @displayString
+    end
+    
+    def active
+      @active
+    end
+  end
+  
+  def self.getHash(name)
+    case name.downcase
+    when "sign type"
+      return Signs
+    when "stop position"
+      return StopPositions
+    when "schedule type"
+      return ScheduleTypes
+    when "sign inset"
+      return SignInsetTypes
+    when "bench count"
+      return BenchCountCategories
+    when "shelter count"
+      return ShelterCountCategories
+    when "shelter inset"
+      return ShelterInsetTypes
+    when "shelter orientation"
+      return ShelterOrientationTypes
+    when "trashcan"
+      return TrashcanTypes
+    when "lighting"
+      return LightingTypes
+    else
+      return {}
+    end
+  end
+  
+  # Returns the list of all internal values for a given field, both active and inactive
+  # Params:
+  # +field+:: string name of the field, eg SignType
+  def self.getFieldValues(field)
+    lookupHash = self.getHash(field)
+    lookupHash.keys
+  end
+  
+  # Returns the display string corresponding to the given internal representation
+  # Params:
+  # +field+:: string name of the field, eg SignType
+  # +value+:: string internal value of the field, eg 'no sign'
+  def self.getFieldName(field, value)
+    lookupHash = self.getHash(field)
+    lookupHash[value].displayString
+  end
+  
+  # Returns a nested array of [internalval, display] pairs for all active options in a field
+  # Params:
+  # +field+:: string name of the field, eg SignType
+  def self.getActivePairs(field)
+    lookupHash = self.getHash(field)
+    activePairs = []
+    lookupHash.keys.each{ |x| activePairs.push([x, lookupHash[x].displayString]) if lookupHash[x].active == 1}
+    activePairs
+  end
+  
   # List all options for sign types here. This order will be used for both the 
-  # internal representation (values) and the externally displayed strings (names)
+  # internal representation (values) and the externally displayed strings (names)  
   module SignType
     SINGLE = 0
     NONMETRO = 1
@@ -19,23 +88,22 @@ class BusStop < ActiveRecord::Base
     DOUBLE = 3
     TRIANGLEKIOSK = 4
     NONE = 5
-    UNKNOWN = 6
+    UNKNOWN = 6 # Leave unknown in this position; add before it
     COUNT = 7
   end
   
-  # Values: internal representation (in db); these may be added to _BUT SHOULD NOT BE REMOVED_
-  def self.SIGNTYPEVALUES_CONST
-    @@SIGNTYPEVALUES_CONST = ["single pole sign", "non bus pole", "wide base", "two pole sign", "triangle", 
-      "no sign", "unknown"]
-  end
-
-  # Names: string representation as these appear in the app (these can be changed arbitrarily, just preserve the
-  # order as per the SignType pseudo-enum
-  def self.SIGNTYPENAMES_CONST
-    @@SIGNTYPENAMES_CONST = ["small sign on own pole", "sign on non bus stop pole", "large sign on one pole",
-    "large sign on two poles", "triangular kiosk", "no sign"]
-  end
+  # DO NOT EVER CHANGE THE KEYS. If a field is retired, move it to "0"
+  # indicating it is inactive. The second property, displayStrings, can be freely changed.
+  Signs = { "single pole sign" => FieldInfo.new("small single sign", 1), 
+    "non bus pole" => FieldInfo.new("sign on non-bus pole", 1), 
+    "wide base" => FieldInfo.new("large single sign", 1), 
+    "two pole sign" => FieldInfo.new("large two pole sign", 1), 
+    "triangle" => FieldInfo.new("triangular kiosk", 1), 
+    "no sign" => FieldInfo.new("no sign", 1),   
+    "unknown" => FieldInfo.new("no data", 1) }
   
+  Signs.default =  FieldInfo.new("no data", 0)
+ 
   module StopPosition
     FAR = 0
     NEAR = 1
@@ -44,16 +112,12 @@ class BusStop < ActiveRecord::Base
     UNKNOWN = 4
     COUNT = 5
   end
-       
-  # Internal representation; don't change, only add/remove     
-  def self.STOPPOSITIONVALUES_CONST
-    @@STOPPOSITIONVALUES_CONST = ["far side", "near side", "at cross street", "opposite to", "unknown"] 
-  end
   
-  # Display strings, change freely
-  def self.STOPPOSITIONNAMES_CONST
-    @@STOPPOSITIONNAMES_CONST = ["far side", "near side", "at cross street", "opposite to"] 
-  end
+  StopPositions = { "far side" => FieldInfo.new("far side", 1), 
+    "near side" => FieldInfo.new("near side", 1), 
+    "at cross street" => FieldInfo.new("at cross street", 0), 
+    "opposite to" => FieldInfo.new("opposite to", 1), 
+    "unknown" => FieldInfo.new("no data", 1) }
       
   module ScheduleType
     NO = 0
@@ -62,13 +126,9 @@ class BusStop < ActiveRecord::Base
     COUNT = 3
   end
   
-  def self.SCHEDULEVALUES_CONST
-    @@SCHEDULEVALUES_CONST = ["no", "yes", "unknown"]
-  end
-  
-  def self.SCHEDULENAMES_CONST
-    @@SCHEDULENAMES_CONST = ["no", "yes"] 
-  end
+  ScheduleTypes = { "no" => FieldInfo.new("no", 1), 
+    "yes" => FieldInfo.new("yes", 1), 
+    "unknown" => FieldInfo.new("no data", 1) }
   
   # Position of the pole relative to the curb
   module SignInset
@@ -78,14 +138,10 @@ class BusStop < ActiveRecord::Base
     COUNT = 3
   end
   
-  def self.SIGNINSETVALUES_CONST
-    @@SIGNINSETVALUES_CONST = ["<1", ">1", "unknown"] 
-  end
+  SignInsetTypes = { "<1" => FieldInfo.new("close to curb (< 1 foot)", 1), 
+    ">1" => FieldInfo.new("far from curb (> 1 foot)", 1), 
+    "unknown" => FieldInfo.new("no data", 1) }
   
-  def self.SIGNINSETNAMES_CONST
-    @@SIGNINSETNAMES_CONST = ["close to curb (< 1 foot)", "far from curb (> 1 foot)"] 
-  end
-
   module BenchCount
     NONE = 0
     ONE = 1
@@ -95,14 +151,12 @@ class BusStop < ActiveRecord::Base
     COUNT = 5
   end
       
-  def self.BENCHCOUNTVALUES_CONST
-    @@BENCHCOUNTVALUES_CONST = ["0", "1", "2", "3+", "unknown"]
-  end
-      
-  def self.BENCHCOUNTNAMES_CONST
-    @@BENCHCOUNTNAMES_CONST = ["0", "1", "2", "3 or more"] 
-  end
-  
+  BenchCountCategories = { "0" => FieldInfo.new("0", 1), 
+    "1" => FieldInfo.new("1", 1), 
+    "2" => FieldInfo.new("2", 1), 
+    "3+" => FieldInfo.new("3 or more", 1), 
+    "unknown" => FieldInfo.new("no data", 1) }
+
   module ShelterCount
     NONE = 0
     ONE = 1
@@ -111,14 +165,12 @@ class BusStop < ActiveRecord::Base
     UNKNOWN = 4
     COUNT = 5
   end
-      
-  def self.SHELTERCOUNTVALUES_CONST
-    @@SHELTERCOUNTVALUES_CONST = ["0", "1", "2", "3+", "unknown"] 
-  end
-      
-  def self.SHELTERCOUNTNAMES_CONST
-    @@SHELTERCOUNTNAMES_CONST = ["0", "1", "2", "3 or more"] 
-  end
+  
+  ShelterCountCategories = { "0" => FieldInfo.new("0", 1), 
+    "1" => FieldInfo.new("1", 1), 
+    "2" => FieldInfo.new("2", 1), 
+    "3+" => FieldInfo.new("3 or more", 1), 
+    "unknown" => FieldInfo.new("no data", 1) }
   
   module ShelterInset
     NEAR = 0
@@ -127,13 +179,9 @@ class BusStop < ActiveRecord::Base
     COUNT = 3
   end
   
-  def self.SHELTERINSETVALUES_CONST
-    @@SHELTERINSETVALUES_CONST = ["<1", ">1", "unknown"] 
-  end
-     
-  def self.SHELTERINSETNAMES_CONST
-    @@SHELTERINSETNAMES_CONST = ["against curb", "across sidewalk from curb"] 
-  end
+  ShelterInsetTypes = { "<1" => FieldInfo.new("against curb", 1), 
+    ">1" => FieldInfo.new("across sidewalk from curb", 1), 
+    "unknown" => FieldInfo.new("no data", 1) }
   
   module ShelterOrientation
     STREET = 0
@@ -142,14 +190,11 @@ class BusStop < ActiveRecord::Base
     COUNT = 3
   end
   
-  def self.SHELTERORIENTATIONVALUES_CONST
-    @@SHELTERORIENTATIONVALUES_CONST = ["streetfacing", "away from street", "sideways", "unknown"] 
-  end
-      
-  def self.SHELTERORIENTATIONNAMES_CONST
-    @@SHELTERORIENTATIONNAMES_CONST = ["towards the street", "away from the street", "perpendicular to street"] 
-  end
-  
+  ShelterOrientationTypes = { "streetfacing" => FieldInfo.new("towards the street", 1), 
+    "away from street" => FieldInfo.new("away from the street", 1), 
+    "sideways" => FieldInfo.new("perpendicular to street", 1),
+    "unknown" => FieldInfo.new("no data", 1) }
+
   module TrashcanType
     NO = 0
     YES = 1
@@ -157,13 +202,9 @@ class BusStop < ActiveRecord::Base
     COUNT = 3
   end
   
-  def self.TRASHCANVALUES_CONST
-    @@TRASHCANVALUES_CONST = ["yes", "no", "unknown"] 
-  end
-  
-  def self.TRASHCANNAMES_CONST
-    @@TRASHCANNAMES_CONST = ["yes", "no"] 
-  end
+  TrashcanTypes = { "no" => FieldInfo.new("no", 1), 
+    "yes" => FieldInfo.new("yes", 1), 
+    "unknown" => FieldInfo.new("no data", 1) }
   
   module LightingType
     NONE = 0
@@ -173,35 +214,34 @@ class BusStop < ActiveRecord::Base
     UNKNOWN = 4
     COUNT = 5
   end
-    
-  def self.LIGHTINGVALUES_CONST
-    @@LIGHTINGVALUES_CONST = ["0", "1", "2", "3", "unknown"]
-  end
-      
-  def self.LIGHTINGNAMES_CONST
-    @@LIGHTINGNAMES_CONST = ["no lighting", "poorly lit", "some lighting", "well-lit"] 
-  end
+  
+  LightingTypes = { "0" => FieldInfo.new("no lighting", 1), 
+    "1" => FieldInfo.new("poorly lit", 1), 
+    "2" => FieldInfo.new("some lighting", 1), 
+    "3" => FieldInfo.new("well-lit", 1), 
+    "unknown" => FieldInfo.new("no data", 1) }
          
   # The following methods are used to convert legacy db categories into the categories 
   # currently in use in the app (mostly Metro > our categories, though this could later be 
   # used to map our own categories that we discontinue into new categories)
          
   def self.stopPosition(pos)
+    positionValues = self.getFieldValues("stop position")
     if pos.to_s == ''
-      return self.STOPPOSITIONVALUES_CONST[StopPosition::UNKNOWN]
+      return positionValues[StopPosition::UNKNOWN]
     end
-    if (self.STOPPOSITIONVALUES_CONST.include?(pos.downcase))
+    if (positionValues.include?(pos.downcase))
       return pos.downcase
     else
       case pos.downcase
         when "at cross st"
-          return self.STOPPOSITIONVALUES_CONST[StopPosition::ATCROSS]
+          return positionValues[StopPosition::ATCROSS]
         when "far middle"
-          return self.STOPPOSITIONVALUES_CONST[StopPosition::FAR]
+          return positionValues[StopPosition::FAR]
         when "near middle"
-          return self.STOPPOSITIONVALUES_CONST[StopPosition::NEAR]
+          return positionValues[StopPosition::NEAR]
         else
-          return self.STOPPOSITIONVALUES_CONST[StopPosition::UNKNOWN]
+          return positionValues[StopPosition::UNKNOWN]
       end
     end
   end
@@ -215,133 +255,142 @@ class BusStop < ActiveRecord::Base
   end
     
   def self.signType(signCode)
-    if (self.SIGNTYPEVALUES_CONST.include?(signCode))
+    signValues = self.getFieldValues("sign type")
+    if (signValues.include?(signCode))
       return signCode
     else
       case signCode
       when "A1 <=2 rts"
-        return self.SIGNTYPEVALUES_CONST[SignType::SINGLE]
+        return signValues[SignType::SINGLE]
       when "C1H <=48 rts"
-        return self.SIGNTYPEVALUES_CONST[SignType::DOUBLE]
+        return signValues[SignType::DOUBLE]
       when "B1H <=14 rts"
-        return self.SIGNTYPEVALUES_CONST[SignType::DOUBLE]
+        return signValues[SignType::DOUBLE]
       when "Single"
-        return self.SIGNTYPEVALUES_CONST[SignType::SINGLE]
+        return signValues[SignType::SINGLE]
       when "A2 <=6 rts"
-        return self.SIGNTYPEVALUES_CONST[SignType::SINGLE]
+        return signValues[SignType::SINGLE]
       when "Ksk Hyb Rts"
-        return self.SIGNTYPEVALUES_CONST[SignType::TRIANGLEKIOSK]
+        return signValues[SignType::TRIANGLEKIOSK]
       when "C2 <=32 rts"
-        return self.SIGNTYPEVALUES_CONST[SignType::SINGLELARGE]
+        return signValues[SignType::SINGLELARGE]
       when "B1 <=12 rts"
-        return self.SIGNTYPEVALUES_CONST[SignType::SINGLE]
+        return signValues[SignType::SINGLE]
       when "C2H <=32 rts"
-        return self.SIGNTYPEVALUES_CONST[SignType::SINGLELARGE]
+        return signValues[SignType::SINGLELARGE]
       when "C1H <=48 rts"
-        return self.SIGNTYPEVALUES_CONST[SignType::DOUBLE]
+        return signValues[SignType::DOUBLE]
       when "Tunnel Rts"
-        return self.SIGNTYPEVALUES_CONST[SignType::SINGLE]
+        return signValues[SignType::SINGLE]
       when "None"
-        return self.SIGNTYPEVALUES_CONST[SignType::NONE]
+        return signValues[SignType::NONE]
       when "C1 <=18 rts"
-        return self.SIGNTYPEVALUES_CONST[SignType::SINGLELARGE]
+        return signValues[SignType::SINGLELARGE]
       when "A2H <=10 rts"
-        return self.SIGNTYPEVALUES_CONST[SignType::SINGLE]
+        return signValues[SignType::SINGLE]
       when "Large Routes"
-        return self.SIGNTYPEVALUES_CONST[SignType::SINGLELARGE]
+        return signValues[SignType::SINGLELARGE]
       when "New double"
-        return self.SIGNTYPEVALUES_CONST[SignType::SINGLE]
+        return signValues[SignType::SINGLE]
       when "Small Routes"
-        return self.SIGNTYPEVALUES_CONST[SignType::SINGLE]
+        return signValues[SignType::SINGLE]
       when "Unknown"
-        return self.SIGNTYPEVALUES_CONST[SignType::UNKNOWN]
+        return signValues[SignType::UNKNOWN]
       else
-        return self.SIGNTYPEVALUES_CONST[SignType::UNKNOWN]
+        return signValues[SignType::UNKNOWN]
       end
     end
   end
 
   def self.scheduleType(holder)
+    scheduleTypes = self.getFieldValues("schedule type")
     if holder.to_s == ''
       return "unknown"
     end
-    if (self.SCHEDULEVALUES_CONST.include?(holder.downcase))
+    if (scheduleTypes.include?(holder.downcase))
       return holder.downcase
     else
       case holder
       when "None"
-        return self.SCHEDULEVALUES_CONST[ScheduleType::NO]
+        return scheduleTypes[ScheduleType::NO]
       when "Single"
-        return self.SCHEDULEVALUES_CONST[ScheduleType::YES]
+        return scheduleTypes[ScheduleType::YES]
       when "Midsize"
-        return self.SCHEDULEVALUES_CONST[ScheduleType::YES]
+        return scheduleTypes[ScheduleType::YES]
       when "H-Panel"
-        return self.SCHEDULEVALUES_CONST[ScheduleType::YES]
+        return scheduleTypes[ScheduleType::YES]
       when "Double"
-        return self.SCHEDULEVALUES_CONST[ScheduleType::YES]
+        return scheduleTypes[ScheduleType::YES]
       else
-        return self.SCHEDULEVALUES_CONST[ScheduleType::UNKNOWN]
+        return scheduleTypes[ScheduleType::UNKNOWN]
       end
     end
   end
 
   def self.signInset(pos)
-    if (self.SIGNINSETVALUES_CONST.include?(pos))
+    signInsets = self.getFieldValues("sign inset")
+    if (signInsets.include?(pos))
       return pos
     else
-      return self.SIGNINSETVALUES_CONST[SignInset::UNKNOWN]
+      return signInsets[SignInset::UNKNOWN]
     end
   end
   
   def self.benchCount(val)
-    if (self.BENCHCOUNTVALUES_CONST.include?(val))
+    benchCounts = self.getFieldValues("bench count")
+    if (benchCounts.include?(val))
       return val
     else
-      return self.BENCHCOUNTVALUES_CONST[BenchCount::UNKNOWN]
+      return benchCounts[BenchCount::UNKNOWN]
     end
   end
   
   def self.shelterCount(val)
-    if (self.SHELTERCOUNTVALUES_CONST.include?(val))
+    shelterCounts = self.getFieldValues("shelter count")
+    if (shelterCounts.include?(val))
       return val
     elsif (val == nil)
-      return self.SHELTERCOUNTVALUES_CONST[ShelterCount::UNKNOWN]
+      return shelterCounts[ShelterCount::UNKNOWN]
     elsif (val == "3" or val == "4" or val == "5")
-      return self.SHELTERCOUNTVALUES_CONST[ShelterCount::LOTS]
+      return shelterCounts[ShelterCount::LOTS]
     else
-      return self.SHELTERCOUNTVALUES_CONST[ShelterCount::UNKNOWN]
+      return shelterCounts[ShelterCount::UNKNOWN]
     end
   end
   
   def self.shelterOrientation(val)
-    if (self.SHELTERORIENTATIONVALUES_CONST.include?(val))
+    orientations = self.getFieldValues("shelter orientation")
+    if (orientations.include?(val))
       return val
     else
-      return self.SHELTERORIENTATIONVALUES_CONST[ShelterOrientation::UNKNOWN]
+      return orientations[ShelterOrientation::UNKNOWN]
     end
   end
   
   def self.shelterInset(val)
-    if (self.SHELTERINSETVALUES_CONST.include?(val))
+    shelterInsets = self.getFieldValues("shelter inset")
+    if (shelterInsets.include?(val))
       return val
     else
-      return self.SHELTERINSETVALUES_CONST[ShelterInset::UNKNOWN]
+      return shelterInsets[ShelterInset::UNKNOWN]
     end
   end
   
   def self.trashCan(val)
-    if (self.TRASHCANVALUES_CONST.include?(val))
+    cans = self.getFieldValues("trashcan")
+    if (cans.include?(val))
       return val
     else
-      return self.TRASHCANVALUES_CONST[TrashcanType::UNKNOWN]
+      return cans[TrashcanType::UNKNOWN]
     end
   end
   
   def self.lighting(val)
-    if (self.LIGHTINGVALUES_CONST.include?(val))
+    lightings = self.getFieldValues("lighting")
+    if (lightings.include?(val))
       return val
     else
-      return self.LIGHTINGVALUES_CONST[LightingType::UNKNOWN]
+      return lightings[LightingType::UNKNOWN]
     end
   end
 end

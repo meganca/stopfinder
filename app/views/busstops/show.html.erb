@@ -43,20 +43,20 @@
   </tr>
   <tr id="intersection" style="background-color: #eee; display:none;">
     <td colspan=2 id="intersection help text">
-      <%= Help.INTERSECTIONHELP_CONST[BusStop.STOPPOSITIONVALUES_CONST.index(session[:intersection_pos][:value])] %><br />
-      <a href="#" data-help-image="intersection image" id="intersection image link">(display example image)</a>
+      <%= Help.StopPosition[session[:intersection_pos][:value]].text %><br />
+      <a href="#" data-help-image="intersection" id="intersection image link"></a>
     </td>
   </tr>
   <tr id="intersection image" style="background-color: #eee; display:none;">
-    <td colspan=2 id="intersection image content">
-        <%= image_tag Help.INTERSECTIONIMG_CONST[BusStop.STOPPOSITIONVALUES_CONST.index(session[:intersection_pos][:value])], :width => "100%", :alt=> Help.INTERSECTIONIMGALT_CONST[BusStop.STOPPOSITIONVALUES_CONST.index(session[:intersection_pos][:value])]%> 
+    <td colspan=2>
+      <%= image_tag Help.StopPosition[session[:intersection_pos][:value]].img, :id => "intersection image content", :width => "100%", :alt=> Help.StopPosition[session[:intersection_pos][:value]].imgAltText %> 
     </td>
   </tr>  
   <% if session[:sign_type][:value] != "unknown" %>
     <tr>
       <td>Sign type:</td>
       <td>
-        <%= BusStop.SIGNTYPENAMES_CONST[BusStop.SIGNTYPEVALUES_CONST.index(session[:sign_type][:value])] %>
+        <%= BusStop.getFieldName("sign type", session[:sign_type][:value]) %>
         <% if session[:sign_type][:needs_verification] == "true" %> * <% end %>
         
         <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about sign type", :data => { :helptype => "sign type" } %> 
@@ -64,15 +64,13 @@
     </tr>
     <tr id="sign type" style="background-color: #eee; display:none;">
       <td colspan=2 id="sign type help text">
-        <%= Help.SIGNTYPEHELP_CONST[BusStop.SIGNTYPEVALUES_CONST.index(session[:sign_type][:value])] %><br />
-        <a href="#" data-help-image="sign type image" id="sign type image link">(display example image)</a>
+        <%= Help.SignType[session[:sign_type][:value]].text %><br />
+        <a href="#" data-help-image="sign type" id="sign type image link"></a>
       </td>
     </tr>
     <tr id="sign type image" style="background-color: #eee; display:none;">
-      <td colspan=2 id="sign type image content">
-        <% if BusStop.SIGNTYPEVALUES_CONST.index(session[:sign_type][:value]) <= Help.SIGNTYPEIMG_CONST.length %>
-          <%= image_tag Help.SIGNTYPEIMG_CONST[BusStop.SIGNTYPEVALUES_CONST.index(session[:sign_type][:value])], :width => "100%", :alt=> Help.SIGNTYPEIMGALT_CONST[BusStop.SIGNTYPEVALUES_CONST.index(session[:sign_type][:value])]%> 
-        <% end %>
+      <td colspan=2>
+        <%= image_tag Help.SignType[session[:sign_type][:value]].img, :id => "sign type image content", :width => "100%", :alt =>  Help.SignType[session[:sign_type][:value]].imgAltText %> 
       </td>
     </tr>
   <% end %>
@@ -80,14 +78,14 @@
     <tr>
       <td>Sign position:</td>
       <td>
-        <%= BusStop.SIGNINSETNAMES_CONST[BusStop.SIGNINSETVALUES_CONST.index(session[:sign_inset][:value])] %> 
+        <%= BusStop.getFieldName("sign inset", session[:sign_inset][:value]) %> 
         <% if session[:sign_inset][:needs_verification] == "true" %> * <% end %>
         <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about sign position", :data => { :helptype => "sign position" } %> 
       </td>
     </tr>
     <tr id="sign position" style="background-color: #eee; display:none;">
       <td colspan=2 id="sign position help text">
-        <%= Help.SIGNPOSITIONHELP_CONST[BusStop.SIGNINSETVALUES_CONST.index(session[:sign_inset][:value])] %><br />
+        <%= Help.SignInsetType[session[:sign_inset][:value]].text %><br />
       </td>
     </tr>
   <% end %>
@@ -95,14 +93,14 @@
     <tr>
       <td>Schedule holder:</td>
       <td>
-        <%= session[:sched_holder][:value] %>
+        <%= BusStop.getFieldName("schedule type", session[:sched_holder][:value]) %>
         <% if session[:sched_holder][:needs_verification] == "true" %> * <% end %>
         <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about schedule holders", :data => { :helptype => "schedule" } %> 
       </td>
     </tr>
     <tr id="schedule" style="background-color: #eee; display:none;">
       <td colspan=2 id="schedule help text">
-        <%= Help.SCHEDULEHELP_CONST[BusStop.SCHEDULEVALUES_CONST.index(session[:sched_holder][:value])] %><br />
+        <%= Help.ScheduleType[session[:sched_holder][:value]].text %><br />
       </td>
     </tr>
   <% end %>
@@ -110,7 +108,7 @@
     <tr>
       <td>Number of shelters:</td>
       <td>
-        <%= BusStop.SHELTERCOUNTNAMES_CONST[BusStop.SHELTERCOUNTVALUES_CONST.index(session[:shelter_count][:value])] %>
+        <%= BusStop.getFieldName("shelter count", session[:shelter_count][:value]) %>
         <% if session[:shelter_count][:needs_verification] == "true" %> * <% end %>
       </td>
     </tr>
@@ -119,14 +117,14 @@
     <tr>
       <td>Shelter position:</td>
       <td>
-        <%= BusStop.SHELTERINSETNAMES_CONST[BusStop.SHELTERINSETVALUES_CONST.index(session[:shelter_offset][:value])] %>
+        <%= BusStop.getFieldName("shelter inset", session[:shelter_offset][:value]) %>
         <% if session[:shelter_offset][:needs_verification] == "true" %> * <% end %>
         <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about shelter position", :data => { :helptype => "shelter position" } %> 
       </td>
     </tr>
     <tr id="shelter position" style="background-color: #eee; display:none;">
       <td colspan=2 id="shelter position help text">
-        <%= Help.SHELTERPOSITIONHELP_CONST[BusStop.SHELTERINSETVALUES_CONST.index(session[:shelter_offset][:value])] %><br />
+        <%= Help.ShelterInsetType[session[:shelter_offset][:value]].text %><br />
       </td>
     </tr>
   <% end %>
@@ -134,14 +132,14 @@
     <tr>
       <td>The shelter faces:</td>
       <td>
-        <%= BusStop.SHELTERORIENTATIONNAMES_CONST[BusStop.SHELTERORIENTATIONVALUES_CONST.index(session[:shelter_orientation][:value])] %>
+        <%= BusStop.getFieldName("shelter orientation", session[:shelter_orientation][:value]) %>
         <% if session[:shelter_orientation][:needs_verification] == "true" %> * <% end %>
         <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about shelter orientation", :data => { :helptype => "shelter orientation" } %> 
       </td>
     </tr>
     <tr id="shelter orientation" style="background-color: #eee; display:none;">
       <td colspan=2 id="shelter orientation help text">
-        <%= Help.SHELTERORIENTATIONHELP_CONST[BusStop.SHELTERORIENTATIONVALUES_CONST.index(session[:shelter_orientation][:value])] %><br />
+        <%= Help.ShelterOrientationType[session[:shelter_orientation][:value]].text %><br />
       </td>
     </tr>
   <% end %>
@@ -149,7 +147,7 @@
     <tr>
       <td>Number of benches:</td>
       <td>
-        <%= BusStop.BENCHCOUNTNAMES_CONST[BusStop.BENCHCOUNTVALUES_CONST.index(session[:bench_count][:value])] %>
+        <%= BusStop.getFieldName("bench count", session[:bench_count][:value]) %>
         <% if session[:bench_count][:needs_verification] == "true" %> * <% end %>
       </td>
     </tr>
@@ -158,7 +156,7 @@
     <tr>
       <td>Trash can?:</td>
       <td>
-        <%= session[:can_count][:value] %>
+        <%= BusStop.getFieldName("trashcan", session[:can_count][:value]) %>
         <% if session[:can_count][:needs_verification] == "true" %> * <% end %>
       </td>
     </tr>
@@ -167,7 +165,7 @@
     <tr>
       <td>Well-lit at night?:</td>
       <td>
-        <%= BusStop.LIGHTINGNAMES_CONST[BusStop.LIGHTINGVALUES_CONST.index(session[:lighting][:value])] %>
+        <%= BusStop.getFieldName("lighting", session[:lighting][:value]) %>
         <% if session[:lighting][:needs_verification] == "true" %> * <% end %>
       </td>
     </tr>

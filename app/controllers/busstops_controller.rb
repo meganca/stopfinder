@@ -55,16 +55,16 @@ class BusstopsController < ApplicationController
     # These fields use both Metro and crowdsourced data; because of this they must be 
     # 'manually' tallied to allow converting from Metro's categories to ours
     intersections = Hash.new
-    BusStop.STOPPOSITIONVALUES_CONST.each {|x| intersections[x] = 0 }
+    BusStop.getFieldValues("stop position").each {|x| intersections[x] = 0 }
     
     signs = Hash.new
-    BusStop.SIGNTYPEVALUES_CONST.each {|x| signs[x] = 0 }
+    BusStop.getFieldValues("sign type").each {|x| signs[x] = 0 }
 
     schedules = Hash.new
-    BusStop.SCHEDULEVALUES_CONST.each {|x| schedules[x] = 0 }
+    BusStop.getFieldValues("schedule type").each {|x| schedules[x] = 0 }
     
     shelterCount = Hash.new
-    BusStop.SHELTERCOUNTVALUES_CONST.each {|x| shelterCount[x] = 0 }
+    BusStop.getFieldValues("shelter count").each {|x| shelterCount[x] = 0 }
     
     stopdata.each do |stop|
       int = BusStop.stopPosition(stop.Intersection)
@@ -166,8 +166,8 @@ class BusstopsController < ApplicationController
       hash = JSON.parse(data)
       session[:direction] = hash["data"]["entry"]["direction"]
     rescue
-      #retry
-      session[:direction] = "E"
+      retry
+      #session[:direction] = "E"
     end
   end
   
