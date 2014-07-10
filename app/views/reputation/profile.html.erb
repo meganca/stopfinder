@@ -8,7 +8,7 @@
 
 .badges {
 	margin: 0 auto;
-	width: 90%;
+	width: 100%;
 }
 </style>
 </head>
@@ -37,12 +37,21 @@
   		  <% else %>
   			<%= User.find_by_id(cookies[:user_id]).points %>
   		 <% end %>
+  <br />
+  NewInfoSubmitted: <% if User.find_by_id(cookies[:user_id]).newInfoSubmitted == nil %>0
+  		  <% else %>
+  			<%= User.find_by_id(cookies[:user_id]).newInfoSubmitted %>
+  		 <% end %>
   <br/><br/>
   Badges:
   <br/>
 <div class="badges">
-<%= image_tag 'oba_logo.png', :width => "50" %> <%= image_tag 'oba_logo.png', :width => "50" %> <%= image_tag 'oba_logo.png', :width => "50" %>
+<% if User.find_by_id(cookies[:user_id]).badges.include? "001" %>
+<%= image_tag '001.png', :width => "50" %>
+<% end %>
 </div>
+
+
 <% else %>
   Not logged in. <%= link_to 'Log in here', "/login/" %><br />
 <% end %>

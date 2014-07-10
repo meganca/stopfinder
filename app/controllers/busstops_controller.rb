@@ -291,6 +291,62 @@ class BusstopsController < ApplicationController
   end
   
   def create
+  
+  	user = User.find_by_id(cookies[:user_id])
+	#Check to see if they are the original submitter for each field
+    if(user.newInfoSubmitted == nil)
+     	user.newInfoSubmitted = 0
+    end
+    if(user.badges == nil)
+    	user.badges = ""
+    end
+	
+    if(session[:sign_type][:value].eql? "unknown" && !(params[:busstop][:RteSignType].eql? "unknown"))
+      	user.points = user.points + 1
+      	user.newInfoSubmitted = user.newInfoSubmitted + 1
+    end
+    if (session[:intersection_pos][:value]=="unknown" && !(params[:busstop][:Intersection].eql? "unknown"))
+        user.points = user.points + 1
+        user.newInfoSubmitted = user.newInfoSubmitted + 1
+    end
+    if (session[:sign_inset][:value]=="unknown" && !(params[:busstop][:InsetFromCurb].eql? "unknown"))
+      	user.points = user.points + 1
+      	user.newInfoSubmitted = user.newInfoSubmitted + 1
+    end
+    if (session[:sched_holder][:value]=="unknown" && !(params[:busstop][:SchedHolder].eql? "unknown"))
+      	user.points = user.points + 1
+      	user.newInfoSubmitted = user.newInfoSubmitted + 1
+    end
+    if (session[:shelter_count][:value]=="unknown" && !(params[:busstop][:Shelters].eql? "unknown"))
+      	user.points = user.points + 1
+      	user.newInfoSubmitted = user.newInfoSubmitted + 1
+    end
+    if (session[:shelter_offset][:value]=="unknown" && !(params[:busstop][:ShelterOffset].eql? "unknown") && !(params[:busstop][:ShelterOffset].eql? nil))
+      	user.points = user.points + 1
+      	user.newInfoSubmitted = user.newInfoSubmitted + 1
+    end
+    if (session[:shelter_orientation][:value]=="unknown" && !(params[:busstop][:ShelterOrientation].eql? "unknown") && !(params[:busstop][:ShelterOrientation].eql? nil))
+      	user.points = user.points + 1
+      	user.newInfoSubmitted = user.newInfoSubmitted + 1
+    end
+    if (session[:bench_count][:value]=="unknown" && !(params[:busstop][:BenchCount].eql? "unknown"))
+      	user.points = user.points + 1
+      	user.newInfoSubmitted = user.newInfoSubmitted + 1
+    end
+    if (session[:can_count][:value]=="unknown" && !(params[:busstop][:HasCan].eql? "unknown"))
+      	user.points = user.points + 1
+      	user.newInfoSubmitted = user.newInfoSubmitted + 1
+    end
+    if (session[:lighting][:value]=="unknown" && !(params[:busstop][:LightingConditions].eql? "unknown"))
+      	user.points = user.points + 1
+      	user.newInfoSubmitted = user.newInfoSubmitted + 1
+    end
+      
+    printf("CURRENT BADGES: " + user.badges)
+    if (user.newInfoSubmitted >= 50 && !(user.badges.include? "001"))
+      	user.badges = user.badges + "001"
+	end
+	user.save
     if(session[:update_type] == "edit" )
       # Not a bad place to add it to their tally, either
       priorSubmission = BusStop.find(session[:submission_id])
@@ -312,12 +368,10 @@ class BusstopsController < ApplicationController
     # If we haven't returned by now this is a new info submit, not an edit
     if(cookies[:user_id])
       uniqueStops = BusStop.count("StopId", :distinct => true, :conditions => "userid = \"" + cookies[:user_id].to_s + "\"" )
-      user = User.find_by_id(cookies[:user_id])
       if(user.stops == nil) # First recorded submission!
         user.points = 10
         user.stops = uniqueStops
         user.title = "01"
-        user.save
       elsif (user.stops < uniqueStops) # This is a new stop
         user.points = user.points + 10
         user.stops = uniqueStops
@@ -328,8 +382,8 @@ class BusstopsController < ApplicationController
         elsif (uniqueStops > 29)
         	user.title = "04"
 		end
-        user.save
       end
+    user.save  
     end
     
     showLog = BusStop.usageLogger
