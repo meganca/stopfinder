@@ -1,0 +1,48 @@
+<head>
+<style>
+.container {
+	font-size: 1.3em;
+	margin: 0 auto;
+	padding-top:1em;
+}
+
+.badges {
+	margin: 0 auto;
+	width: 100%;
+}
+</style>
+</head>
+
+
+<div class="container">
+<% if @displayInfo == "hidden" %>
+  This user's profile is not public.
+<% elsif @displayInfo == "no user" %>
+  There is no user by that id.
+<% end %>
+
+<% if @user != nil %>
+  <%= @user.name %><br />
+  Points: <% if @user.points == nil %>0
+  		  <% else %>
+  			<%= @user.points %>
+  		 <% end %>
+  <br />
+  NewInfoSubmitted: <% if @user.newInfoSubmitted == nil %>0
+  		  <% else %>
+  			<%= @user.newInfoSubmitted %>
+  		 <% end %>
+  <br/><br/>
+  Badges:
+  <br/>
+<div class="badges">
+<% if @user.badges != nil %>
+  <% if @user.badges.include? "001" %>
+  <%= image_tag '001.png', :width => "50" %>
+  <% end %>
+<% end %>
+</div>
+<% end %>
+<br />
+<%= link_to 'Return to information view', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>
+</div>

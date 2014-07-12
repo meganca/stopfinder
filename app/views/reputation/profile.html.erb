@@ -46,8 +46,10 @@
   Badges:
   <br/>
 <div class="badges">
-<% if User.find_by_id(cookies[:user_id]).badges.include? "001" %>
-<%= image_tag '001.png', :width => "50" %>
+<% if User.find_by_id(cookies[:user_id]).badges != nil %>
+  <% if User.find_by_id(cookies[:user_id]).badges.include? "001" %>
+  <%= image_tag '001.png', :width => "50" %>
+  <% end %>
 <% end %>
 </div>
 

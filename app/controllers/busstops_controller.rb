@@ -19,11 +19,13 @@ class BusstopsController < ApplicationController
     showLog = BusStop.usageLogger
     showLog.info("Viewing stop #{agencyid}_#{stopid} at #{Time.now}")
     
-    if(session[:device_id])
-      showLog.info("Accessed by user #{session[:device_id]}")
-    elsif(params[:userid])
+    if(params[:userid])
       session[:device_id] = params[:userid]
       showLog.info("Accessed by user #{params[:userid]}")
+    elsif(session[:device_id] != "")
+      showLog.info("Accessed by user #{session[:device_id]}")
+    elsif(!session[:device_id])
+      session[:device_id] = ""
     end
 
     if(cookies[:user_email])
@@ -290,65 +292,140 @@ class BusstopsController < ApplicationController
     record.LightingConditions = params[:busstop][:LightingConditions]
   end
   
+  def updateUserAccuracy(priorStops, currentStop)
+    priorStops.each do |stop|
+      currentUser = User.find_by_id(stop.UserId)
+       
+      #Check if each field agrees/disagrees with this submission
+      if ((currentStop.Intersection != "unknown") && stop.Intersection != "unknown")
+        currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
+        if (stop.Intersection == currentStop.Intersection)
+          currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+        end
+      end
+      if ((currentStop.RteSignType != "unknown") && stop.RteSignType != "unknown")
+        currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
+        if (stop.RteSignType == currentStop.RteSignType)
+          currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+        end
+      end
+      if ((currentStop.InsetFromCurb != "unknown") && stop.InsetFromCurb != "unknown")
+        currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
+        if (stop.InsetFromCurb == currentStop.InsetFromCurb)
+          currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+        end
+      end
+      if ((currentStop.SchedHolder != "unknown") && stop.SchedHolder != "unknown")
+        currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
+        if (stop.SchedHolder == currentStop.SchedHolder)
+          currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+        end
+      end
+      if ((currentStop.Shelters != "unknown") && stop.Shelters != "unknown")
+        currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
+        if (stop.Shelters == currentStop.Shelters)
+          currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+        end
+      end
+      if ((currentStop.ShelterOffset != nil) && (stop.ShelterOffset != nil) && (currentStop.ShelterOffset != "unknown") && stop.ShelterOffset != "unknown")
+        currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
+        if (stop.ShelterOffset == currentStop.Intersection)
+          currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+        end
+      end
+      if ((currentStop.ShelterOrientation != nil) && (stop.ShelterOrientation != nil) && (currentStop.ShelterOrientation != "unknown") && stop.ShelterOrientation != "unknown")
+        currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
+        if (stop.ShelterOrientation == currentStop.ShelterOrientation)
+          currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+        end
+      end
+      if ((currentStop.BenchCount != "unknown") && stop.BenchCount != "unknown")
+        currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
+        if (stop.BenchCount == currentStop.BenchCount)
+          currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+        end
+      end
+      if ((currentStop.HasCan != "unknown") && stop.HasCan != "unknown")
+        currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
+        if (stop.HasCan == currentStop.HasCan)
+          currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+        end
+      end
+      if ((currentStop.LightingConditions != "unknown") && stop.LightingConditions != "unknown")
+        currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
+        if (stop.LightingConditions == currentStop.LightingConditions)
+          currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+        end
+      end
+      
+      currentUser.accuracy = (currentUser.otherVerifyingVotes * 1.0) / currentUser.otherTotalVotes
+      currentUser.save
+    end
+  end
+  
   def create
   
   	user = User.find_by_id(cookies[:user_id])
-	#Check to see if they are the original submitter for each field
-    if(user.newInfoSubmitted == nil)
-     	user.newInfoSubmitted = 0
-    end
-    if(user.badges == nil)
-    	user.badges = ""
-    end
-	
-    if(session[:sign_type][:value].eql? "unknown" && !(params[:busstop][:RteSignType].eql? "unknown"))
-      	user.points = user.points + 1
-      	user.newInfoSubmitted = user.newInfoSubmitted + 1
-    end
-    if (session[:intersection_pos][:value]=="unknown" && !(params[:busstop][:Intersection].eql? "unknown"))
-        user.points = user.points + 1
-        user.newInfoSubmitted = user.newInfoSubmitted + 1
-    end
-    if (session[:sign_inset][:value]=="unknown" && !(params[:busstop][:InsetFromCurb].eql? "unknown"))
-      	user.points = user.points + 1
-      	user.newInfoSubmitted = user.newInfoSubmitted + 1
-    end
-    if (session[:sched_holder][:value]=="unknown" && !(params[:busstop][:SchedHolder].eql? "unknown"))
-      	user.points = user.points + 1
-      	user.newInfoSubmitted = user.newInfoSubmitted + 1
-    end
-    if (session[:shelter_count][:value]=="unknown" && !(params[:busstop][:Shelters].eql? "unknown"))
-      	user.points = user.points + 1
-      	user.newInfoSubmitted = user.newInfoSubmitted + 1
-    end
-    if (session[:shelter_offset][:value]=="unknown" && !(params[:busstop][:ShelterOffset].eql? "unknown") && !(params[:busstop][:ShelterOffset].eql? nil))
-      	user.points = user.points + 1
-      	user.newInfoSubmitted = user.newInfoSubmitted + 1
-    end
-    if (session[:shelter_orientation][:value]=="unknown" && !(params[:busstop][:ShelterOrientation].eql? "unknown") && !(params[:busstop][:ShelterOrientation].eql? nil))
-      	user.points = user.points + 1
-      	user.newInfoSubmitted = user.newInfoSubmitted + 1
-    end
-    if (session[:bench_count][:value]=="unknown" && !(params[:busstop][:BenchCount].eql? "unknown"))
-      	user.points = user.points + 1
-      	user.newInfoSubmitted = user.newInfoSubmitted + 1
-    end
-    if (session[:can_count][:value]=="unknown" && !(params[:busstop][:HasCan].eql? "unknown"))
-      	user.points = user.points + 1
-      	user.newInfoSubmitted = user.newInfoSubmitted + 1
-    end
-    if (session[:lighting][:value]=="unknown" && !(params[:busstop][:LightingConditions].eql? "unknown"))
-      	user.points = user.points + 1
-      	user.newInfoSubmitted = user.newInfoSubmitted + 1
-    end
+    
+    #Check to see if they are the original submitter for each field
+    if(user != nil)
+      if(user.newInfoSubmitted == nil)
+        user.newInfoSubmitted = 0
+      end
       
-    printf("CURRENT BADGES: " + user.badges)
-    if (user.newInfoSubmitted >= 50 && !(user.badges.include? "001"))
-      	user.badges = user.badges + "001"
-	end
-	user.save
+      if(user.badges == nil)
+        user.badges = ""
+      end
+      
+      if(session[:sign_type][:value].eql? "unknown" && !(params[:busstop][:RteSignType].eql? "unknown"))
+      	user.points = user.points + 1
+      	user.newInfoSubmitted = user.newInfoSubmitted + 1
+      end
+      if (session[:intersection_pos][:value]=="unknown" && !(params[:busstop][:Intersection].eql? "unknown"))
+          user.points = user.points + 1
+          user.newInfoSubmitted = user.newInfoSubmitted + 1
+      end
+      if (session[:sign_inset][:value]=="unknown" && !(params[:busstop][:InsetFromCurb].eql? "unknown"))
+          user.points = user.points + 1
+          user.newInfoSubmitted = user.newInfoSubmitted + 1
+      end
+      if (session[:sched_holder][:value]=="unknown" && !(params[:busstop][:SchedHolder].eql? "unknown"))
+          user.points = user.points + 1
+          user.newInfoSubmitted = user.newInfoSubmitted + 1
+      end
+      if (session[:shelter_count][:value]=="unknown" && !(params[:busstop][:Shelters].eql? "unknown"))
+          user.points = user.points + 1
+          user.newInfoSubmitted = user.newInfoSubmitted + 1
+      end
+      if (session[:shelter_offset][:value]=="unknown" && !(params[:busstop][:ShelterOffset].eql? "unknown") && !(params[:busstop][:ShelterOffset].eql? nil))
+          user.points = user.points + 1
+          user.newInfoSubmitted = user.newInfoSubmitted + 1
+      end
+      if (session[:shelter_orientation][:value]=="unknown" && !(params[:busstop][:ShelterOrientation].eql? "unknown") && !(params[:busstop][:ShelterOrientation].eql? nil))
+          user.points = user.points + 1
+          user.newInfoSubmitted = user.newInfoSubmitted + 1
+      end
+      if (session[:bench_count][:value]=="unknown" && !(params[:busstop][:BenchCount].eql? "unknown"))
+          user.points = user.points + 1
+          user.newInfoSubmitted = user.newInfoSubmitted + 1
+      end
+      if (session[:can_count][:value]=="unknown" && !(params[:busstop][:HasCan].eql? "unknown"))
+          user.points = user.points + 1
+          user.newInfoSubmitted = user.newInfoSubmitted + 1
+      end
+      if (session[:lighting][:value]=="unknown" && !(params[:busstop][:LightingConditions].eql? "unknown"))
+          user.points = user.points + 1
+          user.newInfoSubmitted = user.newInfoSubmitted + 1
+      end
+        
+      printf("CURRENT BADGES: " + user.badges)
+      if (user.newInfoSubmitted >= 50 && !(user.badges.include? "001"))
+          user.badges = user.badges + "001"
+      end
+      user.save
+    end
+    
     if(session[:update_type] == "edit" )
-      # Not a bad place to add it to their tally, either
       priorSubmission = BusStop.find(session[:submission_id])
       updatePrior(priorSubmission)
       checkVerifiedForSave(priorSubmission)
@@ -358,6 +435,17 @@ class BusstopsController < ApplicationController
     
     @busstop = BusStop.new(params[:busstop])
     checkVerifiedForSave(@busstop)
+    
+    #At the moment, only calculate accuracy on first submit, not update
+    if(cookies[:user_id] == nil)
+      userId = ""
+    else
+      userId = cookies[:user_id]
+    end
+    queryString = "SELECT * FROM " + BusStop.table_name + " WHERE stopid = \"" + session[:stop_id] + "\" AND agencyid = \"" + session[:agency_id] + "\" AND OBAId != \"" + session[:device_id] + "\"  AND userid != \"" + userId + "\" AND userid !=\"\""
+    priorStops = BusStop.find_by_sql(queryString)
+    updateUserAccuracy(priorStops, @busstop)
+ 
     @busstop.save
     
     @log = Log.new
@@ -405,6 +493,7 @@ class BusstopsController < ApplicationController
     end
     
     redirect_to dataentry_url(:id => params[:busstop][:AgencyId] + "_" + params[:busstop][:StopId])
+    
   end
 
 end

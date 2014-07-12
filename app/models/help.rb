@@ -52,6 +52,8 @@ class Help
     "yes" => Info.new("The schedule is separate but attached to the stop pole.", "", ""), 
     "unknown" => Info.new("No information exists for this field.", "", "") }
   
+  ScheduleTypes.default = Info.new("No data for this field.", "", "")
+  
   def self.ScheduleType
     ScheduleTypes
   end
@@ -59,6 +61,8 @@ class Help
   SignInsetTypes = { "<1" => Info.new("The sign is at the curb.", "", ""), 
     ">1" => Info.new("The sign is further from the curb, either on the opposite side of the sidewalk or inset more than a foot.", "", ""), 
     "unknown" => Info.new("No information exists for this field.", "", "") }
+  
+  SignInsetTypes.default = Info.new("No data for this field.", "", "")
   
   def self.SignInsetType
     SignInsetTypes
@@ -68,6 +72,8 @@ class Help
     ">1" => Info.new("The shelter is inset from the curb, across the sidewalk.", "", ""), 
     "unknown" => Info.new("No information exists for this field.", "", "") }
     
+  ShelterInsetTypes.default = Info.new("No data for this field.", "", "")
+  
   def self.ShelterInsetType
     ShelterInsetTypes
   end
@@ -76,6 +82,8 @@ class Help
     "away from street" => Info.new("The shelter opens away from the street, with the closed back facing the curb.", "", ""), 
     "sideways" => Info.new("The shelter is perpendicular to the street, with the narrow side facing the curb.", "", ""),
     "unknown" => Info.new("No information exists for this field.", "", "") }
+  
+  ShelterOrientationTypes.default = Info.new("No data for this field.", "", "")
   
   def self.ShelterOrientationType
     ShelterOrientationTypes
