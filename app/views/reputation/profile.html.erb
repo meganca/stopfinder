@@ -8,7 +8,12 @@
 
 .badges {
 	margin: 0 auto;
-	width: 100%;
+}
+.settings {
+	display: none;
+	padding-left:1em;
+	background-color: rgb(238,238,238);
+	max-width: 30%;
 }
 </style>
 </head>
@@ -16,12 +21,7 @@
 
 <div class="container">
 <% if User.find_by_id(cookies[:user_id]).title == nil %><%= image_tag 'oba_logo.png', :alt => "profile picture", :width => "50" %>
-<% elsif User.find_by_id(cookies[:user_id]).title == "01" %>
-	<%= image_tag 'Contributor.png', :alt=> "Contributor icon", :width=>"50"%>
-<% elsif User.find_by_id(cookies[:user_id]).title == "02" %>
-	<%= image_tag 'SavvyTraveler.png', :alt=> "Savvy Traveler icon", :width=>"50"%>
-<% elsif User.find_by_id(cookies[:user_id]).title == "03" %>
-	<%= image_tag 'Contributor.png', :alt=> "Contributor icon", :width=>"50"%>
+<% else %> <%= image_tag User.find_by_id(cookies[:user_id]).title.to_s + '.png', :alt=>"Profile icon", :width=>"50"%>
 <% end %>
 
 <% if cookies[:user_id] %>
@@ -38,10 +38,7 @@
   			<%= User.find_by_id(cookies[:user_id]).points %>
   		 <% end %>
   <br />
-  NewInfoSubmitted: <% if User.find_by_id(cookies[:user_id]).newInfoSubmitted == nil %>0
-  		  <% else %>
-  			<%= User.find_by_id(cookies[:user_id]).newInfoSubmitted %>
-  		 <% end %>
+  <%= link_to 'View Rankings', '/topcontributors/' %>
   <br/><br/>
   Badges:
   <br/>
@@ -52,7 +49,11 @@
   <% end %>
 <% end %>
 </div>
-
+<br/>
+<a href="javascript:void(0)" onclick ="toggleSettings();" id="profLink">Profile Settings</a>
+<div class = "settings" id= "settings">
+Settings
+</div>
 
 <% else %>
   Not logged in. <%= link_to 'Log in here', "/login/" %><br />
@@ -60,3 +61,16 @@
 <br />
 <%= link_to 'Return to information view', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>
 </div>
+
+<script>
+function toggleSettings() {
+	if (document.getElementById('settings').style.display == 'block') {
+		document.getElementById('settings').style.display = 'none';
+		document.getElementById('profLink').innerHTML = "Profile Settings";
+	} else {
+		document.getElementById('settings').style.display = 'block';
+		document.getElementById('profLink').innerHTML = "Hide Settings";
+	}
+	
+}
+</script>

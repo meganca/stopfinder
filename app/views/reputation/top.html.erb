@@ -1,6 +1,21 @@
+<style>
+.container {
+	font-size: 1.3em;
+	margin: 0 auto;
+	padding-top:1em;
+}
+</style>
 <div class="container">
-<b> Top contributors </b><br />
+<b> Top Contributors </b><br/><br/>
+<% @count = 1 %>
 <% @userList.each do |user| %>
-  <%= user.id %>, <%= user.points %>
+  <%= @count %>.
+  <%= image_tag user.title + '.png', :width=>"50"%> 
+  <%= link_to user.name.to_s, '/user/' + user.id.to_s %>, 
+  <%= user.points %> points
+  <% @count = @count + 1 %>
+  <br/>
 <% end %>
+<br/>
+<%= link_to "My Profile", "/reputation/profile" %>
 </div>

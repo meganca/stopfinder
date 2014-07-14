@@ -22,20 +22,17 @@
 <% end %>
 
 <% if @user != nil %>
-  <%= @user.name %><br />
+	<% if @user.title == nil %><%= image_tag 'oba_logo.png', :alt => "profile picture", :width => "50" %>
+	<% else %> <%= image_tag @user.title.to_s + '.png', :alt=>"profile picture", :width=>"50"%>
+	<% end %>
+  <%= @user.name %><br /><br/>
   Points: <% if @user.points == nil %>0
   		  <% else %>
   			<%= @user.points %>
   		 <% end %>
-  <br />
-  NewInfoSubmitted: <% if @user.newInfoSubmitted == nil %>0
-  		  <% else %>
-  			<%= @user.newInfoSubmitted %>
-  		 <% end %>
-  <br/><br/>
-  Badges:
-  <br/>
+  <br /><br/>
 <div class="badges">
+Badges:
 <% if @user.badges != nil %>
   <% if @user.badges.include? "001" %>
   <%= image_tag '001.png', :width => "50" %>
