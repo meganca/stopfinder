@@ -13,19 +13,16 @@ class BusstopsController < ApplicationController
     session[:agency_id] = agencyid
     session[:stop_id] = stopid
     
-    #OBA API call; store any desired variables into session from this
-    queryOBA()
-    
     showLog = BusStop.usageLogger
     showLog.info("Viewing stop #{agencyid}_#{stopid} at #{Time.now}")
     
     if(params[:userid])
       session[:device_id] = params[:userid]
       showLog.info("Accessed by user #{params[:userid]}")
+    elsif(session[:device_id] == nil)
+      session[:device_id] = ""
     elsif(session[:device_id] != "")
       showLog.info("Accessed by user #{session[:device_id]}")
-    elsif(!session[:device_id])
-      session[:device_id] = ""
     end
 
     if(cookies[:user_email])
@@ -43,6 +40,9 @@ class BusstopsController < ApplicationController
       showLog.info("")
       redirect_to '/about/missing' and return
     end
+    
+    #OBA API call; store any desired variables into session from this
+    queryOBA(agencyid, stopid)
     
     # Get the comment
     if (Comment.find_by_agency_id_and_stop_id(agencyid, stopid) == nil)
@@ -157,11 +157,9 @@ class BusstopsController < ApplicationController
     end
   end
   
-  def queryOBA
-    apiURI = "http://api.pugetsound.onebusaway.org/api/where/stop/" + params[:id] + ".json?key=TEST"
-    response = Net::HTTP.get_response(URI.parse(apiURI))
-    data = response.body
-    
+  def queryOBA(agencyid, stopid)
+    apiURI = "http://api.pugetsound.onebusaway.org/api/where/stop/" + agencyid + "_" + stopid + ".json?key=693c0a55-9ef0-4302-8bc3-f9b2db93e124"
+
     begin
       response = Net::HTTP.get_response(URI.parse(apiURI))
       data = response.body
@@ -469,9 +467,19 @@ class BusstopsController < ApplicationController
         	user.title = "03"
         elsif (uniqueStops > 29)
         	user.title = "04"
-		end
+        end
       end
-    user.save  
+      user.save  
+    end
+    
+    # Check user ranking for badge (only applies to visible users)
+    if user.visible == 1
+      userWithRank = User.find_by_sql("select t.id, (select count(*) from users x where x.visible=1 AND x.points > t.points) AS position from users t where t.id = " + cookies[:user_id])
+      
+      # Add 1 because this indexes from 0
+      userRank = userWithRank[0].position + 1
+      
+      # Badgechecking things here
     end
     
     showLog = BusStop.usageLogger
@@ -492,8 +500,7 @@ class BusstopsController < ApplicationController
       Comment.add_or_edit(@busstop.AgencyId, @busstop.StopId, @busstop.StopComment)
     end
     
-    redirect_to dataentry_url(:id => params[:busstop][:AgencyId] + "_" + params[:busstop][:StopId])
-    
+    redirect_to dataentry_url(:id => params[:busstop][:AgencyId] + "_" + params[:busstop][:StopId])   
   end
 
 end

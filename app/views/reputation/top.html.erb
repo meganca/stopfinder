@@ -7,13 +7,11 @@
 </style>
 <div class="container">
 <b> Top Contributors </b><br/><br/>
-<% @count = 1 %>
-<% @userList.each do |user| %>
-  <%= @count %>.
+<% @userList.take_while{ |u| u.position <= 19}.each do |user| %>
+  <%= user.position + 1 %>.
   <%= image_tag user.title + '.png', :width=>"50"%> 
   <%= link_to user.name.to_s, '/user/' + user.id.to_s %>, 
   <%= user.points %> points
-  <% @count = @count + 1 %>
   <br/><br/>
 <% end %>
 <br/>

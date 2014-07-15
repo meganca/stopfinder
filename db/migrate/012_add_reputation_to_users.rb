@@ -1,7 +1,7 @@
 class AddReputationToUsers < ActiveRecord::Migration
   def self.up
     add_column "users", "stops", :int
-    add_column "users", "points", :int
+    add_column "users", "points", :int, default: 0
     add_column "users", "accuracy", :double
     add_column "users", "newInfoSubmitted", :int
   end

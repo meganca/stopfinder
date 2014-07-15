@@ -31,6 +31,6 @@ class ReputationController < ApplicationController
   end
   
   def top
-    @userList = User.find_by_sql("select * from users where visible=1 order by points desc limit 20")
+    @userList = User.find_by_sql("select t.*, (select count(*) from users x where x.visible=1 AND x.points > t.points) AS position from users t where t.visible = 1 order by t.points desc")
   end
 end
