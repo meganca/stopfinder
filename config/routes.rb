@@ -32,6 +32,9 @@ StopfinderDev::Application.routes.draw do
   match '/auth/failure', :to => 'sessions#failure'
   #devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
 
+  #Routing for reputation/profile
+  post '/reputation/profile' => 'reputation#create'
+  
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

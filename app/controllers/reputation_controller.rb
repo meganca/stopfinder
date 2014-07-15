@@ -2,6 +2,22 @@ class ReputationController < ApplicationController
   def profile
   end
   
+  def create
+  	  @form_submitted = true
+  	  user = User.find_by_id(cookies[:user_id])
+ 
+  	  if (params[:settings][:display_name].length > 20)
+  	  	flash[:notice] = "Please keep display name under 20 characters."
+  	  else
+  	  	user.name = params[:settings][:display_name]
+  	  	user.visible = params[:settings][:visible]
+  	  	flash[:notice] = "Changes saved."
+  	  	user.save
+  	  end
+
+  	  redirect_to '/reputation/profile'
+  	  
+  end
   def publicprofile
     @user = User.find_by_id(params[:id])
     @displayInfo = ""

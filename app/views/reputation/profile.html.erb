@@ -11,11 +11,42 @@
 }
 .settings {
 	display: none;
-	padding-left:1em;
+	padding:5px;
+	font-size:1em;
 	background-color: rgb(238,238,238);
-	max-width: 30%;
+	max-width: 80%;
+}
+.editName {
+	display: none;
+}
+.alert {
+	color:red;
+	display:block;
 }
 </style>
+
+<script>
+function toggleVisibility(id) {
+
+	var e = document.getElementById(id);
+	if (e.style.display == 'block') {
+		e.style.display = 'none';
+		if (id == 'settings') {
+			document.getElementById('profLink').innerHTML = "Profile Settings";
+			<% @form_submitted = false %>
+		} else if (id == 'editName') {
+			document.getElementById('displayLink').innerHTML = "Edit Display Name";
+		}
+	} else {
+		e.style.display = 'block';
+		if (id == 'settings')
+			document.getElementById('profLink').innerHTML = "Hide Settings";	
+		else if (id == 'editName') {
+			document.getElementById('displayLink').innerHTML = "Cancel";
+		}
+	}
+}
+</script>
 </head>
 
 
@@ -25,14 +56,12 @@
 <% end %>
 
 <% if cookies[:user_id] %>
-  Welcome,
-  <script> 
-  var email_string = '<%= cookies[:user_email]%>';
-  email_string = email_string.substring(0, email_string.indexOf("@"));
-  document.write(email_string);
-  </script>!
+  Welcome, <%= User.find_by_id(cookies[:user_id]).name %>!
   <br/><br/>
-
+  <% if (!User.find_by_id(cookies[:user_id]).visible) %>
+  <h4 style="color:red">Your profile is private. Make public to take part of rankings.</h4>
+  <br/>
+  <% end %>
   Points: <% if User.find_by_id(cookies[:user_id]).points == nil %>0
   		  <% else %>
   			<%= User.find_by_id(cookies[:user_id]).points %>
@@ -50,11 +79,34 @@
 <% end %>
 </div>
 <br/>
-<a href="javascript:void(0)" onclick ="toggleSettings();" id="profLink">Profile Settings</a>
-<div class = "settings" id= "settings">
-Settings
-</div>
 
+<div class = "settings" id= "settings">
+<%= form_for :settings do |f| %>
+ <%= f.label :make_visible do %>
+ <% if (User.find_by_id(cookies[:user_id]).visible) %>
+ <% checked_value = true %>
+ <% else %>
+ <% checked_value = false %>
+ <% end %>
+  <%= f.check_box :visible, :checked => checked_value %> Make my profile public.
+ <% end %>
+ <br/>
+ 
+ <div class = "editName" id= "editName">
+ <%= f.text_field :display_name, :value => User.find_by_id(cookies[:user_id]).name, :size => 20 %> <br/>
+ </div>
+ <a href="javascript:void(0)" onclick="toggleVisibility('editName');" id="displayLink">Edit Display Name</a>
+ <br/>
+<%= f.submit "Save Changes" %>
+<% end %>
+</div>
+<a href="javascript:void(0)" onclick ="toggleVisibility('settings');" id="profLink">Profile Settings</a>
+ <% if flash[:notice] %>
+ 	<script>
+ 	toggleVisibility('settings');
+ 	toggleVisibility('editName');
+ 	</script>
+<% end %>
 <% else %>
   Not logged in. <%= link_to 'Log in here', "/login/" %><br />
 <% end %>
@@ -62,15 +114,3 @@ Settings
 <%= link_to 'Return to information view', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>
 </div>
 
-<script>
-function toggleSettings() {
-	if (document.getElementById('settings').style.display == 'block') {
-		document.getElementById('settings').style.display = 'none';
-		document.getElementById('profLink').innerHTML = "Profile Settings";
-	} else {
-		document.getElementById('settings').style.display = 'block';
-		document.getElementById('profLink').innerHTML = "Hide Settings";
-	}
-	
-}
-</script>
