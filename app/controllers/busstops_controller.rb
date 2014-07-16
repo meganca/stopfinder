@@ -192,10 +192,10 @@ class BusstopsController < ApplicationController
     stopid = ids[1]
     session[:update_type] = "new"
     
-    if(cookies[:user_id])
-      stopcheck = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = \"" + session[:stop_id] + "\" AND agencyid = \"" + session[:agency_id] + "\" AND userid = \"" + cookies[:user_id] + "\" ORDER BY DateCreated DESC")
-      rateLimitRedirect(stopcheck)
-    end  
+    #if(cookies[:user_id])
+     # stopcheck = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = \"" + session[:stop_id] + "\" AND agencyid = \"" + session[:agency_id] + "\" AND userid = \"" + cookies[:user_id] + "\" ORDER BY DateCreated DESC")
+      #rateLimitRedirect(stopcheck)
+    #end  
     
     # Have to check for device id; might be side effects for multiple users on one device, but
     # atm that is an outlier and should not be counted.
@@ -357,6 +357,18 @@ class BusstopsController < ApplicationController
       end
       
       currentUser.accuracy = (currentUser.otherVerifyingVotes * 1.0) / currentUser.otherTotalVotes
+      printf("Current accuracy: " + currentUser.accuracy.to_s)
+      #Check for accuracy badge
+      if (currentUser.accuracy >= 0.95)
+      	if(!currentUser.badges.include? "003")
+      		currentUser.badges = currentUser.badges + "003"
+      		flash[:notice] = "Congratulations! You have earned the badge 'Honor Roll'!"
+	  	end
+	  else
+	  	if(currentUser.badges.include "003")
+	  		currentUser.badges.slice! "003"
+	  	end
+	  end
       currentUser.save
     end
   end
@@ -416,10 +428,29 @@ class BusstopsController < ApplicationController
           user.newInfoSubmitted = user.newInfoSubmitted + 1
       end
         
-      printf("CURRENT BADGES: " + user.badges)
       if (user.newInfoSubmitted >= 50 && !(user.badges.include? "001"))
           user.badges = user.badges + "001"
+          flash[:notice] = "Congratulations! You have earned the badge 'Information Catalyst'!"
       end
+      
+      # Check user ranking for badge (only applies to visible users)
+	  if user.visible == 1
+     	 userWithRank = User.find_by_sql("select t.id, (select count(*) from users x where x.visible=1 AND x.points > t.points) AS position from users t where t.id = " + cookies[:user_id])
+      
+      # Add 1 because this indexes from 0
+      userRank = userWithRank[0].position + 1
+      
+     
+      # Badgechecking things here
+      	if (userRank <= 20)
+      		if(!user.badges.include? "004")
+      			user.badges = user.badges + "004"
+      			flash[:notice] = "Congratulations! You are a Top Contributor!"
+	  			end
+	  	elsif (user.badges.include? "004")
+	  			user.badges.slice! "004"
+	  	end
+	  end
       user.save
     end
     
@@ -458,30 +489,30 @@ class BusstopsController < ApplicationController
         user.points = 10
         user.stops = uniqueStops
         user.title = "01"
+        flash[:notice] = "Congratulations! You have earned the title 'Contributor'!"
       elsif (user.stops < uniqueStops) # This is a new stop
         user.points = user.points + 10
         user.stops = uniqueStops
         if (uniqueStops > 4)
-        	user.title = "02"
+        	if(user.title == "01")
+        		user.title = "02"
+				flash[:notice] = "Congratulations! You have earned the title 'Savvy Traveler'!"
+			end
         elsif (uniqueStops > 14)
-        	user.title = "03"
+        	if(user.title=="02")
+        		user.title = "03"
+        		flash[:notice] = "Congratulations! You have earned the title 'Stop Detective'!"
+        	end
         elsif (uniqueStops > 29)
-        	user.title = "04"
+        	if(user.title=="03")
+        		user.title = "04"
+				flash[:notice] = "Congratulations! You have earned the title 'Transit Wizard'!"
+			end
         end
       end
       user.save  
     end
-    
-    # Check user ranking for badge (only applies to visible users)
-    if user.visible == 1
-      userWithRank = User.find_by_sql("select t.id, (select count(*) from users x where x.visible=1 AND x.points > t.points) AS position from users t where t.id = " + cookies[:user_id])
-      
-      # Add 1 because this indexes from 0
-      userRank = userWithRank[0].position + 1
-      
-      # Badgechecking things here
-    end
-    
+   
     showLog = BusStop.usageLogger
     showLog.info("Submitted stop info for #{params[:busstop][:AgencyId]}_#{params[:busstop][:StopId]} at #{Time.now}")
     

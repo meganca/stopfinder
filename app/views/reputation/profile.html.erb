@@ -76,6 +76,15 @@ function toggleVisibility(id) {
   <% if User.find_by_id(cookies[:user_id]).badges.include? "001" %>
   <%= image_tag '001.png', :width => "50" %>
   <% end %>
+  <% if User.find_by_id(cookies[:user_id]).badges.include? "002" %>
+  <%= image_tag '002.png', :width => "50" %>
+  <% end %>
+  <% if User.find_by_id(cookies[:user_id]).badges.include? "003" %>
+  <%= image_tag '003.png', :width => "50" %>
+  <% end %>
+  <% if User.find_by_id(cookies[:user_id]).badges.include? "004" %>
+  <%= image_tag '004.png', :width => "50" %>
+  <% end %>
 <% end %>
 </div>
 <br/>
