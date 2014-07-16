@@ -32,9 +32,9 @@
   <tr id="Intersection image" style="background-color: #eee; display:none;">
     <td colspan=2>
       <% if session[:intersection_pos][:needs_verification] == "true" %>
-        <%= image_tag "", :id => "Intersection image content", :width => "100%" %> 
+        <%= image_tag "", :id => "Intersection image content", :style => "max-width: 100%;" %> 
       <% else %>
-        <%= image_tag Help.StopPosition[session[:intersection_pos][:value]].img, :id => "Intersection image content", :width => "100%", :alt=> Help.StopPosition[session[:intersection_pos][:value]].imgAltText %> 
+        <%= image_tag Help.StopPosition[session[:intersection_pos][:value]].img, :id => "Intersection image content", :style => "max-width: 100%;", :alt=> Help.StopPosition[session[:intersection_pos][:value]].imgAltText %> 
       <% end %>
     </td>
   </tr>  
@@ -67,9 +67,9 @@
   <tr id="RteSignType image" style="background-color: #eee; display:none;">
     <td colspan=2>
       <% if session[:sign_type][:needs_verification] == "true" %>
-        <%= image_tag '', :id => "RteSignType image content", :width => "100%" %> 
+        <%= image_tag '', :id => "RteSignType image content", :style => "max-width: 100%;" %> 
       <% else %>
-        <%= image_tag Help.SignType[session[:sign_type][:value]].img, :id => "RteSignType image content", :width => "100%", :alt=> Help.SignType[session[:sign_type][:value]].imgAltText %> 
+        <%= image_tag Help.SignType[session[:sign_type][:value]].img, :id => "RteSignType image content", :style => "max-width: 100%;", :alt=> Help.SignType[session[:sign_type][:value]].imgAltText %> 
       <% end %>
     </td>
   </tr>

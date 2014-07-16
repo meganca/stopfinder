@@ -51,7 +51,7 @@
   </tr>
   <tr id="intersection image" style="background-color: #eee; display:none;">
     <td colspan=2>
-      <%= image_tag Help.StopPosition[session[:intersection_pos][:value]].img, :id => "intersection image content", :width => "100%", :alt=> Help.StopPosition[session[:intersection_pos][:value]].imgAltText %> 
+      <%= image_tag Help.StopPosition[session[:intersection_pos][:value]].img, :id => "intersection image content", :style => "max-width: 100%;", :alt=> Help.StopPosition[session[:intersection_pos][:value]].imgAltText %> 
     </td>
   </tr>  
   <% if session[:sign_type][:value] != "unknown" %>
@@ -72,7 +72,7 @@
     </tr>
     <tr id="sign type image" style="background-color: #eee; display:none;">
       <td colspan=2>
-        <%= image_tag Help.SignType[session[:sign_type][:value]].img, :id => "sign type image content", :width => "100%", :alt =>  Help.SignType[session[:sign_type][:value]].imgAltText %> 
+        <%= image_tag Help.SignType[session[:sign_type][:value]].img, :id => "sign type image content", :style => "max-width: 100%;", :alt =>  Help.SignType[session[:sign_type][:value]].imgAltText %> 
       </td>
     </tr>
   <% end %>
