@@ -18,6 +18,7 @@ class SessionsController < ApplicationController
       currentAuth = Authorization.find_by_uid(auth_hash["uid"])
       
       if (currentAuth == nil)
+        # The first time we log in, we want to make sure the user gets credit for all past submissions
         if (currentUser != nil)
           currentAuth = Authorization.create(uid: auth_hash["uid"], provider: auth_hash["provider"], user_id: currentUser.id)
         else

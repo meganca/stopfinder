@@ -180,7 +180,7 @@ class BusStop < ActiveRecord::Base
   end
   
   ShelterInsetTypes = { "<1" => FieldInfo.new("against curb", 1), 
-    ">1" => FieldInfo.new("across sidewalk from curb", 1), 
+    ">1" => FieldInfo.new("inset from curb", 1), 
     "unknown" => FieldInfo.new("no data", 1) }
   
   module ShelterOrientation

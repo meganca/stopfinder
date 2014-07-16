@@ -181,7 +181,8 @@ class BusstopsController < ApplicationController
         session[:update_type] = "edit"
         session[:submission_id] = checkArray[0].InputId
         loadPriorSubmission(checkArray[0])
-        redirect_to duplicateentry_url(:id => session[:agency_id] + "_" + session[:stop_id]) and return
+        redirect_to duplicateentry_url(:id => session[:agency_id] + "_" + session[:stop_id])
+        return true
       end
     end
   end
@@ -191,17 +192,18 @@ class BusstopsController < ApplicationController
     agencyid = ids[0]
     stopid = ids[1]
     session[:update_type] = "new"
+    redirected = false
     
-    #if(cookies[:user_id])
-     # stopcheck = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = \"" + session[:stop_id] + "\" AND agencyid = \"" + session[:agency_id] + "\" AND userid = \"" + cookies[:user_id] + "\" ORDER BY DateCreated DESC")
-      #rateLimitRedirect(stopcheck)
-    #end  
+    if(cookies[:user_id])
+      stopcheck = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = \"" + session[:stop_id] + "\" AND agencyid = \"" + session[:agency_id] + "\" AND userid = \"" + cookies[:user_id] + "\" ORDER BY DateCreated DESC")
+      redirected = rateLimitRedirect(stopcheck)
+    end  
     
     # Have to check for device id; might be side effects for multiple users on one device, but
     # atm that is an outlier and should not be counted.
-    if(session[:device_id])
+    if(session[:device_id] && !redirected)
       stopcheck = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = \"" + session[:stop_id] + "\" AND agencyid = \"" + session[:agency_id] + "\" AND OBAId = \"" + session[:device_id] + "\" ORDER BY DateCreated DESC")
-      rateLimitRedirect(stopcheck)
+      redirected = rateLimitRedirect(stopcheck)
     end 
     
     showLog = BusStop.usageLogger
@@ -227,8 +229,19 @@ class BusstopsController < ApplicationController
     session[:sign_inset_edit] = submission.InsetFromCurb
     session[:sched_holder_edit] = submission.SchedHolder
     session[:shelter_count_edit] = submission.Shelters
-    session[:shelter_offset_edit] = submission.ShelterOffset
-    session[:shelter_orientation_edit] = submission.ShelterOrientation
+    
+    if submission.ShelterOffset == nil
+      session[:shelter_offset_edit] = "unknown"
+    else
+      session[:shelter_offset_edit] = submission.ShelterOffset
+    end
+    
+    if submission.ShelterOrientation == nil
+      session[:shelter_orientation_edit] = "unknown"
+    else
+      session[:shelter_orientation_edit] = submission.ShelterOrientation
+    end
+    
     session[:bench_count_edit] = submission.BenchCount
     session[:can_count_edit] = submission.HasCan
     session[:lighting_edit] = submission.LightingConditions
@@ -365,7 +378,7 @@ class BusstopsController < ApplicationController
       		flash[:notice] = "Congratulations! You have earned the badge 'Honor Roll'!"
 	  	end
 	  else
-	  	if(currentUser.badges.include "003")
+	  	if(currentUser.badges.include? "003")
 	  		currentUser.badges.slice! "003"
 	  	end
 	  end
