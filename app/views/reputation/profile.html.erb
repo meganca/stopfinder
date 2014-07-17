@@ -51,39 +51,40 @@ function toggleVisibility(id) {
 
 
 <div class="container">
-<% if User.find_by_id(cookies[:user_id]).title == nil %><%= image_tag 'oba_logo.png', :alt => "profile picture", :width => "50" %>
+<% if User.find_by_id(cookies[:user_id]).title == "" || User.find_by_id(cookies[:user_id]).title == nil %><%= image_tag 'oba_logo.png', :alt => "profile picture", :width => "50" %>
 <% else %> <%= image_tag User.find_by_id(cookies[:user_id]).title.to_s + '.png', :alt=>"Profile icon", :width=>"50"%>
 <% end %>
 
 <% if cookies[:user_id] %>
   Welcome, <%= User.find_by_id(cookies[:user_id]).name %>!
-  <br/><br/>
-  <% if (!User.find_by_id(cookies[:user_id]).visible) %>
-  <h4 style="color:red">Your profile is private. Make public to take part of rankings.</h4>
+  <% if (User.find_by_id(cookies[:user_id]).visible==0) %>
+  <h5 style="color:red">Your profile is private. Make public to take part of rankings. (Link to learn more about reputation system.)</h5>
+  <% else %>
   <br/>
   <% end %>
-  Points: <% if User.find_by_id(cookies[:user_id]).points == nil %>0
+  <br/>
+  <b>Points:</b> <% if User.find_by_id(cookies[:user_id]).points == nil %>0
   		  <% else %>
   			<%= User.find_by_id(cookies[:user_id]).points %>
   		 <% end %>
   <br />
   <%= link_to 'View Rankings', '/topcontributors/' %>
   <br/><br/>
-  Badges:
+  <b>Badges:</b> <%= link_to "#{image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about badges"}".html_safe, '/badges' %>
   <br/>
 <div class="badges">
 <% if User.find_by_id(cookies[:user_id]).badges != nil %>
   <% if User.find_by_id(cookies[:user_id]).badges.include? "001" %>
-  <%= image_tag '001.png', :width => "50" %>
+  <%= image_tag '001.png', :width => "50", :alt=>"Information catalyst badge"%>
   <% end %>
   <% if User.find_by_id(cookies[:user_id]).badges.include? "002" %>
-  <%= image_tag '002.png', :width => "50" %>
+  <%= image_tag '002.png', :width => "50", :alt=>"Stop explorer badge" %>
   <% end %>
   <% if User.find_by_id(cookies[:user_id]).badges.include? "003" %>
-  <%= image_tag '003.png', :width => "50" %>
+  <%= image_tag '003.png', :width => "50", :alt=>"Honor Roll badge" %>
   <% end %>
   <% if User.find_by_id(cookies[:user_id]).badges.include? "004" %>
-  <%= image_tag '004.png', :width => "50" %>
+  <%= image_tag '004.png', :width => "50", :alt=>"Top Contributor badge" %>
   <% end %>
 <% end %>
 </div>
@@ -92,7 +93,7 @@ function toggleVisibility(id) {
 <div class = "settings" id= "settings">
 <%= form_for :settings do |f| %>
  <%= f.label :make_visible do %>
- <% if (User.find_by_id(cookies[:user_id]).visible) %>
+ <% if (User.find_by_id(cookies[:user_id]).visible == 1) %>
  <% checked_value = true %>
  <% else %>
  <% checked_value = false %>
@@ -110,7 +111,7 @@ function toggleVisibility(id) {
 <% end %>
 </div>
 <a href="javascript:void(0)" onclick ="toggleVisibility('settings');" id="profLink">Profile Settings</a>
- <% if flash[:notice] %>
+ <% if flash[:notice] == "Please keep display name under 20 characters." %>
  	<script>
  	toggleVisibility('settings');
  	toggleVisibility('editName');

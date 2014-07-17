@@ -2,6 +2,9 @@ class ReputationController < ApplicationController
   def profile
   end
   
+  def badges
+  end
+  
   def create
   	  @form_submitted = true
   	  user = User.find_by_id(cookies[:user_id])

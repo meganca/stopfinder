@@ -22,9 +22,9 @@
 <% end %>
 
 <% if @user != nil %>
-	<% if @user.title == nil %><%= image_tag 'oba_logo.png', :alt => "profile picture", :width => "50" %>
-	<% else %> <%= image_tag @user.title.to_s + '.png', :alt=>"profile picture", :width=>"50"%>
-	<% end %>
+	<% if @user.title == "" || @user.title == nil %><%= image_tag 'oba_logo.png', :alt => "profile picture", :width => "50" %>
+<% else %> <%= image_tag @user.title.to_s + '.png', :alt=>"Profile icon", :width=>"50"%>
+<% end %>
   <%= @user.name %><br /><br/>
   Points: <% if @user.points == nil %>0
   		  <% else %>
@@ -41,5 +41,6 @@ Badges: <br/>
 </div>
 <% end %>
 <br />
+<%= link_to "My Profile/Settings", "/reputation/profile" %><br/>
 <%= link_to 'Return to information view', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>
 </div>

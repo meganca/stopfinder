@@ -1,0 +1,43 @@
+<head>
+<style>
+.container {
+	font-size: 1.3em;
+	margin: 0 auto;
+	padding-top:1em;
+}
+</style>
+</head>
+
+<div class= "container">
+	
+	<table cellpadding = "10" style="max-width: 500px;">
+	<tr><td colspan="2">These are the different badges you can earn while entering information in StopInfo. If you would like to suggest a badge, <%= link_to 'please let us know!', "/contact_forms/new" %></td></tr>
+	<tr><td><%= image_tag '001.png', :width => "50", :alt=>"Information catalyst badge"%></td>
+	<td><b>Information Catalyst:</b> Be the first to enter information for over fifty fields!</td>
+	</tr>
+	<tr><td><%= image_tag '003.png', :width => "50", :alt=>"Honor Roll badge"%></td>
+	<td><b>Honor Roll:</b> Maintain over 95% accuracy. (link: What is accuracy?)</td>
+	</tr>
+	<tr><td><%= image_tag '004.png', :width => "50", :alt=>"Top Contributor badge"%></td>
+	<td><b>Top Contributor:</b> Currently hold a rank on the <%= link_to 'top contributors', "/topcontributors" %> list. </td>
+	</tr>
+	<tr><td colspan="2">In addition to badges, you can earn titles by entering information for multiple stops. The titles are described below:</td></tr>
+	<tr><td><%= image_tag '01.png', :width => "50", :alt=>"Contributor title icon"%></td>
+	<td><b>Contributor:</b> Enter information for at least one stop. </td>
+	</tr>
+	<tr><td><%= image_tag '02.png', :width => "50", :alt=>"Savvy traveler icon"%></td>
+	<td><b>Savvy Traveler:</b> Enter information for 5 or more unique stops.</td>
+	</tr>
+	<tr><td><%= image_tag '03.png', :width => "50", :alt=>"Stop Detective icon"%></td>
+	<td><b>Stop Detective:</b> Enter information for 15 or more unique stops.</td>
+	</tr>
+	<tr><td><%= image_tag '04.png', :width => "50", :alt=>"Transit Wizard icon"%></td>
+	<td><b>Transit Wizard:</b> Enter information for 30 or more unique stops.</td>
+	</tr>
+	</table>
+	<br/>
+	<%= link_to 'Return to profile', "/reputation/profile" %><br/>
+	<%= link_to 'Return to information view', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>
+</div>
+
+	

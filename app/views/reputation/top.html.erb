@@ -9,11 +9,16 @@
 <b> Top Contributors </b><br/><br/>
 <% @userList.take_while{ |u| u.position <= 19}.each do |user| %>
   <%= user.position + 1 %>.
-  <%= image_tag user.title + '.png', :width=>"50"%> 
+  <% if (!user.title.eql? "") %>
+  	<%= image_tag user.title + '.png', :width=>"50"%> 
+  <% else %>
+  	<%= image_tag 'oba_logo.png', :width=>"50" %>
+  <% end %>
   <%= link_to user.name.to_s, '/user/' + user.id.to_s %>, 
   <%= user.points %> points
   <br/><br/>
 <% end %>
 <br/>
-<%= link_to "My Profile", "/reputation/profile" %>
+<%= link_to "My Profile/Settings", "/reputation/profile" %><br/>
+<%= link_to 'Return to information view', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>
 </div>
