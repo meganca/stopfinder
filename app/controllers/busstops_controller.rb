@@ -192,7 +192,8 @@ class BusstopsController < ApplicationController
     agencyid = ids[0]
     stopid = ids[1]
     session[:update_type] = "new"
-    
+	redirected = false 
+	
     if(cookies[:user_id])
       stopcheck = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = \"" + session[:stop_id] + "\" AND agencyid = \"" + session[:agency_id] + "\" AND userid = \"" + cookies[:user_id] + "\" ORDER BY DateCreated DESC")
       redirected = rateLimitRedirect(stopcheck)
