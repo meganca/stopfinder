@@ -16,6 +16,7 @@ StopfinderDev::Application.routes.draw do
   get '/user/:id' => 'reputation#publicprofile'
   get '/topcontributors' => 'reputation#top'
   get '/badges' => 'reputation#badges'
+  get '/about/faqs' => 'about#faqs'
   match 'about/entry/:id' => 'about#entry', :as => :dataentry
   match 'about/contact/:id' => 'about#contact', :as => :emailentry
   match '/testing' => 'about#testing'
@@ -35,6 +36,7 @@ StopfinderDev::Application.routes.draw do
 
   #Routing for reputation/profile
   post '/reputation/profile' => 'reputation#create'
+  post 'about/main' => 'about#create'
   
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

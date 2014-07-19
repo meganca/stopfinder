@@ -1,20 +1,22 @@
-<tr>
+<div style="padding: 5px;"><tr>
 <td><%= image_tag 'oba_logo.png', :width => "100" %><h1> StopInfo</h1></td>
 </tr>
 <p>This application is an ongoing research project at the University of Washington, designed to provide detailed information about bus stops to public transportation users. The information is a combination of data received King County Metro and information provided directly by users of the application. In particular, this application collects information identified by blind and low vision bus riders as landmarks they may use to locate their stop and navigate the bus system more easily.</p>
-<p>To access the stop information for a particular King County Metro bus stop, append the current URL with the following: </br>
-/busstops/1_StopNumber</p>
-<p>For example, the stop at Stevens Way and Benton Lane has the number 75403, so you would add: </br> /busstops/1_75403</p>
-
+<p>To access the stop information for a particular King County Metro bus stop, search by stop number below:</p>
+<%= form_for :search, :url => {action: "create"} do |f| %>
+<%= f.text_field :stop_num, :value => nil, :size => 20 %> <br/>
+<%= f.submit "Find Stop" %>
+<% end %> <br/>
 <table>
   <tr>
-    <td> <%= link_to 'Detailed study information', "/InformationStatementV6.pdf" %>
+    <td colspan = "2" height=20> <%= link_to 'Study information', "/InformationStatementV6.pdf" %>
     </td>
     <td width=40></td>
     <td><%= link_to 'What stop landmarks are used?', "/about/fields" %></td>
   </tr>
   <tr>
-    <td><%= link_to 'Contact us', "/contact_forms/new" %></td>
-    <td></td>
+  	<td colspan = "3"><%= link_to 'FAQs', "/about/faqs" %><br/></td>
+    <td colspan = "2"><%= link_to 'Contact us', "/contact_forms/new" %></td>
   </tr>
 </table>
+</div>

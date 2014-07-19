@@ -12,12 +12,26 @@ class AboutController < ApplicationController
     end
     
     showLog.info("")
+    
   end
   
   def contact
   end
   
+  def create
+ 	 stop = params[:search][:stop_num]
+ 	
+ 	 if (stop != nil && stop != "")
+	 	 redirect_to '/busstops/1_' + stop.to_s
+	 else
+	 	redirect_to '/'
+	 end
+  end
+  
   def entry
+  end
+  
+  def faqs
   end
   
   def irb
