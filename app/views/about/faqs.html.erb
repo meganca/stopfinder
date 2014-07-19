@@ -1,0 +1,46 @@
+<head>
+<style>
+.container {
+	font-size: 1.3em;
+	margin: 0 auto;
+	padding-top:1em;
+}
+</style>
+<title>About StopInfo</title>
+</head>
+
+<div class= "container">
+	<b>About StopInfo</b>
+	<br/><br/>
+	<a href ="#how-stopinfo-works">How does StopInfo work?</a><br/>
+	<a href ="#who-stopinfo-helps">Who does StopInfo benefit?</a><br/>
+	<a href ="#how-you-can-help">How can I help?</a><br/>
+	<a href ="#how-earn-badges">How do I earn badges?</a><br/>
+	<!--<a href ="#how-accuracy-works">How is accuracy assessed?</a><br/>-->
+	<br/>
+	<a name="how-stopinfo-works"></a><b>How does StopInfo work?</b><br/>
+	StopInfo combines data about bus stops from King County Metro 
+	along with information provided directly by users of the application. The system chooses which information to display 
+	according to a majority voting system. A field is considered as 'verified' when it receives
+	at least 75% of the same vote; otherwise, the majority answer is displayed as 'unverified.' 
+	Categories that have information provided by at least one source will appear 
+	on the stop information page.
+	<br/><br/>
+	<a name="who-stopinfo-helps"></a><b>Who does StopInfo benefit?</b><br/>
+	StopInfo is meant to be a tool for everyone who wishes to have information about transit stops as they travel. For example,
+	StopInfo provides information about whether stops are currently closed, or if the stop has good lighting at night. However,
+	we specifically collect information that has been identified by blind and low vision transit riders to be useful when trying to
+	locate transit stops. <br/><br/>
+	<a name="how-you-can-help"></a><b>How can I help?</b><br/>
+	Next time you are waiting at a bus stop, you can add or verify stop information by clicking on the 'Add/verify information' link at the bottom of that stop's information page. Details about the landmarks we are looking for are described by tapping the '?' icon next to each field, or on <%= link_to 'this page', "/about/fields" %>. You can also report temporary or permanent stop closures by tapping the 'Report closure' link on the relevant stop's information page. You can go back and edit stop information at any time if you choose to log in with a Facebook or Google account before adding information.
+	<br/><br/>
+	<a name="how-earn-badges"></a><b>How do I earn badges?</b><br/>
+	Badges are earned by achieving certain goals. They are described in detail <%= link_to 'here', "/badges" %>.
+	<br/><br/>
+	<!-- <a name="how-accuracy-works"></a><b>How is accuracy assessed?</b><br/> 
+	<br/><br/> -->
+	
+	<br/>
+<%= link_to 'StopInfo main page', "/" %><br/>
+<%= link_to 'Return to information view', "/reputation/profile" %>
+</div>
