@@ -138,8 +138,8 @@ class BusStop < ActiveRecord::Base
     COUNT = 3
   end
   
-  SignInsetTypes = { "<1" => FieldInfo.new("close to curb (< 1 foot)", 1), 
-    ">1" => FieldInfo.new("far from curb (> 1 foot)", 1), 
+  SignInsetTypes = { "<1" => FieldInfo.new("at curb", 1), 
+    ">1" => FieldInfo.new("away from curb", 1), 
     "unknown" => FieldInfo.new("no data", 1) }
   
   module BenchCount

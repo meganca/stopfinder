@@ -42,14 +42,14 @@ class Help
     "A graphic of a t-intersection, with the bus stop marked at the top of the T."), 
     "unknown" => Info.new("No information exists for this field.", '', '') }
     
-  StopPositions.default = Info.new("No data for this field.", "", "")
+  StopPositions.default = Info.new("No information exists for this field.", "", "")
   
   def self.StopPosition
     StopPositions
   end
   
-  ScheduleTypes = { "no" => Info.new("The stop has no schedule or the schedule is part of the sign.", "", ""), 
-    "yes" => Info.new("The schedule is separate but attached to the stop pole.", "", ""), 
+  ScheduleTypes = { "no" => Info.new("The stop has no schedule or the schedule is part of the sign.", "combined.png", ""), 
+    "yes" => Info.new("The schedule is separate but attached to the stop pole.", "combined.png", ""), 
     "unknown" => Info.new("No information exists for this field.", "", "") }
   
   ScheduleTypes.default = Info.new("No data for this field.", "", "")
@@ -58,7 +58,7 @@ class Help
     ScheduleTypes
   end
 
-  SignInsetTypes = { "<1" => Info.new("The sign is at the curb.", "", ""), 
+  SignInsetTypes = { "<1" => Info.new("The sign is within one foot of the curb.", "", ""), 
     ">1" => Info.new("The sign is further from the curb, either on the opposite side of the sidewalk or inset more than a foot.", "", ""), 
     "unknown" => Info.new("No information exists for this field.", "", "") }
   

@@ -15,7 +15,7 @@
       <% stopPosOptions[-1][1] = "unknown" %>
       <%= f.select :Intersection, stopPosOptions.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.StopPosition[x[0]].text, 'data-help_img'=> Help.StopPosition[x[0]].img, 'data-help_img_alt'=> Help.StopPosition[x[0]].imgAltText}]}, :selected => session[:intersection_pos][:value] %>
     <% end %>
-    <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about position", :data => { :helptype => "Intersection" } %> 
+    <%= image_tag "question-mark.png", :width => "18px", :alt=> "more information about position", :data => { :helptype => "Intersection" } %> 
     </td>
   </tr>
   <tr id="Intersection" style="background-color: #eee; display:none;">
@@ -50,7 +50,7 @@
         <% signOptions[-1][1] = "unknown" %>
         <%= f.select :RteSignType, signOptions.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.SignType[x[0]].text, 'data-help_img'=> Help.SignType[x[0]].img, 'data-help_img_alt'=> Help.SignType[x[0]].imgAltText} ]}, :selected =>session[:sign_type][:value] %>
       <% end %>
-      <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about position", :data => { :helptype => "RteSignType" } %> 
+      <%= image_tag "question-mark.png", :width => "18px", :alt=> "more information about position", :data => { :helptype => "RteSignType" } %> 
     </td>
   </tr>
   <tr id="RteSignType" style="background-color: #eee; display:none;">
@@ -85,7 +85,7 @@
         <% insetOptions[-1][1] = "unknown" %>
         <%= f.select :InsetFromCurb, insetOptions.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.SignInsetType[x[0]].text, 'data-help_img'=> Help.SignInsetType[x[0]].img, 'data-help_img_alt'=> Help.SignInsetType[x[0]].imgAltText} ]}, :selected => session[:sign_inset][:value] %>
       <% end %>
-      <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about position", :data => { :helptype => "InsetFromCurb" } %> 
+      <%= image_tag "question-mark.png", :width => "18px", :alt=> "more information about position", :data => { :helptype => "InsetFromCurb" } %> 
     </td>
   </tr>
   <tr id="InsetFromCurb" style="background-color: #eee; display:none;">
@@ -109,15 +109,25 @@
         <% schedOptions[-1][1] = "unknown" %>
         <%= f.select :SchedHolder, schedOptions.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.ScheduleType[x[0]].text, 'data-help_img'=> Help.ScheduleType[x[0]].img, 'data-help_img_alt'=> Help.ScheduleType[x[0]].imgAltText} ]}, :selected => session[:sched_holder][:value] %>
       <% end %>
-      <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about position", :data => { :helptype => "SchedHolder" } %>
+      <%= image_tag "question-mark.png", :width => "18px", :alt=> "more information about position", :data => { :helptype => "SchedHolder" } %>
     </td>
   </tr>
   <tr id="SchedHolder" style="background-color: #eee; display:none;">
     <td colspan=2 id="SchedHolder help text">
       <% if session[:sched_holder][:needs_verification] == "true" %>
-        <span id="SchedHolder help content">This field needs more user votes to be confirmed.</span>
+        <span id="SchedHolder help content">This field needs more user votes to be confirmed.</span><br />
       <% else %>
-        <span id="SchedHolder help content"><%= Help.ScheduleType[session[:sched_holder][:value]].text %></span>
+        <span id="SchedHolder help content"><%= Help.ScheduleType[session[:sched_holder][:value]].text %></span><br />
+      <% end %>
+      <a href="#" data-help-image="SchedHolder" id="SchedHolder image link"></a>
+    </td>
+  </tr>
+  <tr id="SchedHolder image" style="background-color: #eee; display:none;">
+    <td colspan=2>
+      <% if session[:sched_holder][:needs_verification] == "true" %>
+        <%= image_tag "", :id => "SchedHolder image content", :style => "max-width: 100%;" %> 
+      <% else %>
+        <%= image_tag Help.ScheduleType[session[:sched_holder_edit]].img, :id => "SchedHolder image content", :style => "max-width: 100%;", :alt=> Help.ScheduleType[session[:sched_holder_edit]].imgAltText %> 
       <% end %>
     </td>
   </tr>
@@ -148,7 +158,7 @@
             <% shelterOffsets[-1][1] = "unknown" %>
             <%= f.select :ShelterOffset, shelterOffsets.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.ShelterInsetType[x[0]].text, 'data-help_img'=> Help.ShelterInsetType[x[0]].img, 'data-help_img_alt'=> Help.ShelterInsetType[x[0]].imgAltText} ]}, :selected => session[:shelter_offset][:value] %>
         <% end %>
-        <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about position", :data => { :helptype => "ShelterOffset" } %>
+        <%= image_tag "question-mark.png", :width => "18px", :alt=> "more information about position", :data => { :helptype => "ShelterOffset" } %>
         </td>
       </tr>
       <tr id="ShelterOffset" style="background-color: #eee; display:none;">
@@ -174,7 +184,7 @@
             <% shelterOrientations[-1][1] = "unknown" %>
             <%= f.select :ShelterOrientation, shelterOrientations.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.ShelterOrientationType[x[0]].text, 'data-help_img'=> Help.ShelterOrientationType[x[0]].img, 'data-help_img_alt'=> Help.ShelterOrientationType[x[0]].imgAltText} ]}, :selected => session[:shelter_orientation][:value] %>
         <% end %>
-        <%= image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about position", :data => { :helptype => "ShelterOrientation" } %>
+        <%= image_tag "question-mark.png", :width => "18px", :alt=> "more information about position", :data => { :helptype => "ShelterOrientation" } %>
         </td>
       </tr>
       <tr id="ShelterOrientation" style="background-color: #eee; display:none;">
