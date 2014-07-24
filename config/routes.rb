@@ -16,7 +16,7 @@ StopfinderDev::Application.routes.draw do
   get '/user/:id' => 'reputation#publicprofile'
   get '/topcontributors' => 'reputation#top'
   get '/badges' => 'reputation#badges'
-  get '/about/faqs' => 'about#faqs'
+  get '/about/faq' => 'about#faq'
   match 'about/entry/:id' => 'about#entry', :as => :dataentry
   match 'about/contact/:id' => 'about#contact', :as => :emailentry
   match '/testing' => 'about#testing'

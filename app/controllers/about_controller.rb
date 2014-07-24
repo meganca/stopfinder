@@ -31,7 +31,7 @@ class AboutController < ApplicationController
   def entry
   end
   
-  def faqs
+  def faq
   end
   
   def irb
