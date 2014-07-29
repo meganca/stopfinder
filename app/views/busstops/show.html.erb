@@ -15,6 +15,9 @@
 	top: 0;
 	max-width: 45px;
 }
+.displaytable {
+  max-width: 500px;
+}
 </style>
 <script>
 function dismiss(id) {
@@ -27,7 +30,7 @@ function dismiss(id) {
 <body>
 
 <!------ BEGIN VIEW HEADER----------->
-<table cellpadding = "10">
+<table cellpadding = "10" class = "displaytable">
 <div class = "banner" id = "banner">
 	<script type="text/javascript">
 	var c = document.cookie.replace(/(?:(?:^|.*;\s*)showBanner\s*\=\s*([^;]*).*$)|^.*$/, "$1");
@@ -179,8 +182,14 @@ function dismiss(id) {
     <tr id="shelter position" style="background-color: #eee; display:none;">
       <td colspan=2 id="shelter position help text">
         <%= Help.ShelterInsetType[session[:shelter_offset][:value]].text %><br />
+        <a href="#" data-help-image="shelter position" id="shelter position image link"></a>
       </td>
     </tr>
+    <tr id="shelter position image" style="background-color: #eee; display:none;">
+      <td colspan=2>
+        <%= image_tag Help.ShelterInsetType[session[:shelter_offset][:value]].img, :id => "shelter position image content", :style => "max-width: 100%;", :alt=> Help.ShelterInsetType[session[:shelter_offset][:value]].imgAltText %>
+      </td>
+    </tr> 
   <% end %>
   <% if (session[:shelter_count][:value] != "0") && (session[:shelter_count][:value] != "unknown") && (session[:shelter_count][:needs_verification] == "false") && session[:shelter_orientation][:value] != "unknown" %>
     <tr>
@@ -194,8 +203,14 @@ function dismiss(id) {
     <tr id="shelter orientation" style="background-color: #eee; display:none;">
       <td colspan=2 id="shelter orientation help text">
         <%= Help.ShelterOrientationType[session[:shelter_orientation][:value]].text %><br />
+        <a href="#" data-help-image="shelter orientation" id="shelter orientation image link"></a>
       </td>
     </tr>
+    <tr id="shelter orientation image" style="background-color: #eee; display:none;">
+      <td colspan=2>
+        <%= image_tag Help.ShelterOrientationType[session[:shelter_orientation][:value]].img, :id => "shelter orientation image content", :style => "max-width: 100%;", :alt=> Help.ShelterOrientationType[session[:shelter_orientation][:value]].imgAltText %>
+      </td>
+    </tr> 
   <% end %>
   <% if session[:bench_count][:value] != "unknown" %>
     <tr>
@@ -208,7 +223,7 @@ function dismiss(id) {
   <% end %>
   <% if session[:can_count][:value] != "unknown" %>
     <tr>
-      <td>Trash can?:</td>
+      <td>Trash can:</td>
       <td>
         <%= BusStop.getFieldName("trashcan", session[:can_count][:value]) %>
         <% if session[:can_count][:needs_verification] == "true" %> * <% end %>
@@ -217,7 +232,7 @@ function dismiss(id) {
   <% end %>
   <% if session[:lighting][:value] != "unknown" %>
     <tr>
-      <td>Well-lit at night?:</td>
+      <td>Lighting at night:</td>
       <td>
         <%= BusStop.getFieldName("lighting", session[:lighting][:value]) %>
         <% if session[:lighting][:needs_verification] == "true" %> * <% end %>

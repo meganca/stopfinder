@@ -127,7 +127,7 @@
       <% if session[:sched_holder][:needs_verification] == "true" %>
         <%= image_tag "", :id => "SchedHolder image content", :style => "max-width: 100%;" %> 
       <% else %>
-        <%= image_tag Help.ScheduleType[session[:sched_holder_edit]].img, :id => "SchedHolder image content", :style => "max-width: 100%;", :alt=> Help.ScheduleType[session[:sched_holder_edit]].imgAltText %> 
+        <%= image_tag Help.ScheduleType[session[:sched_holder][:value]].img, :id => "SchedHolder image content", :style => "max-width: 100%;", :alt=> Help.ScheduleType[session[:sched_holder][:value]].imgAltText %> 
       <% end %>
     </td>
   </tr>
@@ -167,9 +167,19 @@
              <span id="ShelterOffset help content">This field needs more user votes to be confirmed.</span>
           <% else %>
             <span id="ShelterOffset help content"><%= Help.ShelterInsetType[session[:shelter_offset][:value]].text %></span>
-          <% end %>
+          <% end %><br />
+          <a href="#" data-help-image="ShelterOffset" id="ShelterOffset image link"></a>
         </td>
       </tr>
+    <tr id="ShelterOffset image" style="background-color: #eee; display:none;">
+      <td colspan=2>
+        <% if session[:shelter_offset][:needs_verification] == "true" %>
+          <%= image_tag "", :id => "ShelterOffset image content", :style => "max-width: 100%;" %> 
+        <% else %>
+          <%= image_tag Help.ShelterInsetType[session[:shelter_offset][:value]].img, :id => "ShelterOffset image content", :style => "max-width: 100%;", :alt=> Help.ShelterInsetType[session[:shelter_offset][:value]].imgAltText %> 
+        <% end %>
+      </td>
+    </tr>
     <% end %>
     <% if (session[:shelter_count][:value] != "0") && (session[:shelter_count][:value] != "unknown") && (session[:shelter_count][:needs_verification] == "false") %>
       <tr>
@@ -193,6 +203,16 @@
              <span id="ShelterOrientation help content">This field needs more user votes to be confirmed.</span>
           <% else %>
               <span id="ShelterOrientation help content"><%= Help.ShelterOrientationType[session[:shelter_orientation][:value]].text %></span>
+          <% end %><br />
+          <a href="#" data-help-image="ShelterOrientation" id="ShelterOrientation image link"></a>
+        </td>
+      </tr>
+      <tr id="ShelterOrientation image" style="background-color: #eee; display:none;">
+        <td colspan=2>
+          <% if session[:shelter_orientation][:needs_verification] == "true" %>
+            <%= image_tag "", :id => "ShelterOrientation image content", :style => "max-width: 100%;" %> 
+          <% else %>
+            <%= image_tag Help.ShelterOrientationType[session[:shelter_orientation][:value]].img, :id => "ShelterOrientation image content", :style => "max-width: 100%;", :alt=> Help.ShelterOrientationType[session[:shelter_orientation][:value]].imgAltText %> 
           <% end %>
         </td>
       </tr>

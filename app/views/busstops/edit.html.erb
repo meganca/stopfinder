@@ -27,11 +27,7 @@
   </tr>
   <tr id="Intersection image" style="background-color: #eee; display:none;">
     <td colspan=2>
-      <% if session[:intersection_pos][:needs_verification] == "true" %>
-        <%= image_tag "", :id => "Intersection image content", :style => "max-width: 100%;" %> 
-      <% else %>
-        <%= image_tag Help.StopPosition[session[:intersection_pos_edit]].img, :id => "Intersection image content", :style => "max-width: 100%;", :alt=> Help.StopPosition[session[:intersection_pos_edit]].imgAltText %> 
-      <% end %>
+      <%= image_tag Help.StopPosition[session[:intersection_pos_edit]].img, :id => "Intersection image content", :style => "max-width: 100%;", :alt=> Help.StopPosition[session[:intersection_pos_edit]].imgAltText %> 
     </td>
   </tr>  
   <tr>
@@ -57,11 +53,7 @@
   </tr>
   <tr id="RteSignType image" style="background-color: #eee; display:none;">
     <td colspan=2>
-      <% if session[:sign_type][:needs_verification] == "true" %>
-        <%= image_tag '', :id => "RteSignType image content", :style => "max-width: 100%;" %> 
-      <% else %>
-        <%= image_tag Help.SignType[session[:sign_type_edit]].img, :id => "RteSignType image content", :style => "max-width: 100%;", :alt=> Help.SignType[session[:sign_type_edit]].imgAltText %> 
-      <% end %>
+      <%= image_tag Help.SignType[session[:sign_type_edit]].img, :id => "RteSignType image content", :style => "max-width: 100%;", :alt=> Help.SignType[session[:sign_type_edit]].imgAltText %> 
     </td>
   </tr>
   <tr>
@@ -107,11 +99,7 @@
   </tr>
   <tr id="SchedHolder image" style="background-color: #eee; display:none;">
     <td colspan=2>
-      <% if session[:sched_holder][:needs_verification] == "true" %>
-        <%= image_tag "", :id => "SchedHolder image content", :style => "max-width: 100%;" %> 
-      <% else %>
-        <%= image_tag Help.ScheduleType[session[:sched_holder_edit]].img, :id => "SchedHolder image content", :style => "max-width: 100%;", :alt=> Help.ScheduleType[session[:sched_holder_edit]].imgAltText %> 
-      <% end %>
+      <%= image_tag Help.ScheduleType[session[:sched_holder_edit]].img, :id => "SchedHolder image content", :style => "max-width: 100%;", :alt=> Help.ScheduleType[session[:sched_holder_edit]].imgAltText %> 
     </td>
   </tr>
   <tr>
@@ -146,7 +134,13 @@
       </tr>
       <tr id="ShelterOffset" style="background-color: #eee; display:none;">
         <td colspan=2 id="ShelterOffset help text">
-          <span id="ShelterOffset help content"><%= Help.ShelterInsetType[session[:shelter_offset_edit]].text %></span>
+          <span id="ShelterOffset help content"><%= Help.ShelterInsetType[session[:shelter_offset_edit]].text %></span><br />
+          <a href="#" data-help-image="ShelterOffset" id="ShelterOffset image link"></a>
+        </td>
+      </tr>
+      <tr id="ShelterOffset image" style="background-color: #eee; display:none;">
+        <td colspan=2>
+          <%= image_tag Help.ShelterInsetType[session[:shelter_offset_edit]].img, :id => "ShelterOffset image content", :style => "max-width: 100%;", :alt=> Help.ShelterInsetType[session[:shelter_offset_edit]].imgAltText %> 
         </td>
       </tr>
     <% end %>
@@ -168,7 +162,13 @@
       </tr>
       <tr id="ShelterOrientation" style="background-color: #eee; display:none;">
         <td colspan=2 id="ShelterOrientation help text">
-          <span id="ShelterOrientation help content"><%= Help.ShelterOrientationType[session[:shelter_orientation_edit]].text %></span>
+          <span id="ShelterOrientation help content"><%= Help.ShelterOrientationType[session[:shelter_orientation_edit]].text %></span><br />
+          <a href="#" data-help-image="ShelterOrientation" id="ShelterOrientation image link"></a>
+        </td>
+      </tr>
+      <tr id="ShelterOrientation image" style="background-color: #eee; display:none;">
+        <td colspan=2>
+          <%= image_tag Help.ShelterOrientationType[session[:shelter_orientation_edit]].img, :id => "ShelterOrientation image content", :style => "max-width: 100%;", :alt=> Help.ShelterOrientationType[session[:shelter_orientation_edit]].imgAltText %> 
         </td>
       </tr>
     <% end %>

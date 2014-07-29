@@ -179,8 +179,8 @@ class BusStop < ActiveRecord::Base
     COUNT = 3
   end
   
-  ShelterInsetTypes = { "<1" => FieldInfo.new("against curb", 1), 
-    ">1" => FieldInfo.new("inset from curb", 1), 
+  ShelterInsetTypes = { "<1" => FieldInfo.new("at curb", 1), 
+    ">1" => FieldInfo.new("away from curb", 1), 
     "unknown" => FieldInfo.new("no data", 1) }
   
   module ShelterOrientation

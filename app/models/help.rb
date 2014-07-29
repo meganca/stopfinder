@@ -68,8 +68,8 @@ class Help
     SignInsetTypes
   end
   
-  ShelterInsetTypes = { "<1" => Info.new("The shelter is placed next to the curb.", "", ""), 
-    ">1" => Info.new("The shelter is inset from the curb, across the sidewalk.", "", ""), 
+  ShelterInsetTypes = { "<1" => Info.new("The shelter is placed next to the curb.", "shelterpositions.png", ""), 
+    ">1" => Info.new("The shelter is away from the curb, either in the middle of the sidewalk or across the sidewalk from the curb.", "shelterpositions.png", ""), 
     "unknown" => Info.new("No information exists for this field.", "", "") }
     
   ShelterInsetTypes.default = Info.new("No data for this field.", "", "")
@@ -78,9 +78,9 @@ class Help
     ShelterInsetTypes
   end
   
-  ShelterOrientationTypes = { "streetfacing" => Info.new("The shelter is parallel to the street, with the open side facing the curb.", "", ""), 
-    "away from street" => Info.new("The shelter opens away from the street, with the closed back facing the curb.", "", ""), 
-    "sideways" => Info.new("The shelter is perpendicular to the street, with the narrow side facing the curb.", "", ""),
+  ShelterOrientationTypes = { "streetfacing" => Info.new("The shelter is parallel to the street, with the open side facing the curb.", "streetfacing.png", ""), 
+    "away from street" => Info.new("The shelter opens away from the street, with the closed back facing the curb.", "sidewalkfacing.png", ""), 
+    "sideways" => Info.new("The shelter is perpendicular to the street, with the narrow side facing the curb.", "perpendicular.png", ""),
     "unknown" => Info.new("No information exists for this field.", "", "") }
   
   ShelterOrientationTypes.default = Info.new("No data for this field.", "", "")
