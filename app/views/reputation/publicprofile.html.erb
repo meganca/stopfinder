@@ -15,27 +15,45 @@
 
 
 <div class="container">
-<% if @displayInfo == "hidden" %>
-  This user's profile is not public.
-<% elsif @displayInfo == "no user" %>
-  There is no user by that id.
-<% end %>
 
 <% if @user != nil %>
 	<% if @user.title == "" || @user.title == nil %><%= image_tag 'oba_logo.png', :alt => "profile picture", :width => "50" %>
 <% else %> <%= image_tag @user.title.to_s + '.png', :alt=>"Profile icon", :width=>"50"%>
 <% end %>
-  <%= @user.name %><br /><br/>
+
+  <%= @user.name %><br />
+  <h4 style="color:red;">
+<% if @displayInfo == "hidden" %>
+  This user's profile is not public.
+<% elsif @displayInfo == "no user" %>
+  There is no user by that id.
+<% elsif @displayInfo == "same user" %>
+  This is your public profile.
+<% end %>
+</h4>
+<br/>
   Points: <% if @user.points == nil %>0
   		  <% else %>
   			<%= @user.points %>
   		 <% end %>
-  <br /><br/>
+  <br />
+  <%= link_to 'View Rankings', '/topcontributors/' %>
+  <br/><br/>
+  <b>Badges:</b> <%= link_to "#{image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about badges"}".html_safe, '/badges' %>
+  <br/>
 <div class="badges">
-Badges: <br/>
-<% if @user.badges != nil %>
-  <% if @user.badges.include? "001" %>
-  <%= image_tag '001.png', :width => "50" %>
+<% if User.find_by_id(cookies[:user_id]).badges != nil %>
+  <% if User.find_by_id(cookies[:user_id]).badges.include? "001" %>
+  <%= image_tag '001.png', :width => "50", :alt=>"Information catalyst badge"%>
+  <% end %>
+  <% if User.find_by_id(cookies[:user_id]).badges.include? "002" %>
+  <%= image_tag '002.png', :width => "50", :alt=>"Stop explorer badge" %>
+  <% end %>
+  <% if User.find_by_id(cookies[:user_id]).badges.include? "003" %>
+  <%= image_tag '003.png', :width => "50", :alt=>"Honor Roll badge" %>
+  <% end %>
+  <% if User.find_by_id(cookies[:user_id]).badges.include? "004" %>
+  <%= image_tag '004.png', :width => "50", :alt=>"Top Contributor badge" %>
   <% end %>
 <% end %>
 </div>

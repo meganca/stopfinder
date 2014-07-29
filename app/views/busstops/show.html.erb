@@ -1,4 +1,48 @@
-<table cellpadding = "10" style="max-width: 500px;">
+<head>
+<style>
+.container {
+	max-width: 500px;
+	padding: 5px;
+}
+.banner {
+	padding: 5px;
+	max-width: 500px;
+	position: relative;
+}
+.dismiss {
+	position: absolute; 
+	right: 0;
+	top: 0;
+	max-width: 45px;
+}
+</style>
+<script>
+function dismiss(id) {
+	var e = document.getElementById(id);
+	e.style.display = 'none';
+	document.cookie = "showBanner=false";
+}
+</script>
+</head>
+<body>
+
+<!------ BEGIN VIEW HEADER----------->
+<table cellpadding = "10">
+<div class = "banner" id = "banner">
+	<script type="text/javascript">
+	var c = document.cookie.replace(/(?:(?:^|.*;\s*)showBanner\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	if (c == "false") {
+		var e = document.getElementById('banner');
+		e.style.display = 'none';
+	} 
+	</script> 
+
+	<%= image_tag 'topbanner.png', :alt=> 'New! Earn points & gain recognition by entering information about stops. Login with an existing account to get started!', :width=>'100%' %>
+	<div class = 'dismiss'>
+	<a href='javascript:void(0)' onclick ="dismiss('banner');"><%= image_tag 'dismissbutton.png', :alt=> 'Click to dismiss notice.', :width=>'80%' %></a>
+	</div>	
+</div>
+
 <tr align="right"> <td></td>
     <% if cookies[:user_email] %>
       <td><%= cookies[:user_email].to_s %><br/> 
@@ -7,6 +51,8 @@
     <% else %>
       <td><a href = "/login/">Log in with <%= image_tag 'fb_icon_325x325.png', :alt=>"Facebook", :width=> '20'%> or <%= image_tag 'Google-G-Logo.png', :alt=>"Google", :width=> '20'%></a></td>
     <% end %>
+</tr>
+<!----- BEGIN STOP INFO TABLE ----->
 <tr><td colspan=2>
 <h2><%= session[:stop_name] %>,</h2><h3><%= session[:direction] %> bound</h3>
 </td></tr>
@@ -198,3 +244,4 @@
     <td><%= link_to 'FAQ', "/about/faq" %></td>
   </tr>
 </table>
+</body>

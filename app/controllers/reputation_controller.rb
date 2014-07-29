@@ -31,6 +31,8 @@ class ReputationController < ApplicationController
     elsif(@user.visible == 0)
       @user = nil
       @displayInfo = "hidden"
+    elsif(@user == User.find_by_id(cookies[:user_id]))
+      @displayInfo = "same user"
     end
   end
   
