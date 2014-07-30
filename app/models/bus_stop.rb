@@ -2,7 +2,7 @@ class BusStop < ActiveRecord::Base
   self.table_name = "busstops"
   attr_accessible :UserId, :AgencyId, :StopId, :BearingCode, :Intersection,
     :RteSignType, :SchedHolder, :Shelters, :BenchCount, :HasCan, :AddedFrom,
-    :StopComment, :UserIP, :DateCreated, :UserAtStop, :InsetFromCurb, :OBAId,
+    :StopComment, :DateCreated, :UserAtStop, :InsetFromCurb, :OBAId,
     :ShelterOffset, :ShelterOrientation, :LightingConditions, :InputId, :LastEdited
 
   # Log some custom information
