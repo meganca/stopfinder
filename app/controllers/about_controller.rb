@@ -31,6 +31,9 @@ class AboutController < ApplicationController
   def entry
   end
   
+  def deleted
+  end
+  
   def faq
   end
   

@@ -1,0 +1,55 @@
+<head>
+<style>
+.container {
+	font-size: 1.3em;
+	margin: 0 auto;
+	padding-top:1em;
+}
+
+.badges {
+	margin: 0 auto;
+}
+.settings {
+	display: none;
+	padding:5px;
+	font-size:1em;
+	background-color: rgb(238,238,238);
+	max-width: 80%;
+}
+.editName {
+	display: none;
+}
+.alert {
+	color:red;
+	display:block;
+}
+p {
+  font-size:0.9em;
+}
+</style>
+
+</head>
+
+
+<div class="container">
+<% if @user.title == "" || @user.title == nil %><%= image_tag 'oba_logo.png', :alt => "profile picture", :width => "50" %>
+<% else %> <%= image_tag @user.title.to_s + '.png', :alt=>"Profile icon", :width=>"50"%>
+<% end %>
+
+<% if cookies[:user_id] %>
+  <%= @user.name %><br /><br />
+ 
+  <p>Deleting this account will delete your personal statistics, but not data submitted to bus stops. You may 
+  create a new account with this email at any time by logging in again. Please note that all information is deleted <i>permanently</i>. </p>
+<br/>
+
+<p>Would you like to proceed?</p>
+
+<%= link_to "Yes, delete my account", :deleteaccount %>   |   <%= link_to "No, return to profile", :userprofile %>
+<% else %>
+  Not logged in. <%= link_to 'Log in here', "/login/" %><br />
+<% end %>
+<br />
+<%= link_to 'Return to information view', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>
+</div>
+

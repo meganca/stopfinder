@@ -12,13 +12,16 @@ StopfinderDev::Application.routes.draw do
   get '/edit/:id' => 'busstops#edit', :as => :duplicateentry
   get '/add/:id' => 'busstops#addnew'
   get '/closed/:id' => 'closures#report'
-  get '/reputation/profile' => 'reputation#profile'
+  get '/profile' => 'reputation#profile', :as => :userprofile
   get '/user/:id' => 'reputation#publicprofile'
   get '/topcontributors' => 'reputation#top'
   get '/badges' => 'reputation#badges'
+  get '/confirm' => 'reputation#confirmdelete'
+  get '/delete' => 'reputation#delete', :as => :deleteaccount
   get '/about/faq' => 'about#faq'
   match 'about/entry/:id' => 'about#entry', :as => :dataentry
   match 'about/contact/:id' => 'about#contact', :as => :emailentry
+  match 'about/deleted' => 'about#deleted', :as => :accountdeleted
   match '/testing' => 'about#testing'
   match '/busstops/:id' => 'busstops#show', :as => :dataview
   
@@ -32,10 +35,9 @@ StopfinderDev::Application.routes.draw do
   #get	'/manage/account', :to => 'sessions#edit', as => :manage
   match '/auth/:provider/callback', :to => 'sessions#create'
   match '/auth/failure', :to => 'sessions#failure'
-  #devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
 
   #Routing for reputation/profile
-  post '/reputation/profile' => 'reputation#create'
+  post '/profile' => 'reputation#create'
   post 'about/main' => 'about#create'
   
   # Sample of regular route:

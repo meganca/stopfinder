@@ -49,7 +49,7 @@ function dismiss(id) {
 <tr align="right"> <td></td>
     <% if cookies[:user_email] %>
       <td><%= cookies[:user_email].to_s %><br/> 
-      <%= link_to "View Profile/Settings", "/reputation/profile" %><br/>
+      <%= link_to "View Profile/Settings", "/profile" %><br/>
       <%= link_to "Log out", "/logout/" %> </td>
     <% else %>
       <td><a href = "/login/">Log in with <%= image_tag 'fb_icon_325x325.png', :alt=>"Facebook", :width=> '20'%> or <%= image_tag 'Google-G-Logo.png', :alt=>"Google", :width=> '20'%></a></td>
