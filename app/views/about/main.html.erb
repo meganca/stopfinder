@@ -3,20 +3,14 @@
 </tr>
 <p>This application is an ongoing research project at the University of Washington, designed to provide detailed information about bus stops to public transportation users. The information is a combination of data received King County Metro and information provided directly by users of the application. In particular, this application collects information identified by blind and low vision bus riders as landmarks they may use to locate their stop and navigate the bus system more easily.</p>
 <p>To access the stop information for a particular King County Metro bus stop, search by stop number below:</p>
+<!--<a href= "http://homes.cs.washington.edu/~cbonnar/stops.txt" target="_blank">Sample Stop Numbers</a><br/> -->
 <%= form_for :search, :url => {action: "create"} do |f| %>
 <%= f.text_field :stop_num, :value => nil, :size => 20 %> <br/>
 <%= f.submit "Find Stop" %>
 <% end %> <br/>
-<table>
-  <tr>
-    <td colspan = "2" height=20> <%= link_to 'Study information', "/InformationStatementV6.pdf" %>
-    </td>
-    <td width=40></td>
-    <td><%= link_to 'What stop landmarks are used?', "/about/fields" %></td>
-  </tr>
-  <tr>
-  	<td colspan = "3"><%= link_to 'FAQ', "/about/faq" %><br/></td>
-    <td colspan = "2"><%= link_to 'Contact us', "/contact_forms/new" %></td>
-  </tr>
-</table>
+
+<%= link_to 'What stop landmarks are used?', "/about/fields" %><br/>
+<%= link_to 'FAQ', "/about/faq" %><br/>
+<%= link_to 'Contact us', "/contact_forms/new" %>
+
 </div>

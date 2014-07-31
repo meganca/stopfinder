@@ -56,9 +56,10 @@ function toggleVisibility(id) {
 <% end %>
 
 <% if cookies[:user_id] %>
-  Welcome, <%= User.find_by_id(cookies[:user_id]).name %>!
+  Welcome, <%= User.find_by_id(cookies[:user_id]).name %>!<br/>
+  <%= link_to "Log out", "/logout/" %> <br/>
   <% if (User.find_by_id(cookies[:user_id]).visible==0) %>
-  <h5 style="color:red">Your profile is private. Make public to take part of rankings. (Link to learn more about reputation system.)</h5>
+  <h5 style="color:red">Your profile is private. Make public in settings in order to be considered for the <%= link_to 'top contributors list', '/topcontributors/' %>. </h5>
   <% else %>
   <br/>
   <% end %>
@@ -107,10 +108,12 @@ function toggleVisibility(id) {
  </div>
  <a href="javascript:void(0)" onclick="toggleVisibility('editName');" id="displayLink">Edit Display Name</a>
  <br/>
+<%= link_to "Delete account", "/confirm/" %><br/>
 <%= f.submit "Save Changes" %>
 <% end %>
 </div>
-<a href="javascript:void(0)" onclick ="toggleVisibility('settings');" id="profLink">Profile Settings</a>
+<a href="javascript:void(0)" onclick ="toggleVisibility('settings');" id="profLink">Account Settings</a>
+
  <% if flash[:notice] == "Please keep display name under 20 characters." %>
  	<script>
  	toggleVisibility('settings');
@@ -122,9 +125,5 @@ function toggleVisibility(id) {
 <% end %>
 <br />
 <%= link_to 'Return to information view', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>
-<br/>
-<%= link_to "Log out", "/logout/" %>
-<br/>
-<%= link_to "Delete account", "/confirm/" %>
 </div>
 

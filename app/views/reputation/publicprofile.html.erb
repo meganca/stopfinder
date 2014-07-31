@@ -39,26 +39,26 @@
   <br />
   <%= link_to 'View Rankings', '/topcontributors/' %>
   <br/><br/>
-  <b>Badges:</b> <%= link_to "#{image_tag "question-mark.jpg", :width => "18px", :alt=> "more information about badges"}".html_safe, '/badges' %>
+  <b>Badges:</b> <%= link_to "#{image_tag "question-mark.png", :width => "18px", :alt=> "more information about badges"}".html_safe, '/badges' %>
   <br/>
 <div class="badges">
-<% if User.find_by_id(cookies[:user_id]).badges != nil %>
-  <% if User.find_by_id(cookies[:user_id]).badges.include? "001" %>
+<% if @user.badges != nil %>
+  <% if @user.badges.include? "001" %>
   <%= image_tag '001.png', :width => "50", :alt=>"Information catalyst badge"%>
   <% end %>
-  <% if User.find_by_id(cookies[:user_id]).badges.include? "002" %>
+  <% if @user.badges.include? "002" %>
   <%= image_tag '002.png', :width => "50", :alt=>"Stop explorer badge" %>
   <% end %>
-  <% if User.find_by_id(cookies[:user_id]).badges.include? "003" %>
+  <% if @user.badges.include? "003" %>
   <%= image_tag '003.png', :width => "50", :alt=>"Honor Roll badge" %>
   <% end %>
-  <% if User.find_by_id(cookies[:user_id]).badges.include? "004" %>
+  <% if @user.badges.include? "004" %>
   <%= image_tag '004.png', :width => "50", :alt=>"Top Contributor badge" %>
   <% end %>
 <% end %>
 </div>
 <% end %>
 <br />
-<%= link_to "My Profile/Settings", "/reputation/profile" %><br/>
+<%= link_to "My Profile/Settings", "/profile" %><br/>
 <%= link_to 'Return to information view', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>
 </div>
