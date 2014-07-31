@@ -57,7 +57,6 @@ function toggleVisibility(id) {
 
 <% if cookies[:user_id] %>
   Welcome, <%= User.find_by_id(cookies[:user_id]).name %>!<br/>
-  <%= link_to "Log out", "/logout/" %> <br/>
   <% if (User.find_by_id(cookies[:user_id]).visible==0) %>
   <h5 style="color:red">Your profile is private. Make public in settings in order to be considered for the <%= link_to 'top contributors list', '/topcontributors/' %>. </h5>
   <% else %>
@@ -124,6 +123,7 @@ function toggleVisibility(id) {
   Not logged in. <%= link_to 'Log in here', "/login/" %><br />
 <% end %>
 <br />
-<%= link_to 'Return to information view', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>
+<%= link_to 'Return to information view', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %><br/>
+<%= link_to "Log out", "/logout/" %>
 </div>
 
