@@ -74,6 +74,9 @@ function toggleVisibility(id) {
   <br/>
 <div class="badges">
 <% if User.find_by_id(cookies[:user_id]).badges != nil %>
+  <% if User.find_by_id(cookies[:user_id]).badges == "" %>
+  There are no badges to show yet. Enter stop information to collect!
+  <% end %>
   <% if User.find_by_id(cookies[:user_id]).badges.include? "001" %>
   <%= image_tag '001.png', :width => "50", :alt=>"Information catalyst badge"%>
   <% end %>
