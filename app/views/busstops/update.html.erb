@@ -2,39 +2,42 @@
 <table style="max-width: 500px;">
 <tr><td colspan=2>
 <h2><%= session[:stop_name] %>,</h2><h3><%= session[:direction] %> bound</h3>
+<% if session[:update_type] == "edit" %>
+  <p> You've submitted information for this stop within the last 24 hours. You may edit your prior submission: </p>
+<% end %>
 </td></tr>
 <%= form_for :busstop, url: busstops_path do |f| %>
   <tr>
     <td><div style="max-width:90%;"><%= f.label :Intersection, "Stop position: " %> <%= image_tag "question-mark.png", :width => "18px", :alt=> "more information about position", :data => { :helptype => "Intersection" } %></div></td>
     <td>
-    <% if session[:intersection_pos][:needs_verification] == "true" %>
+    <% if session[:intersection_pos][:needs_verification] == "true" && session[:update_type] != "edit" %>
       <% stopPosOptions = BusStop.getActivePairs("stop position") %>
       <% stopPosOptions[-1][1] = "needs verification" %>
       <%= f.select :Intersection, stopPosOptions.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.StopPosition[x[0]].text, 'data-help_img'=> Help.StopPosition[x[0]].img, 'data-help_img_alt'=> Help.StopPosition[x[0]].imgAltText}]}, :selected => "unknown" %>
     <% else %>
       <% stopPosOptions = BusStop.getActivePairs("stop position") %>
       <% stopPosOptions[-1][1] = "unknown" %>
-      <%= f.select :Intersection, stopPosOptions.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.StopPosition[x[0]].text, 'data-help_img'=> Help.StopPosition[x[0]].img, 'data-help_img_alt'=> Help.StopPosition[x[0]].imgAltText}]}, :selected => session[:intersection_pos][:value] %>
+      <%= f.select :Intersection, stopPosOptions.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.StopPosition[x[0]].text, 'data-help_img'=> Help.StopPosition[x[0]].img, 'data-help_img_alt'=> Help.StopPosition[x[0]].imgAltText}]}, :selected => @intersection_pos %>
     <% end %>
     </td>
   </tr>
   <tr id="Intersection" style="background-color: #eee; display:none;">
     <td colspan=2 id="Intersection help text">
-      <% if session[:intersection_pos][:needs_verification] == "true" %>
+      <% if session[:intersection_pos][:needs_verification] == "true" && session[:update_type] != "edit" %>
          <span id="Intersection help content">This field needs more user votes to be confirmed.</span><br />
          <a href="#" data-help-image="Intersection" id="Intersection image link"></a>
       <% else %>
-        <span id="Intersection help content"><%= Help.StopPosition[session[:intersection_pos][:value]].text %></span><br />
+        <span id="Intersection help content"><%= Help.StopPosition[@intersection_pos].text %></span><br />
         <a href="#" data-help-image="Intersection" id="Intersection image link">(display example image)</a>
       <% end %>
     </td>
   </tr>
   <tr id="Intersection image" style="background-color: #eee; display:none;">
     <td colspan=2>
-      <% if session[:intersection_pos][:needs_verification] == "true" %>
+      <% if session[:intersection_pos][:needs_verification] == "true" && session[:update_type] != "edit" %>
         <%= image_tag "", :id => "Intersection image content", :style => "max-width: 100%;" %> 
       <% else %>
-        <%= image_tag Help.StopPosition[session[:intersection_pos][:value]].img, :id => "Intersection image content", :style => "max-width: 100%;", :alt=> Help.StopPosition[session[:intersection_pos][:value]].imgAltText %> 
+        <%= image_tag Help.StopPosition[@intersection_pos].img, :id => "Intersection image content", :style => "max-width: 100%;", :alt=> Help.StopPosition[@intersection_pos].imgAltText %> 
       <% end %>
     </td>
   </tr>  
@@ -42,173 +45,173 @@
     <td><%= f.label :RteSignType, "Sign Type:" %>  <%= image_tag "question-mark.png", :width => "18px", :alt=> "more information about position", :data => { :helptype => "RteSignType" } %> 
 </td>
     <td>
-      <% if session[:sign_type][:needs_verification] == "true" %>
+      <% if session[:sign_type][:needs_verification] == "true" && session[:update_type] != "edit" %>
         <% signOptions = BusStop.getActivePairs("sign type") %>
         <% signOptions[-1][1] = "needs verification" %>
         <%= f.select :RteSignType, signOptions.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.SignType[x[0]].text, 'data-help_img'=> Help.SignType[x[0]].img, 'data-help_img_alt'=> Help.SignType[x[0]].imgAltText} ]}, :selected => "unknown"  %>
       <% else %>
         <% signOptions = BusStop.getActivePairs("sign type") %>
         <% signOptions[-1][1] = "unknown" %>
-        <%= f.select :RteSignType, signOptions.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.SignType[x[0]].text, 'data-help_img'=> Help.SignType[x[0]].img, 'data-help_img_alt'=> Help.SignType[x[0]].imgAltText} ]}, :selected =>session[:sign_type][:value]  %>
+        <%= f.select :RteSignType, signOptions.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.SignType[x[0]].text, 'data-help_img'=> Help.SignType[x[0]].img, 'data-help_img_alt'=> Help.SignType[x[0]].imgAltText} ]}, :selected => @sign_type %>
       <% end %>
       </td>
   </tr>
   <tr id="RteSignType" style="background-color: #eee; display:none;">
     <td colspan=2 id="RteSignType help text">
-      <% if session[:sign_type][:needs_verification] == "true" %>
+      <% if session[:sign_type][:needs_verification] == "true" && session[:update_type] != "edit" %>
          <span id="RteSignType help content">This field needs more user votes to be confirmed.</span><br />
          <a href="#" data-help-image="RteSignType" id="RteSignType image link"></a>
       <% else %>
-        <span id="RteSignType help content"><%= Help.SignType[session[:sign_type][:value]].text %></span><br />
+        <span id="RteSignType help content"><%= Help.SignType[@sign_type].text %></span><br />
         <a href="#" data-help-image="RteSignType" id="RteSignType image link">(display example image)</a>
       <% end %>
     </td>
   </tr>
   <tr id="RteSignType image" style="background-color: #eee; display:none;">
     <td colspan=2>
-      <% if session[:sign_type][:needs_verification] == "true" %>
+      <% if session[:sign_type][:needs_verification] == "true" && session[:update_type] != "edit" %>
         <%= image_tag '', :id => "RteSignType image content", :style => "max-width: 100%;" %> 
       <% else %>
-        <%= image_tag Help.SignType[session[:sign_type][:value]].img, :id => "RteSignType image content", :style => "max-width: 100%;", :alt=> Help.SignType[session[:sign_type][:value]].imgAltText %> 
+        <%= image_tag Help.SignType[@sign_type].img, :id => "RteSignType image content", :style => "max-width: 100%;", :alt=> Help.SignType[@sign_type].imgAltText %> 
       <% end %>
     </td>
   </tr>
   <tr>
     <td><%= f.label :InsetFromCurb, "Sign position:" %> <%= image_tag "question-mark.png", :width => "18px", :alt=> "more information about position", :data => { :helptype => "InsetFromCurb" } %> </td>
     <td>
-      <% if session[:sign_inset][:needs_verification] == "true" %>
+      <% if session[:sign_inset][:needs_verification] == "true" && session[:update_type] != "edit" %>
         <% insetOptions = BusStop.getActivePairs("sign inset") %>
         <% insetOptions[-1][1] = "needs verification" %>
         <%= f.select :InsetFromCurb, insetOptions.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.SignInsetType[x[0]].text, 'data-help_img'=> Help.SignInsetType[x[0]].img, 'data-help_img_alt'=> Help.SignInsetType[x[0]].imgAltText} ]}, :selected => "unknown" %>
       <% else %>
         <% insetOptions = BusStop.getActivePairs("sign inset") %>
         <% insetOptions[-1][1] = "unknown" %>
-        <%= f.select :InsetFromCurb, insetOptions.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.SignInsetType[x[0]].text, 'data-help_img'=> Help.SignInsetType[x[0]].img, 'data-help_img_alt'=> Help.SignInsetType[x[0]].imgAltText} ]}, :selected => session[:sign_inset][:value] %>
+        <%= f.select :InsetFromCurb, insetOptions.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.SignInsetType[x[0]].text, 'data-help_img'=> Help.SignInsetType[x[0]].img, 'data-help_img_alt'=> Help.SignInsetType[x[0]].imgAltText} ]}, :selected => @sign_inset %>
       <% end %>
     </td>
   </tr>
   <tr id="InsetFromCurb" style="background-color: #eee; display:none;">
     <td colspan=2 id="InsetFromCurb help text">
-      <% if session[:sign_inset][:needs_verification] == "true" %>
+      <% if session[:sign_inset][:needs_verification] == "true" && session[:update_type] != "edit" %>
          <span id="InsetFromCurb help content">This field needs more user votes to be confirmed.</span>
       <% else %>
-        <span id="InsetFromCurb help content"><%= Help.SignInsetType[session[:sign_inset][:value]].text %></span>
+        <span id="InsetFromCurb help content"><%= Help.SignInsetType[@sign_inset].text %></span>
       <% end %>
     </td>
   </tr>
   <tr>
     <td><%= f.label :SchedHolder, "Schedule holder:" %> <%= image_tag "question-mark.png", :width => "18px", :alt=> "more information about position", :data => { :helptype => "SchedHolder" } %></td>
     <td>
-      <% if session[:sched_holder][:needs_verification] == "true" %>
+      <% if session[:sched_holder][:needs_verification] == "true" && session[:update_type] != "edit" %>
         <% schedOptions = BusStop.getActivePairs("schedule type") %>
         <% schedOptions[-1][1] = "needs verification" %>
         <%= f.select :SchedHolder, schedOptions.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.ScheduleType[x[0]].text, 'data-help_img'=> Help.ScheduleType[x[0]].img, 'data-help_img_alt'=> Help.ScheduleType[x[0]].imgAltText} ]}, :selected => "unknown" %>
       <% else %>
         <% schedOptions = BusStop.getActivePairs("schedule type") %>
         <% schedOptions[-1][1] = "unknown" %>
-        <%= f.select :SchedHolder, schedOptions.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.ScheduleType[x[0]].text, 'data-help_img'=> Help.ScheduleType[x[0]].img, 'data-help_img_alt'=> Help.ScheduleType[x[0]].imgAltText} ]}, :selected => session[:sched_holder][:value] %>
+        <%= f.select :SchedHolder, schedOptions.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.ScheduleType[x[0]].text, 'data-help_img'=> Help.ScheduleType[x[0]].img, 'data-help_img_alt'=> Help.ScheduleType[x[0]].imgAltText} ]}, :selected => @sched_holder %>
       <% end %>
     </td>
   </tr>
   <tr id="SchedHolder" style="background-color: #eee; display:none;">
     <td colspan=2 id="SchedHolder help text">
-      <% if session[:sched_holder][:needs_verification] == "true" %>
+      <% if session[:sched_holder][:needs_verification] == "true" && session[:update_type] != "edit" %>
         <span id="SchedHolder help content">This field needs more user votes to be confirmed.</span><br />
       <% else %>
-        <span id="SchedHolder help content"><%= Help.ScheduleType[session[:sched_holder][:value]].text %></span><br />
+        <span id="SchedHolder help content"><%= Help.ScheduleType[@sched_holder].text %></span><br />
       <% end %>
       <a href="#" data-help-image="SchedHolder" id="SchedHolder image link"></a>
     </td>
   </tr>
   <tr id="SchedHolder image" style="background-color: #eee; display:none;">
     <td colspan=2>
-      <% if session[:sched_holder][:needs_verification] == "true" %>
+      <% if session[:sched_holder][:needs_verification] == "true" && session[:update_type] != "edit" %>
         <%= image_tag "", :id => "SchedHolder image content", :style => "max-width: 100%;" %> 
       <% else %>
-        <%= image_tag Help.ScheduleType[session[:sched_holder][:value]].img, :id => "SchedHolder image content", :style => "max-width: 100%;", :alt=> Help.ScheduleType[session[:sched_holder][:value]].imgAltText %> 
+        <%= image_tag Help.ScheduleType[@sched_holder].img, :id => "SchedHolder image content", :style => "max-width: 100%;", :alt=> Help.ScheduleType[@sched_holder].imgAltText %> 
       <% end %>
     </td>
   </tr>
   <tr>
     <td><%= f.label :Shelters, "Number of shelters:" %></td>
     <td>
-      <% if session[:shelter_count][:needs_verification] == "true" %>
+      <% if session[:shelter_count][:needs_verification] == "true" && session[:update_type] != "edit" %>
         <% shelterOptions = BusStop.getActivePairs("shelter count") %>
         <% shelterOptions[-1][1] = "needs verification" %>
         <%= f.select :Shelters, shelterOptions.map.with_index{ |x, i| [x[1], x[0]]}, :selected => "unknown" %>
       <% else %>
         <% shelterOptions = BusStop.getActivePairs("shelter count") %>
         <% shelterOptions[-1][1] = "unknown" %>
-        <%= f.select :Shelters, shelterOptions.map.with_index{ |x, i| [x[1], x[0]]}, :selected => session[:shelter_count][:value] %>
+        <%= f.select :Shelters, shelterOptions.map.with_index{ |x, i| [x[1], x[0]]}, :selected => @shelter_count %>
       <% end %>
     </td>
   </tr>
-    <% if (session[:shelter_count][:value] != "0") && (session[:shelter_count][:value] != "unknown") && (session[:shelter_count][:needs_verification] == "false") %>
+    <% if (@shelter_count != "0") && (@shelter_count != "unknown") && (session[:shelter_count][:needs_verification] == "false") %>
       <tr>
         <td><%= f.label :ShelterOffset, "Position of shelter(s):" %>  <%= image_tag "question-mark.png", :width => "18px", :alt=> "more information about position", :data => { :helptype => "ShelterOffset" } %></td>
         <td>
-          <% if session[:shelter_offset][:needs_verification] == "true" %>
+          <% if session[:shelter_offset][:needs_verification] == "true" && session[:update_type] != "edit" %>
             <% shelterOffsets = BusStop.getActivePairs("shelter inset") %>
             <% shelterOffsets[-1][1] = "needs verification" %>
             <%= f.select :ShelterOffset, shelterOffsets.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.ShelterInsetType[x[0]].text, 'data-help_img'=> Help.ShelterInsetType[x[0]].img, 'data-help_img_alt'=> Help.ShelterInsetType[x[0]].imgAltText} ]}, :selected => "unknown" %>
           <% else %>
             <% shelterOffsets = BusStop.getActivePairs("shelter inset") %>
             <% shelterOffsets[-1][1] = "unknown" %>
-            <%= f.select :ShelterOffset, shelterOffsets.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.ShelterInsetType[x[0]].text, 'data-help_img'=> Help.ShelterInsetType[x[0]].img, 'data-help_img_alt'=> Help.ShelterInsetType[x[0]].imgAltText} ]}, :selected => session[:shelter_offset][:value] %>
+            <%= f.select :ShelterOffset, shelterOffsets.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.ShelterInsetType[x[0]].text, 'data-help_img'=> Help.ShelterInsetType[x[0]].img, 'data-help_img_alt'=> Help.ShelterInsetType[x[0]].imgAltText} ]}, :selected => @shelter_offset %>
         <% end %>
         </td>
       </tr>
       <tr id="ShelterOffset" style="background-color: #eee; display:none;">
         <td colspan=2 id="ShelterOffset help text">
-          <% if session[:shelter_offset][:needs_verification] == "true" %>
+          <% if session[:shelter_offset][:needs_verification] == "true" && session[:update_type] != "edit" %>
              <span id="ShelterOffset help content">This field needs more user votes to be confirmed.</span>
           <% else %>
-            <span id="ShelterOffset help content"><%= Help.ShelterInsetType[session[:shelter_offset][:value]].text %></span>
+            <span id="ShelterOffset help content"><%= Help.ShelterInsetType[@shelter_offset].text %></span>
           <% end %><br />
           <a href="#" data-help-image="ShelterOffset" id="ShelterOffset image link"></a>
         </td>
       </tr>
     <tr id="ShelterOffset image" style="background-color: #eee; display:none;">
       <td colspan=2>
-        <% if session[:shelter_offset][:needs_verification] == "true" %>
+        <% if session[:shelter_offset][:needs_verification] == "true" && session[:update_type] != "edit" %>
           <%= image_tag "", :id => "ShelterOffset image content", :style => "max-width: 100%;" %> 
         <% else %>
-          <%= image_tag Help.ShelterInsetType[session[:shelter_offset][:value]].img, :id => "ShelterOffset image content", :style => "max-width: 100%;", :alt=> Help.ShelterInsetType[session[:shelter_offset][:value]].imgAltText %> 
+          <%= image_tag Help.ShelterInsetType[@shelter_offset].img, :id => "ShelterOffset image content", :style => "max-width: 100%;", :alt=> Help.ShelterInsetType[@shelter_offset].imgAltText %> 
         <% end %>
       </td>
     </tr>
     <% end %>
-    <% if (session[:shelter_count][:value] != "0") && (session[:shelter_count][:value] != "unknown") && (session[:shelter_count][:needs_verification] == "false") %>
+    <% if (@shelter_count != "0") && (@shelter_count != "unknown") && (session[:shelter_count][:needs_verification] == "false") %>
       <tr>
         <td><%= f.label :ShelterOrientation, "Shelter orientation:" %> <%= image_tag "question-mark.png", :width => "18px", :alt=> "more information about position", :data => { :helptype => "ShelterOrientation" } %></td>
         <td>
-          <% if session[:shelter_orientation][:needs_verification] == "true" %>
+          <% if session[:shelter_orientation][:needs_verification] == "true" && session[:update_type] != "edit" %>
             <% shelterOrientations = BusStop.getActivePairs("shelter orientation") %>
             <% shelterOrientations[-1][1] = "needs verification" %>
             <%= f.select :ShelterOrientation, shelterOrientations.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.ShelterOrientationType[x[0]].text, 'data-help_img'=> Help.ShelterOrientationType[x[0]].img, 'data-help_img_alt'=> Help.ShelterOrientationType[x[0]].imgAltText} ]}, :selected => "unknown" %>
           <% else %>
             <% shelterOrientations = BusStop.getActivePairs("shelter orientation") %>
             <% shelterOrientations[-1][1] = "unknown" %>
-            <%= f.select :ShelterOrientation, shelterOrientations.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.ShelterOrientationType[x[0]].text, 'data-help_img'=> Help.ShelterOrientationType[x[0]].img, 'data-help_img_alt'=> Help.ShelterOrientationType[x[0]].imgAltText} ]}, :selected => session[:shelter_orientation][:value] %>
+            <%= f.select :ShelterOrientation, shelterOrientations.map.with_index{ |x, i| [x[1], x[0], {'data-help_text'=> Help.ShelterOrientationType[x[0]].text, 'data-help_img'=> Help.ShelterOrientationType[x[0]].img, 'data-help_img_alt'=> Help.ShelterOrientationType[x[0]].imgAltText} ]}, :selected => @shelter_orientation %>
         <% end %>
         </td>
       </tr>
       <tr id="ShelterOrientation" style="background-color: #eee; display:none;">
         <td colspan=2 id="ShelterOrientation help text">
-          <% if session[:shelter_orientation][:needs_verification] == "true" %>
+          <% if session[:shelter_orientation][:needs_verification] == "true" && session[:update_type] != "edit" %>
              <span id="ShelterOrientation help content">This field needs more user votes to be confirmed.</span>
           <% else %>
-              <span id="ShelterOrientation help content"><%= Help.ShelterOrientationType[session[:shelter_orientation][:value]].text %></span>
+              <span id="ShelterOrientation help content"><%= Help.ShelterOrientationType[@shelter_orientation].text %></span>
           <% end %><br />
           <a href="#" data-help-image="ShelterOrientation" id="ShelterOrientation image link"></a>
         </td>
       </tr>
       <tr id="ShelterOrientation image" style="background-color: #eee; display:none;">
         <td colspan=2>
-          <% if session[:shelter_orientation][:needs_verification] == "true" %>
+          <% if session[:shelter_orientation][:needs_verification] == "true" && session[:update_type] != "edit" %>
             <%= image_tag "", :id => "ShelterOrientation image content", :style => "max-width: 100%;" %> 
           <% else %>
-            <%= image_tag Help.ShelterOrientationType[session[:shelter_orientation][:value]].img, :id => "ShelterOrientation image content", :style => "max-width: 100%;", :alt=> Help.ShelterOrientationType[session[:shelter_orientation][:value]].imgAltText %> 
+            <%= image_tag Help.ShelterOrientationType[@shelter_orientation].img, :id => "ShelterOrientation image content", :style => "max-width: 100%;", :alt=> Help.ShelterOrientationType[@shelter_orientation].imgAltText %> 
           <% end %>
         </td>
       </tr>
@@ -216,47 +219,47 @@
     <tr>
       <td><%= f.label :BenchCount, "Number of benches:" %></td>
       <td>
-        <% if session[:bench_count][:needs_verification] == "true" %>
+        <% if session[:bench_count][:needs_verification] == "true" && session[:update_type] != "edit" %>
           <% benchOptions = BusStop.getActivePairs("bench count") %>
           <% benchOptions[-1][1] = "needs verification" %>
           <%= f.select :BenchCount, benchOptions.map.with_index{ |x, i| [x[1], x[0]]}, :selected => "unknown" %>
         <% else %>
           <% benchOptions = BusStop.getActivePairs("bench count") %>
           <% benchOptions[-1][1] = "unknown" %>
-          <%= f.select :BenchCount, benchOptions.map.with_index{ |x, i| [x[1], x[0]]}, :selected => session[:bench_count][:value] %>
+          <%= f.select :BenchCount, benchOptions.map.with_index{ |x, i| [x[1], x[0]]}, :selected => @bench_count %>
         <% end %>
       </td>
     </tr>
     <tr>
       <td><%= f.label :HasCan, "Is there a trash can?:" %></td>
       <td>
-        <% if session[:can_count][:needs_verification] == "true" %>
+        <% if session[:can_count][:needs_verification] == "true" && session[:update_type] != "edit" %>
           <% canOptions = BusStop.getActivePairs("trashcan") %>
           <% canOptions[-1][1] = "needs verification" %>
           <%= f.select :HasCan, canOptions.map.with_index{ |x, i| [x[1], x[0]]}, :selected => "unknown" %>
         <% else %>
           <% canOptions = BusStop.getActivePairs("trashcan") %>
           <% canOptions[-1][1] = "unknown" %>
-          <%= f.select :HasCan, canOptions.map.with_index{ |x, i| [x[1], x[0]]}, :selected => session[:can_count][:value] %>
+          <%= f.select :HasCan, canOptions.map.with_index{ |x, i| [x[1], x[0]]}, :selected => @can_count %>
         <% end %>
       </td>
     </tr>
     <tr>
       <td><%= f.label :LightingConditions, "Is the stop well-lit at night?:" %></td>
       <td>
-        <% if session[:lighting][:needs_verification] == "true" %>
+        <% if session[:lighting][:needs_verification] == "true" && session[:update_type] != "edit" %>
           <% lightingOptions = BusStop.getActivePairs("lighting") %>
           <% lightingOptions[-1][1] = "needs verification" %>
           <%= f.select :LightingConditions, lightingOptions.map.with_index{ |x, i| [x[1], x[0]]}, :selected => "unknown" %>
         <% else %>
           <% lightingOptions = BusStop.getActivePairs("lighting") %>
           <% lightingOptions[-1][1] = "unknown" %>
-          <%= f.select :LightingConditions, lightingOptions.map.with_index{ |x, i| [x[1], x[0]]}, :selected => session[:lighting][:value] %>
+          <%= f.select :LightingConditions, lightingOptions.map.with_index{ |x, i| [x[1], x[0]]}, :selected => @lighting %>
         <% end %>
       </td>
     </tr>
   </table>
-  <% if cookies[:user_email] %>
+  <% if cookies[:user_id] %>
   <p>
    <%= f.label :StopComment, "Additional information:" %>
       <%= f.text_area :StopComment, :value =>session[:comment], :rows =>3, :cols=> "35%" %>

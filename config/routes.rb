@@ -8,7 +8,7 @@ StopfinderDev::Application.routes.draw do
   resources :contact_forms
   #resources :authorizations
   
-  get '/update/:id' => 'busstops#update'
+  get '/update/:id' => 'busstops#update', :as => :submitinfo
   get '/edit/:id' => 'busstops#edit', :as => :duplicateentry
   get '/add/:id' => 'busstops#addnew'
   get '/closed/:id' => 'closures#report'
