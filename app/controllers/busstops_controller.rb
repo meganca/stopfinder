@@ -195,25 +195,25 @@ class BusstopsController < ApplicationController
     redirected = false 
     
     # Set defaults for info submission
-    @intersection_pos = session[:intersection_pos]
-    @sign_type = session[:sign_type]
-    @sign_inset = session[:sign_inset]
-    @sched_holder = session[:sched_holder]
-    @shelter_count = session[:shelter_count]
+    @intersection_pos = session[:intersection_pos][:value]
+    @sign_type = session[:sign_type][:value]
+    @sign_inset = session[:sign_inset][:value]
+    @sched_holder = session[:sched_holder][:value]
+    @shelter_count = session[:shelter_count][:value]
     if session[:shelter_offset] == nil
       @shelter_offset = "unknown"
     else
-      @shelter_offset = session[:shelter_offset]
+      @shelter_offset = session[:shelter_offset][:value]
     end
     
     if session[:shelter_orientation] == nil
       @shelter_orientation = "unknown"
     else
-      @shelter_orientation = session[:shelter_orientation]
+      @shelter_orientation = session[:shelter_orientation][:value]
     end
-    @bench_count = session[:bench_count]
-    @can_count = session[:can_count]
-    @lighting = session[:lighting]
+    @bench_count = session[:bench_count][:value]
+    @can_count = session[:can_count][:value]
+    @lighting = session[:lighting][:value]
 	
     if(cookies[:user_id])
       stopcheck = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = \"" + session[:stop_id] + "\" AND agencyid = \"" + session[:agency_id] + "\" AND userid = \"" + cookies[:user_id] + "\" ORDER BY DateCreated DESC")
