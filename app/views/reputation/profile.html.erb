@@ -1,13 +1,16 @@
 <head>
 <style>
+
 .container {
 	font-size: 1.3em;
 	margin: 0 auto;
 	padding-top:1em;
 }
-
 .badges {
 	margin: 0 auto;
+}
+.badges img {
+	border: none;
 }
 .settings {
 	display: none;
@@ -72,22 +75,27 @@ function toggleVisibility(id) {
   <br/><br/>
   <b>Badges:</b> <%= link_to "#{image_tag "question-mark.png", :width => "18px", :alt=> "more information about badges"}".html_safe, '/badges' %>
   <br/>
-<div class="badges">
+<div class = "badges">
+
 <% if User.find_by_id(cookies[:user_id]).badges != nil %>
+
   <% if User.find_by_id(cookies[:user_id]).badges == "" %>
   There are no badges to show yet. Enter stop information to collect!
   <% end %>
   <% if User.find_by_id(cookies[:user_id]).badges.include? "001" %>
-  <%= image_tag '001.png', :width => "50", :alt=>"Information catalyst badge"%>
+  <a href= "/badges#information-catalyst" ><%= image_tag '001.png', :width => "50", :alt=>"Information catalyst badge"%></a>
   <% end %>
+  
   <% if User.find_by_id(cookies[:user_id]).badges.include? "002" %>
-  <%= image_tag '002.png', :width => "50", :alt=>"Stop explorer badge" %>
+  <a href= "/badges#stop-explorer" ><%= image_tag '002.png', :width => "50", :alt=>"Stop explorer badge" %></a>
   <% end %>
+
   <% if User.find_by_id(cookies[:user_id]).badges.include? "003" %>
-  <%= image_tag '003.png', :width => "50", :alt=>"Honor Roll badge" %>
+  <a href= "/badges#honor-roll"><%= image_tag '003.png', :width => "50", :alt=>"Honor Roll badge" %></a>
   <% end %>
+
   <% if User.find_by_id(cookies[:user_id]).badges.include? "004" %>
-  <%= image_tag '004.png', :width => "50", :alt=>"Top Contributor badge" %>
+  <a href= "/badges#top-contributor" ><%= image_tag '004.png', :width => "50", :alt=>"Top Contributor badge" %></a> <br/>
   <% end %>
 <% end %>
 </div>
