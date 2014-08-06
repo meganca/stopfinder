@@ -181,7 +181,7 @@ class BusstopsController < ApplicationController
         session[:update_type] = "edit"
         session[:submission_id] = checkArray[0].InputId
         loadPriorSubmission(checkArray[0])
-        redirect_to duplicateentry_url(:id => session[:agency_id] + "_" + session[:stop_id])
+        #redirect_to submitinfo_url(:id => session[:agency_id] + "_" + session[:stop_id])
         return true
       end
     end
@@ -192,7 +192,28 @@ class BusstopsController < ApplicationController
     agencyid = ids[0]
     stopid = ids[1]
     session[:update_type] = "new"
-	redirected = false 
+    redirected = false 
+    
+    # Set defaults for info submission
+    @intersection_pos = session[:intersection_pos][:value]
+    @sign_type = session[:sign_type][:value]
+    @sign_inset = session[:sign_inset][:value]
+    @sched_holder = session[:sched_holder][:value]
+    @shelter_count = session[:shelter_count][:value]
+    if session[:shelter_offset] == nil
+      @shelter_offset = "unknown"
+    else
+      @shelter_offset = session[:shelter_offset][:value]
+    end
+    
+    if session[:shelter_orientation] == nil
+      @shelter_orientation = "unknown"
+    else
+      @shelter_orientation = session[:shelter_orientation][:value]
+    end
+    @bench_count = session[:bench_count][:value]
+    @can_count = session[:can_count][:value]
+    @lighting = session[:lighting][:value]
 	
     if(cookies[:user_id])
       stopcheck = BusStop.find_by_sql("SELECT * FROM " + BusStop.table_name + " WHERE stopid = \"" + session[:stop_id] + "\" AND agencyid = \"" + session[:agency_id] + "\" AND userid = \"" + cookies[:user_id] + "\" ORDER BY DateCreated DESC")
@@ -224,25 +245,25 @@ class BusstopsController < ApplicationController
   end
   
   def loadPriorSubmission(submission)
-    session[:intersection_pos_edit] = submission.Intersection
-    session[:sign_type_edit] = submission.RteSignType
-    session[:sign_inset_edit] = submission.InsetFromCurb
-    session[:sched_holder_edit] = submission.SchedHolder
-    session[:shelter_count_edit] = submission.Shelters
+    @intersection_pos = submission.Intersection
+    @sign_type = submission.RteSignType
+    @sign_inset = submission.InsetFromCurb
+    @sched_holder = submission.SchedHolder
+    @shelter_count = submission.Shelters
     if submission.ShelterOffset == nil
-      session[:shelter_offset_edit] = "unknown"
+      @shelter_offset = "unknown"
     else
-      session[:shelter_offset_edit] = submission.ShelterOffset
+      @shelter_offset = submission.ShelterOffset
     end
     
     if submission.ShelterOrientation == nil
-      session[:shelter_orientation_edit] = "unknown"
+      @shelter_orientation = "unknown"
     else
-      session[:shelter_orientation_edit] = submission.ShelterOrientation
+      @shelter_orientation = submission.ShelterOrientation
     end
-    session[:bench_count_edit] = submission.BenchCount
-    session[:can_count_edit] = submission.HasCan
-    session[:lighting_edit] = submission.LightingConditions
+    @bench_count = submission.BenchCount
+    @can_count = submission.HasCan
+    @lighting = submission.LightingConditions
   end
   
   def checkVerifiedForSave(stop)    
