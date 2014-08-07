@@ -382,11 +382,11 @@ class BusstopsController < ApplicationController
       if (currentUser.accuracy >= 0.95)
       	if(!currentUser.badges.include? "003")
       		currentUser.badges = currentUser.badges + "003"
-      		flash[:notice] = "Congratulations! You have earned the badge 'Honor Roll'!"
+      		flash[:alert] = "Congratulations! You have earned the badge 'Honor Roll!'"
 	  	end
 	  else
 	  	if(currentUser.badges.include "003")
-	  		currentUser.badges.slice! "003"
+	  		user.badges = user.badges.gsub("003", "")
 	  	end
 	  end
       currentUser.save
@@ -450,7 +450,7 @@ class BusstopsController < ApplicationController
         
       if (user.newInfoSubmitted >= 50 && !(user.badges.include? "001"))
           user.badges = user.badges + "001"
-          flash[:notice] = "Congratulations! You have earned the badge 'Information Catalyst'!"
+          flash[:alert] = "Congratulations! You have earned the badge 'Information Catalyst!'"
       end
       
       # Check user ranking for badge (only applies to visible users)
@@ -465,10 +465,10 @@ class BusstopsController < ApplicationController
       	if (userRank <= 20)
       		if(!user.badges.include? "004")
       			user.badges = user.badges + "004"
-      			flash[:notice] = "Congratulations! You are a Top Contributor!"
+      			flash[:alert] = "Congratulations! You are a Top Contributor!"
 	  			end
 	  	elsif (user.badges.include? "004")
-	  			user.badges.slice! "004"
+	  			user.badges = user.badges.gsub("004", "")
 	  	end
 	  end
       user.save

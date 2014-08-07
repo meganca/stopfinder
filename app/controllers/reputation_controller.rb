@@ -5,16 +5,39 @@ class ReputationController < ApplicationController
   
   def create
   	  user = User.find_by_id(cookies[:user_id])
- 
+
   	  if (params[:settings][:display_name].length > 20)
   	  	flash[:notice] = "Please keep display name under 20 characters."
   	  else
   	  	user.name = params[:settings][:display_name]
   	  	user.visible = params[:settings][:visible]
+  	  	
+  	  	if user.visible == 1
+  	  		userWithRank = User.find_by_sql("select t.id, (select count(*) from users x where x.visible=1 AND x.points > t.points) AS position from users t where t.id = " + cookies[:user_id])
+      
+  	  		# Add 1 because this indexes from 0
+      		userRank = userWithRank[0].position + 1
+      
+     
+	  		# Badgechecking things here
+	  		if (userRank <= 20)
+      			if(!user.badges.include? "004")
+      				user.badges = user.badges + "004"
+      				flash[:alert] = "Congratulations! You are a Top Contributor!"
+	  			end
+	  		elsif (user.badges.include? "004")
+	  			user.badges = user.badges.gsub("004", "")
+	  		end
+	  	else
+	  		if (user.badges.include? "004")
+	  			user.badges = user.badges.gsub("004", "")
+	  			user.save
+	  		end
+	  	end
+	  		
   	  	flash[:notice] = "Changes saved."
-  	  	user.save
   	  end
-
+  	  user.save
   	  redirect_to '/profile'
   	  
   end
