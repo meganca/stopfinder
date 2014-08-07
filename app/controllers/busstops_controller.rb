@@ -1,5 +1,7 @@
 class BusstopsController < ApplicationController
   respond_to :json
+  include APIHelper
+  
   StopData = Struct.new(:value, :needsValidation)
   @@votingMajority = 0.75
   @@validationMinimum = 3
@@ -42,7 +44,7 @@ class BusstopsController < ApplicationController
     end
     
     #OBA API call; store any desired variables into session from this
-    queryOBA(agencyid, stopid)
+    session[:direction] = direction(agencyid, stopid)
     
     # Get the comment
     if (Comment.find_by_agency_id_and_stop_id(agencyid, stopid) == nil)
@@ -154,20 +156,6 @@ class BusstopsController < ApplicationController
       end
     else
       session[infoSymbol][value] = "unknown"
-    end
-  end
-  
-  def queryOBA(agencyid, stopid)
-    apiURI = "http://api.pugetsound.onebusaway.org/api/where/stop/" + agencyid + "_" + stopid + ".json?key=693c0a55-9ef0-4302-8bc3-f9b2db93e124"
-
-    begin
-      response = Net::HTTP.get_response(URI.parse(apiURI))
-      data = response.body
-      hash = JSON.parse(data)
-      session[:direction] = hash["data"]["entry"]["direction"]
-    rescue
-      retry
-      #session[:direction] = "E"
     end
   end
   

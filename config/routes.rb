@@ -19,6 +19,7 @@ StopfinderDev::Application.routes.draw do
   get '/confirm' => 'reputation#confirmdelete'
   get '/delete' => 'reputation#delete', :as => :deleteaccount
   get '/about/faq' => 'about#faq'
+  get '/find' => 'about#find'
   match 'about/entry/:id' => 'about#entry', :as => :dataentry
   match 'about/contact/:id' => 'about#contact', :as => :emailentry
   match 'about/deleted' => 'about#deleted', :as => :accountdeleted

@@ -1,0 +1,38 @@
+<%= stylesheet_link_tag "bootstrap-combined.min.css" %>
+
+<style>
+a.search:link {
+	color: black;
+  text-decoration: none;
+}
+
+.search {
+  color: black;
+}
+</style>
+<div style="padding: 5px;">
+<% if @stops.blank? %> 
+  No stops found. <%= link_to 'Return to main page.', "/" %>
+<% else %>
+
+  <% @stops.each do |stop| %>
+    <a class = "search" style='display:block' href = <%="/busstops/" + stop.AgencyId.to_s + "_" + stop.StopId.to_s %> >
+      <div class = "search">
+        <h4><%= stop.StopName %></h4>
+        <% routes = busRoutes(stop.AgencyId, stop.StopId) %>
+        <% if routes.length > 10 %>
+          <% routes = routes.take(10) %>
+          <% routes.push("...") %>
+        <% end %>
+        <b>Routes:</b> 
+          <% routes.each do |r| %>
+            <%= r %><% if routes.index(r) != (routes.length - 1) %>, <% end %> 
+          <%end%>
+        <br />
+        <b>Direction:</b> <%= direction(stop.AgencyId, stop.StopId) %><br /><br />
+      </div>
+    </a>
+  <% end %>
+
+<% end %>
+</div>

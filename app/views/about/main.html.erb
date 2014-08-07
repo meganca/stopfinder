@@ -2,12 +2,13 @@
 <td><%= image_tag 'oba_logo.png', :width => "100" %><h1> StopInfo</h1></td>
 </tr>
 <p>This application is an ongoing research project at the University of Washington, designed to provide detailed information about bus stops to public transportation users. The information is a combination of data received King County Metro and information provided directly by users of the application. In particular, this application collects information identified by blind and low vision bus riders as landmarks they may use to locate their stop and navigate the bus system more easily.</p>
-<p>To access the stop information for a particular King County Metro bus stop, search by stop number below:</p>
+<p>To access the stop information for a particular King County Metro bus stop, search by stop number or name below:</p>
 <!--<a href= "http://homes.cs.washington.edu/~cbonnar/stops.txt" target="_blank">Sample Stop Numbers</a><br/> -->
-<%= form_for :search, :url => {action: "create"} do |f| %>
-<%= f.text_field :stop_num, :value => nil, :size => 20 %> <br/>
-<%= f.submit "Find Stop" %>
-<% end %> <br/>
+<%= form_tag("/find", method: :get) do %>
+<%= text_field_tag :stop %> <br/>
+<%= submit_tag "Find Stop" %>
+<% end %>
+<br/>
 <hr>
 <%= link_to 'What stop landmarks are used?', "/about/fields" %><br/>
 <%= link_to 'FAQ', "/about/faq" %><br/>
