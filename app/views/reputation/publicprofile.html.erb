@@ -60,5 +60,7 @@
 <% end %>
 <br />
 <%= link_to "My Profile/Settings", "/profile" %><br/>
-<%= link_to 'Return to information view', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>
+<% if session[:stop_id] %>
+	<%= link_to 'Return to information view', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>
+<% end %>
 </div>

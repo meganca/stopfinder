@@ -134,7 +134,9 @@ function toggleVisibility(id) {
   Not logged in. <%= link_to 'Log in here', "/login/" %><br />
 <% end %>
 <br />
-<%= link_to 'Return to information view', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %><br/>
+<% if session[:stop_id] %>
+	<%= link_to 'Return to information view', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %><br/>
+<% end %>
 <%= link_to "Log out", "/logout/" %>
 </div>
 
