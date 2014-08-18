@@ -62,5 +62,7 @@
 	
 	<br/>
 <%= link_to 'StopInfo main page', "/" %><br/>
-<%= link_to 'Return to information view', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>
+<% if session[:stop_id] %>
+  <%= link_to 'Return to information view', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>
+<% end %>
 </div>
