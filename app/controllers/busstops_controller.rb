@@ -313,83 +313,84 @@ class BusstopsController < ApplicationController
   def updateUserAccuracy(priorStops, currentStop)
     priorStops.each do |stop|
       currentUser = User.find_by_id(stop.UserId)
-       
-      #Check if each field agrees/disagrees with this submission
-      if ((currentStop.Intersection != "unknown") && stop.Intersection != "unknown")
-        currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
-        if (stop.Intersection == currentStop.Intersection)
-          currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+      if currentUser != nil 
+        #Check if each field agrees/disagrees with this submission
+        if ((currentStop.Intersection != "unknown") && stop.Intersection != "unknown")
+          currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
+          if (stop.Intersection == currentStop.Intersection)
+            currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+          end
         end
-      end
-      if ((currentStop.RteSignType != "unknown") && stop.RteSignType != "unknown")
-        currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
-        if (stop.RteSignType == currentStop.RteSignType)
-          currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+        if ((currentStop.RteSignType != "unknown") && stop.RteSignType != "unknown")
+          currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
+          if (stop.RteSignType == currentStop.RteSignType)
+            currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+          end
         end
-      end
-      if ((currentStop.InsetFromCurb != "unknown") && stop.InsetFromCurb != "unknown")
-        currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
-        if (stop.InsetFromCurb == currentStop.InsetFromCurb)
-          currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+        if ((currentStop.InsetFromCurb != "unknown") && stop.InsetFromCurb != "unknown")
+          currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
+          if (stop.InsetFromCurb == currentStop.InsetFromCurb)
+            currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+          end
         end
-      end
-      if ((currentStop.SchedHolder != "unknown") && stop.SchedHolder != "unknown")
-        currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
-        if (stop.SchedHolder == currentStop.SchedHolder)
-          currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+        if ((currentStop.SchedHolder != "unknown") && stop.SchedHolder != "unknown")
+          currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
+          if (stop.SchedHolder == currentStop.SchedHolder)
+            currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+          end
         end
-      end
-      if ((currentStop.Shelters != "unknown") && stop.Shelters != "unknown")
-        currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
-        if (stop.Shelters == currentStop.Shelters)
-          currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+        if ((currentStop.Shelters != "unknown") && stop.Shelters != "unknown")
+          currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
+          if (stop.Shelters == currentStop.Shelters)
+            currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+          end
         end
-      end
-      if ((currentStop.ShelterOffset != nil) && (stop.ShelterOffset != nil) && (currentStop.ShelterOffset != "unknown") && stop.ShelterOffset != "unknown")
-        currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
-        if (stop.ShelterOffset == currentStop.Intersection)
-          currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+        if ((currentStop.ShelterOffset != nil) && (stop.ShelterOffset != nil) && (currentStop.ShelterOffset != "unknown") && stop.ShelterOffset != "unknown")
+          currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
+          if (stop.ShelterOffset == currentStop.Intersection)
+            currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+          end
         end
-      end
-      if ((currentStop.ShelterOrientation != nil) && (stop.ShelterOrientation != nil) && (currentStop.ShelterOrientation != "unknown") && stop.ShelterOrientation != "unknown")
-        currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
-        if (stop.ShelterOrientation == currentStop.ShelterOrientation)
-          currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+        if ((currentStop.ShelterOrientation != nil) && (stop.ShelterOrientation != nil) && (currentStop.ShelterOrientation != "unknown") && stop.ShelterOrientation != "unknown")
+          currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
+          if (stop.ShelterOrientation == currentStop.ShelterOrientation)
+            currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+          end
         end
-      end
-      if ((currentStop.BenchCount != "unknown") && stop.BenchCount != "unknown")
-        currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
-        if (stop.BenchCount == currentStop.BenchCount)
-          currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+        if ((currentStop.BenchCount != "unknown") && stop.BenchCount != "unknown")
+          currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
+          if (stop.BenchCount == currentStop.BenchCount)
+            currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+          end
         end
-      end
-      if ((currentStop.HasCan != "unknown") && stop.HasCan != "unknown")
-        currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
-        if (stop.HasCan == currentStop.HasCan)
-          currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+        if ((currentStop.HasCan != "unknown") && stop.HasCan != "unknown")
+          currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
+          if (stop.HasCan == currentStop.HasCan)
+            currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+          end
         end
-      end
-      if ((currentStop.LightingConditions != "unknown") && stop.LightingConditions != "unknown")
-        currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
-        if (stop.LightingConditions == currentStop.LightingConditions)
-          currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+        if ((currentStop.LightingConditions != "unknown") && stop.LightingConditions != "unknown")
+          currentUser.otherTotalVotes = currentUser.otherTotalVotes + 1
+          if (stop.LightingConditions == currentStop.LightingConditions)
+            currentUser.otherVerifyingVotes = currentUser.otherVerifyingVotes + 1
+          end
         end
+        
+        currentUser.accuracy = (currentUser.otherVerifyingVotes * 1.0) / currentUser.otherTotalVotes
+        printf("Current accuracy: " + currentUser.accuracy.to_s)
+        #Check for accuracy badge
+        if (currentUser.accuracy >= 0.95)
+          if(!currentUser.badges.include? "003")
+            currentUser.badges = currentUser.badges + "003"
+            flash[:alert] = "Congratulations! You have earned the badge 'Honor Roll!'"
+          end
+        else
+          if(currentUser.badges.include "003")
+            user.badges = user.badges.gsub("003", "")
+          end
+        end
+        currentUser.save
       end
-      
-      currentUser.accuracy = (currentUser.otherVerifyingVotes * 1.0) / currentUser.otherTotalVotes
-      printf("Current accuracy: " + currentUser.accuracy.to_s)
-      #Check for accuracy badge
-      if (currentUser.accuracy >= 0.95)
-      	if(!currentUser.badges.include? "003")
-      		currentUser.badges = currentUser.badges + "003"
-      		flash[:alert] = "Congratulations! You have earned the badge 'Honor Roll!'"
-	  	end
-	  else
-	  	if(currentUser.badges.include "003")
-	  		user.badges = user.badges.gsub("003", "")
-	  	end
-	  end
-      currentUser.save
     end
   end
   
