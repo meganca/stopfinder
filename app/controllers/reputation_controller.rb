@@ -10,6 +10,7 @@ class ReputationController < ApplicationController
   	  	flash[:notice] = "Please keep display name under 20 characters."
   	  else
   	  	user.name = params[:settings][:display_name]
+        user.address = params[:settings][:address]
   	  	user.visible = params[:settings][:visible]
   	  	
   	  	if user.visible == 1

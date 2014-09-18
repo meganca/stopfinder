@@ -22,6 +22,9 @@
 .editName {
 	display: none;
 }
+.editAddress {
+  display: none;
+}
 .alert {
 	color:red;
 	display:block;
@@ -39,6 +42,8 @@ function toggleVisibility(id) {
 			<% @form_submitted = false %>
 		} else if (id == 'editName') {
 			document.getElementById('displayLink').innerHTML = "Edit Display Name";
+		} else if (id == 'editAddress') {
+			document.getElementById('addressDisplay').innerHTML = "Edit Mailing Address";
 		}
 	} else {
 		e.style.display = 'block';
@@ -46,6 +51,8 @@ function toggleVisibility(id) {
 			document.getElementById('profLink').innerHTML = "Hide Settings";	
 		else if (id == 'editName') {
 			document.getElementById('displayLink').innerHTML = "Cancel";
+		} else if (id == 'editAddress') {
+			document.getElementById('addressDisplay').innerHTML = "Cancel";
 		}
 	}
 }
@@ -118,6 +125,11 @@ function toggleVisibility(id) {
  </div>
  <a href="javascript:void(0)" onclick="toggleVisibility('editName');" id="displayLink">Edit Display Name</a>
  <br/>
+ <div class = "editAddress" id= "editAddress">
+ <%= f.text_field :address, :value => User.find_by_id(cookies[:user_id]).address, :size => 80%> <br/>
+ </div>
+ <a href="javascript:void(0)" onclick="toggleVisibility('editAddress');" id="addressDisplay">Edit Mailing Address</a>
+ <br/>
 <%= link_to "Delete account", "/confirm/" %><br/>
 <%= f.submit "Save Changes" %>
 <% end %>
@@ -128,6 +140,7 @@ function toggleVisibility(id) {
  	<script>
  	toggleVisibility('settings');
  	toggleVisibility('editName');
+  toggleVisibility('address');
  	</script>
 <% end %>
 <% else %>
