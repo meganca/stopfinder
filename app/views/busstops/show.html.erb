@@ -33,14 +33,14 @@ function dismiss(id) {
 <table cellpadding = "10" class = "displaytable">
 <div class = "banner" id = "banner">
 	<script type="text/javascript">
-	var c = document.cookie.replace(/(?:(?:^|.*;\s*)showBanner\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	var c = document.cookie.replace(/(?:(?:^|.*;\s*)showBanner1\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 	if (c == "false") {
 		var e = document.getElementById('banner');
 		e.style.display = 'none';
 	} 
 	</script> 
 
-	<%= image_tag 'topbanner.png', :alt=> 'New! Earn points & gain recognition by entering information about stops. Login with an existing account to get started!', :width=>'100%' %>
+	<a href = "/about/faq#tickets"><%= image_tag 'topbanner1.png', :alt=> 'New! Earn free bus rides with King County Metro! Click here to find out how entering information about bus stops can earn you bus tickets!', :width=>'100%' %></a>
 	<div class = 'dismiss'>
 	<a href='javascript:void(0)' onclick ="dismiss('banner');"><%= image_tag 'dismissbutton.png', :alt=> 'Click to dismiss notice.', :width=>'80%' %></a>
 	</div>	
