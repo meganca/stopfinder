@@ -45,6 +45,11 @@ class ReputationController < ApplicationController
   
   def profile
     user = User.find_by_id(cookies[:user_id])
+    
+    userLog = BusStop.usageLogger
+    userLog.info("Viewing profile for #{cookies[:user_id]} at #{Time.now}")
+    userLog.info("User logged in as #{cookies[:user_email]}")
+    userLog.info("")
   end
   
   def publicprofile
@@ -63,6 +68,10 @@ class ReputationController < ApplicationController
   
   def top
     @userList = User.find_by_sql("select t.*, (select count(*) from users x where x.visible=1 AND x.points > t.points) AS position from users t where t.visible = 1 order by t.points desc")
+    
+    userLog = BusStop.usageLogger
+    userLog.info("User #{cookies[:user_email]} viewing top contributors list at #{Time.now}")
+    userLog.info("")
   end
   
   def confirmdelete
