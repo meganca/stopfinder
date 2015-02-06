@@ -46,10 +46,14 @@ class ReputationController < ApplicationController
   def profile
     user = User.find_by_id(cookies[:user_id])
     
-    userLog = BusStop.usageLogger
-    userLog.info("Viewing profile for #{cookies[:user_id]} at #{Time.now}")
-    userLog.info("User logged in as #{cookies[:user_email]}")
-    userLog.info("")
+    if(user == nil)
+      redirect_to missinguser_url
+    else
+      userLog = BusStop.usageLogger
+      userLog.info("Profile view from #{session[:device_id]} at #{Time.now}")
+      userLog.info("User logged in as #{cookies[:user_email]}")
+      userLog.info("")
+    end
   end
   
   def publicprofile
@@ -70,7 +74,14 @@ class ReputationController < ApplicationController
     @userList = User.find_by_sql("select t.*, (select count(*) from users x where x.visible=1 AND x.points > t.points) AS position from users t where t.visible = 1 order by t.points desc")
     
     userLog = BusStop.usageLogger
-    userLog.info("User #{cookies[:user_email]} viewing top contributors list at #{Time.now}")
+    userLog.info("Viewing top contributors list at #{Time.now}")
+    
+    if(!cookies[:user_email].blank?)
+      userLog.info("User logged in as #{cookies[:user_email]}")
+    elsif(!session[:device_id].blank?)
+      userLog.info("Accessed from device #{session[:device_id]}")
+    end
+    
     userLog.info("")
   end
   
@@ -88,5 +99,8 @@ class ReputationController < ApplicationController
     cookies.delete(:user_id)
     
     redirect_to accountdeleted_url
+  end
+  
+  def usernotfound
   end
 end

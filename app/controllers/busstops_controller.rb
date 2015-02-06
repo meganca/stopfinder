@@ -18,16 +18,15 @@ class BusstopsController < ApplicationController
     showLog = BusStop.usageLogger
     showLog.info("Viewing stop #{agencyid}_#{stopid} at #{Time.now}")
     
-    if(params[:userid])
-      session[:device_id] = params[:userid]
+    if(!params[:userid].blank?)
       showLog.info("Accessed by user #{params[:userid]}")
     elsif(session[:device_id] == nil)
       session[:device_id] = ""
-    elsif(session[:device_id] != "")
+    elsif(!session[:device_id].blank?)
       showLog.info("Accessed by user #{session[:device_id]}")
     end
 
-    if(cookies[:user_email])
+    if(!cookies[:user_email].blank?)
       showLog.info("User logged in as #{cookies[:user_email]}")
     end
     
@@ -218,11 +217,11 @@ class BusstopsController < ApplicationController
     showLog = BusStop.usageLogger
     showLog.info("Viewing update/verify form for #{agencyid}_#{stopid} at #{Time.now}")
     
-    if(session[:device_id])
+    if(!session[:device_id].blank?)
       showLog.info("Accessed by user #{session[:device_id]}")
     end
 
-    if(cookies[:user_email])
+    if(!cookies[:user_email].blank?)
       showLog.info("User logged in as #{cookies[:user_email]}")
     end
     
@@ -537,11 +536,11 @@ class BusstopsController < ApplicationController
     showLog = BusStop.usageLogger
     showLog.info("Submitted stop info for #{params[:busstop][:AgencyId]}_#{params[:busstop][:StopId]} at #{Time.now}")
     
-    if(session[:device_id])
+    if(!session[:device_id].blank?)
       showLog.info("Submitted by user #{session[:device_id]}")
     end
 
-    if(cookies[:user_email])
+    if(!cookies[:user_email].blank?)
       showLog.info("User logged in as #{cookies[:user_email]}")
     end
     

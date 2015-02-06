@@ -54,7 +54,9 @@ function toggleVisibility(id) {
 
 
 <div class="container">
-<% if User.find_by_id(cookies[:user_id]).title == "" || User.find_by_id(cookies[:user_id]).title == nil %><%= image_tag 'oba_logo.png', :alt => "profile picture", :width => "50" %>
+<% if User.find_by_id(cookies[:user_id]) == nil %>
+  <% redirect_to :back %>
+<% elsif User.find_by_id(cookies[:user_id]).title == "" || User.find_by_id(cookies[:user_id]).title == nil %><%= image_tag 'oba_logo.png', :alt => "profile picture", :width => "50" %>
 <% else %> <%= image_tag User.find_by_id(cookies[:user_id]).title.to_s + '.png', :alt=>"Profile icon", :width=>"50"%>
 <% end %>
 

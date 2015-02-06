@@ -9,11 +9,11 @@ class ClosuresController < ApplicationController
     showLog = BusStop.usageLogger
     showLog.info("Viewing closure report form for #{agencyid}_#{stopid} at #{Time.now}")
     
-    if(session[:device_id])
+    if(!session[:device_id].blank?)
       showLog.info("Accessed by user #{session[:device_id]}")
     end
 
-    if(cookies[:user_email])
+    if(!cookies[:user_email].blank?)
       showLog.info("User logged in as #{cookies[:user_email]}")
     end
     
@@ -44,11 +44,11 @@ class ClosuresController < ApplicationController
     showLog = BusStop.usageLogger
     showLog.info("Submitted closure report form for #{params[:closure][:AgencyId]}_#{params[:closure][:StopId]} at #{Time.now}")
     
-    if(session[:device_id])
+    if(!session[:device_id].blank?)
       showLog.info("Submitted by user #{session[:device_id]}")
     end
 
-    if(cookies[:user_email])
+    if(!cookies[:user_email].blank?)
       showLog.info("User logged in as #{cookies[:user_email]}")
     end
     
