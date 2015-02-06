@@ -1,0 +1,7 @@
+<%= stylesheet_link_tag "bootstrap.min.css" %>
+<div style= "padding:5px;">
+<p>You must be logged in to view the profile page.</p>
+
+<br><br>
+<%= link_to 'Return to information view.', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>
+</div>
