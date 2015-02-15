@@ -71,7 +71,7 @@ class ReputationController < ApplicationController
   end
   
   def top
-    @userList = User.find_by_sql("select t.*, (select count(*) from users x where x.visible=1 AND x.points > t.points) AS position from users t where t.visible = 1 order by t.points desc")
+    @userList = User.find_by_sql("select t.*, (select count(*) from users x where x.visible=1 AND x.points > t.points) AS position from users t where t.visible = 1 AND t.points > 0 order by t.points desc")
     
     userLog = BusStop.usageLogger
     userLog.info("Viewing top contributors list at #{Time.now}")

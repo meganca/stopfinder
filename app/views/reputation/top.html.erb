@@ -7,7 +7,7 @@
 </style>
 <div class="container">
 <b> Top Contributors </b><br/><br/>
-<% @userList.take_while{ |u| u.position <= 19}.each do |user| %>
+<% @userList.take_while{ |u| u.position <= 9}.each do |user| %>
   <%= user.position + 1 %>.
   <% if (!user.title.eql? "") %>
   	<%= image_tag user.title + '.png', :width=>"50"%> 
