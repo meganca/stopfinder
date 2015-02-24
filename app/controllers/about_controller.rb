@@ -106,5 +106,8 @@ class AboutController < ApplicationController
     end
   end
   
+  def survey
+  end
+  
   helper_method :busRoutes, :direction
 end

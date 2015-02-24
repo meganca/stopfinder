@@ -1,0 +1,38 @@
+<div style="padding:5px;">
+<table>
+<tr><td colspan=2>
+
+<h2>Survey Title</h2>
+
+</td></tr>
+<%= form_for :sresponse, url: sresponses_path do |f| %>
+<tr><td colspan=2>Sample radio option:</td></tr>
+<tr>
+  <td colspan=2>
+    <%= f.radio_button :radio1, "what gets recorded", :checked => true %> Default.
+  </td>
+</tr>
+<tr>
+  <td colspan=2>
+    <%= f.radio_button :radio1, "fill in whatever here" %> Less default.
+  </td>
+</tr>
+
+<tr><td colspan=2 height=20></td></tr>
+<tr><td colspan=2>Write a short response:</td></tr>
+
+<tr>
+  <td colspan=2>
+    <%= f.text_area :shortanswer1, :value =>"", :rows =>3, :cols =>20 %>
+  </td>
+</tr>
+</table>
+
+<%= f.hidden_field :OBAid, :value => session[:device_id] %>
+
+<p>
+  <%= f.submit "Submit survey" %>
+</p>
+<% end %>
+
+</div>

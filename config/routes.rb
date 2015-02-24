@@ -6,6 +6,7 @@ StopfinderDev::Application.routes.draw do
   resources :busstops
   resources :closures
   resources :contact_forms
+  resources :sresponses
   #resources :authorizations
   
   get '/update/:id' => 'busstops#update', :as => :submitinfo
@@ -21,7 +22,9 @@ StopfinderDev::Application.routes.draw do
   get '/about/faq' => 'about#faq'
   get '/find' => 'about#find'
   get '/usernotfound' => 'reputation#usernotfound', :as => :missinguser
+  get '/survey/' => 'sresponses#surveyform', :as => :takesurvey
   match 'about/entry/:id' => 'about#entry', :as => :dataentry
+  match 'about/survey/submitted'  => 'about#survey', :as => :surveyresponse
   match 'about/contact/:id' => 'about#contact', :as => :emailentry
   match 'about/deleted' => 'about#deleted', :as => :accountdeleted
   match '/testing' => 'about#testing'
