@@ -37,7 +37,11 @@
 	</table>
 	<br/>
 	<%= link_to 'Return to profile', "/profile" %><br/>
-	<%= link_to 'Return to information view', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>
+  <% if !session[:stop_id].blank? %>
+    <%= link_to 'Return to information view', "/busstops/"+ session[:agency_id] + "_" + session[:stop_id] %>
+  <% else %>
+    <%= link_to 'Return to StopInfo Main Page', "/" %>
+  <% end %>
 </div>
 
 	
