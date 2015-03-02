@@ -311,7 +311,10 @@ class BusstopsController < ApplicationController
   
   def updateUserAccuracy(priorStops, currentStop)
     priorStops.each do |stop|
-      currentUser = User.find_by_id(stop.UserId)
+      if !stop.UserId.blank?
+        currentUser = User.find_by_id(stop.UserId)
+      end
+      
       if currentUser != nil 
         #Check if each field agrees/disagrees with this submission
         if ((currentStop.Intersection != "unknown") && stop.Intersection != "unknown")
@@ -384,7 +387,7 @@ class BusstopsController < ApplicationController
             flash[:alert] = "Congratulations! You have earned the badge 'Honor Roll!'"
           end
         else
-          if(currentUser.badges.include "003")
+          if(currentUser.badges.include? "003")
             user.badges = user.badges.gsub("003", "")
           end
         end
