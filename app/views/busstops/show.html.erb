@@ -31,7 +31,7 @@ function dismiss(id) {
 
 <!------ BEGIN VIEW HEADER----------->
 <table cellpadding = "10" class = "displaytable">
-<!-- <div class = "banner" id = "banner">
+<div class = "banner" id = "banner">
 	<script type="text/javascript">
 	var c = document.cookie.replace(/(?:(?:^|.*;\s*)showBanner1\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 	if (c == "false") {
@@ -40,12 +40,12 @@ function dismiss(id) {
 	} 
 	</script> 
 
-	<a href = "/about/faq#tickets"><%= image_tag 'topbanner1.png', :alt=> 'New! Earn free bus rides with King County Metro! Click here to find out how entering information about bus stops can earn you bus tickets!', :width=>'100%' %></a>
+	<a href = "/about/faq#survey"><%= image_tag 'surveybanner.png', :alt=> 'You could win a $50 gift card of your choosing! Take our survey to help improve the information we display. Double tap here to learn more.', :width=>'100%' %></a>
 	<div class = 'dismiss'>
-	<a href='javascript:void(0)' onclick ="dismiss('banner');"><%= image_tag 'dismissbutton.png', :alt=> 'Click to dismiss notice.', :width=>'80%' %></a>
+	<a href='javascript:void(0)' onclick ="dismiss('banner');"><%= image_tag 'dismissbutton.png', :alt=> 'Click to remove survey banner.', :width=>'80%' %></a>
 	</div>	
 </div>
--->
+
 <tr align="right"> <td></td>
     <% if cookies[:user_email] %>
       <td><%= cookies[:user_email].to_s %><br/> 
