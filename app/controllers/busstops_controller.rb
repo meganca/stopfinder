@@ -20,6 +20,7 @@ class BusstopsController < ApplicationController
     
     if(!params[:userid].blank?)
       showLog.info("Accessed by user #{params[:userid]}")
+      session[:device_id] = params[:userid]
     elsif(session[:device_id] == nil)
       session[:device_id] = ""
     elsif(!session[:device_id].blank?)
